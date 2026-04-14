@@ -54,13 +54,13 @@ export function VoteButton({
     (v) => v.voterId === user.id && v.cible === 'participation',
   );
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!user) {
       show('Connectez-vous pour voter', 'error');
       return;
     }
     if (!elementKey && hasUserVotedOnParticipation) {
-      const result = unvoteOnParticipation(participation, user);
+      const result = await unvoteOnParticipation(participation, user);
       if (!result.ok) {
         show(result.error ?? 'Annulation impossible', 'error');
         return;
@@ -75,8 +75,8 @@ export function VoteButton({
       return;
     }
     const result = elementKey
-      ? voteOnElement(participation, user, elementKey)
-      : voteOnParticipation(participation, user);
+      ? await voteOnElement(participation, user, elementKey)
+      : await voteOnParticipation(participation, user);
     if (!result.ok) {
       show(result.error ?? 'Vote impossible', 'error');
       return;

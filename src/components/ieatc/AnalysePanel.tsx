@@ -294,7 +294,7 @@ function AnnotatedTextWithPanel({
 
   // Vote sur une annotation
   const handleAnnotationVote = useCallback(
-    (participationId: string, annId: string) => {
+    async (participationId: string, annId: string) => {
       if (!user) {
         show('Connectez-vous pour voter', 'error');
         return;
@@ -306,7 +306,7 @@ function AnnotatedTextWithPanel({
       }
       const participation = participations.find((p) => p.id === participationId);
       if (!participation) return;
-      const result = voteOnElement(participation, user, `annotation:${annId}`);
+      const result = await voteOnElement(participation, user, `annotation:${annId}`);
       if (!result.ok) {
         show(result.error ?? 'Vote impossible', 'error');
         return;
@@ -320,11 +320,11 @@ function AnnotatedTextWithPanel({
 
   // Annuler un vote sur une annotation
   const handleAnnotationUnvote = useCallback(
-    (participationId: string, annId: string) => {
+    async (participationId: string, annId: string) => {
       if (!user) return;
       const participation = participations.find((p) => p.id === participationId);
       if (!participation) return;
-      const result = unvoteOnElement(participation, user, `annotation:${annId}`);
+      const result = await unvoteOnElement(participation, user, `annotation:${annId}`);
       if (!result.ok) {
         show(result.error ?? 'Annulation impossible', 'error');
         return;
