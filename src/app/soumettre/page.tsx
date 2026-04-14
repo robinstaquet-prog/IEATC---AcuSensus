@@ -402,7 +402,7 @@ export default function SoumettreCasPage() {
 
   // Soumission
   const handleSubmit = useCallback(
-    (publicationMode: PublicationMode) => {
+    async (publicationMode: PublicationMode) => {
       setError(null);
 
       if (!user) {
