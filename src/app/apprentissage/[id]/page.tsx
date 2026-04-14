@@ -106,9 +106,9 @@ export default function ApprentissageExercicePage() {
   }, [user, cas]);
 
   // Participations du store pour ce cas (utilisees dans la comparaison)
-  const participationsStore = useMemo(() => {
-    if (!cas) return [];
-    return getParticipationsByCase(cas.id);
+  const [participationsStore, setParticipationsStore] = useState<UserParticipation[]>([]);
+  useEffect(() => {
+    if (cas) getParticipationsByCase(cas.id).then(setParticipationsStore);
   }, [cas]);
 
   // Ce cas est-il qualifié pour le mode apprentissage ?

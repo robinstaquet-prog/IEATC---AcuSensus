@@ -94,7 +94,7 @@ export default function ProfilPage() {
 
   useEffect(() => {
     if (user) {
-      setParticipations(getAllParticipations(user.id));
+      getAllParticipations(user.id).then(setParticipations);
       setExercices(getAllExercices(user.id));
       getUserCasesByAuteur(user.id).then(setUserCases);
     }

@@ -91,16 +91,23 @@ function ParticipationModal({
   cas,
   userId,
   onClose,
+  onSaved,
 }: {
   caseId: string;
   cas: ClinicalCase;
   userId: string;
   onClose: () => void;
+  onSaved?: () => void;
 }) {
-  const existing = getParticipation(userId, caseId);
+  const [existing, setExisting] = useState<UserParticipation | undefined>(undefined);
 
-  const handleSave = (data: Partial<UserParticipation>) => {
-    upsertParticipation(userId, { ...data, caseId });
+  useEffect(() => {
+    getParticipation(userId, caseId).then(setExisting);
+  }, [userId, caseId]);
+
+  const handleSave = async (data: Partial<UserParticipation>) => {
+    await upsertParticipation(userId, { ...data, caseId });
+    onSaved?.();
   };
 
   return (
@@ -176,9 +183,10 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
     [cas, participations],
   );
 
-  const refreshParticipations = useCallback(() => {
-    setParticipations(getParticipationsByCase(cas.id));
-    setDifficultyInfo(computeDifficulty(cas.id));
+  const refreshParticipations = useCallback(async () => {
+    const parts = await getParticipationsByCase(cas.id);
+    setParticipations(parts);
+    setDifficultyInfo(computeDifficulty(parts));
   }, [cas.id]);
 
   // Participation factices issues de cas.analyses (variantes) — affichées dans AnalysePanel
@@ -218,32 +226,29 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
   [cas.analyses]);
 
   useEffect(() => {
-    refreshParticipations();
-    // Synchronise les analyses variantes dans localStorage pour que les votes fonctionnent
-    for (const av of analyseVariantes) {
-      syncParticipationIfNeeded(av);
-    }
+    void refreshParticipations();
     if (user) {
-      const p = getParticipation(user.id, cas.id);
-      if (p) {
-        setHasParticipation(true);
-        if (p.revelationFaite) setRevealed(true);
-      }
+      getParticipation(user.id, cas.id).then((p) => {
+        if (p) {
+          setHasParticipation(true);
+          if (p.revelationFaite) setRevealed(true);
+        }
+      });
     }
-  }, [user, cas.id, refreshParticipations, analyseVariantes]);
+  }, [user, cas.id, refreshParticipations]);
 
   const handleReveal = () => {
     setRevealed(true);
-    if (user) markRevelation(user.id, cas.id);
+    if (user) void markRevelation(user.id, cas.id);
   };
 
-  // Suppression de la participation — sans remboursement des points de vote
   const handleDeleteParticipation = () => {
     if (!user) return;
-    removeParticipation(user.id, cas.id);
-    setHasParticipation(false);
-    setShowConfirmDelete(false);
-    refreshParticipations();
+    removeParticipation(user.id, cas.id).then(() => {
+      setHasParticipation(false);
+      setShowConfirmDelete(false);
+      void refreshParticipations();
+    });
   };
 
   const [analyseVariantesOverrides, setAnalyseVariantesOverrides] = useState<Map<string, UserParticipation>>(new Map());
@@ -642,11 +647,11 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
           caseId={cas.id}
           cas={cas}
           userId={user.id}
-          onClose={() => {
+          onClose={() => setShowParticipation(false)}
+          onSaved={() => {
             setShowParticipation(false);
-            refreshParticipations();
-            const p = getParticipation(user.id, cas.id);
-            if (p) setHasParticipation(true);
+            setHasParticipation(true);
+            void refreshParticipations();
           }}
         />
       )}

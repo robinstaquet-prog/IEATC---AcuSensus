@@ -1007,7 +1007,7 @@ export function ParticipationForm({
   // ── Soumission ─────────────────────────────────────────────────────────────
 
   const submit = useCallback(
-    (publication: PublicationMode) => {
+    async (publication: PublicationMode) => {
       setError(null);
       setValidationErrors([]);
       setErrorSections(new Set());
@@ -1165,7 +1165,7 @@ export function ParticipationForm({
       // En mode apprentissage (skipPersist), ne pas sauvegarder dans le store
       // de participation et ne pas ajouter de points de vote.
       if (!skipPersist) {
-        upsertParticipation(user.id, data);
+        await upsertParticipation(user.id, data);
         addVotePoints(2);
       }
 

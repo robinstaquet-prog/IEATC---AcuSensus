@@ -1,125 +1,222 @@
 'use client';
 
-// ─── Store de participation — localStorage (MVP) ──────────────────────────────
-// MVP : stockage local dans le navigateur de l'utilisateur.
-// Production : remplacer par appels Supabase avec RLS strict.
-// La couche d'abstraction est là : les composants utilisent ces fonctions,
-// pas directement localStorage ou Supabase.
+// ─── Store de participation — Supabase ────────────────────────────────────────
 
-import type { UserParticipation, DifficulteEstimee } from '@/types';
-import { DIFFICULTE_LABELS, RATIO_STATUT } from '@/types';
+import { supabase } from '@/lib/supabase';
+import type { UserParticipation, ClinicalCase, DifficulteEstimee } from '@/types';
+import { RATIO_STATUT, DIFFICULTE_LABELS } from '@/types';
 
-const STORAGE_KEY = 'acusensus:participations';
+// ─── Mapping Supabase ↔ TypeScript ───────────────────────────────────────────
 
-function getAll(): UserParticipation[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as UserParticipation[]) : [];
-  } catch {
-    return [];
-  }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function fromRow(row: Record<string, any>): UserParticipation {
+  const extra = row.extra_data ?? {};
+  return {
+    id: row.id,
+    userId: row.user_id,
+    caseId: row.case_id,
+    grilleChoisie: row.grille_choisie,
+    grilleSecondaire: row.grille_secondaire ?? undefined,
+    bilanEnergetique: row.bilan_energetique ?? undefined,
+    strategie: row.strategie ?? undefined,
+    publicationMode: row.publication_mode,
+    valeur: row.valeur ?? 1.0,
+    pointsProposer: row.points_traitement ?? [],
+    annotationsInterrogatoire: row.annotations ?? [],
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    polariteIdentifiee: extra.polariteIdentifiee,
+    localisationIdentifiee: extra.localisationIdentifiee,
+    categoriesRetenues: extra.categoriesRetenues ?? [],
+    commentaireLibre: extra.commentaireLibre,
+    revelationFaite: extra.revelationFaite ?? false,
+    annotationsPouls: extra.annotationsPouls,
+    langueTexte: extra.langueTexte,
+    annotationsLangue: extra.annotationsLangue,
+    examensSupp: extra.examensSupp,
+    palpationAbdo: extra.palpationAbdo,
+    deuxiemeSeance: extra.deuxiemeSeance,
+    publiee: extra.publiee,
+    votes: extra.votes ?? [],
+    votePoints: extra.votePoints ?? 0,
+    difficultéEstimee: extra.difficultéEstimee,
+  };
 }
 
-function saveAll(participations: UserParticipation[]): void {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(participations));
+function toInsertRow(userId: string, data: Partial<UserParticipation> & { caseId: string }) {
+  return {
+    case_id: data.caseId,
+    user_id: userId,
+    grille_choisie: data.grilleChoisie ?? 'yin_yang',
+    grille_secondaire: data.grilleSecondaire ?? null,
+    bilan_energetique: data.bilanEnergetique ?? null,
+    strategie: data.strategie ?? null,
+    points_traitement: data.pointsProposer ?? [],
+    publication_mode: data.publicationMode ?? 'anonyme',
+    valeur: data.valeur ?? 1.0,
+    annotations: data.annotationsInterrogatoire ?? [],
+    extra_data: {
+      polariteIdentifiee: data.polariteIdentifiee,
+      localisationIdentifiee: data.localisationIdentifiee,
+      categoriesRetenues: data.categoriesRetenues ?? [],
+      commentaireLibre: data.commentaireLibre,
+      revelationFaite: data.revelationFaite ?? false,
+      annotationsPouls: data.annotationsPouls,
+      langueTexte: data.langueTexte,
+      annotationsLangue: data.annotationsLangue,
+      examensSupp: data.examensSupp,
+      palpationAbdo: data.palpationAbdo,
+      deuxiemeSeance: data.deuxiemeSeance,
+      publiee: data.publiee,
+      votes: data.votes ?? [],
+      votePoints: data.votePoints ?? 0,
+      difficultéEstimee: data.difficultéEstimee,
+    },
+  };
 }
 
-export function getParticipation(
+// ─── Fonctions du store ───────────────────────────────────────────────────────
+
+export async function getParticipation(
   userId: string,
   caseId: string,
-): UserParticipation | undefined {
-  return getAll().find((p) => p.userId === userId && p.caseId === caseId);
+): Promise<UserParticipation | undefined> {
+  const { data, error } = await supabase
+    .from('user_participations')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('case_id', caseId)
+    .maybeSingle();
+  if (error || !data) return undefined;
+  return fromRow(data);
 }
 
-export function getAllParticipations(userId: string): UserParticipation[] {
-  return getAll().filter((p) => p.userId === userId);
+export async function getAllParticipations(userId: string): Promise<UserParticipation[]> {
+  const { data, error } = await supabase
+    .from('user_participations')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+  if (error || !data) return [];
+  return data.map(fromRow);
 }
 
-export function upsertParticipation(
+export async function upsertParticipation(
   userId: string,
   data: Partial<UserParticipation> & { caseId: string },
-): UserParticipation {
-  const all = getAll();
-  const idx = all.findIndex((p) => p.userId === userId && p.caseId === data.caseId);
+): Promise<UserParticipation> {
   const now = new Date().toISOString();
+  const existing = await getParticipation(userId, data.caseId);
 
-  if (idx >= 0) {
-    all[idx] = { ...all[idx], ...data, userId, updatedAt: now };
-    saveAll(all);
-    return all[idx]!;
+  if (existing) {
+    const { data: updated, error } = await supabase
+      .from('user_participations')
+      .update({ ...toInsertRow(userId, data), updated_at: now })
+      .eq('id', existing.id)
+      .select()
+      .single();
+    if (error || !updated) throw new Error(error?.message ?? 'Erreur mise à jour');
+    return fromRow(updated);
   }
 
-  const newP: UserParticipation = {
+  const row = {
     id: `p-${Date.now()}`,
-    userId,
-    caseId: data.caseId,
-    grilleChoisie: data.grilleChoisie,
-    grilleSecondaire: data.grilleSecondaire,
-    polariteIdentifiee: data.polariteIdentifiee,
-    localisationIdentifiee: data.localisationIdentifiee,
-    categoriesRetenues: data.categoriesRetenues ?? [],
-    pointsProposer: data.pointsProposer ?? [],
-    commentaireLibre: data.commentaireLibre,
-    revelationFaite: data.revelationFaite ?? false,
-    createdAt: now,
-    updatedAt: now,
-    annotationsInterrogatoire: data.annotationsInterrogatoire,
-    annotationsPouls: data.annotationsPouls,
-    langueTexte: data.langueTexte,
-    annotationsLangue: data.annotationsLangue,
-    examensSupp: data.examensSupp,
-    palpationAbdo: data.palpationAbdo,
-    bilanEnergetique: data.bilanEnergetique,
-    strategie: data.strategie,
-    deuxiemeSeance: data.deuxiemeSeance,
-    publicationMode: data.publicationMode,
-    publiee: data.publiee,
-    votes: data.votes,
-    votePoints: data.votePoints,
-    valeur: data.valeur,
-    difficultéEstimee: data.difficultéEstimee,
+    ...toInsertRow(userId, data),
+    created_at: now,
+    updated_at: now,
   };
-  saveAll([...all, newP]);
-  return newP;
+  const { data: inserted, error } = await supabase
+    .from('user_participations')
+    .insert(row)
+    .select()
+    .single();
+  if (error || !inserted) throw new Error(error?.message ?? 'Erreur insertion');
+  return fromRow(inserted);
 }
 
-// Toutes les participations associées à un cas (tous utilisateurs confondus).
-// MVP : utilisé pour afficher la forme 1 (toutes les participations triées par valeur).
-export function getParticipationsByCase(caseId: string): UserParticipation[] {
-  return getAll().filter((p) => p.caseId === caseId);
+export async function getParticipationsByCase(caseId: string): Promise<UserParticipation[]> {
+  const { data, error } = await supabase
+    .from('user_participations')
+    .select('*')
+    .eq('case_id', caseId)
+    .order('valeur', { ascending: false });
+  if (error || !data) return [];
+  return data.map(fromRow);
 }
 
-// Met à jour directement une participation existante par id (pour les votes).
-export function updateParticipationById(
+export async function updateParticipationById(
   id: string,
   patch: Partial<UserParticipation>,
-): UserParticipation | undefined {
-  const all = getAll();
-  const idx = all.findIndex((p) => p.id === id);
-  if (idx === -1) return undefined;
-  all[idx] = { ...all[idx]!, ...patch, updatedAt: new Date().toISOString() };
-  saveAll(all);
-  return all[idx]!;
+): Promise<UserParticipation | undefined> {
+  const { data: existing } = await supabase
+    .from('user_participations')
+    .select('*')
+    .eq('id', id)
+    .single();
+  if (!existing) return undefined;
+
+  const currentExtra = existing.extra_data ?? {};
+  const newExtra = {
+    ...currentExtra,
+    ...(patch.votes !== undefined && { votes: patch.votes }),
+    ...(patch.votePoints !== undefined && { votePoints: patch.votePoints }),
+    ...(patch.revelationFaite !== undefined && { revelationFaite: patch.revelationFaite }),
+  };
+
+  const update: Record<string, unknown> = {
+    extra_data: newExtra,
+    updated_at: new Date().toISOString(),
+  };
+  if (patch.valeur !== undefined) update.valeur = patch.valeur;
+  if (patch.publicationMode !== undefined) update.publication_mode = patch.publicationMode;
+
+  const { data: updated, error } = await supabase
+    .from('user_participations')
+    .update(update)
+    .eq('id', id)
+    .select()
+    .single();
+  if (error || !updated) return undefined;
+  return fromRow(updated);
+}
+
+export async function markRevelation(userId: string, caseId: string): Promise<void> {
+  const existing = await getParticipation(userId, caseId);
+  if (!existing) return;
+  const { data: row } = await supabase
+    .from('user_participations')
+    .select('extra_data')
+    .eq('id', existing.id)
+    .single();
+  await supabase
+    .from('user_participations')
+    .update({
+      extra_data: { ...(row?.extra_data ?? {}), revelationFaite: true },
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', existing.id);
+}
+
+export async function removeParticipation(userId: string, caseId: string): Promise<void> {
+  await supabase
+    .from('user_participations')
+    .delete()
+    .eq('user_id', userId)
+    .eq('case_id', caseId);
+}
+
+// No-op : les analyses statiques ne sont pas insérées dans Supabase
+export async function syncParticipationIfNeeded(_p: UserParticipation): Promise<void> {
+  // Les analyses statiques proviennent de data/cases.ts, pas de la DB
 }
 
 // ─── Qualification "cas d'apprentissage" ─────────────────────────────────────
-// Un cas est "d'apprentissage" si :
-//   1. Il a au moins une analyse de type expert (role/auteurStatut = 'expert'), OU
-//   2. Il a au moins une participation avec valeur >= 50 (très populaire), OU
-//   3. Une participation a reçu un vote à ratio 10 (vote expert)
-import type { ClinicalCase } from '@/types';
 
 export function isCasApprentissage(
   cas: ClinicalCase,
   participations: UserParticipation[],
 ): boolean {
-  // Condition 1 : cas explicitement marqué exemplaire
   if (cas.exemplaire) return true;
-
-  // Condition 2 : au moins une analyse VARIANTE d'expert
-  // (l'analyse officielle ne compte pas — elle existe pour tous les cas)
   const hasExpertVariante =
     cas.analyses.some(
       (a) => a.type !== 'officielle' && (a.role === 'expert' || a.auteurStatut === 'expert'),
@@ -130,80 +227,32 @@ export function isCasApprentissage(
         (p as UserParticipation & { auteurStatut?: string }).auteurStatut === 'expert',
     );
   if (hasExpertVariante) return true;
-
-  // Condition 3 : participation très populaire (valeur >= 50)
-  const hasPopular = participations.some((p) => (p.valeur ?? 0) >= 50);
-  if (hasPopular) return true;
-
-  // Condition 4 : un vote expert (ratio 10) dans les votes d'une participation
-  const hasExpertVote = participations.some((p) =>
+  if (participations.some((p) => (p.valeur ?? 0) >= 50)) return true;
+  return participations.some((p) =>
     (p.votes ?? []).some((v) => RATIO_STATUT[v.voterStatut] === 10),
   );
-  return hasExpertVote;
 }
 
-export function markRevelation(userId: string, caseId: string): void {
-  const all = getAll();
-  const idx = all.findIndex((p) => p.userId === userId && p.caseId === caseId);
-  if (idx >= 0) {
-    all[idx] = { ...all[idx]!, revelationFaite: true, updatedAt: new Date().toISOString() };
-    saveAll(all);
-  }
-}
+// ─── Difficulté estimée ───────────────────────────────────────────────────────
 
-// Supprime la participation d'un utilisateur pour un cas donné.
-// Note : les points de vote gagnés à la soumission ne sont pas remboursés.
-export function removeParticipation(userId: string, caseId: string): void {
-  const all = getAll();
-  const filtered = all.filter((p) => !(p.userId === userId && p.caseId === caseId));
-  saveAll(filtered);
-}
-
-// Agrège les évaluations de difficulté de toutes les participations d'un cas.
-// Retourne le niveau le plus fréquent et le nombre de votes correspondants.
 export interface DifficultyResult {
   niveau: DifficulteEstimee;
   label: string;
   count: number;
-  total: number; // nombre total de participations ayant renseigné ce champ
+  total: number;
 }
 
-// Insère une participation dans le store si elle n'y est pas encore (par id).
-// Utilisé pour synchroniser les analyses statiques (cas.analyses) vers localStorage
-// afin que les votes fonctionnent.
-export function syncParticipationIfNeeded(participation: UserParticipation): void {
-  if (typeof window === 'undefined') return;
-  const all = getAll();
-  if (all.some((p) => p.id === participation.id)) return;
-  saveAll([...all, participation]);
-}
-
-export function computeDifficulty(caseId: string): DifficultyResult | null {
-  const participations = getParticipationsByCase(caseId);
+export function computeDifficulty(participations: UserParticipation[]): DifficultyResult | null {
   const votes = participations
     .map((p) => p.difficultéEstimee)
     .filter((d): d is DifficulteEstimee => !!d);
-
   if (votes.length === 0) return null;
-
   const counts = new Map<DifficulteEstimee, number>();
-  for (const v of votes) {
-    counts.set(v, (counts.get(v) ?? 0) + 1);
-  }
-
+  for (const v of votes) counts.set(v, (counts.get(v) ?? 0) + 1);
   let best: DifficulteEstimee = votes[0]!;
   let bestCount = 0;
   for (const [niveau, count] of counts.entries()) {
-    if (count > bestCount) {
-      best = niveau;
-      bestCount = count;
-    }
+    if (count > bestCount) { best = niveau; bestCount = count; }
   }
-
-  return {
-    niveau: best,
-    label: DIFFICULTE_LABELS[best],
-    count: bestCount,
-    total: votes.length,
-  };
+  return { niveau: best, label: DIFFICULTE_LABELS[best], count: bestCount, total: votes.length };
 }

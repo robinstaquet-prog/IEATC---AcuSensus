@@ -13,9 +13,7 @@ import { getUserCases } from '@/lib/user-cases-store';
 import { GRILLES } from '@/data/grilles';
 import { Input } from '@/components/ui/input';
 import type { ClinicalCase, ReadingGridId } from '@/types';
-import { RATIO_STATUT } from '@/types';
 import { cn } from '@/lib/utils';
-import { getParticipationsByCase } from '@/lib/participation-store';
 import {
   Search,
   BookOpen,
@@ -154,14 +152,9 @@ function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
 
     // Filtre 1 : Apprentissage = cas marqués exemplaire ou avec analyse expert
     if (f.mode === 'apprentissage') {
-      const storeParticipations = getParticipationsByCase(c.id);
       const isApprentissage =
         c.exemplaire ||
-        c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert') ||
-        storeParticipations.some((p) => (p.valeur ?? 0) >= 50) ||
-        storeParticipations.some((p) =>
-          (p.votes ?? []).some((v) => RATIO_STATUT[v.voterStatut] === 10),
-        );
+        c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
       if (!isApprentissage) return false;
     }
 
