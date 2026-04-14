@@ -7,7 +7,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { getCasesPublies } from '@/data';
-import { getParticipationsByCase, isCasApprentissage } from '@/lib/participation-store';
 import type { ClinicalCase } from '@/types';
 import { cn } from '@/lib/utils';
 import { GraduationCap, BookOpen, Star } from 'lucide-react';
@@ -99,8 +98,8 @@ export default function ApprentissagePage() {
     // getCasesPublies inclut deja les cas utilisateur
     const allCases = getCasesPublies();
     return allCases.filter((c) => {
-      const participations = getParticipationsByCase(c.id);
-      return isCasApprentissage(c, participations);
+      // Apprentissage = cas marqués exemplaire ou avec analyse expert
+      return c.exemplaire || c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
     });
   }, [mounted]);
 
