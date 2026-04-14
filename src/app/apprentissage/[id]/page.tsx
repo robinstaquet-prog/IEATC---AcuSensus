@@ -9,7 +9,6 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { getCaseById } from '@/data';
-import { getUserCaseById } from '@/lib/user-cases-store';
 import { getParticipationsByCase, isCasApprentissage } from '@/lib/participation-store';
 import { getExercice, saveExercice } from '@/lib/exercice-store';
 import { ParticipationForm } from '@/components/ieatc/ParticipationForm';
@@ -90,9 +89,9 @@ export default function ApprentissageExercicePage() {
   const [exercice, setExercice] = useState<UserParticipation | null>(null);
   const [showForm, setShowForm] = useState(false);
 
-  // Recuperer le cas (corpus ou utilisateur)
+  // Recuperer le cas (corpus uniquement pour l'apprentissage)
   const cas = useMemo((): ClinicalCase | undefined => {
-    return getCaseById(id) ?? getUserCaseById(id);
+    return getCaseById(id);
   }, [id]);
 
   // Charger l'exercice existant si present

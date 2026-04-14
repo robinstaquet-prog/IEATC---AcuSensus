@@ -12,7 +12,6 @@ import { getAllParticipations } from '@/lib/participation-store';
 import { getUserCasesByAuteur, deleteUserCase } from '@/lib/user-cases-store';
 import { getAllExercices } from '@/lib/exercice-store';
 import { getCaseById } from '@/data';
-import { getUserCaseById } from '@/lib/user-cases-store';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import type { UserParticipation, ClinicalCase } from '@/types';
 import { cn } from '@/lib/utils';
@@ -425,7 +424,7 @@ export default function ProfilPage() {
               ) : (
                 <div className="space-y-3">
                   {exercices.map((ex) => {
-                    const cas = getCaseById(ex.caseId) ?? getUserCaseById(ex.caseId);
+                    const cas = getCaseById(ex.caseId);
                     const titreCas = cas?.titre ?? ex.caseId;
                     const dateStr = ex.updatedAt
                       ? new Date(ex.updatedAt).toLocaleDateString('fr-FR', {
