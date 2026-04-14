@@ -13,6 +13,7 @@ import {
   type ReactNode,
 } from 'react';
 import { supabase } from '@/lib/supabase';
+import type { StatutPraticien } from '@/types/index';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -33,7 +34,7 @@ export interface AuthUser {
   telephone?: string;
   // Compatibilité avec les composants existants
   pseudo: string;
-  statut?: string;
+  statut?: StatutPraticien;
   niveauProfil?: string;
   dateInscription?: string;
   anneePromotion?: number;
