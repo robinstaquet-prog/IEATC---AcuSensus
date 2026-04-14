@@ -479,7 +479,7 @@ export default function SoumettreCasPage() {
       addUserCase(newCas);
       setSaved(true);
       setTimeout(() => {
-        router.push(`/cas/${casId}`);
+        router.push(`/mes-cas/${casId}`);
       }, 1500);
     },
     [
