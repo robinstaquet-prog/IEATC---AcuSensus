@@ -6,9 +6,10 @@
 //   2. Niveau de complexité
 //   3. Grille — visible uniquement en mode "Cas d'apprentissage"
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { getCasesPublies } from '@/data';
+import { getUserCases } from '@/lib/user-cases-store';
 import { GRILLES } from '@/data/grilles';
 import { Input } from '@/components/ui/input';
 import type { ClinicalCase, ReadingGridId } from '@/types';
@@ -38,9 +39,10 @@ const COMPLEXITE_COLORS: Record<number, string> = {
 function CasCard({ cas, showApprentissage }: { cas: ClinicalCase; showApprentissage?: boolean }) {
   const complexiteColor = COMPLEXITE_COLORS[cas.niveauComplexite];
   const complexiteLabel = COMPLEXITE_LABELS[cas.niveauComplexite];
+  const href = cas.id.startsWith('user-cas-') ? `/mes-cas/${cas.id}` : `/cas/${cas.id}`;
 
   return (
-    <Link href={`/cas/${cas.id}`} className="group block">
+    <Link href={href} className="group block">
       <article className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 h-full flex flex-col">
         {/* Header */}
         <div className="px-5 pt-5 pb-3">
@@ -194,7 +196,18 @@ function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
 
 export default function CasListPage() {
   const [filters, setFilters] = useState<Filters>(INITIAL_FILTERS);
-  const cases = getCasesPublies();
+  const corpus = getCasesPublies();
+  const [userCases, setUserCases] = useState<ClinicalCase[]>([]);
+
+  useEffect(() => {
+    getUserCases().then((cas) => {
+      const publies = cas.filter((c) => c.statut === 'publie');
+      const nouveaux = publies.filter((c) => !corpus.some((cc) => cc.id === c.id));
+      setUserCases(nouveaux);
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const cases = useMemo(() => [...corpus, ...userCases], [userCases]); // eslint-disable-line react-hooks/exhaustive-deps
   const filtered = useMemo(() => filterCas(cases, filters), [cases, filters]);
 
   const hasActive =
