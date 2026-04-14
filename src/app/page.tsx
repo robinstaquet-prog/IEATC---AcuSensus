@@ -15,6 +15,7 @@ import {
   computeGlobalStats,
 } from '@/data';
 import { getGrille, GRILLES } from '@/data/grilles';
+import { TutorialAccordion } from '@/components/home/TutorialAccordion';
 
 export default function HomePage() {
   const stats = computeGlobalStats();
@@ -59,6 +60,9 @@ export default function HomePage() {
                 Lexique IEATC
               </Link>
             </div>
+
+            {/* Accordéon tutoriel */}
+            <TutorialAccordion />
           </div>
         </div>
       </section>

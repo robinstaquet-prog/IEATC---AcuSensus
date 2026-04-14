@@ -1,6 +1,6 @@
 -- ═══════════════════════════════════════════════════════════════════════════════
 -- AcuSensus — Schéma Supabase / PostgreSQL
--- Version : 1.0 MVP
+-- Version : 1.1 — Auth réelle + profils étendus
 -- ═══════════════════════════════════════════════════════════════════════════════
 -- Principes de sécurité :
 --   • RLS activé sur TOUTES les tables contenant des données utilisateurs
@@ -53,29 +53,49 @@ create type sexe as enum ('masculin', 'feminin', 'non_precise');
 -- Liée à auth.users de Supabase Auth via id = auth.uid()
 
 create table if not exists public.users (
-  id          uuid primary key references auth.users(id) on delete cascade,
-  email       text not null unique,
-  pseudo      text not null,
-  role        role_utilisateur not null default 'etudiant',
-  niveau_profil niveau_profil not null default 'debutant',
-  date_inscription timestamptz not null default now(),
-  updated_at  timestamptz not null default now()
+  id                uuid primary key references auth.users(id) on delete cascade,
+  email             text not null unique,
+  pseudo            text not null,
+  role              role_utilisateur not null default 'etudiant',
+  niveau_profil     niveau_profil not null default 'debutant',
+  date_inscription  timestamptz not null default now(),
+  updated_at        timestamptz not null default now(),
+
+  -- ─── Champs étendus v1.1 ─────────────────────────────────────────────────
+  nom               text,
+  prenom            text,
+  statut_ieatc      text,   -- 'premiere_annee' | 'etudiant' | 'quatrieme_annee' | 'jeune_praticien' | 'praticien_experimente' | 'expert'
+  annee_promotion   int,    -- nullable
+  annee_diplome     int,    -- nullable — requis si jeune_praticien ou au-dessus
+  lieu_pratique     text,   -- nullable
+  photo_profil      text,   -- nullable — URL
+  mail_public       text,   -- nullable
+  telephone         text,   -- nullable
+  points_vote       int not null default 10,
+  is_admin          boolean not null default false
 );
 
 alter table public.users enable row level security;
 
--- Lecture : visible par l'utilisateur lui-même et les admins
+-- Lecture : visible par l'utilisateur lui-même
 create policy "users_select_own" on public.users
   for select using (auth.uid() = id);
 
-create policy "users_select_admin" on public.users
+-- Lecture admin : les admins voient tous les profils
+create policy "users_select_admin_all" on public.users
   for select using (
-    exists (select 1 from public.users u where u.id = auth.uid() and u.role = 'admin')
+    exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
   );
 
 -- Mise à jour : uniquement ses propres données
 create policy "users_update_own" on public.users
   for update using (auth.uid() = id);
+
+-- Mise à jour admin : les admins peuvent modifier tous les profils
+create policy "users_update_admin" on public.users
+  for update using (
+    exists (select 1 from public.users u where u.id = auth.uid() and u.is_admin = true)
+  );
 
 -- Insertion automatique lors de l'inscription (trigger)
 create policy "users_insert_own" on public.users
@@ -89,11 +109,29 @@ returns trigger
 language plpgsql security definer set search_path = ''
 as $$
 begin
-  insert into public.users (id, email, pseudo)
+  insert into public.users (
+    id,
+    email,
+    pseudo,
+    nom,
+    prenom,
+    statut_ieatc,
+    points_vote,
+    is_admin
+  )
   values (
     new.id,
     new.email,
-    coalesce(new.raw_user_meta_data->>'pseudo', split_part(new.email, '@', 1))
+    coalesce(
+      new.raw_user_meta_data->>'prenom' || ' ' || new.raw_user_meta_data->>'nom',
+      new.raw_user_meta_data->>'pseudo',
+      split_part(new.email, '@', 1)
+    ),
+    coalesce(new.raw_user_meta_data->>'nom', ''),
+    coalesce(new.raw_user_meta_data->>'prenom', ''),
+    coalesce(new.raw_user_meta_data->>'statut_ieatc', 'etudiant'),
+    coalesce((new.raw_user_meta_data->>'points_vote')::int, 10),
+    coalesce((new.raw_user_meta_data->>'is_admin')::boolean, false)
   );
   return new;
 end;

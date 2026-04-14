@@ -1,6 +1,6 @@
 'use client';
 
-// ─── Mon profil — refonte Phase 3 ─────────────────────────────────────────────
+// ─── Mon profil — Supabase Auth ───────────────────────────────────────────────
 // Affiche : identité (nom/prénom/statut/volée + infos optionnelles),
 // compteurs (participations et cas soumis, tous + publics),
 // puis listes publiques uniquement (participations publiées + cas soumis publics).
@@ -15,11 +15,9 @@ import { getCaseById } from '@/data';
 import { getUserCaseById } from '@/lib/user-cases-store';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import type { UserParticipation, ClinicalCase } from '@/types';
-import { LABEL_STATUT } from '@/types';
 import { cn } from '@/lib/utils';
 import {
   User,
-  LogIn,
   BookOpen,
   PenLine,
   Award,
@@ -30,7 +28,21 @@ import {
   Coins,
   FilePlus,
   GraduationCap,
+  LogIn,
 } from 'lucide-react';
+
+// ─── Labels statut IEATC ──────────────────────────────────────────────────────
+
+const LABEL_STATUT_IEATC: Record<string, string> = {
+  premiere_annee: '1ère année',
+  etudiant: 'Étudiant',
+  quatrieme_annee: '4ème année',
+  jeune_praticien: 'Jeune praticien',
+  praticien_experimente: 'Praticien expérimenté',
+  expert: 'Expert',
+  // Compatibilité ancien modèle
+  etudiant_4e_annee: 'Étudiant 4e année',
+};
 
 function PublicParticipationRow({ p }: { p: UserParticipation }) {
   const cas = getCaseById(p.caseId);
@@ -73,11 +85,10 @@ function PublicParticipationRow({ p }: { p: UserParticipation }) {
 }
 
 export default function ProfilPage() {
-  const { user, signIn, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
   const [participations, setParticipations] = useState<UserParticipation[]>([]);
   const [userCases, setUserCases] = useState<ClinicalCase[]>([]);
   const [exercices, setExercices] = useState<UserParticipation[]>([]);
-  // Onglet actif : participations, cas soumis, apprentissage
   type OngletProfil = 'participations' | 'cas' | 'apprentissage';
   const [onglet, setOnglet] = useState<OngletProfil>('participations');
 
@@ -104,33 +115,34 @@ export default function ProfilPage() {
           <User size={36} className="text-slate-300 mx-auto mb-4" />
           <h1 className="text-xl font-bold text-slate-900 mb-2">Mon espace</h1>
           <p className="text-slate-500 text-sm mb-6">
-            Connectez-vous pour accéder à votre profil et à vos participations.
+            Connectez-vous pour voir votre profil et vos participations.
           </p>
-          <button
-            onClick={signIn}
+          <Link
+            href="/connexion"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-teal-600 text-white hover:bg-teal-500 font-semibold text-sm transition-colors"
           >
             <LogIn size={16} />
-            Connexion (démo)
-          </button>
+            Se connecter
+          </Link>
         </div>
       </div>
     );
   }
 
+  // Données profil
+  const fullName = [user.prenom, user.nom].filter(Boolean).join(' ') || user.pseudo || user.email;
+  const isExpert = user.statut_ieatc === 'expert';
+  const volee = user.annee_promotion ? `Volée ${user.annee_promotion}` : null;
+  const statutLabel = user.statut_ieatc
+    ? LABEL_STATUT_IEATC[user.statut_ieatc] ?? user.statut_ieatc
+    : '—';
+
   // Compteurs
   const totalPart = participations.length;
   const publicPart = participations.filter((p) => p.publicationMode === 'public').length;
   const anonPart = totalPart - publicPart;
-
-  // Compteurs des cas soumis par l'utilisateur
   const totalCasSoumis = userCases.length;
   const publicCasSoumis = userCases.filter((c) => c.auteurId === user.id).length;
-
-  const isExpert = user.statut === 'expert';
-  const volee = user.anneePromotion ? `Volée ${user.anneePromotion}` : null;
-  const fullName = [user.prenom, user.nom].filter(Boolean).join(' ') || user.pseudo;
-
   const publicParticipations = participations.filter((p) => p.publicationMode === 'public');
 
   return (
@@ -139,10 +151,10 @@ export default function ProfilPage() {
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-6">
           <div className="flex items-center gap-4">
-            {user.photoUrl ? (
+            {user.photo_profil ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={user.photoUrl}
+                src={user.photo_profil}
                 alt={fullName}
                 className="w-14 h-14 rounded-full object-cover border-2 border-white/20"
               />
@@ -159,9 +171,14 @@ export default function ProfilPage() {
                     <Award size={10} /> EXPERT
                   </span>
                 )}
+                {user.is_admin && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-700 text-teal-200">
+                    ADMIN
+                  </span>
+                )}
               </div>
               <p className="text-slate-400 text-sm">
-                {user.statut ? LABEL_STATUT[user.statut] : '—'}
+                {statutLabel}
                 {volee && <span className="text-slate-500"> · {volee}</span>}
               </p>
             </div>
@@ -175,16 +192,16 @@ export default function ProfilPage() {
           </div>
 
           {/* Infos optionnelles */}
-          {(user.lieu || user.emailPublic || user.telephone) && (
+          {(user.lieu_pratique || user.mail_public || user.telephone) && (
             <div className="mt-4 flex flex-wrap gap-3 text-xs text-slate-400">
-              {user.lieu && (
+              {user.lieu_pratique && (
                 <span className="inline-flex items-center gap-1">
-                  <MapPin size={11} /> {user.lieu}
+                  <MapPin size={11} /> {user.lieu_pratique}
                 </span>
               )}
-              {user.emailPublic && (
+              {user.mail_public && (
                 <span className="inline-flex items-center gap-1">
-                  <Mail size={11} /> {user.emailPublic}
+                  <Mail size={11} /> {user.mail_public}
                 </span>
               )}
               {user.telephone && (
@@ -290,7 +307,7 @@ export default function ProfilPage() {
                     Aucune participation publique pour l&apos;instant.
                   </p>
                   <p className="text-xs text-slate-400 mt-1">
-                    Seules les participations publiees en mode public s&apos;affichent ici.
+                    Seules les participations publiées en mode public s&apos;affichent ici.
                   </p>
                 </div>
               ) : (
@@ -381,11 +398,11 @@ export default function ProfilPage() {
                 <div className="rounded-xl border border-slate-200 p-8 text-center">
                   <GraduationCap size={24} className="text-slate-300 mx-auto mb-2" />
                   <p className="text-slate-500 text-sm">
-                    Aucun exercice d&apos;apprentissage termine.
+                    Aucun exercice d&apos;apprentissage terminé.
                   </p>
                   <p className="text-xs text-slate-400 mt-1">
                     <Link href="/apprentissage" className="text-teal-600 hover:text-teal-700 underline">
-                      Decouvrir les cas d&apos;apprentissage
+                      Découvrir les cas d&apos;apprentissage
                     </Link>
                   </p>
                 </div>
