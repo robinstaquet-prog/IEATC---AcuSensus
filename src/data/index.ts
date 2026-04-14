@@ -14,26 +14,14 @@ import {
   getCaseById as getCaseByIdCorpus,
   getCasesPublies as getCasesPubliesCorpus,
 } from './cases';
-import { getUserCases, getUserCaseById } from '@/lib/user-cases-store';
 import type { ClinicalCase } from '@/types';
 
 export function getCaseById(id: string): ClinicalCase | undefined {
-  const fromCorpus = getCaseByIdCorpus(id);
-  if (fromCorpus) return fromCorpus;
-  if (typeof window === 'undefined') return undefined;
-  return getUserCaseById(id);
+  return getCaseByIdCorpus(id);
 }
 
 export function getCasesPublies(): ClinicalCase[] {
-  const corpus = getCasesPubliesCorpus();
-  // Ajouter les cas utilisateur publies (eviter les doublons)
-  let userCases: ClinicalCase[] = [];
-  if (typeof window !== 'undefined') {
-    userCases = getUserCases().filter(
-      (c) => c.statut === 'publie' && !corpus.some((cc) => cc.id === c.id),
-    );
-  }
-  return [...corpus, ...userCases];
+  return getCasesPubliesCorpus();
 }
 
 // ─── Statistiques globales calculées ─────────────────────────────────────────

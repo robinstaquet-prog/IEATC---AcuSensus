@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getUserCaseById } from '@/lib/user-cases-store';
 import type { ClinicalCase } from '@/types';
 import { CasDetailClient } from '@/app/cas/[id]/CasDetailClient';
+import { Loader2 } from 'lucide-react';
 
 export default function MesCasPage() {
   const params = useParams();
@@ -14,12 +15,13 @@ export default function MesCasPage() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const found = getUserCaseById(id);
-    if (!found) {
-      setNotFound(true);
-    } else {
-      setCas(found);
-    }
+    getUserCaseById(id).then((found) => {
+      if (!found) {
+        setNotFound(true);
+      } else {
+        setCas(found);
+      }
+    });
   }, [id]);
 
   if (notFound) {
@@ -27,12 +29,12 @@ export default function MesCasPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-slate-900 mb-2">Cas introuvable</h1>
-          <p className="text-slate-500 mb-6">Ce cas n'existe pas ou a été supprimé.</p>
+          <p className="text-slate-500 mb-6">Ce cas n&apos;existe pas ou a été supprimé.</p>
           <button
             onClick={() => router.push('/')}
             className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-500"
           >
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </button>
         </div>
       </div>
@@ -42,7 +44,7 @@ export default function MesCasPage() {
   if (!cas) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-slate-400">Chargement...</div>
+        <Loader2 size={28} className="animate-spin text-slate-300" />
       </div>
     );
   }

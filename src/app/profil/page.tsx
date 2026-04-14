@@ -96,8 +96,8 @@ export default function ProfilPage() {
   useEffect(() => {
     if (user) {
       setParticipations(getAllParticipations(user.id));
-      setUserCases(getUserCasesByAuteur(user.id));
       setExercices(getAllExercices(user.id));
+      getUserCasesByAuteur(user.id).then(setUserCases);
     }
   }, [user]);
 
@@ -372,9 +372,9 @@ export default function ProfilPage() {
                             Voir <ArrowRight size={11} />
                           </Link>
                           <button
-                            onClick={() => {
+                            onClick={async () => {
                               if (confirm(`Supprimer le cas "${c.titre}" ? Cette action est irréversible.`)) {
-                                deleteUserCase(c.id);
+                                await deleteUserCase(c.id);
                                 setUserCases((prev) => prev.filter((x) => x.id !== c.id));
                               }
                             }}

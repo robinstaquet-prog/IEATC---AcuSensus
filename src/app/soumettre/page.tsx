@@ -476,7 +476,11 @@ export default function SoumettreCasPage() {
         analyses: [],
       };
 
-      addUserCase(newCas);
+      const { error: saveError } = await addUserCase(newCas);
+      if (saveError) {
+        setError('Erreur lors de la sauvegarde : ' + saveError);
+        return;
+      }
       setSaved(true);
       setTimeout(() => {
         router.push(`/mes-cas/${casId}`);
