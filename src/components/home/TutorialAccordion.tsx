@@ -9,33 +9,33 @@ import { cn } from '@/lib/utils';
 const SECTIONS = [
   {
     id: 'synthese',
-    title: 'Qu'est-ce qu'une synthèse clinique ?',
+    title: `Qu'est-ce qu'une synthèse clinique ?`,
     content:
-      'Chaque cas clinique peut recevoir plusieurs synthèses — des analyses structurées rédigées par des praticiens ou des experts. Chaque synthèse est organisée selon une grille de lecture spécifique à l'approche IEATC : Yin/Yang, Cinq Éléments, Zang/Fu, Méridiens, Tiges & Branches… Une même situation clinique peut ainsi être éclairée sous plusieurs angles complémentaires.',
+      `Chaque cas clinique peut recevoir plusieurs synthèses — des analyses structurées rédigées par des praticiens ou des experts. Chaque synthèse est organisée selon une grille de lecture spécifique à l'approche IEATC : Yin/Yang, Cinq Éléments, Zang/Fu, Méridiens, Tiges & Branches… Une même situation clinique peut ainsi être éclairée sous plusieurs angles complémentaires.`,
   },
   {
     id: 'apprentissage',
-    title: 'Pourquoi certains cas sont en mode Apprentissage ?',
+    title: `Pourquoi certains cas sont en mode Apprentissage ?`,
     content:
-      'Un cas passe en mode Apprentissage lorsqu'il a été suffisamment validé par la communauté — ou directement labellisé par un expert de l'école. Ce mode permet de comparer son propre raisonnement avec les analyses de référence. Tous les cas ne sont pas immédiatement éligibles : ils doivent répondre à des critères de qualité et de complétude.',
+      `Un cas passe en mode Apprentissage lorsqu'il a été suffisamment validé par la communauté — ou directement labellisé par un expert de l'école. Ce mode permet de comparer son propre raisonnement avec les analyses de référence. Tous les cas ne sont pas immédiatement éligibles : ils doivent répondre à des critères de qualité et de complétude.`,
   },
   {
     id: 'voter',
-    title: 'À quoi sert de voter ?',
+    title: `À quoi sert de voter ?`,
     content:
-      'Voter permet à la communauté de reconnaître les analyses les plus pertinentes et les mieux argumentées. Le poids d'un vote n'est pas uniforme : plus le votant est expérimenté (praticien, expert), plus son vote contribue fortement à la valeur d'une analyse. Cela permet de faire émerger naturellement les raisonnements cliniques les plus solides.',
+      `Voter permet à la communauté de reconnaître les analyses les plus pertinentes et les mieux argumentées. Le poids d'un vote n'est pas uniforme : plus le votant est expérimenté (praticien, expert), plus son vote contribue fortement à la valeur d'une analyse. Cela permet de faire émerger naturellement les raisonnements cliniques les plus solides.`,
   },
   {
     id: 'qualifiee',
-    title: 'Qu'est-ce qu'une analyse qualifiée ?',
+    title: `Qu'est-ce qu'une analyse qualifiée ?`,
     content:
-      'Une analyse qualifiée est une synthèse qui a reçu suffisamment de reconnaissance de la communauté pour servir de référence pédagogique. Elle est identifiée par un badge distinctif et utilisée dans les cas d'apprentissage. C'est la marque que le raisonnement clinique présenté est jugé fiable et formateur par la communauté IEATC.',
+      `Une analyse qualifiée est une synthèse qui a reçu suffisamment de reconnaissance de la communauté pour servir de référence pédagogique. Elle est identifiée par un badge distinctif et utilisée dans les cas d'apprentissage. C'est la marque que le raisonnement clinique présenté est jugé fiable et formateur par la communauté IEATC.`,
   },
   {
     id: 'participer',
-    title: 'Comment participer ?',
+    title: `Comment participer ?`,
     content:
-      'Commencez par explorer les cas cliniques disponibles. Sur chaque cas, vous pouvez soumettre votre propre synthèse — en mode public (visible) ou anonyme — et voter pour les analyses des autres praticiens. Vous pouvez aussi vous entraîner en mode Apprentissage : rédigez votre analyse, puis comparez-la avec celles des experts pour affiner votre pensée clinique.',
+      `Commencez par explorer les cas cliniques disponibles. Sur chaque cas, vous pouvez soumettre votre propre synthèse — en mode public (visible) ou anonyme — et voter pour les analyses des autres praticiens. Vous pouvez aussi vous entraîner en mode Apprentissage : rédigez votre analyse, puis comparez-la avec celles des experts pour affiner votre pensée clinique.`,
   },
 ];
 
