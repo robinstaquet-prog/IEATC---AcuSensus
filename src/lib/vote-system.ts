@@ -1,17 +1,15 @@
 // ─── Système de vote AcuSensus ────────────────────────────────────────────────
+// Les votes sont appliqués via des fonctions RPC Supabase (SECURITY DEFINER)
+// pour contourner les RLS qui bloquent la modification des lignes d'autrui.
 
-import type { UserParticipation, Vote, StatutPraticien, User } from '@/types';
+import type { UserParticipation, StatutPraticien, User } from '@/types';
 import { RATIO_STATUT } from '@/types';
-import { updateParticipationById } from '@/lib/participation-store';
+import { supabase } from '@/lib/supabase';
 
 export const COST_ELEMENT = 1;
 export const COST_PARTICIPATION = 2;
 
-function uid(): string {
-  return `v-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-}
-
-export function computeValeur(votes: Vote[] | undefined): number {
+export function computeValeur(votes: UserParticipation['votes']): number {
   if (!votes || votes.length === 0) return 1;
   const sum = votes.reduce((acc, v) => acc + (RATIO_STATUT[v.voterStatut] ?? 1) * 0.1, 0);
   return 1 + sum;
@@ -34,6 +32,43 @@ export interface VoteResult {
   consumed?: number;
 }
 
+// ─── Mapping brut depuis le résultat RPC ─────────────────────────────────────
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function rowToParticipation(row: Record<string, any>): UserParticipation {
+  const extra = row.extra_data ?? {};
+  return {
+    id: row.id,
+    userId: row.user_id,
+    caseId: row.case_id,
+    grilleChoisie: row.grille_choisie,
+    grilleSecondaire: row.grille_secondaire ?? undefined,
+    bilanEnergetique: row.bilan_energetique ?? undefined,
+    strategie: row.strategie ?? undefined,
+    publicationMode: row.publication_mode,
+    valeur: row.valeur ?? 1.0,
+    pointsProposer: row.points_traitement ?? [],
+    annotationsInterrogatoire: row.annotations ?? [],
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    polariteIdentifiee: extra.polariteIdentifiee,
+    localisationIdentifiee: extra.localisationIdentifiee,
+    categoriesRetenues: extra.categoriesRetenues ?? [],
+    commentaireLibre: extra.commentaireLibre,
+    revelationFaite: extra.revelationFaite ?? false,
+    annotationsPouls: extra.annotationsPouls,
+    langueTexte: extra.langueTexte,
+    annotationsLangue: extra.annotationsLangue,
+    examensSupp: extra.examensSupp,
+    palpationAbdo: extra.palpationAbdo,
+    deuxiemeSeance: extra.deuxiemeSeance,
+    publiee: extra.publiee,
+    votes: extra.votes ?? [],
+    votePoints: extra.votePoints ?? 0,
+    difficultéEstimee: extra.difficultéEstimee,
+  };
+}
+
 function alreadyVoted(
   participation: UserParticipation,
   voterId: string,
@@ -48,6 +83,8 @@ function alreadyVoted(
   return votes.some((v) => v.voterId === voterId && v.cible === 'participation');
 }
 
+// ─── Votes via RPC ────────────────────────────────────────────────────────────
+
 export async function voteOnElement(
   participation: UserParticipation,
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
@@ -59,19 +96,20 @@ export async function voteOnElement(
   if (alreadyVoted(participation, voter.id, elementKey)) {
     return { ok: false, error: 'Vous avez déjà voté sur cet élément.' };
   }
-  const newVote: Vote = {
-    id: uid(),
-    voterId: voter.id,
-    voterStatut: voter.statut ?? 'etudiant',
-    cible: 'element',
-    elementKey,
-    createdAt: new Date().toISOString(),
-  };
-  const votes = [...(participation.votes ?? []), newVote];
-  const votePoints = (participation.votePoints ?? 0) + 1;
-  const valeur = computeValeur(votes);
-  const updated = await updateParticipationById(participation.id, { votes, votePoints, valeur });
-  return { ok: !!updated, updated, consumed: COST_ELEMENT };
+
+  const { data, error } = await supabase.rpc('cast_vote', {
+    p_participation_id: participation.id,
+    p_voter_id:         voter.id,
+    p_voter_statut:     voter.statut ?? 'etudiant',
+    p_cible:            'element',
+    p_element_key:      elementKey,
+  });
+
+  if (error || !data?.ok) {
+    return { ok: false, error: data?.error ?? error?.message ?? 'Vote impossible' };
+  }
+  const updated = data.row ? rowToParticipation(data.row) : undefined;
+  return { ok: true, updated, consumed: COST_ELEMENT };
 }
 
 export async function voteOnParticipation(
@@ -84,18 +122,20 @@ export async function voteOnParticipation(
   if (alreadyVoted(participation, voter.id)) {
     return { ok: false, error: 'Vous avez déjà validé cette participation.' };
   }
-  const newVote: Vote = {
-    id: uid(),
-    voterId: voter.id,
-    voterStatut: voter.statut ?? 'etudiant',
-    cible: 'participation',
-    createdAt: new Date().toISOString(),
-  };
-  const votes = [...(participation.votes ?? []), newVote];
-  const votePoints = (participation.votePoints ?? 0) + 2;
-  const valeur = computeValeur(votes);
-  const updated = await updateParticipationById(participation.id, { votes, votePoints, valeur });
-  return { ok: !!updated, updated, consumed: COST_PARTICIPATION };
+
+  const { data, error } = await supabase.rpc('cast_vote', {
+    p_participation_id: participation.id,
+    p_voter_id:         voter.id,
+    p_voter_statut:     voter.statut ?? 'etudiant',
+    p_cible:            'participation',
+    p_element_key:      null,
+  });
+
+  if (error || !data?.ok) {
+    return { ok: false, error: data?.error ?? error?.message ?? 'Vote impossible' };
+  }
+  const updated = data.row ? rowToParticipation(data.row) : undefined;
+  return { ok: true, updated, consumed: COST_PARTICIPATION };
 }
 
 export async function unvoteOnElement(
@@ -103,32 +143,36 @@ export async function unvoteOnElement(
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
   elementKey: string,
 ): Promise<VoteResult> {
-  const votes = participation.votes ?? [];
-  const idx = votes.findIndex(
-    (v) => v.voterId === voter.id && v.cible === 'element' && v.elementKey === elementKey,
-  );
-  if (idx === -1) return { ok: false, error: 'Aucun vote à annuler sur cet élément.' };
-  const newVotes = votes.filter((_, i) => i !== idx);
-  const votePoints = Math.max(0, (participation.votePoints ?? 0) - 1);
-  const valeur = computeValeur(newVotes);
-  const updated = await updateParticipationById(participation.id, { votes: newVotes, votePoints, valeur });
-  return { ok: !!updated, updated, consumed: -COST_ELEMENT };
+  const { data, error } = await supabase.rpc('cancel_vote', {
+    p_participation_id: participation.id,
+    p_voter_id:         voter.id,
+    p_cible:            'element',
+    p_element_key:      elementKey,
+  });
+
+  if (error || !data?.ok) {
+    return { ok: false, error: data?.error ?? error?.message ?? 'Annulation impossible' };
+  }
+  const updated = data.row ? rowToParticipation(data.row) : undefined;
+  return { ok: true, updated, consumed: -COST_ELEMENT };
 }
 
 export async function unvoteOnParticipation(
   participation: UserParticipation,
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
 ): Promise<VoteResult> {
-  const votes = participation.votes ?? [];
-  const idx = votes.findIndex(
-    (v) => v.voterId === voter.id && v.cible === 'participation',
-  );
-  if (idx === -1) return { ok: false, error: 'Aucun vote à annuler sur cette participation.' };
-  const newVotes = votes.filter((_, i) => i !== idx);
-  const votePoints = Math.max(0, (participation.votePoints ?? 0) - 2);
-  const valeur = computeValeur(newVotes);
-  const updated = await updateParticipationById(participation.id, { votes: newVotes, votePoints, valeur });
-  return { ok: !!updated, updated, consumed: -COST_PARTICIPATION };
+  const { data, error } = await supabase.rpc('cancel_vote', {
+    p_participation_id: participation.id,
+    p_voter_id:         voter.id,
+    p_cible:            'participation',
+    p_element_key:      null,
+  });
+
+  if (error || !data?.ok) {
+    return { ok: false, error: data?.error ?? error?.message ?? 'Annulation impossible' };
+  }
+  const updated = data.row ? rowToParticipation(data.row) : undefined;
+  return { ok: true, updated, consumed: -COST_PARTICIPATION };
 }
 
 export function ratioLabel(statut?: StatutPraticien): string {
