@@ -104,7 +104,7 @@ function mapProfile(profile: Record<string, any>): AuthUser {
     mail_public: profile.mail_public ?? undefined,
     telephone: profile.telephone ?? undefined,
     // Compatibilité
-    pseudo: profile.pseudo ?? `${prenom} ${nom}`.trim() || profile.email,
+    pseudo: profile.pseudo ?? (`${prenom} ${nom}`.trim() || profile.email),
     statut: profile.statut_ieatc ?? 'etudiant',
     niveauProfil: profile.niveau_profil ?? 'debutant',
     dateInscription: profile.date_inscription ?? '',
