@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { getAllParticipations } from '@/lib/participation-store';
-import { getUserCasesByAuteur } from '@/lib/user-cases-store';
+import { getUserCasesByAuteur, deleteUserCase } from '@/lib/user-cases-store';
 import { getAllExercices } from '@/lib/exercice-store';
 import { getCaseById } from '@/data';
 import { getUserCaseById } from '@/lib/user-cases-store';
@@ -29,6 +29,7 @@ import {
   FilePlus,
   GraduationCap,
   LogIn,
+  Trash2,
 } from 'lucide-react';
 
 // ─── Labels statut IEATC ──────────────────────────────────────────────────────
@@ -356,19 +357,34 @@ export default function ProfilPage() {
                       <div className="flex items-start gap-4">
                         <div className="flex-1 min-w-0">
                           <Link
-                            href={`/cas/${c.id}`}
+                            href={`/mes-cas/${c.id}`}
                             className="font-semibold text-slate-900 hover:text-teal-700 transition-colors leading-snug block mb-1"
                           >
                             {c.titre}
                           </Link>
                           <p className="text-xs text-slate-500 line-clamp-1">{c.content.motif}</p>
                         </div>
-                        <Link
-                          href={`/cas/${c.id}`}
-                          className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-700 font-medium shrink-0"
-                        >
-                          Voir <ArrowRight size={11} />
-                        </Link>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <Link
+                            href={`/mes-cas/${c.id}`}
+                            className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-700 font-medium"
+                          >
+                            Voir <ArrowRight size={11} />
+                          </Link>
+                          <button
+                            onClick={() => {
+                              if (confirm(`Supprimer le cas "${c.titre}" ? Cette action est irréversible.`)) {
+                                deleteUserCase(c.id);
+                                setUserCases((prev) => prev.filter((x) => x.id !== c.id));
+                              }
+                            }}
+                            className="flex items-center gap-1 text-xs text-red-400 hover:text-red-600 font-medium px-2 py-1 rounded hover:bg-red-50 transition-colors"
+                            title="Supprimer ce cas"
+                          >
+                            <Trash2 size={12} />
+                            Supprimer
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}

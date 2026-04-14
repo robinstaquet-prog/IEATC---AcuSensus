@@ -44,3 +44,9 @@ export function addUserCase(cas: ClinicalCase): void {
   all.push(cas);
   saveAll(all);
 }
+
+/** Supprime un cas par son ID. */
+export function deleteUserCase(id: string): void {
+  const all = getAll().filter((c) => c.id !== id);
+  saveAll(all);
+}
