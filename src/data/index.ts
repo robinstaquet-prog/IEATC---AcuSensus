@@ -18,7 +18,10 @@ import { getUserCases, getUserCaseById } from '@/lib/user-cases-store';
 import type { ClinicalCase } from '@/types';
 
 export function getCaseById(id: string): ClinicalCase | undefined {
-  return getCaseByIdCorpus(id) ?? getUserCaseById(id);
+  const fromCorpus = getCaseByIdCorpus(id);
+  if (fromCorpus) return fromCorpus;
+  if (typeof window === 'undefined') return undefined;
+  return getUserCaseById(id);
 }
 
 export function getCasesPublies(): ClinicalCase[] {

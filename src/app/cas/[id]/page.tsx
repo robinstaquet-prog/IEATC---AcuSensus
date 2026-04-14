@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { getCaseById, CLINICAL_CASES } from '@/data';
 import { CasDetailClient } from './CasDetailClient';
 
+export const dynamicParams = false;
+
 interface Props {
   params: Promise<{ id: string }>;
 }
