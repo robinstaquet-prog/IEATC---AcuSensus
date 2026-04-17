@@ -1,28 +1,78 @@
 import { computeGlobalStats } from '@/data';
 import { getGrille } from '@/data/grilles';
 import { GridBadge } from '@/components/ieatc/GridBadge';
-import { COMPLEXITE_LABELS, COMPLEXITE_COLORS } from '@/lib/constants';
-import { BarChart3, BookOpen, Star, GitBranch, TrendingUp } from 'lucide-react';
+import { COMPLEXITE_LABELS } from '@/lib/constants';
+import { BarChart3, BookOpen, Star, GitBranch, Crosshair } from 'lucide-react';
 
-// ─── Barre de stat ─────────────────────────────────────────────────────────────
+// ─── Labels métier ────────────────────────────────────────────────────────────
 
-function StatBar({ label, value, max, sublabel }: {
+const FOYER_LABELS: Record<string, string> = {
+  superieur: 'Foyer Supérieur (poumons, cœur)',
+  moyen: 'Foyer Moyen (digestif)',
+  inferieur: 'Foyer Inférieur (reins, utérus)',
+  multiple: 'Foyers multiples',
+};
+
+const FOYER_COLORS: Record<string, string> = {
+  superieur: 'bg-sky-500',
+  moyen: 'bg-amber-500',
+  inferieur: 'bg-indigo-500',
+  multiple: 'bg-violet-500',
+};
+
+const TECHNIQUE_LABELS: Record<string, string> = {
+  tonification: 'Tonification',
+  moxa_tonification: 'Moxa + Tonification',
+  tonification_chauffee: 'Tonification chauffée',
+  dispersion: 'Dispersion',
+  moxa_dispersion: 'Moxa + Dispersion',
+  dispersion_puis_tonification: 'Dispersion → Tonification',
+  moxa: 'Moxa seul',
+  harmonisation: 'Harmonisation',
+  neutre: 'Neutre',
+};
+
+const TECHNIQUE_COLORS: Record<string, string> = {
+  tonification: 'bg-emerald-500',
+  moxa_tonification: 'bg-orange-500',
+  tonification_chauffee: 'bg-lime-500',
+  dispersion: 'bg-blue-500',
+  moxa_dispersion: 'bg-amber-500',
+  dispersion_puis_tonification: 'bg-cyan-500',
+  moxa: 'bg-red-500',
+  harmonisation: 'bg-violet-500',
+  neutre: 'bg-slate-400',
+};
+
+const COMPLEXITE_BAR_COLORS: Record<number, string> = {
+  1: 'bg-emerald-500',
+  2: 'bg-amber-500',
+  3: 'bg-orange-500',
+};
+
+// ─── Barre de stat générique ──────────────────────────────────────────────────
+
+function StatBar({
+  label,
+  value,
+  max,
+  color = 'bg-teal-500',
+}: {
   label: string;
   value: number;
   max: number;
-  sublabel?: string;
+  color?: string;
 }) {
   const pct = max > 0 ? (value / max) * 100 : 0;
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <span className="text-sm font-medium text-slate-800 truncate">{label}</span>
-        <span className="text-xs text-slate-500 shrink-0 ml-2">{value}</span>
+        <span className="text-sm font-medium text-slate-800 truncate pr-2">{label}</span>
+        <span className="text-xs text-slate-500 shrink-0">{value}</span>
       </div>
-      {sublabel && <p className="text-xs text-slate-400 mb-1">{sublabel}</p>}
       <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
         <div
-          className="h-full bg-teal-500 rounded-full transition-all"
+          className={`h-full rounded-full transition-all ${color}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -37,27 +87,9 @@ export default function StatistiquesPage() {
 
   const maxPointCount = stats.topPoints[0]?.count ?? 1;
   const maxGrilleCount = stats.topGrilles[0]?.count ?? 1;
-  const maxPolariteCount = stats.topPolarites[0]?.count ?? 1;
+  const maxFoyerCount = stats.topFoyers[0]?.count ?? 1;
+  const maxTechniqueCount = stats.topTechniques[0]?.count ?? 1;
   const totalSexe = Object.values(stats.repartitionSexe).reduce((a, b) => a + b, 0);
-
-  const POLARITE_LABELS: Record<string, string> = {
-    yin: 'Yin',
-    yang: 'Yang',
-    mixte: 'Yin/Yang mixte',
-  };
-
-  const POLARITE_COLORS: Record<string, string> = {
-    yin: 'bg-blue-500',
-    yang: 'bg-red-500',
-    mixte: 'bg-violet-500',
-  };
-
-  const COMPLEXITE_BAR_COLORS: Record<number, string> = {
-    1: 'bg-emerald-500',
-    2: 'bg-amber-500',
-    3: 'bg-orange-500',
-    4: 'bg-red-500',
-  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -69,7 +101,8 @@ export default function StatistiquesPage() {
           <h1 className="text-2xl font-bold text-slate-900">Statistiques</h1>
         </div>
         <p className="text-slate-500 text-sm">
-          Vue globale sur la base de cas IEATC — points mobilisés, grilles de lecture, polarités.
+          Vue d'ensemble du corpus IEATC — points, grilles de lecture, foyers et techniques.
+          Ces données reflètent les analyses du corpus éditorial.
         </p>
       </div>
 
@@ -78,8 +111,8 @@ export default function StatistiquesPage() {
         {[
           { label: 'Cas publiés', value: stats.casPublies, icon: BookOpen, bg: 'bg-teal-50', color: 'text-teal-600' },
           { label: "Cas d'apprentissage", value: stats.casExemplaires, icon: Star, bg: 'bg-amber-50', color: 'text-amber-600' },
-          { label: 'Lectures / Analyses', value: stats.totalAnalyses, icon: GitBranch, bg: 'bg-indigo-50', color: 'text-indigo-600' },
-          { label: 'Total base', value: stats.totalCas, icon: TrendingUp, bg: 'bg-emerald-50', color: 'text-emerald-600' },
+          { label: 'Analyses dans le corpus', value: stats.totalAnalyses, icon: GitBranch, bg: 'bg-indigo-50', color: 'text-indigo-600' },
+          { label: 'Points distincts référencés', value: stats.pointsDistincts, icon: Crosshair, bg: 'bg-emerald-50', color: 'text-emerald-600' },
         ].map(({ label, value, icon: Icon, bg, color }) => (
           <div key={label} className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
             <div className={`w-10 h-10 rounded-lg ${bg} flex items-center justify-center mb-3`}>
@@ -96,7 +129,9 @@ export default function StatistiquesPage() {
         {/* Points les plus utilisés */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
           <h2 className="font-bold text-slate-900 mb-1">Points les plus utilisés</h2>
-          <p className="text-sm text-slate-500 mb-5">Fréquence d'apparition dans les analyses</p>
+          <p className="text-sm text-slate-500 mb-5">
+            Fréquence d'apparition dans les traitements proposés
+          </p>
           <div className="space-y-4">
             {stats.topPoints.map(({ id, count }) => (
               <StatBar key={id} label={id} value={count} max={maxPointCount} />
@@ -107,13 +142,15 @@ export default function StatistiquesPage() {
         {/* Grilles de lecture */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
           <h2 className="font-bold text-slate-900 mb-1">Grilles de lecture</h2>
-          <p className="text-sm text-slate-500 mb-5">Distribution par grille principale d'analyse</p>
+          <p className="text-sm text-slate-500 mb-5">
+            Distribution par grille principale utilisée dans les analyses
+          </p>
           <div className="space-y-4">
             {stats.topGrilles.map(({ id, count }) => {
               const grille = getGrille(id as Parameters<typeof getGrille>[0]);
               return (
                 <div key={id}>
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-1.5">
                     {grille ? (
                       <GridBadge grilleId={grille.id} size="sm" />
                     ) : (
@@ -135,29 +172,47 @@ export default function StatistiquesPage() {
           </div>
         </div>
 
-        {/* Polarités */}
+        {/* Localisation des foyers */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
-          <h2 className="font-bold text-slate-900 mb-1">Polarités Yin / Yang</h2>
+          <h2 className="font-bold text-slate-900 mb-1">Localisation des foyers</h2>
           <p className="text-sm text-slate-500 mb-5">
-            Répartition des diagnostics par polarité générale
+            Foyer principalement impliqué dans chaque analyse — renseigné par le praticien
           </p>
           <div className="space-y-4">
-            {stats.topPolarites.map(({ id, count }) => (
-              <div key={id}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-slate-700">
-                    {POLARITE_LABELS[id] ?? id}
-                  </span>
-                  <span className="text-xs text-slate-400">{count}</span>
-                </div>
-                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${POLARITE_COLORS[id] ?? 'bg-slate-400'}`}
-                    style={{ width: `${(count / maxPolariteCount) * 100}%` }}
-                  />
-                </div>
-              </div>
+            {stats.topFoyers.map(({ id, count }) => (
+              <StatBar
+                key={id}
+                label={FOYER_LABELS[id] ?? id}
+                value={count}
+                max={maxFoyerCount}
+                color={FOYER_COLORS[id] ?? 'bg-slate-400'}
+              />
             ))}
+            {stats.topFoyers.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Techniques de traitement */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-bold text-slate-900 mb-1">Techniques de traitement</h2>
+          <p className="text-sm text-slate-500 mb-5">
+            Distribution des techniques sur l'ensemble des points proposés dans les analyses
+          </p>
+          <div className="space-y-4">
+            {stats.topTechniques.map(({ id, count }) => (
+              <StatBar
+                key={id}
+                label={TECHNIQUE_LABELS[id] ?? id}
+                value={count}
+                max={maxTechniqueCount}
+                color={TECHNIQUE_COLORS[id] ?? 'bg-slate-400'}
+              />
+            ))}
+            {stats.topTechniques.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
           </div>
         </div>
 
@@ -167,7 +222,7 @@ export default function StatistiquesPage() {
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
-                Sexe
+                Sexe du patient
               </p>
               <div className="space-y-3">
                 {[
@@ -195,7 +250,7 @@ export default function StatistiquesPage() {
 
             <div>
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
-                Complexité
+                Niveau de complexité
               </p>
               <div className="space-y-2">
                 {([1, 2, 3] as const).map((level) => {
@@ -223,15 +278,20 @@ export default function StatistiquesPage() {
           </div>
         </div>
 
-        {/* Roadmap */}
+        {/* Roadmap statistiques communautaires */}
         <div className="bg-teal-50 rounded-xl border border-teal-200 p-6 lg:col-span-2">
-          <h3 className="font-semibold text-teal-900 mb-3">Statistiques avancées — Roadmap</h3>
+          <h3 className="font-semibold text-teal-900 mb-1">Statistiques communautaires — À venir</h3>
+          <p className="text-xs text-teal-700 mb-4">
+            Ces statistiques s'enrichiront automatiquement avec les participations de la communauté.
+          </p>
           <ul className="grid sm:grid-cols-2 gap-2 text-sm text-teal-800">
             {[
+              'Distribution des grilles choisies par les participants',
+              'Techniques les plus proposées par les étudiants',
+              "Divergences de raisonnement entre analyses d'un même cas",
+              'Difficulté perçue par la communauté vs. niveau officiel',
               'Associations récurrentes motif clinique ↔ points utilisés',
-              'Divergences entre analyses pour un même cas',
-              'Similitudes structurelles inter-cas (clustering)',
-              'Évolution des diagnostics dans le temps',
+              'Évolution des pratiques dans le temps',
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" />

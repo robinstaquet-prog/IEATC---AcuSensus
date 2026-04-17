@@ -32,6 +32,7 @@ import type { GlobalStats, FrequencyEntry, NiveauComplexite } from '@/types';
 function computeFrequency(ids: string[]): FrequencyEntry[] {
   const map: Record<string, number> = {};
   for (const id of ids) {
+    if (!id) continue; // ignorer les valeurs vides/undefined
     map[id] = (map[id] ?? 0) + 1;
   }
   return Object.entries(map)
@@ -43,9 +44,21 @@ export function computeGlobalStats(): GlobalStats {
   const publie = CLINICAL_CASES.filter((c) => c.statut === 'publie');
   const allAnalyses = publie.flatMap((c) => c.analyses);
 
+  // Points — codes bruts extraits des traitements proposés
   const allPointCodes = allAnalyses.flatMap((a) => a.pointsUtilises.map((p) => p.code));
+
+  // Grilles principales utilisées dans les analyses
   const allGrilles = allAnalyses.map((a) => a.grillePrincipale);
-  const allPolarites = allAnalyses.map((a) => a.polarite);
+
+  // Localisation des foyers — renseignée par les praticiens dans leur analyse
+  // ('non_applicable' exclu car non informatif pour les statistiques)
+  const allFoyers = allAnalyses
+    .map((a) => a.localisationFoyer)
+    .filter((f): f is NonNullable<typeof f> => !!f && f !== 'non_applicable')
+    .map(String);
+
+  // Techniques de traitement — extraites des points proposés dans chaque analyse
+  const allTechniques = allAnalyses.flatMap((a) => a.pointsUtilises.map((p) => p.technique));
 
   const complexityDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0 };
   const sexeDistribution: Record<string, number> = { masculin: 0, feminin: 0, non_precise: 0 };
@@ -62,9 +75,11 @@ export function computeGlobalStats(): GlobalStats {
     casPublies: publie.length,
     casExemplaires: publie.filter((c) => c.exemplaire).length,
     totalAnalyses: allAnalyses.length,
+    pointsDistincts: new Set(allPointCodes).size,
     topPoints: computeFrequency(allPointCodes).slice(0, 10),
-    topGrilles: computeFrequency(allGrilles).slice(0, 7),
-    topPolarites: computeFrequency(allPolarites),
+    topGrilles: computeFrequency(allGrilles).slice(0, 8),
+    topFoyers: computeFrequency(allFoyers),
+    topTechniques: computeFrequency(allTechniques),
     repartitionComplexite: complexityDistribution as Record<NiveauComplexite, number>,
     repartitionSexe: sexeDistribution,
   };

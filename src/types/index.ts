@@ -416,9 +416,11 @@ export interface GlobalStats {
   casPublies: number;
   casExemplaires: number;
   totalAnalyses: number;
+  pointsDistincts: number;         // nombre de codes de points uniques référencés
   topPoints: FrequencyEntry[];
   topGrilles: FrequencyEntry[];
-  topPolarites: FrequencyEntry[];
+  topFoyers: FrequencyEntry[];     // distribution localisationFoyer (Sup/Moy/Inf)
+  topTechniques: FrequencyEntry[]; // distribution des techniques de traitement
   repartitionComplexite: Record<NiveauComplexite, number>;
   repartitionSexe: Record<string, number>;
 }
