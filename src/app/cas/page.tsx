@@ -23,16 +23,7 @@ import {
   FileText,
   GraduationCap,
 } from 'lucide-react';
-
-// ─── Utilitaires d'affichage ──────────────────────────────────────────────────
-
-const COMPLEXITE_LABELS: Record<number, string> = { 1: '1ère année', 2: 'Intermédiaire', 3: '4ème année', 4: 'Avancé' };
-const COMPLEXITE_COLORS: Record<number, string> = {
-  1: 'bg-emerald-100 text-emerald-700',
-  2: 'bg-amber-100 text-amber-700',
-  3: 'bg-orange-100 text-orange-700',
-  4: 'bg-red-100 text-red-700',
-};
+import { COMPLEXITE_LABELS, COMPLEXITE_COLORS } from '@/lib/constants';
 
 function CasCard({ cas, showApprentissage }: { cas: ClinicalCase; showApprentissage?: boolean }) {
   const complexiteColor = COMPLEXITE_COLORS[cas.niveauComplexite];

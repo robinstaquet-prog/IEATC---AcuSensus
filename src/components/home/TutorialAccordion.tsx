@@ -72,7 +72,7 @@ export function TutorialAccordion() {
               </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className="overflow-hidden data-[state=open]:animate-[slideDown_150ms_ease-out] data-[state=closed]:animate-[slideUp_150ms_ease-in]">
-              <div className="px-4 pb-4 pt-2 text-xs text-slate-400 leading-relaxed bg-slate-900/30">
+              <div className="px-4 pb-4 pt-2 text-sm text-slate-300 leading-relaxed bg-slate-900/30">
                 {section.content}
               </div>
             </Accordion.Content>

@@ -9,26 +9,15 @@ import Link from 'next/link';
 import { getCasesPublies } from '@/data';
 import type { ClinicalCase } from '@/types';
 import { cn } from '@/lib/utils';
-import { GraduationCap, BookOpen, Star } from 'lucide-react';
-
-// ─── Utilitaires d'affichage ─────────────────────────────────────────────────
-
-const COMPLEXITE_LABELS: Record<number, string> = {
-  1: '1ere annee',
-  2: 'Intermediaire',
-  3: '4eme annee',
-  4: 'Avance',
-};
-const COMPLEXITE_COLORS: Record<number, string> = {
-  1: 'bg-emerald-100 text-emerald-700',
-  2: 'bg-amber-100 text-amber-700',
-  3: 'bg-orange-100 text-orange-700',
-  4: 'bg-red-100 text-red-700',
-};
+import { COMPLEXITE_LABELS, COMPLEXITE_COLORS } from '@/lib/constants';
+import { GraduationCap, BookOpen, Star, GitBranch, Lock } from 'lucide-react';
 
 function ApprentissageCasCard({ cas }: { cas: ClinicalCase }) {
+  const analysesCount = cas.analyses.length;
+  const hasExpert = cas.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
+
   return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 h-full flex flex-col">
+    <div className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 h-full flex flex-col group">
       {/* Header */}
       <div className="px-5 pt-5 pb-3">
         <div className="flex items-start justify-between gap-2 mb-3">
@@ -41,8 +30,13 @@ function ApprentissageCasCard({ cas }: { cas: ClinicalCase }) {
               {COMPLEXITE_LABELS[cas.niveauComplexite]}
             </span>
           </div>
+          {hasExpert && (
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-1.5 py-0.5 bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shrink-0">
+              Expert
+            </span>
+          )}
         </div>
-        <h3 className="font-semibold text-slate-900 leading-snug">
+        <h3 className="font-semibold text-slate-900 leading-snug group-hover:text-teal-700 transition-colors">
           {cas.titre}
         </h3>
       </div>
@@ -55,29 +49,40 @@ function ApprentissageCasCard({ cas }: { cas: ClinicalCase }) {
       </div>
 
       {/* Tags */}
-      <div className="px-5 py-2">
-        <div className="flex flex-wrap gap-1.5">
-          {cas.tags.slice(0, 4).map((tag) => (
-            <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
-              {tag}
-            </span>
-          ))}
+      {cas.tags.length > 0 && (
+        <div className="px-5 py-2">
+          <div className="flex flex-wrap gap-1.5">
+            {cas.tags.slice(0, 4).map((tag) => (
+              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Footer + bouton */}
-      <div className="px-5 py-4 mt-auto border-t border-slate-100 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs text-slate-400">
-          {cas.age && <span>{cas.age} ans</span>}
-          {cas.age && cas.sexe && <span>.</span>}
-          {cas.sexe && <span>{cas.sexe === 'feminin' ? 'F' : cas.sexe === 'masculin' ? 'H' : '?'}</span>}
+      <div className="px-5 py-4 mt-auto border-t border-slate-100 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 text-xs text-slate-400">
+          {cas.age && (
+            <span>
+              {cas.age} ans
+              {cas.sexe && cas.sexe !== 'non_precise' && ` · ${cas.sexe === 'feminin' ? 'F' : 'H'}`}
+            </span>
+          )}
+          {analysesCount > 0 && (
+            <span className="flex items-center gap-1">
+              <GitBranch size={11} />
+              {analysesCount} analyse{analysesCount > 1 ? 's' : ''}
+            </span>
+          )}
         </div>
         <Link
           href={`/apprentissage/${cas.id}`}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-600 text-white text-sm font-medium hover:bg-teal-500 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-600 text-white text-sm font-medium hover:bg-teal-500 transition-colors shrink-0"
         >
           <GraduationCap size={14} />
-          S&apos;entrainer sur ce cas
+          S&apos;entraîner
         </Link>
       </div>
     </div>
@@ -88,6 +93,7 @@ function ApprentissageCasCard({ cas }: { cas: ClinicalCase }) {
 
 export default function ApprentissagePage() {
   const [mounted, setMounted] = useState(false);
+  const [niveauFiltre, setNiveauFiltre] = useState<number | ''>('');
 
   useEffect(() => {
     setMounted(true);
@@ -95,13 +101,16 @@ export default function ApprentissagePage() {
 
   const casApprentissage = useMemo(() => {
     if (!mounted) return [];
-    // getCasesPublies inclut deja les cas utilisateur
     const allCases = getCasesPublies();
     return allCases.filter((c) => {
-      // Apprentissage = cas marqués exemplaire ou avec analyse expert
       return c.exemplaire || c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
     });
   }, [mounted]);
+
+  const filtered = useMemo(() => {
+    if (!niveauFiltre) return casApprentissage;
+    return casApprentissage.filter((c) => c.niveauComplexite === niveauFiltre);
+  }, [casApprentissage, niveauFiltre]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -114,33 +123,69 @@ export default function ApprentissagePage() {
         <p className="text-slate-500 text-sm max-w-3xl leading-relaxed">
           Entraînez-vous sur des cas cliniques validés par la communauté.
           Réalisez votre analyse en conditions réelles, puis comparez-la avec les analyses
-          d&apos;experts et de praticiens confirmés. Vos exercices restent privés et n&apos;impactent
-          pas les statistiques du cas.
+          d&apos;experts et de praticiens confirmés.
         </p>
       </div>
 
-      {/* Indication visuelle : exercice privé */}
-      <div className="bg-teal-50 border border-teal-200 rounded-xl px-5 py-3 mb-8 flex items-start gap-3">
-        <BookOpen size={16} className="text-teal-600 mt-0.5 shrink-0" />
-        <p className="text-sm text-teal-800">
-          <strong>Exercice privé</strong> — Vos exercices d&apos;apprentissage ne sont pas publiés,
-          ne rapportent pas de points de vote, et ne figurent pas dans les statistiques du cas ni
-          de votre profil.
-        </p>
+      {/* Indication visuelle + filtre niveau */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <div className="flex-1 bg-teal-50 border border-teal-200 rounded-xl px-5 py-3 flex items-start gap-3">
+          <Lock size={15} className="text-teal-600 mt-0.5 shrink-0" />
+          <p className="text-sm text-teal-800">
+            <strong>Exercice privé</strong> — Vos exercices ne sont pas publiés et ne figurent pas dans les statistiques.
+          </p>
+        </div>
+
+        {casApprentissage.length > 0 && (
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-sm text-slate-500 whitespace-nowrap">Niveau :</span>
+            <select
+              value={niveauFiltre}
+              onChange={(e) => setNiveauFiltre(e.target.value ? Number(e.target.value) : '')}
+              className="h-10 px-3 text-sm rounded-lg border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer"
+            >
+              <option value="">Tous</option>
+              {[1, 2, 3, 4].map((n) => (
+                <option key={n} value={n}>{COMPLEXITE_LABELS[n]}</option>
+              ))}
+            </select>
+            <span className="text-sm text-slate-400 whitespace-nowrap">
+              {filtered.length} cas
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Liste des cas */}
       {casApprentissage.length === 0 ? (
-        <div className="text-center py-16">
-          <GraduationCap size={36} className="text-slate-300 mx-auto mb-4" />
-          <p className="text-slate-400 text-lg mb-2">Aucun cas d&apos;apprentissage disponible.</p>
-          <p className="text-sm text-slate-400">
-            Les cas deviennent disponibles quand ils ont une analyse d&apos;expert ou une participation tres votee.
+        <div className="text-center py-20 bg-white rounded-xl border border-slate-200">
+          <GraduationCap size={40} className="text-slate-200 mx-auto mb-4" />
+          <p className="text-slate-500 font-medium mb-1">Aucun cas d&apos;apprentissage disponible.</p>
+          <p className="text-sm text-slate-400 max-w-sm mx-auto">
+            Les cas deviennent disponibles lorsqu&apos;ils ont une analyse d&apos;expert
+            ou une participation très votée par la communauté.
           </p>
+          <Link
+            href="/cas"
+            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-lg bg-teal-600 text-white font-semibold text-sm hover:bg-teal-500 transition-colors"
+          >
+            <BookOpen size={15} />
+            Explorer les cas
+          </Link>
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-slate-400 mb-2">Aucun cas pour ce niveau.</p>
+          <button
+            onClick={() => setNiveauFiltre('')}
+            className="text-sm text-teal-600 hover:text-teal-700"
+          >
+            Voir tous les niveaux
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {casApprentissage.map((c) => (
+          {filtered.map((c) => (
             <ApprentissageCasCard key={c.id} cas={c} />
           ))}
         </div>

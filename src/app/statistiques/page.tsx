@@ -1,6 +1,7 @@
 import { computeGlobalStats } from '@/data';
 import { getGrille } from '@/data/grilles';
 import { GridBadge } from '@/components/ieatc/GridBadge';
+import { COMPLEXITE_LABELS, COMPLEXITE_COLORS } from '@/lib/constants';
 import { BarChart3, BookOpen, Star, GitBranch, TrendingUp } from 'lucide-react';
 
 // ─── Barre de stat ─────────────────────────────────────────────────────────────
@@ -51,16 +52,11 @@ export default function StatistiquesPage() {
     mixte: 'bg-violet-500',
   };
 
-  const COMPLEXITE_LABELS: Record<number, string> = {
-    1: 'Introductif',
-    2: 'Intermédiaire',
-    3: 'Avancé',
-  };
-
-  const COMPLEXITE_COLORS: Record<number, string> = {
+  const COMPLEXITE_BAR_COLORS: Record<number, string> = {
     1: 'bg-emerald-500',
     2: 'bg-amber-500',
-    3: 'bg-red-500',
+    3: 'bg-orange-500',
+    4: 'bg-red-500',
   };
 
   return (
@@ -204,16 +200,17 @@ export default function StatistiquesPage() {
               <div className="space-y-2">
                 {([1, 2, 3] as const).map((level) => {
                   const count = stats.repartitionComplexite[level] ?? 0;
+                  if (count === 0) return null;
                   const pct =
                     stats.casPublies > 0 ? Math.round((count / stats.casPublies) * 100) : 0;
                   return (
                     <div key={level} className="flex items-center gap-2">
-                      <span className="text-xs text-slate-500 w-20 shrink-0">
+                      <span className="text-xs text-slate-500 w-24 shrink-0">
                         {COMPLEXITE_LABELS[level]}
                       </span>
                       <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                         <div
-                          className={`h-full rounded-full ${COMPLEXITE_COLORS[level]}`}
+                          className={`h-full rounded-full ${COMPLEXITE_BAR_COLORS[level]}`}
                           style={{ width: `${pct}%` }}
                         />
                       </div>

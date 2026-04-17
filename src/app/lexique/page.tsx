@@ -257,13 +257,14 @@ export default function LexiquePage() {
 
       {/* Liste */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-slate-400 text-lg mb-2">Aucun terme ne correspond.</p>
+        <div className="text-center py-16 bg-white rounded-xl border border-slate-200">
+          <Library size={32} className="text-slate-200 mx-auto mb-3" />
+          <p className="text-slate-500 font-medium mb-1">Aucun terme ne correspond.</p>
           <button
             onClick={() => { setSearch(''); setActiveCategorie(''); }}
-            className="text-sm text-teal-600 hover:text-teal-700"
+            className="text-sm text-teal-600 hover:text-teal-700 mt-2"
           >
-            Réinitialiser
+            Réinitialiser les filtres
           </button>
         </div>
       ) : (

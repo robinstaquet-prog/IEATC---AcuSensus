@@ -13,6 +13,7 @@ import { getUserCasesByAuteur, deleteUserCase } from '@/lib/user-cases-store';
 import { getAllExercices } from '@/lib/exercice-store';
 import { getCaseById } from '@/data';
 import { GridBadge } from '@/components/ieatc/GridBadge';
+import { LABEL_STATUT_IEATC } from '@/lib/constants';
 import type { UserParticipation, ClinicalCase } from '@/types';
 import { cn } from '@/lib/utils';
 import {
@@ -29,20 +30,8 @@ import {
   GraduationCap,
   LogIn,
   Trash2,
+  Loader2,
 } from 'lucide-react';
-
-// ─── Labels statut IEATC ──────────────────────────────────────────────────────
-
-const LABEL_STATUT_IEATC: Record<string, string> = {
-  premiere_annee: '1ère année',
-  etudiant: 'Étudiant',
-  quatrieme_annee: '4ème année',
-  jeune_praticien: 'Jeune praticien',
-  praticien_experimente: 'Praticien expérimenté',
-  expert: 'Expert',
-  // Compatibilité ancien modèle
-  etudiant_4e_annee: 'Étudiant 4e année',
-};
 
 function PublicParticipationRow({ p }: { p: UserParticipation }) {
   const cas = getCaseById(p.caseId);
@@ -102,8 +91,8 @@ export default function ProfilPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-10 text-center">
-        <p className="text-slate-500">Chargement…</p>
+      <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center">
+        <Loader2 size={28} className="text-teal-500 animate-spin" />
       </div>
     );
   }

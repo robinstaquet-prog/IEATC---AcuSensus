@@ -17,6 +17,7 @@ import { PoulsDisplay } from '@/components/ieatc/PoulsDisplay';
 import { useAuth } from '@/lib/auth-context';
 import type { ClinicalCase, UserParticipation } from '@/types';
 import { cn } from '@/lib/utils';
+import { COMPLEXITE_LABELS, COMPLEXITE_COLORS, cleLabel } from '@/lib/constants';
 import {
   ArrowLeft,
   GraduationCap,
@@ -24,55 +25,6 @@ import {
   Eye,
   Activity,
 } from 'lucide-react';
-
-// ─── Constantes d'affichage ──────────────────────────────────────────────────
-
-const COMPLEXITE_LABELS: Record<number, string> = {
-  1: '1ère année',
-  2: 'Intermédiaire',
-  3: '4ème année',
-  4: 'Avancé',
-};
-const COMPLEXITE_COLORS: Record<number, string> = {
-  1: 'bg-emerald-100 text-emerald-700',
-  2: 'bg-amber-100 text-amber-700',
-  3: 'bg-orange-100 text-orange-700',
-  4: 'bg-red-100 text-red-700',
-};
-
-const CLE_LABELS: Record<string, string> = {
-  douleur: 'Douleur',
-  horaire: 'Horaire',
-  activite: 'Activité',
-  traumatisme: 'Traumatisme',
-  preferences: 'Préférences',
-  antecedents: 'Antécédents',
-  sommeil: 'Sommeil',
-  alimentation: 'Alimentation',
-  digestion: 'Digestion',
-  urine: 'Urines',
-  transit: 'Transit',
-  energie: 'Énergie',
-  temperature: 'Température',
-  emotionnel: 'Émotionnel',
-  contexte: 'Contexte',
-  symptome: 'Symptôme',
-  evolution: 'Évolution',
-  selles: 'Selles',
-  frissons: 'Frissons / chaleur',
-  transpiration: 'Transpiration',
-  menstruations: 'Menstruations',
-  symptomes_tete: 'Symptômes tête',
-  oreilles: 'Oreilles',
-  coeur: 'Cœur',
-  aspect: 'Aspect',
-  psychisme: 'Psychisme',
-  desirs: 'Désirs',
-};
-
-function cleLabel(cle: string): string {
-  return CLE_LABELS[cle] ?? cle.charAt(0).toUpperCase() + cle.slice(1).replace(/_/g, ' ');
-}
 
 // ─── Etapes de la page ──────────────────────────────────────────────────────
 

@@ -17,6 +17,7 @@ import {
   GraduationCap,
   ChevronDown,
   Shield,
+  Library,
 } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
@@ -25,8 +26,9 @@ const NAV_LINKS = [
   { href: '/', label: 'Accueil', icon: Home },
   { href: '/cas', label: 'Cas cliniques', icon: BookOpen },
   { href: '/apprentissage', label: 'Apprentissage', icon: GraduationCap },
+  { href: '/lexique', label: 'Lexique', icon: Library },
   { href: '/soumettre', label: 'Soumettre', icon: FilePlus },
-  { href: '/statistiques', label: 'Statistiques', icon: BarChart3 },
+  { href: '/statistiques', label: 'Stats', icon: BarChart3 },
 ];
 
 export function Navbar() {

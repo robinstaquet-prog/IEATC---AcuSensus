@@ -23,6 +23,7 @@ import { ParticipationForm } from '@/components/ieatc/ParticipationForm';
 import { AnalysePanel } from '@/components/ieatc/AnalysePanel';
 import type { ClinicalCase, UserParticipation, ClinicalAnalysis } from '@/types';
 import { cn } from '@/lib/utils';
+import { COMPLEXITE_LABELS, COMPLEXITE_COLORS, cleLabel } from '@/lib/constants';
 import {
   ArrowLeft,
   Star,
@@ -40,49 +41,6 @@ import {
   Trash2,
   GraduationCap,
 } from 'lucide-react';
-
-// ─── Constantes d'affichage ───────────────────────────────────────────────────
-
-const COMPLEXITE_LABELS: Record<number, string> = {
-  1: '1ère année',
-  2: 'Intermédiaire',
-  3: '4ème année',
-  4: 'Avancé',
-};
-const COMPLEXITE_COLORS: Record<number, string> = {
-  1: 'bg-emerald-100 text-emerald-700',
-  2: 'bg-amber-100 text-amber-700',
-  3: 'bg-orange-100 text-orange-700',
-  4: 'bg-red-100 text-red-700',
-};
-
-const CLE_LABELS: Record<string, string> = {
-  douleur: 'Douleur',
-  horaire: 'Horaire',
-  activite: 'Activité',
-  traumatisme: 'Traumatisme',
-  preferences: 'Préférences',
-  antecedents: 'Antécédents',
-  sommeil: 'Sommeil',
-  alimentation: 'Alimentation',
-  digestion: 'Digestion',
-  urine: 'Urines',
-  transit: 'Transit',
-  energie: 'Énergie',
-  temperature: 'Température',
-  emotionnel: 'Émotionnel',
-  contexte: 'Contexte',
-  symptome: 'Symptôme',
-  evolution: 'Évolution',
-  selles: 'Selles',
-  frissons: 'Frissons / chaleur',
-  transpiration: 'Transpiration',
-  menstruations: 'Menstruations',
-};
-
-function cleLabel(cle: string): string {
-  return CLE_LABELS[cle] ?? cle.charAt(0).toUpperCase() + cle.slice(1).replace(/_/g, ' ');
-}
 
 // ─── Modal participation ───────────────────────────────────────────────────────
 
@@ -390,11 +348,10 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
               Mode apprentissage
             </Link>
           )}
-          {user && (
+          {user ? (
             <button
               onClick={() => {
                 if (hasParticipation) {
-                  // Afficher la modale de confirmation avant d'ouvrir le formulaire
                   setShowConfirmModif(true);
                 } else {
                   setShowParticipation(true);
@@ -405,6 +362,14 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
               <PenLine size={14} />
               {hasParticipation ? 'Modifier ma participation' : 'Consigner mon analyse'}
             </button>
+          ) : (
+            <Link
+              href="/connexion"
+              className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg border border-teal-200 bg-teal-50 text-teal-700 hover:bg-teal-100 transition-colors font-medium"
+            >
+              <PenLine size={14} />
+              Connexion pour participer
+            </Link>
           )}
           {user && hasParticipation && (
             <button
