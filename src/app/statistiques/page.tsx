@@ -90,7 +90,9 @@ export default function StatistiquesPage() {
   const maxFoyerCount = stats.topFoyers[0]?.count ?? 1;
   const maxTechniqueCount = stats.topTechniques[0]?.count ?? 1;
   const maxFamilleCount = stats.topFamillesDiag[0]?.count ?? 1;
+  const maxSyndromeCount = stats.topSyndromes[0]?.count ?? 1;
   const maxOrganeCount = stats.topOrganes[0]?.count ?? 1;
+  const maxStrategieCount = stats.topStrategies[0]?.count ?? 1;
   const totalSexe = Object.values(stats.repartitionSexe).reduce((a, b) => a + b, 0);
 
   return (
@@ -218,21 +220,15 @@ export default function StatistiquesPage() {
           </div>
         </div>
 
-        {/* Familles diagnostiques normalisées */}
+        {/* Familles diagnostiques — couche 1 */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
           <h2 className="font-bold text-slate-900 mb-1">Familles diagnostiques</h2>
           <p className="text-sm text-slate-500 mb-5">
-            Patterns IEATC reconnus automatiquement dans les bilans et catégories diagnostiques
+            Grandes familles pathologiques Yin/Yang — Vide, Plénitude, Stagnation, Facteurs
           </p>
           <div className="space-y-4">
             {stats.topFamillesDiag.map(({ id, count, label }) => (
-              <StatBar
-                key={id}
-                label={label ?? id}
-                value={count}
-                max={maxFamilleCount}
-                color="bg-teal-500"
-              />
+              <StatBar key={id} label={label ?? id} value={count} max={maxFamilleCount} color="bg-teal-500" />
             ))}
             {stats.topFamillesDiag.length === 0 && (
               <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
@@ -240,23 +236,49 @@ export default function StatistiquesPage() {
           </div>
         </div>
 
-        {/* Organes et localisations impliqués */}
+        {/* Syndromes spécifiques — couche 2 */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-bold text-slate-900 mb-1">Syndromes identifiés</h2>
+          <p className="text-sm text-slate-500 mb-5">
+            Syndromes IEATC nommés reconnus dans les bilans et catégories diagnostiques
+          </p>
+          <div className="space-y-4">
+            {stats.topSyndromes.map(({ id, count, label }) => (
+              <StatBar key={id} label={label ?? id} value={count} max={maxSyndromeCount} color="bg-violet-500" />
+            ))}
+            {stats.topSyndromes.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Organes et localisations — couche 3 */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
           <h2 className="font-bold text-slate-900 mb-1">Organes et localisations</h2>
           <p className="text-sm text-slate-500 mb-5">
-            Organes Zang/Fu et Foyers les plus souvent mentionnés dans les analyses
+            Organes Tsang/Fu, Foyers et Merveilleux Vaisseaux impliqués
           </p>
           <div className="space-y-4">
             {stats.topOrganes.map(({ id, count, label }) => (
-              <StatBar
-                key={id}
-                label={label ?? id}
-                value={count}
-                max={maxOrganeCount}
-                color="bg-indigo-500"
-              />
+              <StatBar key={id} label={label ?? id} value={count} max={maxOrganeCount} color="bg-indigo-500" />
             ))}
             {stats.topOrganes.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Stratégies thérapeutiques — couche 4 */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-bold text-slate-900 mb-1">Stratégies thérapeutiques</h2>
+          <p className="text-sm text-slate-500 mb-5">
+            Axes de traitement reconnus dans les stratégies des analyses
+          </p>
+          <div className="space-y-4">
+            {stats.topStrategies.map(({ id, count, label }) => (
+              <StatBar key={id} label={label ?? id} value={count} max={maxStrategieCount} color="bg-amber-500" />
+            ))}
+            {stats.topStrategies.length === 0 && (
               <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
             )}
           </div>

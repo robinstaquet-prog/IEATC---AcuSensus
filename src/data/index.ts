@@ -61,20 +61,31 @@ export function computeGlobalStats(): GlobalStats {
   // Techniques de traitement — extraites des points proposés dans chaque analyse
   const allTechniques = allAnalyses.flatMap((a) => a.pointsUtilises.map((p) => p.technique));
 
-  // ── Normalisation sémantique des bilans et catégories diagnostiques ─────────
-  // Pour chaque analyse : categoriesDiagnostiques (obligatoire) + bilanEnergetique (optionnel)
-  // On extrait familles diagnostiques et organes impliqués, puis on agrège.
+  // ── Normalisation sémantique à 4 couches ─────────────────────────────────────
+  // Sources : categoriesDiagnostiques (requis) + bilanEnergetique + strategie (optionnels)
+  // Chaque analyse contribue une fois par concept reconnu (sans doublons intra-analyse).
   const famillesCounts: Record<string, number> = {};
+  const syndromesCounts: Record<string, number> = {};
   const organesCounts: Record<string, number> = {};
+  const strategiesCounts: Record<string, number> = {};
 
   for (const a of allAnalyses) {
-    const textes: string[] = [
+    const textesDiag: string[] = [
       ...a.categoriesDiagnostiques,
       ...(a.bilanEnergetique ? [a.bilanEnergetique] : []),
     ];
-    const { familles, organes } = normaliserTextes(textes);
+    const textesStrategie: string[] = [
+      ...(a.strategieTherapeutique ? [a.strategieTherapeutique] : []),
+      ...(a.strategie ? [a.strategie] : []),
+    ];
+
+    const { familles, syndromes, organes } = normaliserTextes(textesDiag);
+    const { strategies } = normaliserTextes(textesStrategie);
+
     for (const f of familles) famillesCounts[f] = (famillesCounts[f] ?? 0) + 1;
+    for (const s of syndromes) syndromesCounts[s] = (syndromesCounts[s] ?? 0) + 1;
     for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
+    for (const s of strategies) strategiesCounts[s] = (strategiesCounts[s] ?? 0) + 1;
   }
 
   const topFamillesDiag: FrequencyEntry[] = Object.entries(famillesCounts)
@@ -82,7 +93,17 @@ export function computeGlobalStats(): GlobalStats {
     .sort((a, b) => b.count - a.count)
     .slice(0, 12);
 
+  const topSyndromes: FrequencyEntry[] = Object.entries(syndromesCounts)
+    .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12);
+
   const topOrganes: FrequencyEntry[] = Object.entries(organesCounts)
+    .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10);
+
+  const topStrategies: FrequencyEntry[] = Object.entries(strategiesCounts)
     .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
@@ -108,7 +129,9 @@ export function computeGlobalStats(): GlobalStats {
     topFoyers: computeFrequency(allFoyers),
     topTechniques: computeFrequency(allTechniques),
     topFamillesDiag,
+    topSyndromes,
     topOrganes,
+    topStrategies,
     repartitionComplexite: complexityDistribution as Record<NiveauComplexite, number>,
     repartitionSexe: sexeDistribution,
   };

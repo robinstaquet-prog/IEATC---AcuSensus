@@ -421,8 +421,10 @@ export interface GlobalStats {
   topGrilles: FrequencyEntry[];
   topFoyers: FrequencyEntry[];        // distribution localisationFoyer (Sup/Moy/Inf)
   topTechniques: FrequencyEntry[];    // distribution des techniques de traitement
-  topFamillesDiag: FrequencyEntry[];  // familles diagnostiques normalisées
-  topOrganes: FrequencyEntry[];       // organes/localisations les plus impliqués
+  topFamillesDiag: FrequencyEntry[];  // familles diag normalisées (couche 1)
+  topSyndromes: FrequencyEntry[];     // syndromes nommés spécifiques (couche 2)
+  topOrganes: FrequencyEntry[];       // organes/localisations (couche 3)
+  topStrategies: FrequencyEntry[];    // stratégies thérapeutiques (couche 4)
   repartitionComplexite: Record<NiveauComplexite, number>;
   repartitionSexe: Record<string, number>;
 }
