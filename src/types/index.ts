@@ -416,11 +416,13 @@ export interface GlobalStats {
   casPublies: number;
   casExemplaires: number;
   totalAnalyses: number;
-  pointsDistincts: number;         // nombre de codes de points uniques référencés
+  pointsDistincts: number;            // nombre de codes de points uniques référencés
   topPoints: FrequencyEntry[];
   topGrilles: FrequencyEntry[];
-  topFoyers: FrequencyEntry[];     // distribution localisationFoyer (Sup/Moy/Inf)
-  topTechniques: FrequencyEntry[]; // distribution des techniques de traitement
+  topFoyers: FrequencyEntry[];        // distribution localisationFoyer (Sup/Moy/Inf)
+  topTechniques: FrequencyEntry[];    // distribution des techniques de traitement
+  topFamillesDiag: FrequencyEntry[];  // familles diagnostiques normalisées
+  topOrganes: FrequencyEntry[];       // organes/localisations les plus impliqués
   repartitionComplexite: Record<NiveauComplexite, number>;
   repartitionSexe: Record<string, number>;
 }

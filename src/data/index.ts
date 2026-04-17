@@ -27,6 +27,7 @@ export function getCasesPublies(): ClinicalCase[] {
 // ─── Statistiques globales calculées ─────────────────────────────────────────
 
 import { CLINICAL_CASES } from './cases';
+import { normaliserTextes, labelConceptIeatc } from './normalisation';
 import type { GlobalStats, FrequencyEntry, NiveauComplexite } from '@/types';
 
 function computeFrequency(ids: string[]): FrequencyEntry[] {
@@ -60,6 +61,32 @@ export function computeGlobalStats(): GlobalStats {
   // Techniques de traitement — extraites des points proposés dans chaque analyse
   const allTechniques = allAnalyses.flatMap((a) => a.pointsUtilises.map((p) => p.technique));
 
+  // ── Normalisation sémantique des bilans et catégories diagnostiques ─────────
+  // Pour chaque analyse : categoriesDiagnostiques (obligatoire) + bilanEnergetique (optionnel)
+  // On extrait familles diagnostiques et organes impliqués, puis on agrège.
+  const famillesCounts: Record<string, number> = {};
+  const organesCounts: Record<string, number> = {};
+
+  for (const a of allAnalyses) {
+    const textes: string[] = [
+      ...a.categoriesDiagnostiques,
+      ...(a.bilanEnergetique ? [a.bilanEnergetique] : []),
+    ];
+    const { familles, organes } = normaliserTextes(textes);
+    for (const f of familles) famillesCounts[f] = (famillesCounts[f] ?? 0) + 1;
+    for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
+  }
+
+  const topFamillesDiag: FrequencyEntry[] = Object.entries(famillesCounts)
+    .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12);
+
+  const topOrganes: FrequencyEntry[] = Object.entries(organesCounts)
+    .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10);
+
   const complexityDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0 };
   const sexeDistribution: Record<string, number> = { masculin: 0, feminin: 0, non_precise: 0 };
 
@@ -80,6 +107,8 @@ export function computeGlobalStats(): GlobalStats {
     topGrilles: computeFrequency(allGrilles).slice(0, 8),
     topFoyers: computeFrequency(allFoyers),
     topTechniques: computeFrequency(allTechniques),
+    topFamillesDiag,
+    topOrganes,
     repartitionComplexite: complexityDistribution as Record<NiveauComplexite, number>,
     repartitionSexe: sexeDistribution,
   };

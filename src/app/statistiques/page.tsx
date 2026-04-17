@@ -89,6 +89,8 @@ export default function StatistiquesPage() {
   const maxGrilleCount = stats.topGrilles[0]?.count ?? 1;
   const maxFoyerCount = stats.topFoyers[0]?.count ?? 1;
   const maxTechniqueCount = stats.topTechniques[0]?.count ?? 1;
+  const maxFamilleCount = stats.topFamillesDiag[0]?.count ?? 1;
+  const maxOrganeCount = stats.topOrganes[0]?.count ?? 1;
   const totalSexe = Object.values(stats.repartitionSexe).reduce((a, b) => a + b, 0);
 
   return (
@@ -211,6 +213,50 @@ export default function StatistiquesPage() {
               />
             ))}
             {stats.topTechniques.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Familles diagnostiques normalisées */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-bold text-slate-900 mb-1">Familles diagnostiques</h2>
+          <p className="text-sm text-slate-500 mb-5">
+            Patterns IEATC reconnus automatiquement dans les bilans et catégories diagnostiques
+          </p>
+          <div className="space-y-4">
+            {stats.topFamillesDiag.map(({ id, count, label }) => (
+              <StatBar
+                key={id}
+                label={label ?? id}
+                value={count}
+                max={maxFamilleCount}
+                color="bg-teal-500"
+              />
+            ))}
+            {stats.topFamillesDiag.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Organes et localisations impliqués */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-bold text-slate-900 mb-1">Organes et localisations</h2>
+          <p className="text-sm text-slate-500 mb-5">
+            Organes Zang/Fu et Foyers les plus souvent mentionnés dans les analyses
+          </p>
+          <div className="space-y-4">
+            {stats.topOrganes.map(({ id, count, label }) => (
+              <StatBar
+                key={id}
+                label={label ?? id}
+                value={count}
+                max={maxOrganeCount}
+                color="bg-indigo-500"
+              />
+            ))}
+            {stats.topOrganes.length === 0 && (
               <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
             )}
           </div>
