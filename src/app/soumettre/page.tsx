@@ -1007,6 +1007,11 @@ export default function SoumettreCasPage() {
           </div>
         )}
 
+        {/* Note modifiabilité */}
+        <p className="text-xs text-slate-400 text-center">
+          Vous pourrez modifier ce cas depuis votre espace profil tant qu&apos;il n&apos;a pas reçu d&apos;analyse.
+        </p>
+
         {/* Actions */}
         <div className="flex gap-3 pt-4 sticky bottom-0 bg-white py-4 border-t border-slate-100">
           <Button

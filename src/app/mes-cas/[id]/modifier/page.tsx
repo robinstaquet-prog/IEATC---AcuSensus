@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { getUserCaseById, updateUserCase } from '@/lib/user-cases-store';
+import { getParticipationsByCase } from '@/lib/participation-store';
 import { Button } from '@/components/ui/button';
 import type {
   ClinicalCase,
@@ -185,6 +186,7 @@ export default function ModifierCasPage() {
   const [cas, setCas] = useState<ClinicalCase | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [blocked, setBlocked] = useState(false);
 
   // Champs de base
   const [titre, setTitre] = useState('');
@@ -230,9 +232,14 @@ export default function ModifierCasPage() {
 
   // Chargement et hydration du cas existant
   useEffect(() => {
-    getUserCaseById(caseId).then((found) => {
+    getUserCaseById(caseId).then(async (found) => {
       if (!found) { setNotFound(true); return; }
       if (found.auteurId !== user?.id) { setLoadError('Vous ne pouvez modifier que vos propres cas.'); return; }
+
+      // Bloquer la modification si le cas a déjà reçu des analyses
+      const parts = await getParticipationsByCase(caseId);
+      if (parts.length > 0) { setBlocked(true); setCas(found); return; }
+
       setCas(found);
 
       // Hydration des champs
@@ -415,6 +422,38 @@ export default function ModifierCasPage() {
     return (
       <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center">
         <Loader2 size={28} className="text-teal-500 animate-spin" />
+      </div>
+    );
+  }
+
+  if (blocked) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-16 text-center space-y-4">
+        <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-100 text-amber-600 mb-2">
+          <AlertTriangle size={26} />
+        </div>
+        <h1 className="text-xl font-bold text-slate-900">Modification impossible</h1>
+        <p className="text-slate-600 text-sm leading-relaxed max-w-sm mx-auto">
+          Ce cas a déjà reçu des analyses de la communauté. Pour préserver la cohérence de ces
+          analyses, il ne peut plus être modifié.
+        </p>
+        <p className="text-slate-400 text-xs">
+          Si une correction est indispensable, contactez un administrateur.
+        </p>
+        <div className="flex justify-center gap-3 pt-2">
+          <Link
+            href={`/mes-cas/${caseId}`}
+            className="text-sm px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
+          >
+            Voir le cas
+          </Link>
+          <Link
+            href="/profil"
+            className="text-sm px-4 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-500 transition-colors font-semibold"
+          >
+            Mon profil
+          </Link>
+        </div>
       </div>
     );
   }

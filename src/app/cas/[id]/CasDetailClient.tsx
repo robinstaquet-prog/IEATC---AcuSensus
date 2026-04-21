@@ -423,7 +423,7 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
               <BookOpen size={13} className="text-teal-600" />
               Motif de consultation
             </h2>
-            <p className="text-slate-800 leading-relaxed font-medium">{cas.content.motif}</p>
+            <p className="text-slate-800 leading-relaxed font-medium whitespace-pre-wrap">{cas.content.motif}</p>
           </section>
 
           <section className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
@@ -437,7 +437,7 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
                   <dt className="font-semibold text-slate-500 pt-0.5 shrink-0">
                     {cleLabel(item.cle)}
                   </dt>
-                  <dd className="text-slate-700 leading-relaxed">{item.valeur}</dd>
+                  <dd className="text-slate-700 leading-relaxed whitespace-pre-wrap">{item.valeur}</dd>
                 </div>
               ))}
               {cas.content.contexteVie && (
@@ -445,13 +445,13 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
                   <dt className="font-semibold text-slate-500 pt-0.5 shrink-0">
                     Contexte de vie
                   </dt>
-                  <dd className="text-slate-700 leading-relaxed">{cas.content.contexteVie}</dd>
+                  <dd className="text-slate-700 leading-relaxed whitespace-pre-wrap">{cas.content.contexteVie}</dd>
                 </div>
               )}
               {cas.content.antecedents && (
                 <div className="grid grid-cols-[9rem_1fr] gap-3 py-2.5 text-sm">
                   <dt className="font-semibold text-slate-500 pt-0.5 shrink-0">Antécédents</dt>
-                  <dd className="text-slate-700 leading-relaxed">{cas.content.antecedents}</dd>
+                  <dd className="text-slate-700 leading-relaxed whitespace-pre-wrap">{cas.content.antecedents}</dd>
                 </div>
               )}
             </dl>
@@ -466,13 +466,13 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
                 {cas.content.observation && (
                   <div className="grid grid-cols-[9rem_1fr] gap-3 py-2.5 text-sm">
                     <dt className="font-semibold text-slate-500 pt-0.5">Observation</dt>
-                    <dd className="text-slate-700 leading-relaxed">{cas.content.observation}</dd>
+                    <dd className="text-slate-700 leading-relaxed whitespace-pre-wrap">{cas.content.observation}</dd>
                   </div>
                 )}
                 {cas.content.palpation && (
                   <div className="grid grid-cols-[9rem_1fr] gap-3 py-2.5 text-sm">
                     <dt className="font-semibold text-slate-500 pt-0.5">Palpation</dt>
-                    <dd className="text-slate-700 leading-relaxed">{cas.content.palpation}</dd>
+                    <dd className="text-slate-700 leading-relaxed whitespace-pre-wrap">{cas.content.palpation}</dd>
                   </div>
                 )}
               </dl>
