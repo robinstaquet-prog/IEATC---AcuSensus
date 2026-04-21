@@ -473,8 +473,8 @@ export default function SoumettreCasPage() {
       // Construire les lectures de pouls
       const lectures = buildLectures();
 
-      if (lectures.length === 0) {
-        setError('Veuillez renseigner au moins une position de pouls.');
+      if (lectures.length === 0 && !poulsSynthese.trim()) {
+        setError('Veuillez renseigner au moins une position de pouls ou un commentaire global sur les pouls.');
         return;
       }
 

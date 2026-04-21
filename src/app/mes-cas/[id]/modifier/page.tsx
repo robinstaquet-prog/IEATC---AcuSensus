@@ -371,7 +371,7 @@ export default function ModifierCasPage() {
     if (allInterrogatoire.length === 0) { setError("L'interrogatoire doit contenir au moins une rubrique remplie."); setSubmitting(false); return; }
 
     const lectures = buildLectures();
-    if (lectures.length === 0) { setError('Veuillez renseigner au moins une position de pouls.'); setSubmitting(false); return; }
+    if (lectures.length === 0 && !poulsSynthese.trim()) { setError('Veuillez renseigner au moins une position de pouls ou un commentaire global sur les pouls.'); setSubmitting(false); return; }
 
     const motifStr = motifs.filter((m) => m.trim()).length === 1
       ? motifs[0].trim()
