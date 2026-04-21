@@ -158,25 +158,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [fetchProfile]);
 
   useEffect(() => {
-    // Récupère la session courante au montage
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (session?.user) {
-        const profile = await fetchProfile(session.user.id);
-        setUser(profile);
-      }
-      setLoading(false);
-    });
-
-    // Écoute les changements d'état d'auth
+    // onAuthStateChange tire immédiatement avec INITIAL_SESSION — pas besoin de getSession() séparé.
+    // Le finally garantit que setLoading(false) est toujours appelé, même si fetchProfile échoue.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (session?.user) {
-          const profile = await fetchProfile(session.user.id);
-          setUser(profile);
-        } else {
-          setUser(null);
+      async (_event, session) => {
+        try {
+          if (session?.user) {
+            const profile = await fetchProfile(session.user.id);
+            setUser(profile);
+          } else {
+            setUser(null);
+          }
+        } finally {
+          setLoading(false);
         }
-        setLoading(false);
       }
     );
 
@@ -187,9 +182,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (prenom: string, nom: string, password: string) => {
     const email = buildEmail(prenom, nom);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       return { error: 'Identifiants incorrects. Vérifiez votre prénom, nom et mot de passe.' };
+    }
+    // Charger le profil immédiatement — ne pas attendre onAuthStateChange.
+    // Cela garantit que user est déjà défini quand la navigation post-login se déclenche.
+    if (data.session?.user) {
+      const profile = await fetchProfile(data.session.user.id);
+      if (profile) setUser(profile);
     }
     return { error: null };
   };

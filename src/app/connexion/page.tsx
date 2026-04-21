@@ -41,6 +41,7 @@ export default function ConnexionPage() {
       return;
     }
 
+    router.refresh();
     router.push('/');
   };
 
