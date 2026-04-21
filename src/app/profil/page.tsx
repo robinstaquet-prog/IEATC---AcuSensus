@@ -83,11 +83,17 @@ export default function ProfilPage() {
   const [onglet, setOnglet] = useState<OngletProfil>('participations');
 
   useEffect(() => {
-    if (user) {
-      getAllParticipations(user.id).then(setParticipations);
-      getAllExercices(user.id).then(setExercices);
-      getUserCasesByAuteur(user.id).then(setUserCases);
-    }
+    if (!user) return;
+    void (async () => {
+      const [parts, exos, cases] = await Promise.all([
+        getAllParticipations(user.id),
+        getAllExercices(user.id),
+        getUserCasesByAuteur(user.id),
+      ]);
+      setParticipations(parts);
+      setExercices(exos);
+      setUserCases(cases);
+    })();
   }, [user]);
 
   if (isLoading) {
