@@ -68,6 +68,7 @@ export function computeGlobalStats(): GlobalStats {
   const syndromesCounts: Record<string, number> = {};
   const organesCounts: Record<string, number> = {};
   const strategiesCounts: Record<string, number> = {};
+  const pathologiesCounts: Record<string, number> = {};
 
   for (const a of allAnalyses) {
     const textesDiag: string[] = [
@@ -86,6 +87,12 @@ export function computeGlobalStats(): GlobalStats {
     for (const s of syndromes) syndromesCounts[s] = (syndromesCounts[s] ?? 0) + 1;
     for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
     for (const s of strategies) strategiesCounts[s] = (strategiesCounts[s] ?? 0) + 1;
+  }
+
+  // ── Pathologies — extraites du motif de consultation (par cas, non par analyse) ──
+  for (const c of publie) {
+    const { pathologies } = normaliserTextes([c.content.motif]);
+    for (const p of pathologies) pathologiesCounts[p] = (pathologiesCounts[p] ?? 0) + 1;
   }
 
   const topFamillesDiag: FrequencyEntry[] = Object.entries(famillesCounts)
@@ -107,6 +114,11 @@ export function computeGlobalStats(): GlobalStats {
     .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
+
+  const topPathologies: FrequencyEntry[] = Object.entries(pathologiesCounts)
+    .map(([id, count]) => ({ id, count, label: labelConceptIeatc(id) }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12);
 
   const complexityDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0 };
   const sexeDistribution: Record<string, number> = { masculin: 0, feminin: 0, non_precise: 0 };
@@ -132,6 +144,7 @@ export function computeGlobalStats(): GlobalStats {
     topSyndromes,
     topOrganes,
     topStrategies,
+    topPathologies,
     repartitionComplexite: complexityDistribution as Record<NiveauComplexite, number>,
     repartitionSexe: sexeDistribution,
   };
