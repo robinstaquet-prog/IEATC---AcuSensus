@@ -333,8 +333,14 @@ export default function ModifierCasPage() {
     add('Foyer Moyen (bilatéral)', p3FoyerMoy);
     add('Foyer Inférieur (bilatéral)', p3FoyerInf);
     for (const organe of p4Organes) {
+      const label = organe.nom.trim() || 'Organe non nommé';
       if (organe.nom.trim() || positionHasData(organe.data)) {
-        add(organe.nom.trim() || 'Organe non nommé', organe.data);
+        lectures.push({
+          position: 'specifique',
+          positionLabel: label,
+          qualites: organe.data.qualites,
+          interpretation: organe.data.autre.trim(),
+        });
       }
     }
     for (const pp of poulsPeripheriques) {
