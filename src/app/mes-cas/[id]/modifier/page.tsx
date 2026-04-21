@@ -15,6 +15,7 @@ import type {
   PalpationAbdoEntry,
   ElementWuxing,
   EtatPalpationAbdo,
+  PublicationMode,
 } from '@/types';
 import { cn } from '@/lib/utils';
 import { AlertTriangle, Plus, X, FileText, ChevronDown, ChevronUp, CheckCircle2, Loader2 } from 'lucide-react';
@@ -198,6 +199,7 @@ export default function ModifierCasPage() {
   const [saved, setSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [publicationMode, setPublicationMode] = useState<PublicationMode>('public');
 
   // Interrogatoire
   const [interrogatoire, setInterrogatoire] = useState<ItemInterrogatoire[]>(
@@ -255,6 +257,7 @@ export default function ModifierCasPage() {
       setPalpation(found.content.palpation ?? '');
       setLangue(found.content.langueTexte ?? '');
       setExamens(found.content.examensTexte ?? '');
+      setPublicationMode(found.content.publicationMode ?? 'public');
 
       // Interrogatoire
       const existingInterro = found.content.interrogatoire ?? [];
@@ -385,8 +388,8 @@ export default function ModifierCasPage() {
       examensTexte: examens.trim() || undefined,
       palpationAbdo: showPalpAbdo && palpAbdo.length > 0 ? palpAbdo : undefined,
       prisePouls: { condition: cas?.content.prisePouls.condition ?? 'Non precise', lectures, synthese: poulsSynthese.trim() || undefined },
-      publicationMode: cas?.content.publicationMode,
-      auteurNom: cas?.content.auteurNom,
+      publicationMode,
+      auteurNom: publicationMode === 'anonyme' ? undefined : `${user?.prenom ?? ''} ${user?.nom ?? ''}`.trim() || undefined,
     };
 
     const { error: saveError } = await updateUserCase(caseId, { titre: titre.trim(), slug, content: newContent });
@@ -398,7 +401,7 @@ export default function ModifierCasPage() {
     }
     setSaved(true);
     setTimeout(() => { router.push(`/mes-cas/${caseId}`); }, 1200);
-  }, [titre, motifs, observation, palpation, langue, examens, interrogatoire, rubriquesLibres, buildLectures, poulsSynthese, showPalpAbdo, palpAbdo, caseId, cas, router]);
+  }, [titre, motifs, observation, palpation, langue, examens, interrogatoire, rubriquesLibres, buildLectures, poulsSynthese, showPalpAbdo, palpAbdo, caseId, cas, publicationMode, user, router]);
 
   if (notFound) {
     return (
@@ -658,6 +661,22 @@ export default function ModifierCasPage() {
               })}
             </div>
           )}
+        </Section>
+
+        {/* Mode de publication */}
+        <Section title="Mode de publication">
+          <div className="flex gap-3">
+            <button type="button" onClick={() => setPublicationMode('public')}
+              className={cn('flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-colors text-center',
+                publicationMode === 'public' ? 'bg-teal-50 border-teal-400 text-teal-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50')}>
+              Public<br /><span className="text-xs font-normal">Votre nom affiché</span>
+            </button>
+            <button type="button" onClick={() => setPublicationMode('anonyme')}
+              className={cn('flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-colors text-center',
+                publicationMode === 'anonyme' ? 'bg-slate-100 border-slate-400 text-slate-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50')}>
+              Anonyme<br /><span className="text-xs font-normal">Nom masqué</span>
+            </button>
+          </div>
         </Section>
 
         {/* Erreur */}
