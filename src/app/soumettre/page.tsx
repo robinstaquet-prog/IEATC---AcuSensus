@@ -5,7 +5,7 @@
 // observation, palpation, pouls structures (4 principes IEATC), langue,
 // examens complementaires.
 // PAS de section therapie (bilan, strategie, points).
-// Stocke dans localStorage via user-cases-store.
+// Stocke dans Supabase via user-cases-store (table clinical_cases).
 
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
