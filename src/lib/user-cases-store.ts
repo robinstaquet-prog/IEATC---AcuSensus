@@ -17,6 +17,7 @@ function mapRow(row: Record<string, any>): ClinicalCase {
     sexe: row.sexe ?? undefined,
     casComplet: row.cas_complet,
     exemplaire: row.exemplaire,
+    qualifieApprentissage: row.qualifie_apprentissage ?? false,
     grillePrincipale: row.grille_principale as ReadingGridId,
     tags: row.tags ?? [],
     content: row.content,
@@ -81,4 +82,21 @@ export async function addUserCase(cas: ClinicalCase): Promise<{ error: string | 
 
 export async function deleteUserCase(id: string): Promise<void> {
   await supabase.from('clinical_cases').delete().eq('id', id);
+}
+
+export async function updateUserCase(id: string, patch: {
+  titre?: string;
+  slug?: string;
+  content?: Partial<ClinicalCase['content']>;
+}): Promise<{ error: string | null }> {
+  const update: Record<string, unknown> = {};
+  if (patch.titre !== undefined) update.titre = patch.titre;
+  if (patch.slug !== undefined) update.slug = patch.slug;
+  if (patch.content !== undefined) update.content = patch.content;
+  const { error } = await supabase
+    .from('clinical_cases')
+    .update(update)
+    .eq('id', id);
+  if (error) return { error: error.message };
+  return { error: null };
 }

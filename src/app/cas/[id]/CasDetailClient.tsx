@@ -131,7 +131,7 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [mainTab, setMainTab] = useState<MainTab>('clinique');
   // Texte langue du cas — optionnel, à enrichir quand le type CaseContent sera étendu
-  const langueTexteCas: string | undefined = undefined;
+  const langueTexteCas = cas.content.langueTexte;
   const [participations, setParticipations] = useState<UserParticipation[]>([]);
   // Difficulté estimée par la communauté (calculée après chargement des participations)
   const [difficultyInfo, setDifficultyInfo] = useState<ReturnType<typeof computeDifficulty>>(null);
@@ -299,6 +299,19 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
               </p>
             </div>
           )}
+
+          <div className="px-5 py-3">
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mb-1">Publié par</p>
+            <p className="text-slate-700 text-sm font-medium">
+              {cas.content.publicationMode === 'anonyme'
+                ? <span className="text-slate-400 italic">Anonyme</span>
+                : cas.content.auteurNom
+                  ? cas.content.auteurNom
+                  : cas.auteurId
+                    ? <span className="text-slate-400">Membre</span>
+                    : <span className="text-slate-400">Corpus IEATC</span>}
+            </p>
+          </div>
 
           <div className="px-5 py-3">
             <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mb-1">État</p>
@@ -511,14 +524,48 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
             )}
           </section>
 
+          {/* Section Palpation abdominale */}
+          {cas.content.palpationAbdo && cas.content.palpationAbdo.length > 0 && (
+            <section>
+              <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">
+                Palpation abdominale (5 éléments)
+              </h2>
+              <div className="bg-white border border-slate-200 rounded-xl px-5 py-4">
+                <div className="flex flex-col gap-2">
+                  {cas.content.palpationAbdo.map((entry) => (
+                    <div key={entry.element} className="flex items-center gap-3 text-sm">
+                      <span className="font-semibold text-slate-600 w-14 capitalize">{entry.element}</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {entry.etats.map((etat) => (
+                          <span
+                            key={etat}
+                            className="text-xs px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-100 capitalize"
+                          >
+                            {etat}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Section Examens complémentaires */}
           <section>
             <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">
               Examens complémentaires
             </h2>
-            <p className="text-sm text-slate-400 italic bg-slate-50 border border-slate-200 rounded-xl px-5 py-4">
-              Aucun examen complémentaire pour ce cas.
-            </p>
+            {cas.content.examensTexte ? (
+              <div className="bg-white border border-slate-200 rounded-xl px-5 py-4 text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">
+                {cas.content.examensTexte}
+              </div>
+            ) : (
+              <p className="text-sm text-slate-400 italic bg-slate-50 border border-slate-200 rounded-xl px-5 py-4">
+                Aucun examen complémentaire pour ce cas.
+              </p>
+            )}
           </section>
         </div>
       )}

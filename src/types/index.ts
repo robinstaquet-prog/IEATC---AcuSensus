@@ -148,6 +148,11 @@ export interface CaseContent {
   palpation?: string;          // optionnel
   contexteVie?: string;        // optionnel
   antecedents?: string;        // optionnel
+  langueTexte?: string;           // examen de la langue (texte libre)
+  examensTexte?: string;          // examens complémentaires (texte libre)
+  palpationAbdo?: PalpationAbdoEntry[];  // palpation abdominale 5 éléments
+  publicationMode?: PublicationMode;     // 'public' | 'anonyme'
+  auteurNom?: string;             // nom affiché si publication non anonyme
 }
 
 // ─── Annotation (plage de caractères sur un texte) ───────────────────────────
@@ -290,6 +295,7 @@ export interface ClinicalCase {
   auteurId?: string;
   casComplet: boolean;         // tous champs obligatoires présents
   exemplaire: boolean;         // marqué par un éditeur
+  qualifieApprentissage?: boolean; // atteint le seuil communautaire (valeur >= 50)
   grillePrincipale: ReadingGridId;
   tags: string[];
   content: CaseContent;
@@ -425,6 +431,7 @@ export interface GlobalStats {
   topSyndromes: FrequencyEntry[];     // syndromes nommés spécifiques (couche 2)
   topOrganes: FrequencyEntry[];       // organes/localisations (couche 3)
   topStrategies: FrequencyEntry[];    // stratégies thérapeutiques (couche 4)
+  topPathologies: FrequencyEntry[];   // motifs de consultation normalisés (couche 5)
   repartitionComplexite: Record<NiveauComplexite, number>;
   repartitionSexe: Record<string, number>;
 }

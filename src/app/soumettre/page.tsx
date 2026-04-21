@@ -513,6 +513,11 @@ export default function SoumettreCasPage() {
           interrogatoire: allInterrogatoire,
           observation: observation.trim() || undefined,
           palpation: palpation.trim() || undefined,
+          langueTexte: langue.trim() || undefined,
+          examensTexte: examens.trim() || undefined,
+          palpationAbdo: showPalpAbdo && palpAbdo.length > 0 ? palpAbdo : undefined,
+          publicationMode,
+          auteurNom: publicationMode === 'anonyme' ? undefined : `${user.prenom} ${user.nom}`.trim(),
           prisePouls: {
             condition: 'Non precise',
             lectures,

@@ -25,6 +25,7 @@ import {
   Mail,
   Phone,
   ArrowRight,
+  Library,
   Coins,
   FilePlus,
   GraduationCap,
@@ -84,7 +85,7 @@ export default function ProfilPage() {
   useEffect(() => {
     if (user) {
       getAllParticipations(user.id).then(setParticipations);
-      setExercices(getAllExercices(user.id));
+      getAllExercices(user.id).then(setExercices);
       getUserCasesByAuteur(user.id).then(setUserCases);
     }
   }, [user]);
@@ -359,6 +360,13 @@ export default function ProfilPage() {
                           >
                             Voir <ArrowRight size={11} />
                           </Link>
+                          <Link
+                            href={`/mes-cas/${c.id}/modifier`}
+                            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors font-medium"
+                          >
+                            <PenLine size={12} />
+                            Modifier
+                          </Link>
                           <button
                             onClick={async () => {
                               if (confirm(`Supprimer le cas "${c.titre}" ? Cette action est irréversible.`)) {
@@ -448,6 +456,22 @@ export default function ProfilPage() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Ressources */}
+      <div className="bg-slate-50 rounded-xl border border-slate-200 p-4">
+        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Ressources</p>
+        <Link
+          href="/lexique"
+          className="flex items-center gap-3 px-4 py-3 bg-white rounded-lg border border-slate-200 hover:border-teal-300 hover:shadow-sm transition-all group"
+        >
+          <Library size={16} className="text-teal-600 shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-slate-800 group-hover:text-teal-700">Lexique IEATC</p>
+            <p className="text-xs text-slate-400">Glossaire des concepts et termes de l&apos;école</p>
+          </div>
+          <ArrowRight size={14} className="text-slate-300 group-hover:text-teal-500 shrink-0" />
+        </Link>
       </div>
     </div>
   );
