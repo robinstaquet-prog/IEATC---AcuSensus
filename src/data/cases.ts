@@ -1909,6 +1909,446 @@ Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la di
       },
     ],
   },
+  // ───────────────────────────────────────────────────────────────────────────
+  // CAS 006 — THOMAS, 45 ANS — Lombalgie chronique
+  // Grille principale : Yin/Yang → Zang/Fu (Rein)
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    id: 'cas-006',
+    slug: 'thomas-45-ans-lombalgie-chronique',
+    titre: 'Thomas, 45 ans — Lombalgie chronique et grande fatigue',
+    statut: 'publie',
+    niveauComplexite: 1,
+    age: 45,
+    trancheAge: 'adulte',
+    sexe: 'masculin',
+    dateCreation: '2025-10-01',
+    datePublication: '2025-10-15',
+    casComplet: true,
+    exemplaire: false,
+    grillePrincipale: 'yin_yang',
+    tags: ['lombalgie', 'rein', 'fatigue', 'Yang vide', 'Ming Men'],
+    viewCount: 187,
+    content: {
+      motif: "Lombalgie chronique depuis 4 ans avec irradiation dans la fesse droite. Grande fatigue en fin de journée.",
+      interrogatoire: [
+        { cle: 'douleur', valeur: "Douleur sourde et profonde dans le bas du dos. Aggravée au repos prolongé et le matin au réveil. Améliorée par la chaleur et le mouvement." },
+        { cle: 'horaire', valeur: "Pire le matin au lever. Mieux après activité douce. Rechutes en hiver et par temps froid." },
+        { cle: 'urines', valeur: "Urines claires et abondantes, surtout la nuit (2-3 levées). Légère incontinence d'effort." },
+        { cle: 'froid', valeur: "Froid aux pieds et aux genoux. Aime les bains chauds. Frileuse." },
+        { cle: 'antecedents', valeur: "Surmenage professionnel depuis 10 ans. Père opéré du dos (hernie discale L4-L5)." },
+      ],
+      observation: "Patient pâle, voix basse. Dos courbé légèrement en avant. Pas de déficit neurologique.",
+      prisePouls: {
+        condition: "Patient allongé, bras détendu",
+        lectures: [
+          { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Vide profond au Foyer Inférieur gauche — Yang du Rein insuffisant." },
+          { position: 'foyer_inferieur_droit', qualites: ['vide', 'profond'], interpretation: "Vide profond bilatéral confirmant le vide Yang général du Rein." },
+          { position: 'global_profond', qualites: ['lent', 'faible'], interpretation: "Pouls global lent et faible — vide de Yang constitutionnel profond." },
+        ],
+        synthese: "Vide de Yang du Rein et du Ming Men. La lenteur globale confirme le froid interne. Traiter le Yang du Foyer Inférieur en priorité absolue.",
+      },
+    },
+    analyses: [
+      {
+        id: 'a006-yy-officielle',
+        caseId: 'cas-006',
+        type: 'officielle',
+        auteurPseudo: 'Dr Laurent Mercier',
+        auteurStatut: 'expert',
+        role: 'expert',
+        publicationMode: 'public',
+        votePoints: 38,
+        valeur: 3.8,
+        grillePrincipale: 'yin_yang',
+        polarite: 'yang',
+        localisationFoyer: 'inferieur',
+        raisonnement: `Tableau classique de Vide de Yang du Rein avec insuffisance du Ming Men. La lombalgie chronique en IEATC n'est jamais purement mécanique — le dos lombaire est le territoire du Rein. La douleur améliorée par la chaleur, les urines claires nocturnes, le froid aux membres inférieurs et la fatigue profonde dessinent le portrait du Yang vide profond.
+
+Le Ming Men (VG4) est le foyer du Yang constitutionnel. Son insuffisance se lit sur les deux pouls du Foyer Inférieur, vides et profonds. Les moxas sur VG4 et V23 sont le traitement de choix.`,
+        categoriesDiagnostiques: [
+          "Vide de Yang du Rein — Ming Men insuffisant",
+          "Froid interne au Foyer Inférieur",
+          "Vide de Yang général — fatigue profonde",
+        ],
+        strategieTherapeutique: "1. Ranimer le Feu du Ming Men (VG4 moxas). 2. Tonifier le Yang du Rein (V23, R3). 3. Réchauffer le Foyer Inférieur. 4. Soutenir le Yang général (36E).",
+        traitementPropose: `VG4 moxas (Ming Men — clé du Yang constitutionnel). V23 bilatéral tonification + moxas (point Shu du Rein). R3 bilatéral tonification (source Rein). V40 dispersion (lombes locales). 36E bilatéral tonification (soutien Yang général).`,
+        pointsUtilises: [
+          { code: 'VG4', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Feu du Ming Men — Yang constitutionnel", ordre: 1 },
+          { code: 'V23', technique: 'moxa_tonification', justification: "Point Shu du Rein — tonifie Yang du Rein", ordre: 2 },
+          { code: 'R3', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Source du Rein — Yin et Yang du Rein", ordre: 3 },
+          { code: 'V40', technique: 'dispersion', justification: "Point commande des lombes", ordre: 4 },
+          { code: '36E', nomIeatc: 'Zu San Li', technique: 'moxa_tonification', justification: "Yang général — soutien énergétique global", ordre: 5 },
+        ],
+        niveauConfiance: 'expert',
+        sourceType: 'editoriale',
+        version: 1,
+        enseignementCle: "Lombalgie chronique = Vide de Yang du Rein jusqu'à preuve du contraire. Les moxas sur VG4 sont indispensables — l'aiguille seule ne suffit pas pour ranimer le Ming Men.",
+      },
+      {
+        id: 'a006-cinq-elements',
+        caseId: 'cas-006',
+        type: 'variante',
+        auteurPseudo: 'Martine L.',
+        auteurStatut: 'praticien_experimente',
+        role: 'praticien',
+        publicationMode: 'public',
+        votePoints: 22,
+        valeur: 1.0,
+        grillePrincipale: 'cinq_elements',
+        grillesSecondaires: ['yin_yang'],
+        polarite: 'yang',
+        localisationFoyer: 'inferieur',
+        raisonnement: "L'Eau (Rein) est la base de tout — insuffisance constitutionnelle aggravée par le surmenage. Le cycle Sheng est brisé vers le bas : Eau insuffisante → Bois mal nourri → tendons et dos fragilisés. Traiter d'abord l'Eau pour relancer toute la chaîne.",
+        categoriesDiagnostiques: [
+          "Vide de Yang du Rein (Eau) — racine constitutionnelle",
+          "Vide de Jing du Rein — épuisement par surmenage",
+          "Cycle Sheng Eau → Bois insuffisant",
+        ],
+        strategieTherapeutique: "1. Nourrir l'Eau (Rein Yang et Jing). 2. Relancer le cycle Sheng. 3. Traiter la lombalgie secondairement.",
+        bilanEnergetique: "Vide de Yang du Rein et vide de Jing — surmenage chronique a vidé les réserves ancestrales. Lombalgie = expression locale d'un vide profond du Foyer Inférieur.",
+        strategie: "1. VG4 + V23 moxas (Yang Rein et Ming Men)\n2. R3 + R7 tonification (Yin et Yang Rein)\n3. 39VB (moelle, os, Jing) en soutien",
+        pointsUtilises: [
+          { code: 'VG4', technique: 'moxa_tonification', justification: "Ming Men — Yang constitutionnel", ordre: 1 },
+          { code: 'R7', technique: 'tonification', justification: "Tonifie le Yang du Rein — complément de R3", ordre: 2 },
+          { code: 'R3', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Source du Rein", ordre: 3 },
+          { code: '39VB', technique: 'tonification', justification: "Réunion des moelles — soutient le Jing", ordre: 4 },
+        ],
+        niveauConfiance: 'standard',
+        sourceType: 'humaine',
+        version: 1,
+        votes: [],
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CAS 007 — SOPHIE, 42 ANS — Cervicalgies + céphalées + insomnie
+  // Grille principale : Yin/Yang → Zang/Fu (Foie/Rein)
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    id: 'cas-007',
+    slug: 'sophie-42-ans-cervicalgies-cephalees',
+    titre: 'Sophie, 42 ans — Cervicalgies, céphalées temporales et insomnie',
+    statut: 'publie',
+    niveauComplexite: 2,
+    age: 42,
+    trancheAge: 'adulte',
+    sexe: 'feminin',
+    dateCreation: '2025-10-20',
+    datePublication: '2025-11-05',
+    casComplet: true,
+    exemplaire: false,
+    grillePrincipale: 'yin_yang',
+    tags: ['céphalées', 'cervicalgies', 'insomnie', 'Yang Foie montant', 'Yin Rein'],
+    viewCount: 143,
+    content: {
+      motif: "Cervicalgies persistantes avec céphalées temporales récurrentes et insomnie depuis 8 mois.",
+      interrogatoire: [
+        { cle: 'cephalees', valeur: "Céphalées temporales bilatérales, pulsatiles. Aggravées par le stress et les menstruations. Soulagées par la pression froide." },
+        { cle: 'cervicalgies', valeur: "Raideur cervicale matinale. Tension dans la nuque et les épaules. Pas de névralgie cervico-brachiale." },
+        { cle: 'sommeil', valeur: "Endormissement difficile. Réveils nocturnes entre 1h et 3h. Rêves agités, parfois cauchemars. Fatigue matinale persistante." },
+        { cle: 'emotionnel', valeur: "Stress professionnel important. Irritabilité. Difficultés à décompresser en soirée." },
+        { cle: 'regles', valeur: "Cycle raccourci (23-24 jours). Saignements plus abondants depuis 1 an. Céphalées systématiques J2-J3." },
+      ],
+      observation: "Teint rouge, yeux brillants. Tension dans les trapèzes et les muscles sous-occipitaux.",
+      prisePouls: {
+        condition: "Patient allongé après 5 min de repos",
+        lectures: [
+          { position: 'foyer_moyen_gauche', qualites: ['corde_arc', 'rapide'], interpretation: "Pouls en corde-arc rapide au Foyer Moyen gauche — Yang du Foie montant." },
+          { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Foyer Inférieur gauche vide profond — Yin du Rein insuffisant (cause profonde)." },
+          { position: 'foyer_superieur_gauche', qualites: ['rapide'], interpretation: "Cœur rapide — Shen légèrement perturbé par le manque de Yin." },
+        ],
+        synthese: "Vide de Yin du Rein → Yang du Foie non ancré → monte vers le haut. Traiter le Rein en premier, le Foie en second.",
+      },
+    },
+    analyses: [
+      {
+        id: 'a007-yy-officielle',
+        caseId: 'cas-007',
+        type: 'officielle',
+        auteurPseudo: 'Dr Isabelle Fontaine',
+        auteurStatut: 'expert',
+        role: 'expert',
+        publicationMode: 'public',
+        votePoints: 47,
+        valeur: 4.7,
+        grillePrincipale: 'yin_yang',
+        grillesSecondaires: ['zang_fu'],
+        polarite: 'yin',
+        localisationFoyer: 'superieur',
+        raisonnement: `Tableau classique de Vide de Yin du Rein → Yang du Foie montant. La règle R4 s'applique ici pleinement : traiter le Rein (cause), pas le Foie (conséquence).
+
+Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le méridien VB (trajet temporal). L'insomnie avec réveils 1h-3h est l'heure du Foie — le Yang ne peut redescendre faute de Yin pour l'ancrer. Les cervicalgies sont la stagnation du Yang du Foie bloqué en Foyer Supérieur.`,
+        categoriesDiagnostiques: [
+          "Vide de Yin du Rein — cause profonde",
+          "Yang du Foie montant — conséquence directe",
+          "Shen légèrement perturbé — insomnie secondaire",
+          "Stagnation Yang en Foyer Supérieur — cervicalgies et céphalées",
+        ],
+        strategieTherapeutique: "1. Nourrir le Yin du Rein (R3, R6, R7). 2. Abaisser le Yang du Foie (3F, 2F). 3. Pacifier le Shen (C7). 4. Libérer localement le Foyer Supérieur (20VB, VG20).",
+        traitementPropose: `R3 + R6 tonification (nourrit le Yin du Rein — cause profonde). 3F dispersion (abaisse le Yang du Foie). VG20 dispersion (fait descendre le Yang depuis le sommet). 20VB dispersion (libère le Foyer Supérieur et le méridien VB). C7 tonification (pacifie le Shen).`,
+        pointsUtilises: [
+          { code: 'R3', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — cause profonde des céphalées", ordre: 1 },
+          { code: 'R6', nomIeatc: 'Zhao Hai', technique: 'tonification', justification: "Renforce le Yin du Rein, pacifie le Shen", ordre: 2 },
+          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Abaisse le Yang du Foie — traitement secondaire", ordre: 3 },
+          { code: 'VG20', technique: 'dispersion', justification: "Fait descendre le Yang depuis le sommet du crâne", ordre: 4 },
+          { code: '20VB', technique: 'dispersion', justification: "Libère le méridien VB au cou — céphalées temporales", ordre: 5 },
+          { code: 'C7', nomIeatc: 'Shen Men', technique: 'tonification', justification: "Pacifie le Shen — insomnie", ordre: 6 },
+        ],
+        niveauConfiance: 'expert',
+        sourceType: 'editoriale',
+        version: 1,
+        enseignementCle: "Règle R4 : céphalées par Yang du Foie montant → traiter le Yin du Rein D'ABORD. Ne pas disperser le Foie sans avoir nourri le Rein — inefficace et épuisant.",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CAS 008 — MARIE, 36 ANS — Fatigue chronique + anxiété + insomnie
+  // Grille principale : Zang/Fu (Cœur / Rein)
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    id: 'cas-008',
+    slug: 'marie-36-ans-fatigue-anxiete-insomnie',
+    titre: 'Marie, 36 ans — Fatigue profonde, anxiété et insomnie',
+    statut: 'publie',
+    niveauComplexite: 2,
+    age: 36,
+    trancheAge: 'adulte',
+    sexe: 'feminin',
+    dateCreation: '2025-11-01',
+    datePublication: '2025-11-20',
+    casComplet: true,
+    exemplaire: false,
+    grillePrincipale: 'zang_fu',
+    tags: ['fatigue', 'anxiété', 'insomnie', 'Shen', 'Cœur', 'Rein', 'vide Yin'],
+    viewCount: 98,
+    content: {
+      motif: "Fatigue chronique profonde avec anxiété permanente et difficultés d'endormissement depuis 1 an. Épuisement après effort minime.",
+      interrogatoire: [
+        { cle: 'fatigue', valeur: "Fatigue dès le matin au lever. Coup de pompe entre 11h et 13h. Épuisement total en soirée. Pas améliorée par le repos." },
+        { cle: 'sommeil', valeur: "Endormissement difficile (1-2h). Réveils entre 3h et 5h avec ruminations. Jamais de sommeil réparateur." },
+        { cle: 'anxiete', valeur: "Anxiété diffuse, permanente. Palpitations fréquentes au stress. Difficultés de concentration." },
+        { cle: 'chaleur', valeur: "Chaleur dans la poitrine le soir. Sueurs nocturnes. Mains et pieds chauds. Bouche sèche la nuit." },
+        { cle: 'antecedents', valeur: "Burn-out professionnel il y a 18 mois. Jamais complètement récupérée depuis." },
+      ],
+      observation: "Regard anxieux, voix hésitante. Teint légèrement rouge sur les pommettes. Agitation des mains.",
+      prisePouls: {
+        condition: "Patient allongé, respiration calmée",
+        lectures: [
+          { position: 'foyer_superieur_gauche', qualites: ['vide', 'rapide'], interpretation: "Cœur vide et rapide — Shen sans ancrage, Yin insuffisant." },
+          { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Yin du Rein vide profond — cause du vide de Yin général et du feu du vide." },
+          { position: 'foyer_superieur_droit', qualites: ['vide', 'faible'], interpretation: "Poumon vide — Qi général insuffisant." },
+        ],
+        synthese: "Vide de Yin du Rein → Feu du vide irrite le Cœur → Shen perturbé. Tableau post-burn-out classique : épuisement du Yin par surmenage chronique.",
+      },
+    },
+    analyses: [
+      {
+        id: 'a008-zangfu-officielle',
+        caseId: 'cas-008',
+        type: 'officielle',
+        auteurPseudo: 'Dr Laurent Mercier',
+        auteurStatut: 'expert',
+        role: 'expert',
+        publicationMode: 'public',
+        votePoints: 41,
+        valeur: 4.1,
+        grillePrincipale: 'zang_fu',
+        grillesSecondaires: ['yin_yang'],
+        polarite: 'yin',
+        localisationFoyer: 'superieur',
+        raisonnement: `Tableau de Vide de Yin du Rein → Feu du vide → Shen perturbé. C'est la séquence classique du burn-out en IEATC.
+
+La chaleur vespérale, les sueurs nocturnes, la bouche sèche la nuit, le pouls vide et rapide au Cœur — tout indique le Feu du vide (Xu Huo). Règle R3 absolue : ne jamais disperser cette chaleur, elle n'est pas réelle. Il faut NOURRIR le Yin pour que le Feu du vide s'éteigne de lui-même.
+
+Le Cœur héberge le Shen. Sans Yin pour l'ancrer, le Shen erre → anxiété, insomnie, palpitations.`,
+        categoriesDiagnostiques: [
+          "Vide de Yin du Rein — épuisement post burn-out",
+          "Feu du vide (Xu Huo) — chaleur vespérale, sueurs nocturnes",
+          "Shen perturbé par vide de Yin du Cœur — insomnie, anxiété",
+          "Vide de Qi du Poumon — fatigue profonde, souffle insuffisant",
+        ],
+        strategieTherapeutique: "1. Nourrir le Yin du Rein et du Cœur (R3, R6, MC6). 2. Clarifier le Feu du vide (NON disperser). 3. Pacifier le Shen (C7, R6). 4. Soutenir le Qi (36E, P7).",
+        traitementPropose: `R3 + R6 tonification (nourrit le Yin du Rein — source du Feu du vide). MC6 tonification (pacifie le Shen, nourrit le Yin du Cœur). C7 tonification (Shen Men — porte du Shen). R6 + C7 tonification (paire de MV : Yin Qiao Mo — excellent pour l'insomnie). 36E tonification (Qi général).`,
+        pointsUtilises: [
+          { code: 'R3', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — source profonde du Feu du vide", ordre: 1 },
+          { code: 'R6', nomIeatc: 'Zhao Hai', technique: 'tonification', justification: "Yin Qiao Mo + Yin Rein — insomnie et anxiété", ordre: 2 },
+          { code: 'MC6', nomIeatc: 'Nei Guan', technique: 'tonification', justification: "Pacifie le Shen, calme les palpitations, nourrit le Yin Cœur", ordre: 3 },
+          { code: 'C7', nomIeatc: 'Shen Men', technique: 'tonification', justification: "Porte du Shen — ancrage direct du Shen dans le Cœur", ordre: 4 },
+          { code: '36E', nomIeatc: 'Zu San Li', technique: 'tonification', justification: "Soutient le Qi général post-burn-out", ordre: 5 },
+        ],
+        niveauConfiance: 'expert',
+        sourceType: 'editoriale',
+        version: 1,
+        enseignementCle: "Feu du vide post burn-out : NOURRIR le Yin, jamais disperser la chaleur. La paire R6 + C7 est le traitement de fond de l'insomnie par vide de Yin.",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CAS 009 — LUCIE, 22 ANS — Dysménorrhée + SPM
+  // Grille principale : Cinq Éléments (Bois/Sang)
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    id: 'cas-009',
+    slug: 'lucie-22-ans-dysmenorrhee-spm',
+    titre: 'Lucie, 22 ans — Dysménorrhée invalidante et syndrome prémenstruel',
+    statut: 'publie',
+    niveauComplexite: 2,
+    age: 22,
+    trancheAge: 'jeune_adulte',
+    sexe: 'feminin',
+    dateCreation: '2025-11-15',
+    datePublication: '2025-12-01',
+    casComplet: true,
+    exemplaire: false,
+    grillePrincipale: 'cinq_elements',
+    tags: ['dysménorrhée', 'SPM', 'Foie', 'stagnation Qi', 'vide Sang', 'règles'],
+    viewCount: 76,
+    content: {
+      motif: "Dysménorrhée invalidante depuis 4 ans avec syndrome prémenstruel marqué — règles douloureuses, ballonnements et anxiété prémenstruelle.",
+      interrogatoire: [
+        { cle: 'regles', valeur: "Douleurs intenses J1-J2, obligeant à l'alitement. Sang rouge foncé avec caillots. Cycle de 28 jours régulier mais douloureux depuis l'adolescence." },
+        { cle: 'spm', valeur: "Les 5-7 jours précédant les règles : seins douloureux, irritabilité majeure, pleurs faciles, ballonnements, envie de sucre." },
+        { cle: 'digestif', valeur: "Ballonnements fréquents en dehors des règles. Alternance diarrhées/constipation selon le stress." },
+        { cle: 'emotionnel', valeur: "Grande sensibilité émotionnelle. Frustration facile. Se sent mieux après avoir pleuré ou après les règles." },
+        { cle: 'froid', valeur: "Appuyer fort sur le ventre soulage. La chaleur (bouillotte) améliore." },
+      ],
+      observation: "Teint légèrement jaune-verdâtre. Ongles fragiles. Légère tension dans les hypocondres.",
+      prisePouls: {
+        condition: "J14 du cycle (mi-cycle)",
+        lectures: [
+          { position: 'foyer_moyen_gauche', qualites: ['corde_arc'], interpretation: "Corde-arc au Foyer Moyen gauche — Foie en tension, Qi stagnant." },
+          { position: 'foyer_superieur_gauche', qualites: ['vide', 'faible'], interpretation: "Cœur faible — Sang insuffisant (vide de Sang du Foie)." },
+          { position: 'foyer_inferieur_gauche', qualites: ['vide'], interpretation: "Foyer Inférieur gauche légèrement vide — Sang du Rein insuffisant." },
+        ],
+        synthese: "Stagnation de Qi du Foie sur fond de Vide de Sang. Le Qi stagnant bloque la circulation du Sang à la menstruation → douleurs et caillots.",
+      },
+    },
+    analyses: [
+      {
+        id: 'a009-cinq-elements-officielle',
+        caseId: 'cas-009',
+        type: 'officielle',
+        auteurPseudo: 'Dr Isabelle Fontaine',
+        auteurStatut: 'expert',
+        role: 'expert',
+        publicationMode: 'public',
+        votePoints: 35,
+        valeur: 3.5,
+        grillePrincipale: 'cinq_elements',
+        grillesSecondaires: ['zang_fu'],
+        polarite: 'yin',
+        localisationFoyer: 'inferieur',
+        raisonnement: `Stagnation de Qi du Foie (Bois) sur fond de Vide de Sang — tableau classique de dysménorrhée IEATC.
+
+Le Foie gouverne la libre circulation du Qi et stocke le Sang. En vide de Sang, le Foie ne peut plus assurer la circulation fluide → tension, caillots, douleurs spasmodiques. Le SPM (irritabilité, seins douloureux) est la manifestation de la stagnation de Qi du Foie dans la semaine précédant les règles.
+
+Stratégie : nourrir le Sang du Foie EN PREMIER, puis lever la stagnation de Qi. Dans le sens inverse → on libère sans avoir nourri → aggravation.`,
+        categoriesDiagnostiques: [
+          "Stagnation de Qi du Foie — dysménorrhée et SPM",
+          "Vide de Sang du Foie — ongles fragiles, vide Cœur",
+          "Stagnation de Sang au Foyer Inférieur — caillots, douleurs fixes",
+        ],
+        strategieTherapeutique: "1. Nourrir le Sang du Foie (8F, 6Rte). 2. Lever la stagnation de Qi du Foie (3F, 4GI). 3. Lever la stagnation de Sang (10Rte). 4. Calmer le Bois (2F).",
+        traitementPropose: `8F tonification (nourrit le Sang du Foie — source). 6Rte tonification (nourrit le Sang général, régularise les menstruations). 3F dispersion (lève la stagnation de Qi du Foie). 10Rte dispersion (lève la stagnation de Sang). 4GI dispersion (lève la stagnation de Qi général, antidouleur). 29VC (R25) : réchauffer l'utérus si froid.`,
+        pointsUtilises: [
+          { code: '8F', technique: 'tonification', justification: "Source Foie — nourrit le Sang du Foie, régularise le cycle", ordre: 1 },
+          { code: '6Rte', technique: 'tonification', justification: "Réunion des 3 Yin — nourrit le Sang, régularise les menstruations", ordre: 2 },
+          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Lève la stagnation de Qi du Foie — SPM et douleurs prémenstruelles", ordre: 3 },
+          { code: '10Rte', technique: 'dispersion', justification: "Lève la stagnation de Sang — caillots et douleurs fixes", ordre: 4 },
+          { code: '4GI', nomIeatc: 'He Gu', technique: 'dispersion', justification: "Lève la stagnation de Qi général — antidouleur puissant", ordre: 5 },
+        ],
+        niveauConfiance: 'expert',
+        sourceType: 'editoriale',
+        version: 1,
+        enseignementCle: "Dysménorrhée à caillots = stagnation de Sang sur fond de stagnation de Qi du Foie. Nourrir le Sang D'ABORD, lever la stagnation ensuite. L'inverse aggrave.",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CAS 010 — PIERRE, 50 ANS — Tendinite épicondyle + stress
+  // Grille principale : Méridiens (GI/TR)
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    id: 'cas-010',
+    slug: 'pierre-50-ans-tendinite-epicondyle',
+    titre: 'Pierre, 50 ans — Tendinite épicondyle latéral bras droit',
+    statut: 'publie',
+    niveauComplexite: 1,
+    age: 50,
+    trancheAge: 'adulte',
+    sexe: 'masculin',
+    dateCreation: '2025-12-01',
+    datePublication: '2025-12-15',
+    casComplet: true,
+    exemplaire: false,
+    grillePrincipale: 'meridiens',
+    tags: ['tendinite', 'épicondylite', 'méridien GI', 'TR', 'coude', 'Oé/Iong'],
+    viewCount: 64,
+    content: {
+      motif: "Tendinite épicondyle latéral au coude droit depuis 3 mois — douleur irradiant dans l'avant-bras lors de la prise en pronation.",
+      interrogatoire: [
+        { cle: 'douleur', valeur: "Douleur vive à la pression de l'épicondyle latéral. Irradiation vers le poignet lors de la serrage. Aggravée par le geste répété (tennis, travail informatique)." },
+        { cle: 'horaire', valeur: "Mieux le matin, pire en cours de journée. Aggravée par le froid humide." },
+        { cle: 'general', valeur: "Stress professionnel important. Fatigue générale. Travaille 60h/semaine depuis 6 mois." },
+        { cle: 'antecedents', valeur: "Joueur de tennis (3-4h/semaine). Aucun traumatisme. Apparition progressive et insidieuse." },
+      ],
+      observation: "Douleur reproductible à la pression de l'épicondyle latéral. Test de Cozen positif. Pas d'atteinte neurologique.",
+      prisePouls: {
+        condition: "Patient assis, bras droit examiné",
+        lectures: [
+          { position: 'foyer_superieur_droit', qualites: ['vide', 'superficiel'], interpretation: "Pouls superficiel vide à droite — Oé en plénitude locale sur fond d'Iong insuffisante." },
+          { position: 'foyer_moyen_droit', qualites: ['large', 'mou'], interpretation: "Rate légèrement large et mou — Foyer Moyen un peu chargé." },
+          { position: 'global_superficiel', qualites: ['vide'], interpretation: "Pouls global superficiel vide — vide Yang général, fatigue de fond." },
+        ],
+        synthese: "Paradoxe Oé/Iong : chaleur/inflammation locale (Oé en excès) sur fond de vide Yang général (Iong insuffisante). Traiter l'Iong générale ET disperser l'Oé locale.",
+      },
+    },
+    analyses: [
+      {
+        id: 'a010-meridiens-officielle',
+        caseId: 'cas-010',
+        type: 'officielle',
+        auteurPseudo: 'Jean-Marc Pellerin',
+        auteurStatut: 'expert',
+        role: 'expert',
+        publicationMode: 'public',
+        votePoints: 29,
+        valeur: 2.9,
+        grillePrincipale: 'meridiens',
+        grillesSecondaires: ['yin_yang'],
+        polarite: 'yang',
+        localisationFoyer: 'superieur',
+        raisonnement: `Tendinite de l'épicondyle latéral = atteinte du méridien Gros Intestin (Yang Ming du bras). Le méridien GI passe exactement sur l'épicondyle latéral. La stagnation locale d'Oé (chaleur-inflammation) est réelle mais superficielle.
+
+Règle R6 : paradoxe Oé/Iong. Le vide Yang général (surmenage, Iong insuffisante) crée un déséquilibre où l'Oé stagne en surface. Si on disperse seulement l'Oé locale sans tonifier l'Iong générale, l'effet sera fugace — la stagnation reviendra.
+
+La double action est nécessaire : tonifier l'Iong (Yang général) + disperser l'Oé locale (méridien GI au coude).`,
+        categoriesDiagnostiques: [
+          "Obstruction du méridien Gros Intestin — Oé en plénitude locale",
+          "Paradoxe Oé plénitude locale / Iong insuffisante générale",
+          "Vide de Yang général — surmenage, Iong affaiblie",
+        ],
+        strategieTherapeutique: "1. Tonifier l'Iong générale (Yang général). 2. Disperser l'Oé au méridien GI local. 3. Traitement local de l'épicondyle.",
+        traitementPropose: `36E tonification + moxas (Yang général — tonifie l'Iong). 11GI dispersion (point local épicondyle — lève la stagnation d'Oé). 4GI dispersion (distal GI — renforce l'action de 11GI). 5TR dispersion (méridien TR — adjacent à GI au coude). 41VB tonification (tendon-ligaments général).`,
+        pointsUtilises: [
+          { code: '36E', nomIeatc: 'Zu San Li', technique: 'moxa_tonification', justification: "Tonifie l'Iong générale — traitement de fond du vide Yang", ordre: 1 },
+          { code: '11GI', nomIeatc: 'Qu Chi', technique: 'dispersion', justification: "Point local de l'épicondyle — disperse l'Oé dans le méridien GI", ordre: 2 },
+          { code: '4GI', nomIeatc: 'He Gu', technique: 'dispersion', justification: "Distal GI — renforce la dispersion de l'Oé locale", ordre: 3 },
+          { code: '5TR', technique: 'dispersion', justification: "Méridien Triple Réchauffeur au coude — complémentaire de GI", ordre: 4 },
+          { code: '34VB', technique: 'tonification', justification: "Point Hui des tendons — action globale sur les tendons", ordre: 5 },
+        ],
+        niveauConfiance: 'expert',
+        sourceType: 'editoriale',
+        version: 1,
+        enseignementCle: "Règle R6 — paradoxe Oé/Iong : toujours tonifier l'Iong générale EN MÊME TEMPS que disperser l'Oé locale. L'un sans l'autre = rechutes.",
+      },
+    ],
+  },
 ];
 
 // ─── Utilitaires ─────────────────────────────────────────────────────────────

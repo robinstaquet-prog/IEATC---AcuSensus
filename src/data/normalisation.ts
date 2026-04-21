@@ -65,7 +65,8 @@ export type CategorieConcept =
   | 'localisation'   // Foyer Supérieur/Moyen/Inférieur — niveau 3
   | 'vaisseau'       // Merveilleux Vaisseau (Du Mai, Ren Mai…) — niveau 3
   | 'element'        // Élément wuxing (Eau, Bois, Feu, Terre, Métal) — niveau 3
-  | 'strategie';     // Stratégie thérapeutique — niveau 4
+  | 'strategie'      // Stratégie thérapeutique — niveau 4
+  | 'pathologie';    // Présentation clinique / motif de consultation — niveau 5
 
 export interface ConceptIeatc {
   id: string;
@@ -1174,15 +1175,347 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// COUCHE 5 — PATHOLOGIES / MOTIFS DE CONSULTATION
+// Normalise les présentations cliniques en entités statistiques.
+// Source principale : ClinicalCase.content.motif (motif de consultation).
+// Chaque entrée regroupe toutes les variantes d'expression d'une même plainte.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+export const PATHOLOGIES_IEATC: ConceptIeatc[] = [
+
+  // ─── Douleurs locomotrices ───────────────────────────────────────────────────
+  {
+    id: 'lombalgie',
+    label: 'Lombalgie / Douleur lombaire',
+    categorie: 'pathologie',
+    patterns: [
+      'lombalgie', 'lombalgies', 'lumbago',
+      'douleur lombaire', 'douleurs lombaires',
+      'mal de dos', 'mal au dos', 'douleur au dos',
+      'douleur bas du dos', 'douleur en bas du dos',
+    ],
+  },
+  {
+    id: 'cervicalgie',
+    label: 'Cervicalgie / Douleur cervicale',
+    categorie: 'pathologie',
+    patterns: [
+      'cervicalgie', 'cervicalgies',
+      'douleur cervicale', 'douleurs cervicales',
+      'douleur au cou', 'douleur dans le cou',
+      'raideur cervicale', 'raideur du cou',
+      'torticolis', 'nuque douloureuse', 'nuque raide',
+    ],
+  },
+  {
+    id: 'tendinite',
+    label: 'Tendinite / Tendinopathie',
+    categorie: 'pathologie',
+    patterns: [
+      'tendinite', 'tendinites', 'tendinopathie', 'tendinopathies', 'tendinose',
+      'epicondylite', 'epicondylites', 'epicondyle',
+      'epitrochleite', 'rotulien', 'tendon',
+      'periarthrite', 'coiffe des rotateurs',
+    ],
+  },
+  {
+    id: 'gonalgie',
+    label: 'Gonalgie / Douleur de genou',
+    categorie: 'pathologie',
+    patterns: [
+      'gonalgie', 'gonalgies',
+      'douleur genou', 'douleur au genou', 'douleurs genou',
+      'douleur du genou', 'genou douloureux', 'genou droit', 'genou gauche',
+      'chondropathie', 'menisque',
+    ],
+  },
+  {
+    id: 'sciatique',
+    label: 'Sciatique / Névralgie sciatique',
+    categorie: 'pathologie',
+    patterns: [
+      'sciatique', 'sciatalgie', 'nevralgique sciatique',
+      'irradiation sciatique', 'douleur irradiante jambe',
+      'douleur irradiation fessiere', 'crural',
+    ],
+  },
+  {
+    id: 'epaule_douloureuse',
+    label: 'Épaule douloureuse',
+    categorie: 'pathologie',
+    patterns: [
+      'epaule douloureuse', 'douleur epaule', 'douleur a l epaule',
+      'douleur de l epaule', 'blocage epaule', 'epaule bloquee',
+      'epaule droite', 'epaule gauche',
+    ],
+  },
+  {
+    id: 'arthralgie',
+    label: 'Arthralgie / Arthrite / Goutte',
+    categorie: 'pathologie',
+    patterns: [
+      'arthralgie', 'arthralgies', 'arthrite', 'arthrites',
+      'douleur articulaire', 'douleurs articulaires',
+      'polyarthrite', 'rhumatisme', 'rhumatismes',
+      'goutte', 'crise de goutte', 'hyperuricemie',
+    ],
+  },
+
+  // ─── Neurologie / Tête ───────────────────────────────────────────────────────
+  {
+    id: 'cephalees',
+    label: 'Céphalées / Migraines',
+    categorie: 'pathologie',
+    patterns: [
+      'cephalee', 'cephalees', 'migraine', 'migraines',
+      'mal de tete', 'maux de tete', 'mal a la tete',
+      'douleur cephalique', 'cephalee temporale', 'cephalee frontale',
+      'cephalee occipitale', 'algie de la face',
+    ],
+  },
+  {
+    id: 'vertiges',
+    label: 'Vertiges / Étourdissements',
+    categorie: 'pathologie',
+    patterns: [
+      'vertige', 'vertiges', 'etourdissement', 'etourdissements',
+      'sensation de vertige', 'instabilite', 'troubles de l equilibre',
+    ],
+  },
+  {
+    id: 'acouphenes',
+    label: 'Acouphènes / Bourdonnements d\'oreille',
+    categorie: 'pathologie',
+    patterns: [
+      'acouphene', 'acouphenes', 'bourdonnement', 'bourdonnements',
+      'bourdonnement d oreille', 'bourdonnements d oreille',
+      'tinnitus', 'sifflement oreille', 'sifflements oreille',
+    ],
+  },
+
+  // ─── Sommeil / Psychisme ─────────────────────────────────────────────────────
+  {
+    id: 'insomnie',
+    label: 'Insomnie / Troubles du sommeil',
+    categorie: 'pathologie',
+    patterns: [
+      'insomnie', 'insomnies', 'trouble du sommeil', 'troubles du sommeil',
+      'difficulte a dormir', 'difficultes a dormir',
+      'difficulte d endormissement', 'endormissement difficile',
+      'sommeil perturbe', 'sommeil de mauvaise qualite',
+      'reveil nocturne', 'reveils nocturnes', 'reveil precoce',
+    ],
+  },
+  {
+    id: 'anxiete',
+    label: 'Anxiété / Stress',
+    categorie: 'pathologie',
+    patterns: [
+      'anxiete', 'stress', 'angoisse', 'angoisses',
+      'nervosité', 'nervosité excessive',
+      'agitation', 'irritabilite',
+      'burn out', 'burnout', 'epuisement professionnel',
+    ],
+  },
+  {
+    id: 'depression',
+    label: 'Dépression / Mélancolie',
+    categorie: 'pathologie',
+    patterns: [
+      'depression', 'depressions', 'deprime', 'abattement',
+      'melancolie', 'tristesse persistante', 'humeur sombre',
+    ],
+  },
+
+  // ─── Digestif ────────────────────────────────────────────────────────────────
+  {
+    id: 'diarrhees',
+    label: 'Diarrhées / Transit accéléré',
+    categorie: 'pathologie',
+    patterns: [
+      'diarrhee', 'diarrhees', 'selles molles', 'selles liquides',
+      'transit accelere', 'colon irritable', 'intestin irritable',
+      'syndrome intestin irritable', 'sii', 'colite',
+    ],
+  },
+  {
+    id: 'constipation',
+    label: 'Constipation',
+    categorie: 'pathologie',
+    patterns: [
+      'constipation', 'constipations', 'selles dures',
+      'transit lent', 'difficulte a aller a la selle',
+    ],
+  },
+  {
+    id: 'ballonnements',
+    label: 'Ballonnements / Distension abdominale',
+    categorie: 'pathologie',
+    patterns: [
+      'ballonnement', 'ballonnements', 'distension abdominale',
+      'gaz intestinaux', 'flatulences', 'meteorisme',
+      'ventre gonflé', 'ventre gonfle', 'abdomen distendu',
+    ],
+  },
+  {
+    id: 'nausees',
+    label: 'Nausées / Vomissements',
+    categorie: 'pathologie',
+    patterns: [
+      'nausee', 'nausees', 'vomissement', 'vomissements',
+      'sensation de nausee', 'envie de vomir',
+    ],
+  },
+  {
+    id: 'reflux',
+    label: 'Reflux / RGO / Brûlures d\'estomac',
+    categorie: 'pathologie',
+    patterns: [
+      'reflux', 'rgo', 'pyrosis', 'brulure estomac', 'brulures estomac',
+      'remontees acides', 'acidite gastrique', 'gastrite',
+    ],
+  },
+
+  // ─── Cardiovasculaire ────────────────────────────────────────────────────────
+  {
+    id: 'palpitations',
+    label: 'Palpitations / Arythmie',
+    categorie: 'pathologie',
+    patterns: [
+      'palpitation', 'palpitations', 'tachycardie',
+      'arythmie', 'extrasystole', 'extrasystoles',
+      'coeur qui s emballe', 'coeur rapide',
+    ],
+  },
+  {
+    id: 'hypertension',
+    label: 'Hypertension artérielle (HTA)',
+    categorie: 'pathologie',
+    patterns: [
+      'hypertension', 'hta', 'tension elevee', 'tension arterielle elevee',
+      'pression arterielle haute', 'tension trop haute',
+    ],
+  },
+
+  // ─── Gynécologie ─────────────────────────────────────────────────────────────
+  {
+    id: 'dysmenorrhee',
+    label: 'Dysménorrhée / Règles douloureuses',
+    categorie: 'pathologie',
+    patterns: [
+      'dysmenorrhee', 'regles douloureuses', 'douleurs menstruelles',
+      'crampes menstruelles', 'douleurs regles', 'douleur regles',
+      'douleur pendant les regles', 'algodysmenorrhee',
+    ],
+  },
+  {
+    id: 'irregularite_menstruelle',
+    label: 'Irrégularité menstruelle / Aménorrhée',
+    categorie: 'pathologie',
+    patterns: [
+      'amenorrhee', 'absence de regles', 'regles absentes',
+      'irregularite menstruelle', 'regles irregulieres', 'cycle irregulier',
+      'oligomenorrhee', 'spanioménorrhée', 'cycles trop longs',
+    ],
+  },
+  {
+    id: 'spm',
+    label: 'Syndrome prémenstruel (SPM)',
+    categorie: 'pathologie',
+    patterns: [
+      'spm', 'syndrome premenstruel', 'premenstruel',
+      'syndrome pre menstruel', 'tension premenstruelle',
+    ],
+  },
+
+  // ─── Respiratoire ────────────────────────────────────────────────────────────
+  {
+    id: 'toux',
+    label: 'Toux / Toux chronique',
+    categorie: 'pathologie',
+    patterns: [
+      'toux', 'toux chronique', 'toux seche', 'toux grasse',
+      'toux persistante', 'toux irritative',
+    ],
+  },
+  {
+    id: 'asthme',
+    label: 'Asthme / Dyspnée',
+    categorie: 'pathologie',
+    patterns: [
+      'asthme', 'dyspnee', 'essoufflement', 'difficulte respiratoire',
+      'difficultes respiratoires', 'oppression thoracique',
+      'souffle court', 'gene respiratoire',
+    ],
+  },
+  {
+    id: 'sinusite',
+    label: 'Sinusite / Rhinite / Rhume',
+    categorie: 'pathologie',
+    patterns: [
+      'sinusite', 'sinusites', 'rhinite', 'rhinites',
+      'congestion nasale', 'nez bouche', 'rhume chronique',
+      'rhino sinusite', 'ecoulement nasal', 'mouchage frequent',
+    ],
+  },
+
+  // ─── Uro-génital ─────────────────────────────────────────────────────────────
+  {
+    id: 'pollakiurie',
+    label: 'Pollakiurie / Mictions fréquentes',
+    categorie: 'pathologie',
+    patterns: [
+      'pollakiurie', 'mictions frequentes', 'envie frequente d uriner',
+      'envie d uriner souvent', 'incontinence urinaire', 'fuites urinaires',
+      'besoins frequents', 'urgences mictionnelles',
+    ],
+  },
+  {
+    id: 'nycturie',
+    label: 'Nycturie / Réveils nocturnes pour uriner',
+    categorie: 'pathologie',
+    patterns: [
+      'nycturie', 'nycturiés', 'se lever la nuit pour uriner',
+      'lever la nuit', 'mictions nocturnes', 'reveils pour uriner',
+      'envie d uriner la nuit',
+    ],
+  },
+
+  // ─── Général ─────────────────────────────────────────────────────────────────
+  {
+    id: 'fatigue',
+    label: 'Fatigue / Asthénie',
+    categorie: 'pathologie',
+    patterns: [
+      'fatigue', 'fatigues', 'asthenie', 'epuisement',
+      'manque d energie', 'manque d energies', 'fatigue chronique',
+      'fatigue generale', 'grande fatigue', 'tres fatigue',
+    ],
+  },
+
+  // ─── Peau ────────────────────────────────────────────────────────────────────
+  {
+    id: 'eczema',
+    label: 'Eczéma / Prurit / Dermatite',
+    categorie: 'pathologie',
+    patterns: [
+      'eczema', 'dermatite', 'prurit', 'demangeaison', 'demangeaisons',
+      'psoriasis', 'urticaire', 'eruption cutanee',
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // API DE NORMALISATION
 // ═══════════════════════════════════════════════════════════════════════════════
 
-/** Table complète : tous les concepts (familles + syndromes + organes + stratégies) */
+/** Table complète : tous les concepts (familles + syndromes + organes + stratégies + pathologies) */
 const TOUS_CONCEPTS: ConceptIeatc[] = [
   ...FAMILLES_DIAG,
   ...SYNDROMES_IEATC,
   ...ORGANES_LOCA,
   ...STRATEGIES_IEATC,
+  ...PATHOLOGIES_IEATC,
 ];
 
 /**
@@ -1194,6 +1527,7 @@ export function extraireConceptsIeatc(texte: string): {
   syndromes: string[];
   organes: string[];
   strategies: string[];
+  pathologies: string[];
 } {
   const n = normaliserTexteIeatc(texte);
 
@@ -1201,6 +1535,7 @@ export function extraireConceptsIeatc(texte: string): {
   const syndromes: string[] = [];
   const organes: string[] = [];
   const strategies: string[] = [];
+  const pathologies: string[] = [];
 
   for (const concept of TOUS_CONCEPTS) {
     if (!concept.patterns.some((p) => matchPattern(n, p))) continue;
@@ -1220,10 +1555,13 @@ export function extraireConceptsIeatc(texte: string): {
       case 'strategie':
         strategies.push(concept.id);
         break;
+      case 'pathologie':
+        pathologies.push(concept.id);
+        break;
     }
   }
 
-  return { familles, syndromes, organes, strategies };
+  return { familles, syndromes, organes, strategies, pathologies };
 }
 
 /**
@@ -1235,11 +1573,13 @@ export function normaliserTextes(textes: string[]): {
   syndromes: string[];
   organes: string[];
   strategies: string[];
+  pathologies: string[];
 } {
   const f = new Set<string>();
   const s = new Set<string>();
   const o = new Set<string>();
   const st = new Set<string>();
+  const pa = new Set<string>();
 
   for (const t of textes) {
     const r = extraireConceptsIeatc(t);
@@ -1247,6 +1587,7 @@ export function normaliserTextes(textes: string[]): {
     r.syndromes.forEach((x) => s.add(x));
     r.organes.forEach((x) => o.add(x));
     r.strategies.forEach((x) => st.add(x));
+    r.pathologies.forEach((x) => pa.add(x));
   }
 
   return {
@@ -1254,6 +1595,7 @@ export function normaliserTextes(textes: string[]): {
     syndromes: [...s],
     organes: [...o],
     strategies: [...st],
+    pathologies: [...pa],
   };
 }
 

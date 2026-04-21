@@ -17,7 +17,6 @@ import {
   GraduationCap,
   ChevronDown,
   Shield,
-  Library,
 } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
@@ -26,7 +25,6 @@ const NAV_LINKS = [
   { href: '/', label: 'Accueil', icon: Home },
   { href: '/cas', label: 'Cas cliniques', icon: BookOpen },
   { href: '/apprentissage', label: 'Apprentissage', icon: GraduationCap },
-  { href: '/lexique', label: 'Lexique', icon: Library },
   { href: '/soumettre', label: 'Soumettre', icon: FilePlus },
   { href: '/statistiques', label: 'Stats', icon: BarChart3 },
 ];
@@ -119,7 +117,7 @@ export function Navbar() {
                     <button
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       className={cn(
-                        'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white/90 hover:bg-slate-700 hover:text-white',
+                        'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white hover:bg-slate-700',
                         dropdownOpen && 'bg-slate-700 text-white',
                       )}
                     >
@@ -168,7 +166,7 @@ export function Navbar() {
                 <div className="flex items-center gap-2">
                   <Link
                     href="/connexion"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-white/90 hover:bg-slate-700 hover:text-white transition-colors"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-white border border-slate-500 hover:bg-slate-700 hover:border-slate-400 transition-colors"
                   >
                     <LogIn size={15} />
                     Connexion
@@ -255,7 +253,7 @@ export function Navbar() {
                   <Link
                     href="/connexion"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm text-white hover:bg-slate-700"
+                    className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm text-white border border-slate-500 hover:bg-slate-700 active:bg-slate-700 transition-colors"
                   >
                     <LogIn size={16} /> Connexion
                   </Link>

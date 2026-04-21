@@ -96,9 +96,20 @@ export async function getAllParticipations(userId: string): Promise<UserParticip
     .from('user_participations')
     .select('*')
     .eq('user_id', userId)
+    .filter('extra_data->isExercice', 'neq', 'true')
     .order('created_at', { ascending: false });
   if (error || !data) return [];
   return data.map(fromRow);
+}
+
+/** Si la valeur dépasse 50, marque le cas comme qualifié pour l'apprentissage. */
+async function maybeQualifieCase(caseId: string, valeur?: number): Promise<void> {
+  if ((valeur ?? 0) >= 50) {
+    await supabase
+      .from('clinical_cases')
+      .update({ qualifie_apprentissage: true })
+      .eq('id', caseId);
+  }
 }
 
 export async function upsertParticipation(
@@ -116,6 +127,7 @@ export async function upsertParticipation(
       .select()
       .single();
     if (error || !updated) throw new Error(error?.message ?? 'Erreur mise à jour');
+    await maybeQualifieCase(data.caseId, data.valeur);
     return fromRow(updated);
   }
 
@@ -131,6 +143,7 @@ export async function upsertParticipation(
     .select()
     .single();
   if (error || !inserted) throw new Error(error?.message ?? 'Erreur insertion');
+  await maybeQualifieCase(data.caseId, data.valeur);
   return fromRow(inserted);
 }
 
@@ -177,6 +190,9 @@ export async function updateParticipationById(
     .select()
     .single();
   if (error || !updated) return undefined;
+  if (patch.valeur !== undefined) {
+    await maybeQualifieCase(existing.case_id, patch.valeur);
+  }
   return fromRow(updated);
 }
 
@@ -216,10 +232,10 @@ export function isCasApprentissage(
   cas: ClinicalCase,
   participations: UserParticipation[],
 ): boolean {
-  if (cas.exemplaire) return true;
+  if (cas.exemplaire || cas.qualifieApprentissage) return true;
   const hasExpertVariante =
     cas.analyses.some(
-      (a) => a.type !== 'officielle' && (a.role === 'expert' || a.auteurStatut === 'expert'),
+      (a) => a.role === 'expert' || a.auteurStatut === 'expert',
     ) ||
     participations.some(
       (p) =>

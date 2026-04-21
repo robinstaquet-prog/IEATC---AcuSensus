@@ -7,7 +7,9 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
-import { Shield, Check, Loader2, AlertCircle, ExternalLink } from 'lucide-react';
+import { Shield, Check, Loader2, AlertCircle, ExternalLink, Eye, EyeOff, BookOpen } from 'lucide-react';
+import { CLINICAL_CASES } from '@/data/cases';
+import { getHiddenCorpusCaseIds, setCorpusCaseHidden } from '@/lib/corpus-overrides';
 
 const STATUTS_OPTIONS = [
   { value: 'premiere_annee', label: '1ère année' },
@@ -43,6 +45,7 @@ export default function AdminPage() {
   const [users, setUsers] = useState<UserRow[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
+  const [hiddenIds, setHiddenIds] = useState<Set<string>>(new Set());
 
   const fetchUsers = useCallback(async () => {
     setLoadingUsers(true);
@@ -83,8 +86,20 @@ export default function AdminPage() {
     }
     if (user?.is_admin) {
       fetchUsers();
+      setHiddenIds(getHiddenCorpusCaseIds());
     }
   }, [user, isLoading, router, fetchUsers]);
+
+  const toggleCasVisibility = (id: string) => {
+    const nowHidden = !hiddenIds.has(id);
+    setCorpusCaseHidden(id, nowHidden);
+    setHiddenIds((prev) => {
+      const next = new Set(prev);
+      if (nowHidden) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  };
 
   const updateUserField = (id: string, field: string, value: unknown) => {
     setUsers((prev) =>
@@ -304,6 +319,61 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+      {/* ─── Gestion du corpus ─────────────────────────────────────────────── */}
+      <div className="mt-10">
+        <div className="flex items-center gap-3 mb-4">
+          <BookOpen size={18} className="text-slate-600" />
+          <div>
+            <h2 className="text-lg font-bold text-slate-900">Gestion du corpus</h2>
+            <p className="text-xs text-slate-400">
+              Les cas masqués n&apos;apparaissent plus dans la liste publique. Les stats ne sont pas affectées.
+            </p>
+          </div>
+        </div>
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50 text-left">
+                <th className="px-4 py-3 font-semibold text-slate-600">ID</th>
+                <th className="px-4 py-3 font-semibold text-slate-600">Titre</th>
+                <th className="px-4 py-3 font-semibold text-slate-600 whitespace-nowrap">Complexité</th>
+                <th className="px-4 py-3 font-semibold text-slate-600 whitespace-nowrap">Analyses</th>
+                <th className="px-4 py-3 font-semibold text-slate-600">Visibilité</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {CLINICAL_CASES.map((cas) => {
+                const hidden = hiddenIds.has(cas.id);
+                return (
+                  <tr key={cas.id} className={hidden ? 'bg-slate-50/80 opacity-60' : 'hover:bg-slate-50/40'}>
+                    <td className="px-4 py-3 font-mono text-xs text-slate-400 whitespace-nowrap">{cas.id}</td>
+                    <td className="px-4 py-3">
+                      <div className="font-medium text-slate-800 leading-snug">{cas.titre}</div>
+                      <div className="text-xs text-slate-400 mt-0.5">{cas.content.motif.slice(0, 70)}{cas.content.motif.length > 70 ? '…' : ''}</div>
+                    </td>
+                    <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">Niveau {cas.niveauComplexite}</td>
+                    <td className="px-4 py-3 text-xs text-slate-500">{cas.analyses.length}</td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => toggleCasVisibility(cas.id)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                          hidden
+                            ? 'bg-slate-100 text-slate-500 hover:bg-emerald-50 hover:text-emerald-700'
+                            : 'bg-red-50 text-red-600 hover:bg-red-100'
+                        }`}
+                      >
+                        {hidden ? <Eye size={12} /> : <EyeOff size={12} />}
+                        {hidden ? 'Restaurer' : 'Masquer'}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

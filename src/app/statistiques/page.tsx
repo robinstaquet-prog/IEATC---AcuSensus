@@ -93,6 +93,7 @@ export default function StatistiquesPage() {
   const maxSyndromeCount = stats.topSyndromes[0]?.count ?? 1;
   const maxOrganeCount = stats.topOrganes[0]?.count ?? 1;
   const maxStrategieCount = stats.topStrategies[0]?.count ?? 1;
+  const maxPathologieCount = stats.topPathologies[0]?.count ?? 1;
   const totalSexe = Object.values(stats.repartitionSexe).reduce((a, b) => a + b, 0);
 
   return (
@@ -279,6 +280,22 @@ export default function StatistiquesPage() {
               <StatBar key={id} label={label ?? id} value={count} max={maxStrategieCount} color="bg-amber-500" />
             ))}
             {stats.topStrategies.length === 0 && (
+              <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Motifs de consultation — couche 5 */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:col-span-2">
+          <h2 className="font-bold text-slate-900 mb-1">Motifs de consultation</h2>
+          <p className="text-sm text-slate-500 mb-5">
+            Pathologies et plaintes cliniques normalisées — extraites des motifs de consultation des cas publiés
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4">
+            {stats.topPathologies.map(({ id, count, label }) => (
+              <StatBar key={id} label={label ?? id} value={count} max={maxPathologieCount} color="bg-rose-500" />
+            ))}
+            {stats.topPathologies.length === 0 && (
               <p className="text-sm text-slate-400 italic">Aucune donnée disponible.</p>
             )}
           </div>

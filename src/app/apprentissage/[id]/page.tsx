@@ -49,11 +49,12 @@ export default function ApprentissageExercicePage() {
   // Charger l'exercice existant si present
   useEffect(() => {
     if (user && cas) {
-      const existing = getExercice(user.id, cas.id);
-      if (existing) {
-        setExercice(existing);
-        setEtape('comparaison');
-      }
+      getExercice(user.id, cas.id).then((existing) => {
+        if (existing) {
+          setExercice(existing);
+          setEtape('comparaison');
+        }
+      });
     }
   }, [user, cas]);
 
@@ -84,9 +85,9 @@ export default function ApprentissageExercicePage() {
 
   // Callback apres soumission de l'exercice
   const handleSaveExercice = useCallback(
-    (data: Partial<UserParticipation>) => {
+    async (data: Partial<UserParticipation>) => {
       if (!user || !cas) return;
-      const saved = saveExercice(user.id, { ...data, caseId: cas.id });
+      const saved = await saveExercice(user.id, { ...data, caseId: cas.id });
       setExercice(saved);
       setEtape('comparaison');
       setShowForm(false);

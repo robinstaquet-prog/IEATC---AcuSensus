@@ -9,6 +9,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { getCasesPublies } from '@/data';
+import { getHiddenCorpusCaseIds } from '@/lib/corpus-overrides';
 import { getUserCases } from '@/lib/user-cases-store';
 import { GRILLES } from '@/data/grilles';
 import { Input } from '@/components/ui/input';
@@ -107,9 +108,10 @@ type ModeFiltre = 'tous' | 'apprentissage';
 
 interface Filters {
   search: string;
-  mode: ModeFiltre;         // Filtre 1 : Tous / Apprentissage
-  niveau: string;           // Filtre 2 : Niveau de complexité
+  mode: ModeFiltre;           // Filtre 1 : Tous / Apprentissage
+  niveau: string;             // Filtre 2 : Niveau de complexité
   grille: ReadingGridId | ''; // Filtre 3 : Grille (visible seulement si mode = 'apprentissage')
+  maxAnalyses: string;        // Filtre 4 : Peu analysés (seuil)
 }
 
 const INITIAL_FILTERS: Filters = {
@@ -117,6 +119,7 @@ const INITIAL_FILTERS: Filters = {
   mode: 'tous',
   niveau: '',
   grille: '',
+  maxAnalyses: '',
 };
 
 function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
@@ -141,10 +144,11 @@ function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
       if (!haystack.includes(q)) return false;
     }
 
-    // Filtre 1 : Apprentissage = cas marqués exemplaire ou avec analyse expert
+    // Filtre 1 : Apprentissage = exemplaire, qualifié communautaire, ou analyse expert
     if (f.mode === 'apprentissage') {
       const isApprentissage =
         c.exemplaire ||
+        c.qualifieApprentissage ||
         c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
       if (!isApprentissage) return false;
     }
@@ -172,6 +176,12 @@ function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
       if (!hasGrilleQualifiee) return false;
     }
 
+    // Filtre 4 : Peu analysés — cas avec moins de N analyses
+    if (f.maxAnalyses) {
+      const seuil = parseInt(f.maxAnalyses, 10);
+      if (c.analyses.length >= seuil) return false;
+    }
+
     return true;
   });
 }
@@ -180,25 +190,32 @@ function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
 
 export default function CasListPage() {
   const [filters, setFilters] = useState<Filters>(INITIAL_FILTERS);
-  const corpus = getCasesPublies();
+  const [hiddenIds, setHiddenIds] = useState<Set<string>>(new Set());
+  const allCorpus = getCasesPublies();
   const [userCases, setUserCases] = useState<ClinicalCase[]>([]);
 
   useEffect(() => {
+    setHiddenIds(getHiddenCorpusCaseIds());
     getUserCases().then((cas) => {
       const publies = cas.filter((c) => c.statut === 'publie');
-      const nouveaux = publies.filter((c) => !corpus.some((cc) => cc.id === c.id));
+      const nouveaux = publies.filter((c) => !allCorpus.some((cc) => cc.id === c.id));
       setUserCases(nouveaux);
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const cases = useMemo(() => [...corpus, ...userCases], [userCases]); // eslint-disable-line react-hooks/exhaustive-deps
+  const corpus = useMemo(
+    () => allCorpus.filter((c) => !hiddenIds.has(c.id)),
+    [hiddenIds] // eslint-disable-line react-hooks/exhaustive-deps
+  );
+  const cases = useMemo(() => [...corpus, ...userCases], [corpus, userCases]);
   const filtered = useMemo(() => filterCas(cases, filters), [cases, filters]);
 
   const hasActive =
     filters.search ||
     filters.mode !== 'tous' ||
     filters.niveau ||
-    filters.grille;
+    filters.grille ||
+    filters.maxAnalyses;
 
   const selectClass =
     'h-10 px-3 text-sm rounded-lg border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer';
@@ -282,6 +299,19 @@ export default function CasListPage() {
               ))}
             </select>
           )}
+
+          {/* Filtre 4 : Peu analysés */}
+          <select
+            value={filters.maxAnalyses}
+            onChange={(e) => setFilters({ ...filters, maxAnalyses: e.target.value })}
+            className={selectClass}
+          >
+            <option value="">Toutes les analyses</option>
+            <option value="2">Moins de 2 analyses</option>
+            <option value="3">Moins de 3 analyses</option>
+            <option value="5">Moins de 5 analyses</option>
+            <option value="10">Moins de 10 analyses</option>
+          </select>
 
           {hasActive && (
             <button
