@@ -323,8 +323,9 @@ export default function SoumettreCasPage() {
   const [showPalpAbdo, setShowPalpAbdo] = useState(false);
   const [palpAbdo, setPalpAbdo] = useState<PalpationAbdoEntry[]>([]);
 
-  // Erreur
+  // Erreur + loading
   const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   // Ajouter une rubrique libre a l'interrogatoire
   const addRubriqueLibre = () => {
@@ -443,6 +444,7 @@ export default function SoumettreCasPage() {
   const handleSubmit = useCallback(
     async (publicationMode: PublicationMode) => {
       setError(null);
+      setSubmitting(true);
 
       if (!user) {
         setError('Vous devez etre connecte pour soumettre un cas.');
@@ -522,7 +524,9 @@ export default function SoumettreCasPage() {
 
       const { error: saveError } = await addUserCase(newCas);
       if (saveError) {
+        console.error('[soumettre] Erreur Supabase :', saveError);
         setError('Erreur lors de la sauvegarde : ' + saveError);
+        setSubmitting(false);
         return;
       }
       setSaved(true);
@@ -1003,21 +1007,29 @@ export default function SoumettreCasPage() {
           <Button
             onClick={() => handleSubmit('public')}
             variant="primary"
+            disabled={submitting || saved}
             className={cn('flex-1 gap-2', saved && 'bg-emerald-600')}
           >
             {saved ? (
               <>
-                <CheckCircle2 size={16} /> Publie !
+                <CheckCircle2 size={16} /> Publié !
               </>
+            ) : submitting ? (
+              'Enregistrement...'
             ) : (
               'Publier'
             )}
           </Button>
-          <Button onClick={() => handleSubmit('anonyme')} variant="outline" className="gap-2">
+          <Button
+            onClick={() => handleSubmit('anonyme')}
+            variant="outline"
+            disabled={submitting || saved}
+            className="gap-2"
+          >
             Publier anonyme
           </Button>
           <Link href="/cas">
-            <Button variant="ghost">Annuler</Button>
+            <Button variant="ghost" disabled={submitting}>Annuler</Button>
           </Link>
         </div>
       </div>
