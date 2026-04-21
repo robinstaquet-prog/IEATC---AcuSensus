@@ -231,6 +231,45 @@ function QualitesSelector({
   );
 }
 
+// ─── Expansion automatique des références de motifs ─────────────────────────
+// Intercepte la touche espace : si le texte avant le curseur se termine
+// par "N)", remplace "N)" par "MotifN : " et empêche l'insertion de l'espace.
+
+function handleMotifKeyDown(
+  e: React.KeyboardEvent<HTMLTextAreaElement>,
+  motifsList: string[],
+  currentValue: string,
+  setValue: (v: string) => void,
+) {
+  if (e.key !== ' ') return;
+
+  const textarea = e.currentTarget;
+  const cursorPos = textarea.selectionStart ?? currentValue.length;
+  const textBefore = currentValue.slice(0, cursorPos);
+
+  // Vérifie si le texte avant le curseur se termine par "N)"
+  const match = textBefore.match(/(\d+)\)$/);
+  if (!match) return;
+
+  const num = parseInt(match[1]) - 1;
+  if (num < 0 || num >= motifsList.length || !motifsList[num].trim()) return;
+
+  e.preventDefault();
+
+  const prefix = textBefore.slice(0, textBefore.length - match[0].length);
+  const suffix = currentValue.slice(cursorPos);
+  const replacement = motifsList[num].trim() + ' : ';
+  const newValue = prefix + replacement + suffix;
+  const newCursorPos = prefix.length + replacement.length;
+
+  setValue(newValue);
+
+  // Repositionne le curseur après le re-render React
+  requestAnimationFrame(() => {
+    textarea.setSelectionRange(newCursorPos, newCursorPos);
+  });
+}
+
 // ─── Page principale ────────────────────────────────────────────────────────
 
 export default function SoumettreCasPage() {
@@ -239,7 +278,7 @@ export default function SoumettreCasPage() {
 
   // Champs du formulaire
   const [titre, setTitre] = useState('');
-  const [motif, setMotif] = useState('');
+  const [motifs, setMotifs] = useState<string[]>(['']);
   const [observation, setObservation] = useState('');
   const [palpation, setPalpation] = useState('');
   const [langue, setLangue] = useState('');
@@ -413,7 +452,7 @@ export default function SoumettreCasPage() {
         setError('Le titre du cas est obligatoire.');
         return;
       }
-      if (!motif.trim()) {
+      if (motifs.every((m) => !m.trim())) {
         setError('Le motif de consultation est obligatoire.');
         return;
       }
@@ -463,7 +502,12 @@ export default function SoumettreCasPage() {
         tags: [],
         viewCount: 0,
         content: {
-          motif: motif.trim(),
+          motif: motifs.filter((m) => m.trim()).length === 1
+            ? motifs[0].trim()
+            : motifs
+                .map((m, i) => (m.trim() ? `${i + 1}) ${m.trim()}` : null))
+                .filter(Boolean)
+                .join('\n'),
           interrogatoire: allInterrogatoire,
           observation: observation.trim() || undefined,
           palpation: palpation.trim() || undefined,
@@ -487,7 +531,7 @@ export default function SoumettreCasPage() {
       }, 1500);
     },
     [
-      user, titre, motif, observation, palpation, interrogatoire,
+      user, titre, motifs, observation, palpation, interrogatoire,
       rubriquesLibres, buildLectures, poulsSynthese, router, p4Organes,
     ],
   );
@@ -552,13 +596,44 @@ export default function SoumettreCasPage() {
 
         {/* 2. Motif */}
         <Section title="Motif de consultation">
-          <textarea
-            value={motif}
-            onChange={(e) => setMotif(e.target.value)}
-            rows={3}
-            placeholder="Decrivez le motif de consultation principal..."
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
-          />
+          <div className="space-y-3">
+            {motifs.map((m, idx) => (
+              <div key={idx} className="space-y-1">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-semibold text-slate-600">
+                    Motif {idx + 1}
+                  </label>
+                  {motifs.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setMotifs(motifs.filter((_, i) => i !== idx))}
+                      className="text-slate-400 hover:text-red-500 p-1"
+                    >
+                      <X size={13} />
+                    </button>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  value={m}
+                  onChange={(e) => {
+                    const next = [...motifs];
+                    next[idx] = e.target.value;
+                    setMotifs(next);
+                  }}
+                  placeholder={idx === 0 ? 'Ex : Epicondylite' : 'Ex : Préménopause'}
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                />
+              </div>
+            ))}
+          </div>
+          <Button variant="outline" size="sm" onClick={() => setMotifs([...motifs, ''])}>
+            <Plus size={12} /> Ajouter un motif de consultation
+          </Button>
+          <p className="text-xs text-slate-400 mt-1">
+            Dans l&apos;interrogatoire, tapez <span className="font-mono bg-slate-100 px-1 rounded">1)</span> suivi
+            d&apos;un espace pour insérer automatiquement &laquo; Motif 1 : &raquo;.
+          </p>
         </Section>
 
         {/* 3. Interrogatoire — 6 rubriques IEATC */}
@@ -566,6 +641,25 @@ export default function SoumettreCasPage() {
           <p className="text-xs text-slate-500 mb-2">
             Remplissez les rubriques suggerees et/ou ajoutez des rubriques libres.
           </p>
+
+          {/* Légende des raccourcis motifs */}
+          {motifs.some((m) => m.trim()) && (
+            <div className="text-xs bg-teal-50 border border-teal-100 rounded-lg px-3 py-2 mb-2 space-y-0.5">
+              <p className="font-semibold text-teal-700">Raccourcis disponibles :</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-0.5">
+                {motifs.map((m, i) =>
+                  m.trim() ? (
+                    <span key={i} className="text-teal-600">
+                      <span className="font-mono bg-teal-100 px-1 rounded">{i + 1}){' '}</span>
+                      {' '}→ {m.trim()}
+                    </span>
+                  ) : null,
+                )}
+              </div>
+              <p className="text-teal-500 mt-0.5">Tapez le raccourci suivi d&apos;un espace pour l&apos;insérer.</p>
+            </div>
+          )}
+
           {/* Rubriques suggerees */}
           {interrogatoire.map((item, idx) => {
             const label = RUBRIQUES_INTERROGATOIRE_SUGGEREES.find((r) => r.cle === item.cle)?.label ?? item.cle;
@@ -579,6 +673,13 @@ export default function SoumettreCasPage() {
                     next[idx] = { ...item, valeur: e.target.value };
                     setInterrogatoire(next);
                   }}
+                  onKeyDown={(e) =>
+                    handleMotifKeyDown(e, motifs, item.valeur, (v) => {
+                      const next = [...interrogatoire];
+                      next[idx] = { ...item, valeur: v };
+                      setInterrogatoire(next);
+                    })
+                  }
                   rows={2}
                   placeholder={INTERROGATOIRE_PLACEHOLDERS[item.cle] ?? `${label}...`}
                   className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
@@ -608,6 +709,13 @@ export default function SoumettreCasPage() {
                   next[idx] = { ...item, valeur: e.target.value };
                   setRubriquesLibres(next);
                 }}
+                onKeyDown={(e) =>
+                  handleMotifKeyDown(e, motifs, item.valeur, (v) => {
+                    const next = [...rubriquesLibres];
+                    next[idx] = { ...item, valeur: v };
+                    setRubriquesLibres(next);
+                  })
+                }
                 rows={2}
                 placeholder="Contenu..."
                 className="flex-1 px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
