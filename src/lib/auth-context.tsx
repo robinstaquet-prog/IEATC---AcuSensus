@@ -213,8 +213,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (signUpError) {
-      if (signUpError.message?.includes('already registered')) {
+      if (signUpError.message?.includes('already registered') || signUpError.message?.includes('already been registered')) {
         return { error: 'Un compte existe déjà avec ce prénom et ce nom.' };
+      }
+      if (signUpError.message?.includes('Database error') || signUpError.message?.includes('database error')) {
+        return { error: 'Erreur de base de données. Le trigger de création de profil a échoué — contactez l\'administrateur.' };
       }
       return { error: signUpError.message ?? 'Erreur lors de la création du compte.' };
     }

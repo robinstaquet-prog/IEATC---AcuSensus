@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   BookOpen,
@@ -35,6 +35,7 @@ export function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, signOut, isLoading } = useAuth();
+  const router = useRouter();
 
   // Ferme le dropdown si clic en dehors
   useEffect(() => {
@@ -51,6 +52,8 @@ export function Navbar() {
     setDropdownOpen(false);
     setMobileOpen(false);
     await signOut();
+    router.push('/connexion');
+    router.refresh();
   };
 
   const displayName = user
