@@ -201,42 +201,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: authData, error: signUpError } = await supabase.auth.signUp({
       email,
       password: data.password,
-      options: {
-        data: {
-          prenom: data.prenom,
-          nom: data.nom,
-          statut_ieatc: data.statut_ieatc,
-          points_vote: 10,
-          is_admin: false,
-        },
-      },
     });
 
     if (signUpError) {
       if (signUpError.message?.includes('already registered') || signUpError.message?.includes('already been registered')) {
         return { error: 'Un compte existe déjà avec ce prénom et ce nom.' };
       }
-      if (signUpError.message?.includes('Database error') || signUpError.message?.includes('database error')) {
-        return { error: 'Erreur de base de données. Le trigger de création de profil a échoué — contactez l\'administrateur.' };
-      }
       return { error: signUpError.message ?? 'Erreur lors de la création du compte.' };
     }
 
-    // Met à jour les champs supplémentaires du profil
-    if (authData.user) {
-      const updates: Record<string, unknown> = {};
-      if (data.annee_promotion !== undefined) updates.annee_promotion = data.annee_promotion;
-      if (data.annee_diplome !== undefined) updates.annee_diplome = data.annee_diplome;
-      if (data.lieu_pratique) updates.lieu_pratique = data.lieu_pratique;
-      if (data.mail_public) updates.mail_public = data.mail_public;
-      if (data.telephone) updates.telephone = data.telephone;
+    if (!authData.user) {
+      return { error: 'Erreur lors de la création du compte.' };
+    }
 
-      if (Object.keys(updates).length > 0) {
-        await supabase
-          .from('users')
-          .update(updates)
-          .eq('id', authData.user.id);
-      }
+    // Création du profil directement côté client (sans trigger)
+    const pseudo = `${data.prenom} ${data.nom}`.trim();
+    const profilePayload: Record<string, unknown> = {
+      id: authData.user.id,
+      email,
+      pseudo,
+      prenom: data.prenom,
+      nom: data.nom,
+      statut_ieatc: data.statut_ieatc,
+      points_vote: 10,
+      is_admin: false,
+    };
+    if (data.annee_promotion !== undefined) profilePayload.annee_promotion = data.annee_promotion;
+    if (data.annee_diplome !== undefined) profilePayload.annee_diplome = data.annee_diplome;
+    if (data.lieu_pratique) profilePayload.lieu_pratique = data.lieu_pratique;
+    if (data.mail_public) profilePayload.mail_public = data.mail_public;
+    if (data.telephone) profilePayload.telephone = data.telephone;
+
+    const { error: profileError } = await supabase
+      .from('users')
+      .upsert(profilePayload);
+
+    if (profileError) {
+      // L'auth est créée mais le profil a échoué — on signOut pour nettoyer
+      await supabase.auth.signOut();
+      return { error: `Erreur création profil : ${profileError.message}` };
     }
 
     return { error: null };
