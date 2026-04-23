@@ -12,7 +12,7 @@ import { getAllParticipations } from '@/lib/participation-store';
 import { getUserCasesByAuteur, deleteUserCase } from '@/lib/user-cases-store';
 import { getAllExercices } from '@/lib/exercice-store';
 import { getNotifications, markAllNotifsRead, type Notification } from '@/lib/notification-store';
-import { getReceivedMessages, markAllMessagesRead, type Message } from '@/lib/message-store';
+import { getReceivedMessages, markAllMessagesRead, sendMessage, type Message } from '@/lib/message-store';
 import { getCaseById } from '@/data';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import { LABEL_STATUT_IEATC } from '@/lib/constants';
@@ -37,6 +37,7 @@ import {
   Bell,
   MessageSquare,
   ThumbsUp,
+  Send,
 } from 'lucide-react';
 
 function PublicParticipationRow({ p }: { p: UserParticipation }) {
@@ -86,6 +87,11 @@ export default function ProfilPage() {
   const [exercices, setExercices] = useState<UserParticipation[]>([]);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
+  // Réponses inline aux messages
+  const [replyOpenId, setReplyOpenId] = useState<string | null>(null);
+  const [replyText, setReplyText] = useState('');
+  const [replySending, setReplySending] = useState(false);
+  const [replySentId, setReplySentId] = useState<string | null>(null);
   type OngletProfil = 'participations' | 'cas' | 'apprentissage' | 'notifications';
   const [onglet, setOnglet] = useState<OngletProfil>('participations');
 
@@ -453,34 +459,101 @@ export default function ProfilPage() {
                   <div className="space-y-2">
                     {messages.map((msg) => (
                       <div key={msg.id} className={cn(
-                        'rounded-xl border p-4',
+                        'rounded-xl border',
                         !msg.read ? 'border-teal-200 bg-teal-50/40' : 'border-slate-100',
                       )}>
-                        <div className="flex items-start gap-3">
-                          <div className="w-7 h-7 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold text-xs shrink-0">
-                            {msg.senderPrenom?.charAt(0).toUpperCase() ?? '?'}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <Link
-                                href={`/membres/${msg.senderId}`}
-                                className="text-sm font-semibold text-slate-900 hover:text-teal-700 transition-colors"
-                              >
-                                {msg.senderPrenom} {msg.senderNom}
-                              </Link>
-                              {!msg.read && (
-                                <span className="w-2 h-2 rounded-full bg-teal-500 shrink-0" />
-                              )}
+                        <div className="p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="w-7 h-7 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                              {msg.senderPrenom?.charAt(0).toUpperCase() ?? '?'}
                             </div>
-                            <p className="text-sm text-slate-700 whitespace-pre-wrap">{msg.content}</p>
-                            <p className="text-xs text-slate-400 mt-1.5">
-                              {new Date(msg.createdAt).toLocaleDateString('fr-FR', {
-                                day: 'numeric', month: 'long', year: 'numeric',
-                                hour: '2-digit', minute: '2-digit',
-                              })}
-                            </p>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Link
+                                  href={`/membres/${msg.senderId}`}
+                                  className="text-sm font-semibold text-slate-900 hover:text-teal-700 transition-colors"
+                                >
+                                  {msg.senderPrenom} {msg.senderNom}
+                                </Link>
+                                {!msg.read && (
+                                  <span className="w-2 h-2 rounded-full bg-teal-500 shrink-0" />
+                                )}
+                              </div>
+                              <p className="text-sm text-slate-700 whitespace-pre-wrap">{msg.content}</p>
+                              <div className="flex items-center justify-between mt-2">
+                                <p className="text-xs text-slate-400">
+                                  {new Date(msg.createdAt).toLocaleDateString('fr-FR', {
+                                    day: 'numeric', month: 'long', year: 'numeric',
+                                    hour: '2-digit', minute: '2-digit',
+                                  })}
+                                </p>
+                                <button
+                                  onClick={() => {
+                                    setReplyOpenId(replyOpenId === msg.id ? null : msg.id);
+                                    setReplyText('');
+                                    setReplySentId(null);
+                                  }}
+                                  className="flex items-center gap-1.5 text-xs text-teal-600 hover:text-teal-700 font-medium transition-colors"
+                                >
+                                  <Send size={11} />
+                                  Répondre
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
+
+                        {/* Formulaire de réponse inline */}
+                        {replyOpenId === msg.id && (
+                          <div className="border-t border-slate-100 px-4 py-3 bg-slate-50/60">
+                            {replySentId === msg.id ? (
+                              <p className="text-xs text-teal-600 font-medium py-1">Réponse envoyée ✓</p>
+                            ) : (
+                              <>
+                                <textarea
+                                  value={replyText}
+                                  onChange={(e) => setReplyText(e.target.value)}
+                                  placeholder={`Répondre à ${msg.senderPrenom}…`}
+                                  rows={3}
+                                  className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none bg-white"
+                                />
+                                <div className="flex justify-end gap-2 mt-2">
+                                  <button
+                                    onClick={() => { setReplyOpenId(null); setReplyText(''); }}
+                                    className="text-xs text-slate-400 hover:text-slate-600 px-3 py-1.5 transition-colors"
+                                  >
+                                    Annuler
+                                  </button>
+                                  <button
+                                    onClick={async () => {
+                                      if (!user || !replyText.trim()) return;
+                                      setReplySending(true);
+                                      await sendMessage(
+                                        user.id,
+                                        user.prenom ?? '',
+                                        user.nom ?? '',
+                                        msg.senderId,
+                                        replyText.trim(),
+                                      );
+                                      setReplySending(false);
+                                      setReplySentId(msg.id);
+                                      setReplyText('');
+                                      setTimeout(() => {
+                                        setReplyOpenId(null);
+                                        setReplySentId(null);
+                                      }, 2000);
+                                    }}
+                                    disabled={replySending || !replyText.trim()}
+                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 text-white text-xs font-semibold hover:bg-teal-500 transition-colors disabled:opacity-60"
+                                  >
+                                    {replySending ? <Loader2 size={11} className="animate-spin" /> : <Send size={11} />}
+                                    Envoyer
+                                  </button>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
