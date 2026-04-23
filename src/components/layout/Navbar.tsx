@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   User,
+  Users,
   LogIn,
   LogOut,
   Coins,
@@ -17,14 +18,18 @@ import {
   GraduationCap,
   ChevronDown,
   Shield,
+  Bell,
 } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
+import { getUnreadNotifCount } from '@/lib/notification-store';
+import { supabase } from '@/lib/supabase';
 
 const NAV_LINKS = [
   { href: '/', label: 'Accueil', icon: Home },
   { href: '/cas', label: 'Cas cliniques', icon: BookOpen },
   { href: '/apprentissage', label: 'Apprentissage', icon: GraduationCap },
+  { href: '/membres', label: 'Membres', icon: Users },
   { href: '/soumettre', label: 'Soumettre', icon: FilePlus },
   { href: '/statistiques', label: 'Stats', icon: BarChart3 },
 ];
@@ -36,6 +41,39 @@ export function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, signOut, isLoading } = useAuth();
   const router = useRouter();
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  // Charge le compteur non-lu + écoute les nouvelles notifications en temps réel
+  useEffect(() => {
+    if (!user) { setUnreadCount(0); return; }
+    let cancelled = false;
+
+    void getUnreadNotifCount(user.id).then((count) => {
+      if (!cancelled) setUnreadCount(count);
+    });
+
+    // Écoute aussi les nouveaux messages non lus
+    const channel = supabase
+      .channel(`notif-badge-${user.id}`)
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'notifications',
+        filter: `user_id=eq.${user.id}`,
+      }, () => { setUnreadCount((c) => c + 1); })
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'messages',
+        filter: `recipient_id=eq.${user.id}`,
+      }, () => { setUnreadCount((c) => c + 1); })
+      .subscribe();
+
+    return () => {
+      cancelled = true;
+      void supabase.removeChannel(channel);
+    };
+  }, [user]);
 
   // Ferme le dropdown si clic en dehors
   useEffect(() => {
@@ -124,7 +162,14 @@ export function Navbar() {
                         dropdownOpen && 'bg-slate-700 text-white',
                       )}
                     >
-                      <User size={15} />
+                      <div className="relative">
+                        <User size={15} />
+                        {unreadCount > 0 && (
+                          <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-3.5 h-3.5 rounded-full bg-red-500 text-white text-[8px] font-bold">
+                            {unreadCount > 9 ? '9+' : unreadCount}
+                          </span>
+                        )}
+                      </div>
                       <span className="max-w-[120px] truncate">{displayName}</span>
                       <ChevronDown
                         size={13}
@@ -137,11 +182,26 @@ export function Navbar() {
                       <div className="absolute right-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-slate-200 py-1.5 z-50">
                         <Link
                           href="/profil"
-                          onClick={() => setDropdownOpen(false)}
+                          onClick={() => { setDropdownOpen(false); setUnreadCount(0); }}
                           className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
                         >
                           <User size={15} className="text-slate-400" />
                           Mon profil
+                        </Link>
+                        <Link
+                          href="/profil"
+                          onClick={() => { setDropdownOpen(false); setUnreadCount(0); }}
+                          className="flex items-center justify-between px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                        >
+                          <span className="flex items-center gap-2.5">
+                            <Bell size={15} className="text-slate-400" />
+                            Notifications
+                          </span>
+                          {unreadCount > 0 && (
+                            <span className="flex items-center justify-center min-w-[18px] h-[18px] rounded-full bg-red-500 text-white text-[10px] font-bold px-1">
+                              {unreadCount > 9 ? '9+' : unreadCount}
+                            </span>
+                          )}
                         </Link>
                         {user.is_admin && (
                           <Link

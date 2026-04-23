@@ -11,6 +11,8 @@ import { useAuth } from '@/lib/auth-context';
 import { getAllParticipations } from '@/lib/participation-store';
 import { getUserCasesByAuteur, deleteUserCase } from '@/lib/user-cases-store';
 import { getAllExercices } from '@/lib/exercice-store';
+import { getNotifications, markAllNotifsRead, type Notification } from '@/lib/notification-store';
+import { getReceivedMessages, markAllMessagesRead, type Message } from '@/lib/message-store';
 import { getCaseById } from '@/data';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import { LABEL_STATUT_IEATC } from '@/lib/constants';
@@ -32,6 +34,9 @@ import {
   LogIn,
   Trash2,
   Loader2,
+  Bell,
+  MessageSquare,
+  ThumbsUp,
 } from 'lucide-react';
 
 function PublicParticipationRow({ p }: { p: UserParticipation }) {
@@ -79,20 +84,26 @@ export default function ProfilPage() {
   const [participations, setParticipations] = useState<UserParticipation[]>([]);
   const [userCases, setUserCases] = useState<ClinicalCase[]>([]);
   const [exercices, setExercices] = useState<UserParticipation[]>([]);
-  type OngletProfil = 'participations' | 'cas' | 'apprentissage';
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
+  type OngletProfil = 'participations' | 'cas' | 'apprentissage' | 'notifications';
   const [onglet, setOnglet] = useState<OngletProfil>('participations');
 
   useEffect(() => {
     if (!user) return;
     void (async () => {
-      const [parts, exos, cases] = await Promise.all([
+      const [parts, exos, cases, notifs, msgs] = await Promise.all([
         getAllParticipations(user.id),
         getAllExercices(user.id),
         getUserCasesByAuteur(user.id),
+        getNotifications(user.id),
+        getReceivedMessages(user.id),
       ]);
       setParticipations(parts);
       setExercices(exos);
       setUserCases(cases);
+      setNotifications(notifs);
+      setMessages(msgs);
     })();
   }, [user]);
 
@@ -140,6 +151,9 @@ export default function ProfilPage() {
   const totalCasSoumis = userCases.length;
   const publicCasSoumis = userCases.filter((c) => c.auteurId === user.id).length;
   const publicParticipations = participations.filter((p) => p.publicationMode === 'public');
+  const unreadNotifCount = notifications.filter((n) => !n.read).length;
+  const unreadMsgCount = messages.filter((m) => !m.read).length;
+  const totalUnread = unreadNotifCount + unreadMsgCount;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -237,44 +251,71 @@ export default function ProfilPage() {
         </Link>
       </div>
 
-      {/* Onglets : participations, cas soumis, apprentissage */}
+      {/* Onglets : participations, cas soumis, apprentissage, notifications */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
         <div className="flex border-b border-slate-200">
           <button
             onClick={() => setOnglet('participations')}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors',
+              'flex-1 flex items-center justify-center gap-2 px-3 py-3 text-sm font-medium transition-colors',
               onglet === 'participations'
                 ? 'text-teal-700 border-b-2 border-teal-600 bg-teal-50/50'
                 : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50',
             )}
           >
             <PenLine size={14} />
-            Participations
+            <span className="hidden sm:inline">Participations</span>
           </button>
           <button
             onClick={() => setOnglet('cas')}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors',
+              'flex-1 flex items-center justify-center gap-2 px-3 py-3 text-sm font-medium transition-colors',
               onglet === 'cas'
                 ? 'text-teal-700 border-b-2 border-teal-600 bg-teal-50/50'
                 : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50',
             )}
           >
             <BookOpen size={14} />
-            Cas soumis
+            <span className="hidden sm:inline">Cas soumis</span>
           </button>
           <button
             onClick={() => setOnglet('apprentissage')}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors',
+              'flex-1 flex items-center justify-center gap-2 px-3 py-3 text-sm font-medium transition-colors',
               onglet === 'apprentissage'
                 ? 'text-teal-700 border-b-2 border-teal-600 bg-teal-50/50'
                 : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50',
             )}
           >
             <GraduationCap size={14} />
-            Apprentissage
+            <span className="hidden sm:inline">Apprentissage</span>
+          </button>
+          <button
+            onClick={async () => {
+              setOnglet('notifications');
+              if (user && (unreadNotifCount > 0 || unreadMsgCount > 0)) {
+                await Promise.all([
+                  markAllNotifsRead(user.id),
+                  markAllMessagesRead(user.id),
+                ]);
+                setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+                setMessages((prev) => prev.map((m) => ({ ...m, read: true })));
+              }
+            }}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 px-3 py-3 text-sm font-medium transition-colors relative',
+              onglet === 'notifications'
+                ? 'text-teal-700 border-b-2 border-teal-600 bg-teal-50/50'
+                : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50',
+            )}
+          >
+            <Bell size={14} />
+            <span className="hidden sm:inline">Notifications</span>
+            {totalUnread > 0 && (
+              <span className="absolute top-2 right-2 sm:static sm:ml-0 flex items-center justify-center w-4 h-4 rounded-full bg-red-500 text-white text-[10px] font-bold">
+                {totalUnread > 9 ? '9+' : totalUnread}
+              </span>
+            )}
           </button>
         </div>
 
@@ -390,6 +431,115 @@ export default function ProfilPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Onglet notifications */}
+          {onglet === 'notifications' && (
+            <div>
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <Bell size={16} className="text-teal-600" />
+                Notifications
+              </h2>
+
+              {/* Messages reçus */}
+              {messages.length > 0 && (
+                <div className="mb-6">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                    <MessageSquare size={12} /> Messages reçus
+                  </p>
+                  <div className="space-y-2">
+                    {messages.map((msg) => (
+                      <div key={msg.id} className={cn(
+                        'rounded-xl border p-4',
+                        !msg.read ? 'border-teal-200 bg-teal-50/40' : 'border-slate-100',
+                      )}>
+                        <div className="flex items-start gap-3">
+                          <div className="w-7 h-7 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                            {msg.senderPrenom?.charAt(0).toUpperCase() ?? '?'}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <Link
+                                href={`/membres/${msg.senderId}`}
+                                className="text-sm font-semibold text-slate-900 hover:text-teal-700 transition-colors"
+                              >
+                                {msg.senderPrenom} {msg.senderNom}
+                              </Link>
+                              {!msg.read && (
+                                <span className="w-2 h-2 rounded-full bg-teal-500 shrink-0" />
+                              )}
+                            </div>
+                            <p className="text-sm text-slate-700 whitespace-pre-wrap">{msg.content}</p>
+                            <p className="text-xs text-slate-400 mt-1.5">
+                              {new Date(msg.createdAt).toLocaleDateString('fr-FR', {
+                                day: 'numeric', month: 'long', year: 'numeric',
+                                hour: '2-digit', minute: '2-digit',
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Votes sur analyses */}
+              {notifications.filter((n) => n.type === 'vote_analyse').length > 0 && (
+                <div>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                    <ThumbsUp size={12} /> Validations reçues
+                  </p>
+                  <div className="space-y-2">
+                    {notifications
+                      .filter((n) => n.type === 'vote_analyse')
+                      .map((n) => (
+                        <div key={n.id} className={cn(
+                          'rounded-xl border p-4',
+                          !n.read ? 'border-amber-200 bg-amber-50/40' : 'border-slate-100',
+                        )}>
+                          <div className="flex items-center gap-3">
+                            <div className="w-7 h-7 rounded-full bg-amber-400 flex items-center justify-center shrink-0">
+                              <ThumbsUp size={12} className="text-white" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm text-slate-800">
+                                <Link
+                                  href={`/membres/${n.data.voterId}`}
+                                  className="font-semibold hover:text-teal-700 transition-colors"
+                                >
+                                  {n.data.voterPrenom} {n.data.voterNom}
+                                </Link>
+                                {' '}a validé votre analyse sur{' '}
+                                <Link
+                                  href={`/cas/${n.data.caseId}`}
+                                  className="text-teal-600 hover:text-teal-700 font-medium"
+                                >
+                                  {n.data.caseId}
+                                </Link>
+                              </p>
+                              <p className="text-xs text-slate-400 mt-1">
+                                {new Date(n.createdAt).toLocaleDateString('fr-FR', {
+                                  day: 'numeric', month: 'long', year: 'numeric',
+                                  hour: '2-digit', minute: '2-digit',
+                                })}
+                              </p>
+                            </div>
+                            {!n.read && <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />}
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {messages.length === 0 && notifications.filter((n) => n.type === 'vote_analyse').length === 0 && (
+                <div className="text-center py-10">
+                  <Bell size={28} className="text-slate-300 mx-auto mb-2" />
+                  <p className="text-slate-500 text-sm">Aucune notification pour l&apos;instant.</p>
                 </div>
               )}
             </div>

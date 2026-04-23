@@ -5,6 +5,7 @@
 import type { UserParticipation, StatutPraticien, User } from '@/types';
 import { RATIO_STATUT } from '@/types';
 import { supabase } from '@/lib/supabase';
+import { insertNotification } from '@/lib/notification-store';
 
 export const COST_ELEMENT = 1;
 export const COST_PARTICIPATION = 2;
@@ -114,7 +115,7 @@ export async function voteOnElement(
 
 export async function voteOnParticipation(
   participation: UserParticipation,
-  voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
+  voter: Pick<User, 'id' | 'statut' | 'votePoints'> & { prenom?: string; nom?: string },
 ): Promise<VoteResult> {
   if ((voter.votePoints ?? 0) < COST_PARTICIPATION) {
     return { ok: false, error: 'Solde insuffisant (2 pts requis).' };
@@ -134,6 +135,18 @@ export async function voteOnParticipation(
   if (error || !data?.ok) {
     return { ok: false, error: data?.error ?? error?.message ?? 'Vote impossible' };
   }
+
+  // Notification au propriétaire de l'analyse (sauf si c'est lui-même qui vote)
+  if (participation.userId && participation.userId !== voter.id) {
+    void insertNotification(participation.userId, 'vote_analyse', {
+      participationId: participation.id,
+      caseId: participation.caseId,
+      voterId: voter.id,
+      voterPrenom: voter.prenom ?? '',
+      voterNom: voter.nom ?? '',
+    });
+  }
+
   const updated = data.row ? rowToParticipation(data.row) : undefined;
   return { ok: true, updated, consumed: COST_PARTICIPATION };
 }
