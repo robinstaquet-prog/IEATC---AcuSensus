@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import { LABEL_STATUT_IEATC } from '@/lib/constants';
-import { Users, MapPin, Loader2, Search } from 'lucide-react';
+import { Users, MapPin, Loader2, Search, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MemberRow {
@@ -26,22 +26,30 @@ export default function MembresPage() {
   const router = useRouter();
   const [membres, setMembres] = useState<MemberRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (isLoading) return;
+    if (!user) {
       router.push('/connexion');
       return;
     }
-    if (!user) return;
 
     void (async () => {
-      const { data } = await supabase
-        .from('users')
-        .select('id, prenom, nom, statut_ieatc, annee_promotion, lieu_pratique, photo_profil')
-        .order('prenom', { ascending: true });
-      setMembres(data ?? []);
-      setLoading(false);
+      try {
+        const { data, error } = await supabase
+          .from('users')
+          .select('id, prenom, nom, statut_ieatc, annee_promotion, lieu_pratique, photo_profil')
+          .order('prenom', { ascending: true });
+        if (error) {
+          setFetchError(`Erreur chargement membres : ${error.message}. Le SQL supabase/members-messaging.sql a-t-il été exécuté ?`);
+        } else {
+          setMembres(data ?? []);
+        }
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [user, isLoading, router]);
 
@@ -75,6 +83,14 @@ export default function MembresPage() {
           <p className="text-sm text-slate-500">{membres.length} membre{membres.length > 1 ? 's' : ''} inscrit{membres.length > 1 ? 's' : ''}</p>
         </div>
       </div>
+
+      {/* Erreur éventuelle */}
+      {fetchError && (
+        <div className="mb-6 flex items-start gap-3 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+          <AlertCircle size={16} className="shrink-0 mt-0.5" />
+          {fetchError}
+        </div>
+      )}
 
       {/* Recherche */}
       <div className="relative mb-6">
