@@ -21,6 +21,7 @@ import {
 import { PoulsDisplay } from '@/components/ieatc/PoulsDisplay';
 import { ParticipationForm } from '@/components/ieatc/ParticipationForm';
 import { AnalysePanel } from '@/components/ieatc/AnalysePanel';
+import { FiveElementsAnalysis } from '@/components/ieatc/FiveElementsAnalysis';
 import type { ClinicalCase, UserParticipation, ClinicalAnalysis } from '@/types';
 import { cn } from '@/lib/utils';
 import { COMPLEXITE_LABELS, COMPLEXITE_COLORS, cleLabel } from '@/lib/constants';
@@ -40,6 +41,7 @@ import {
   BarChart2,
   Trash2,
   GraduationCap,
+  Sparkles,
 } from 'lucide-react';
 
 // ─── Modal participation ───────────────────────────────────────────────────────
@@ -118,7 +120,7 @@ interface CasDetailClientProps {
   cas: ClinicalCase;
 }
 
-type MainTab = 'clinique' | 'pouls_langue';
+type MainTab = 'clinique' | 'pouls_langue' | 'ia_5e';
 
 export function CasDetailClient({ cas }: CasDetailClientProps) {
   const { user } = useAuth();
@@ -406,13 +408,16 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
         </div>
       </div>
 
-      {/* Onglets principaux : Clinique / Pouls */}
+      {/* Onglets principaux : Clinique / Pouls / IA */}
       <div className="flex items-center gap-1 mb-5 border-b border-slate-200">
         <TabBtn active={mainTab === 'clinique'} onClick={() => setMainTab('clinique')} icon={<FileText size={14} />}>
           Cas clinique
         </TabBtn>
         <TabBtn active={mainTab === 'pouls_langue'} onClick={() => setMainTab('pouls_langue')} icon={<Activity size={14} />}>
           Pouls, Langue & Examens
+        </TabBtn>
+        <TabBtn active={mainTab === 'ia_5e'} onClick={() => setMainTab('ia_5e')} icon={<Sparkles size={14} />}>
+          Analyse IA 5 Éléments
         </TabBtn>
       </div>
 
@@ -570,8 +575,15 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
         </div>
       )}
 
+      {/* Onglet IA 5 Éléments */}
+      {mainTab === 'ia_5e' && (
+        <div className="space-y-4">
+          <FiveElementsAnalysis cas={cas} />
+        </div>
+      )}
+
       {/* Panneau analyse déverrouillée */}
-      {revealed && (
+      {mainTab !== 'ia_5e' && revealed && (
         <div className="mt-6">
           <AnalysePanel cas={cas} participations={allParticipations} onVote={onVoted} />
           {!user && (
