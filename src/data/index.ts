@@ -28,6 +28,7 @@ export function getCasesPublies(): ClinicalCase[] {
 
 import { CLINICAL_CASES } from './cases';
 import { normaliserTextes, labelConceptIeatc } from './normalisation';
+import { normalizePoint } from '@/lib/point-normalize';
 import type { GlobalStats, FrequencyEntry, NiveauComplexite } from '@/types';
 
 function computeFrequency(ids: string[]): FrequencyEntry[] {
@@ -46,7 +47,10 @@ export function computeGlobalStats(): GlobalStats {
   const allAnalyses = publie.flatMap((c) => c.analyses);
 
   // Points — codes bruts extraits des traitements proposés
-  const allPointCodes = allAnalyses.flatMap((a) => a.pointsUtilises.map((p) => p.code));
+  // Normaliser les codes (VG→TM, RM→JM, etc.) pour agréger correctement
+  const allPointCodes = allAnalyses.flatMap((a) =>
+    a.pointsUtilises.map((p) => normalizePoint(p.code).code),
+  );
 
   // Grilles principales utilisées dans les analyses
   const allGrilles = allAnalyses.map((a) => a.grillePrincipale);
