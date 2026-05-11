@@ -7,9 +7,10 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
-import { Shield, Check, Loader2, AlertCircle, ExternalLink, Eye, EyeOff, BookOpen } from 'lucide-react';
+import { Shield, Check, Loader2, AlertCircle, ExternalLink, Eye, EyeOff, BookOpen, Trash2, Pencil, Database } from 'lucide-react';
 import { CLINICAL_CASES } from '@/data/cases';
 import { getHiddenCorpusCaseIds, setCorpusCaseHidden } from '@/lib/corpus-overrides';
+import type { ClinicalCase } from '@/types';
 
 const STATUTS_OPTIONS = [
   { value: 'premiere_annee', label: '1ère année' },
@@ -46,6 +47,62 @@ export default function AdminPage() {
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [hiddenIds, setHiddenIds] = useState<Set<string>>(new Set());
+
+  // ─── Cas Supabase ───────────────────────────────────────────────────────────
+  const [supabaseCases, setSupabaseCases] = useState<{ id: string; titre: string; auteur_id: string | null }[]>([]);
+  const [loadingCases, setLoadingCases] = useState(false);
+  const [seedingCorpus, setSeedingCorpus] = useState(false);
+  const [seedCorpusMsg, setSeedCorpusMsg] = useState<string | null>(null);
+
+  const fetchSupabaseCases = useCallback(async () => {
+    setLoadingCases(true);
+    const { data } = await supabase
+      .from('clinical_cases')
+      .select('id, titre, auteur_id')
+      .order('titre', { ascending: true });
+    setSupabaseCases(data ?? []);
+    setLoadingCases(false);
+  }, []);
+
+  const deleteCas = async (id: string) => {
+    if (!confirm(`Supprimer définitivement le cas "${id}" de Supabase ?\n\nLes participations liées seront aussi supprimées (cascade FK).`)) return;
+    await supabase.from('clinical_cases').delete().eq('id', id);
+    setSupabaseCases((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  const seedAllCorpus = async () => {
+    setSeedingCorpus(true);
+    setSeedCorpusMsg(null);
+    let inserted = 0;
+    let skipped = 0;
+    for (const cas of CLINICAL_CASES) {
+      const { error } = await supabase.from('clinical_cases').upsert(
+        {
+          id: cas.id,
+          slug: cas.slug,
+          titre: cas.titre,
+          statut: cas.statut,
+          niveau_complexite: cas.niveauComplexite,
+          age: cas.age ?? null,
+          sexe: cas.sexe ?? null,
+          cas_complet: cas.casComplet,
+          exemplaire: cas.exemplaire,
+          grille_principale: cas.grillePrincipale,
+          tags: cas.tags,
+          content: cas.content,
+          auteur_id: cas.auteurId ?? null,
+          date_creation: cas.dateCreation ?? null,
+          date_publication: cas.datePublication ?? null,
+        } as Partial<ClinicalCase>,
+        { onConflict: 'id', ignoreDuplicates: true },
+      );
+      if (error) skipped++;
+      else inserted++;
+    }
+    setSeedCorpusMsg(`${inserted} cas insérés / mis à jour, ${skipped} erreurs.`);
+    setSeedingCorpus(false);
+    await fetchSupabaseCases();
+  };
 
   const fetchUsers = useCallback(async () => {
     setLoadingUsers(true);
@@ -87,8 +144,9 @@ export default function AdminPage() {
     if (user?.is_admin) {
       fetchUsers();
       setHiddenIds(getHiddenCorpusCaseIds());
+      fetchSupabaseCases();
     }
-  }, [user, isLoading, router, fetchUsers]);
+  }, [user, isLoading, router, fetchUsers, fetchSupabaseCases]);
 
   const toggleCasVisibility = (id: string) => {
     const nowHidden = !hiddenIds.has(id);
@@ -319,6 +377,82 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+      {/* ─── Cas dans Supabase (clinical_cases) ───────────────────────────── */}
+      <div className="mt-10">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Database size={18} className="text-slate-600" />
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">Cas dans Supabase</h2>
+              <p className="text-xs text-slate-400">
+                Les cas en base. Suppression définitive (participations liées supprimées aussi).
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            {seedCorpusMsg && <span className="text-xs text-teal-600">{seedCorpusMsg}</span>}
+            <button
+              onClick={seedAllCorpus}
+              disabled={seedingCorpus}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-600 text-white text-sm font-medium hover:bg-teal-500 transition-colors disabled:opacity-60"
+            >
+              {seedingCorpus ? <Loader2 size={14} className="animate-spin" /> : <Database size={14} />}
+              Insérer tous les cas du corpus
+            </button>
+          </div>
+        </div>
+
+        {loadingCases ? (
+          <div className="flex items-center justify-center py-10">
+            <Loader2 size={24} className="animate-spin text-slate-300" />
+          </div>
+        ) : supabaseCases.length === 0 ? (
+          <div className="text-center py-10 text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">
+            Aucun cas dans Supabase pour l&apos;instant.
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50 text-left">
+                  <th className="px-4 py-3 font-semibold text-slate-600">ID</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Titre</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Auteur</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {supabaseCases.map((cas) => (
+                  <tr key={cas.id} className="hover:bg-slate-50/40">
+                    <td className="px-4 py-3 font-mono text-xs text-slate-400 whitespace-nowrap">{cas.id}</td>
+                    <td className="px-4 py-3 font-medium text-slate-800">{cas.titre}</td>
+                    <td className="px-4 py-3 text-xs text-slate-400">
+                      {cas.auteur_id ? cas.auteur_id.slice(0, 8) + '…' : 'Corpus'}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/mes-cas/${cas.id}/modifier`}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-600 hover:bg-slate-50 transition-colors"
+                        >
+                          <Pencil size={11} /> Modifier
+                        </Link>
+                        <button
+                          onClick={() => deleteCas(cas.id)}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-red-200 text-xs text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          <Trash2 size={11} /> Supprimer
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
 
       {/* ─── Gestion du corpus ─────────────────────────────────────────────── */}
       <div className="mt-10">
