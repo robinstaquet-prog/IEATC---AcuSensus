@@ -28,6 +28,7 @@ import {
   ChevronDown,
   ChevronUp,
   AlertCircle,
+  Pencil,
 } from 'lucide-react';
 import {
   normalizePoint,
@@ -139,6 +140,7 @@ interface AnnotatableTextProps {
   annotations: Annotation[];
   onAdd: (a: Annotation) => void;
   onRemove: (id: string) => void;
+  onUpdate: (id: string, comment: string) => void;
   activeId: string | null;
   onHover: (id: string | null) => void;
 }
@@ -155,6 +157,7 @@ function AnnotatableText({
   annotations,
   onAdd,
   onRemove,
+  onUpdate,
   activeId,
   onHover,
 }: AnnotatableTextProps) {
@@ -164,6 +167,9 @@ function AnnotatableText({
   const [pendingComment, setPendingComment] = useState('');
   // Position fixe du popover de commentaire — ancrée à la sélection
   const [popoverPos, setPopoverPos] = useState<PopoverPos | null>(null);
+  // Édition en ligne d'un commentaire existant
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editDraft, setEditDraft] = useState('');
 
   // Calcule la position du popover à partir du bounding rect de la sélection active.
   const computePopoverPos = useCallback((): PopoverPos | null => {
@@ -272,13 +278,9 @@ function AnnotatableText({
             value={pendingComment}
             onChange={(e) => setPendingComment(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                validate();
-              }
               if (e.key === 'Escape') cancelPending();
             }}
-            placeholder="Votre remarque (Entrée pour valider)…"
+            placeholder="Votre remarque clinique…"
             rows={3}
             className="w-full text-sm px-2 py-1.5 rounded border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
           />
@@ -349,11 +351,12 @@ function AnnotatableText({
             {annotations.map((a) => {
               const extrait = texte.slice(a.start, a.start + a.length);
               const isActive = activeId === a.id;
+              const isEditing = editingId === a.id;
               return (
                 <div
                   key={a.id}
-                  onMouseEnter={() => onHover(a.id)}
-                  onMouseLeave={() => onHover(null)}
+                  onMouseEnter={() => !isEditing && onHover(a.id)}
+                  onMouseLeave={() => !isEditing && onHover(null)}
                   className={cn(
                     'rounded-lg p-2 border text-xs transition-colors cursor-default',
                     isActive ? 'bg-amber-50 border-amber-300' : 'bg-white border-slate-200',
@@ -363,14 +366,55 @@ function AnnotatableText({
                     <MessageSquare size={11} className="text-teal-500 mt-0.5 shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="italic text-slate-500 line-clamp-1">« {extrait} »</p>
-                      {a.comment && <p className="text-slate-700 mt-0.5">{a.comment}</p>}
+                      {isEditing ? (
+                        <div className="mt-1 space-y-1">
+                          <textarea
+                            autoFocus
+                            value={editDraft}
+                            onChange={(e) => setEditDraft(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Escape') setEditingId(null);
+                            }}
+                            rows={2}
+                            className="w-full text-xs px-2 py-1 rounded border border-teal-300 focus:outline-none focus:ring-1 focus:ring-teal-500 resize-none"
+                          />
+                          <div className="flex gap-1">
+                            <button
+                              onClick={() => { onUpdate(a.id, editDraft); setEditingId(null); }}
+                              className="text-[11px] px-2 py-0.5 rounded bg-teal-600 text-white hover:bg-teal-500"
+                            >
+                              OK
+                            </button>
+                            <button
+                              onClick={() => setEditingId(null)}
+                              className="text-[11px] px-2 py-0.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50"
+                            >
+                              Annuler
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-slate-700 mt-0.5">{a.comment || <span className="italic text-slate-400">sans commentaire</span>}</p>
+                      )}
                     </div>
-                    <button
-                      onClick={() => onRemove(a.id)}
-                      className="text-slate-300 hover:text-red-400 shrink-0"
-                    >
-                      <X size={11} />
-                    </button>
+                    {!isEditing && (
+                      <div className="flex gap-0.5 shrink-0">
+                        <button
+                          onClick={() => { setEditDraft(a.comment); setEditingId(a.id); }}
+                          className="text-slate-300 hover:text-teal-500"
+                          title="Modifier"
+                        >
+                          <Pencil size={11} />
+                        </button>
+                        <button
+                          onClick={() => onRemove(a.id)}
+                          className="text-slate-300 hover:text-red-400"
+                          title="Supprimer"
+                        >
+                          <X size={11} />
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -1174,14 +1218,17 @@ export function ParticipationForm({
 
       // En mode apprentissage (skipPersist), ne pas sauvegarder dans le store
       // de participation et ne pas ajouter de points de vote.
-      if (!skipPersist) {
-        await upsertParticipation(user.id, data);
-        addVotePoints(2);
+      try {
+        if (!skipPersist) {
+          await upsertParticipation(user.id, data);
+          addVotePoints(2);
+        }
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2000);
+        onSave?.(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Erreur lors de la publication. Vérifiez votre connexion et réessayez.');
       }
-
-      setSaved(true);
-      setTimeout(() => setSaved(false), 2000);
-      onSave?.(data);
     },
     [
       user,
@@ -1241,6 +1288,14 @@ export function ParticipationForm({
         </div>
       )}
 
+      {/* ── Erreur technique (Supabase / points sans action) ── */}
+      {error && (
+        <div className="bg-red-50 border border-red-300 rounded-xl px-4 py-3 flex items-start gap-2" role="alert">
+          <AlertCircle size={15} className="text-red-600 mt-0.5 shrink-0" />
+          <p className="text-sm text-red-700">{error}</p>
+        </div>
+      )}
+
       <p className="text-sm text-slate-500 bg-slate-50 rounded-lg p-3">
         {mode === 'participation' ? (
           <>
@@ -1289,6 +1344,7 @@ export function ParticipationForm({
             annotations={annInterrogatoire}
             onAdd={(a) => setAnnInterrogatoire([...annInterrogatoire, a])}
             onRemove={(id) => setAnnInterrogatoire(annInterrogatoire.filter((x) => x.id !== id))}
+            onUpdate={(id, comment) => setAnnInterrogatoire(annInterrogatoire.map((x) => x.id === id ? { ...x, comment } : x))}
             activeId={activeId}
             onHover={setActiveId}
           />
@@ -1318,6 +1374,7 @@ export function ParticipationForm({
                   annotations={annLangue}
                   onAdd={(a) => setAnnLangue([...annLangue, a])}
                   onRemove={(id) => setAnnLangue(annLangue.filter((x) => x.id !== id))}
+                  onUpdate={(id, comment) => setAnnLangue(annLangue.map((x) => x.id === id ? { ...x, comment } : x))}
                   activeId={activeId}
                   onHover={setActiveId}
                 />
@@ -1343,6 +1400,7 @@ export function ParticipationForm({
                     annotations={annLangue}
                     onAdd={(a) => setAnnLangue([...annLangue, a])}
                     onRemove={(id) => setAnnLangue(annLangue.filter((x) => x.id !== id))}
+                    onUpdate={(id, comment) => setAnnLangue(annLangue.map((x) => x.id === id ? { ...x, comment } : x))}
                     activeId={activeId}
                     onHover={setActiveId}
                   />
@@ -1385,6 +1443,11 @@ export function ParticipationForm({
                 onRemove={(id) =>
                   updateExamen(ex.id, {
                     annotations: ex.annotations.filter((x) => x.id !== id),
+                  })
+                }
+                onUpdate={(id, comment) =>
+                  updateExamen(ex.id, {
+                    annotations: ex.annotations.map((x) => x.id === id ? { ...x, comment } : x),
                   })
                 }
                 activeId={activeId}
@@ -1435,6 +1498,7 @@ export function ParticipationForm({
               annotations={annPouls}
               onAdd={(a) => setAnnPouls([...annPouls, a])}
               onRemove={(id) => setAnnPouls(annPouls.filter((x) => x.id !== id))}
+              onUpdate={(id, comment) => setAnnPouls(annPouls.map((x) => x.id === id ? { ...x, comment } : x))}
               activeId={activeId}
               onHover={setActiveId}
             />

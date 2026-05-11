@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import {
   getParticipation,
-  upsertParticipation,
   markRevelation,
   getParticipationsByCase,
   computeDifficulty,
@@ -63,8 +62,8 @@ function ParticipationModal({
     getParticipation(userId, caseId).then(setExisting);
   }, [userId, caseId]);
 
-  const handleSave = async (data: Partial<UserParticipation>) => {
-    await upsertParticipation(userId, { ...data, caseId });
+  const handleSave = (_data: Partial<UserParticipation>) => {
+    // La form sauvegarde déjà via upsertParticipation — on notifie juste le parent
     onSaved?.();
   };
 
