@@ -5,6 +5,7 @@
 import { supabase } from '@/lib/supabase';
 import type { UserParticipation, ClinicalCase, DifficulteEstimee } from '@/types';
 import { RATIO_STATUT, DIFFICULTE_LABELS } from '@/types';
+import { CLINICAL_CASES } from '@/data/cases';
 
 // ─── Colonnes directes RÉELLES dans user_participations ──────────────────────
 // Confirmées par les erreurs PostgREST successives :
@@ -117,11 +118,56 @@ async function maybeQualifieCase(caseId: string, valeur?: number): Promise<void>
   }
 }
 
+/**
+ * S'assure que le cas existe dans clinical_cases avant d'insérer une participation.
+ * Les cas statiques (data/cases.ts) n'y sont pas par défaut → on les y insère à la volée.
+ */
+async function ensureCaseExists(caseId: string): Promise<void> {
+  // Vérifier si le cas est déjà en base
+  const { data: existing } = await supabase
+    .from('clinical_cases')
+    .select('id')
+    .eq('id', caseId)
+    .maybeSingle();
+  if (existing) return; // déjà présent
+
+  // Chercher dans les cas statiques
+  const staticCase = CLINICAL_CASES.find((c) => c.id === caseId);
+  if (!staticCase) return; // cas inconnu, on laisse la FK échouer normalement
+
+  // Insérer le cas statique dans Supabase (upsert pour idempotence)
+  const { error } = await supabase.from('clinical_cases').upsert(
+    {
+      id: staticCase.id,
+      slug: staticCase.slug,
+      titre: staticCase.titre,
+      statut: staticCase.statut,
+      niveau_complexite: staticCase.niveauComplexite,
+      age: staticCase.age ?? null,
+      sexe: staticCase.sexe ?? null,
+      cas_complet: staticCase.casComplet,
+      exemplaire: staticCase.exemplaire,
+      grille_principale: staticCase.grillePrincipale,
+      tags: staticCase.tags,
+      content: staticCase.content,
+      auteur_id: staticCase.auteurId ?? null,
+      date_creation: staticCase.dateCreation ?? null,
+      date_publication: staticCase.datePublication ?? null,
+    },
+    { onConflict: 'id', ignoreDuplicates: true },
+  );
+  if (error) console.error('[ensureCaseExists] Impossible d\'insérer le cas statique:', error.message);
+}
+
 export async function upsertParticipation(
   userId: string,
   data: Partial<UserParticipation> & { caseId: string },
 ): Promise<UserParticipation> {
   const now = new Date().toISOString();
+
+  // S'assurer que le cas existe en DB (contrainte FK case_id)
+  await ensureCaseExists(data.caseId);
+
   const existing = await getParticipation(userId, data.caseId);
 
   if (existing) {
