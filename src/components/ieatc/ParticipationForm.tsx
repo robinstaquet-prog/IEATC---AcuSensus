@@ -394,7 +394,11 @@ function AnnotatableText({
                           </div>
                         </div>
                       ) : (
-                        <p className="text-slate-700 mt-0.5">{a.comment || <span className="italic text-slate-400">sans commentaire</span>}</p>
+                        <p className="text-slate-700 mt-0.5">
+                          {a.comment
+                            ? a.comment.split('\n').map(l => l.trim()).filter(Boolean).join(' — ')
+                            : <span className="italic text-slate-400">sans commentaire</span>}
+                        </p>
                       )}
                     </div>
                     {!isEditing && (

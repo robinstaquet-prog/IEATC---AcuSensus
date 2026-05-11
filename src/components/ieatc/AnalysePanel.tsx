@@ -160,7 +160,9 @@ function AnnotationSidePanel({
 
             {/* Commentaire */}
             <p className="text-sm text-slate-700 leading-snug">
-              {c.comment || <em className="text-slate-400">(sans commentaire)</em>}
+              {c.comment
+                ? c.comment.split('\n').map(l => l.trim()).filter(Boolean).join(' — ')
+                : <em className="text-slate-400">(sans commentaire)</em>}
             </p>
 
             {/* Bouton de vote */}
