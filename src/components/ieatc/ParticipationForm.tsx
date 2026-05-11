@@ -1243,7 +1243,13 @@ export function ParticipationForm({
         setTimeout(() => setSaved(false), 2000);
         onSave?.(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Erreur lors de la publication. Vérifiez votre connexion et réessayez.');
+        const msg = err instanceof Error ? err.message : String(err);
+        console.error('[ParticipationForm] Erreur publication Supabase:', msg, err);
+        setError(msg || 'Erreur lors de la publication. Vérifiez votre connexion et réessayez.');
+        // Scroll vers le banner d'erreur en bas du form pour s'assurer qu'il est visible
+        setTimeout(() => {
+          errorBannerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 50);
       }
     },
     [
@@ -1783,8 +1789,9 @@ export function ParticipationForm({
       </Section>
 
       {error && (
-        <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2 flex items-center gap-2">
-          <AlertCircle size={14} /> {error}
+        <div className="text-sm text-red-700 bg-red-100 border-2 border-red-400 rounded-lg px-4 py-3 flex items-start gap-2 font-medium shadow">
+          <AlertCircle size={16} className="shrink-0 mt-0.5" />
+          <span>{error}</span>
         </div>
       )}
 
