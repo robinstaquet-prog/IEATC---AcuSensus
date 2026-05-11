@@ -56,16 +56,27 @@ function ParticipationModal({
   onClose: () => void;
   onSaved?: () => void;
 }) {
-  const [existing, setExisting] = useState<UserParticipation | undefined>(undefined);
+  // `null` = chargé, pas de participation existante
+  // `undefined` = en cours de chargement
+  const [existing, setExisting] = useState<UserParticipation | null | undefined>(undefined);
 
   useEffect(() => {
-    getParticipation(userId, caseId).then(setExisting);
+    getParticipation(userId, caseId).then((p) => setExisting(p ?? null));
   }, [userId, caseId]);
 
   const handleSave = (_data: Partial<UserParticipation>) => {
     // La form sauvegarde déjà via upsertParticipation — on notifie juste le parent
     onSaved?.();
   };
+
+  const interrogatoireText = [
+    cas.content.motif,
+    ...cas.content.interrogatoire.map((i) => `${i.cle} : ${i.valeur}`),
+    cas.content.contexteVie ?? '',
+    cas.content.antecedents ?? '',
+  ]
+    .filter(Boolean)
+    .join('\n\n');
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
@@ -88,23 +99,25 @@ function ParticipationModal({
           </button>
         </div>
         <div className="flex-1 overflow-y-auto">
-          <ParticipationForm
-            mode="participation"
-            caseId={caseId}
-            interrogatoireText={[
-              cas.content.motif,
-              ...cas.content.interrogatoire.map((i) => `${i.cle} : ${i.valeur}`),
-              cas.content.contexteVie ?? '',
-              cas.content.antecedents ?? '',
-            ]
-              .filter(Boolean)
-              .join('\n\n')}
-            pulses={cas.content.prisePouls.lectures}
-            pulsesCondition={cas.content.prisePouls.condition}
-            existingParticipation={existing}
-            onSave={handleSave}
-            onCancel={onClose}
-          />
+          {/* Attendre que la participation existante soit chargée avant de monter le formulaire.
+              Sans ça, le formulaire s'initialise vide puis la donnée arrive trop tard
+              (useState n'accepte son initialValue qu'au premier mount). */}
+          {existing === undefined ? (
+            <div className="p-8 text-center text-slate-400 text-sm">Chargement…</div>
+          ) : (
+            <ParticipationForm
+              key={existing?.id ?? 'nouveau'}
+              mode="participation"
+              caseId={caseId}
+              interrogatoireText={interrogatoireText}
+              pulses={cas.content.prisePouls.lectures}
+              pulsesCondition={cas.content.prisePouls.condition}
+              langueTexteCas={cas.content.langueTexte}
+              existingParticipation={existing ?? undefined}
+              onSave={handleSave}
+              onCancel={onClose}
+            />
+          )}
         </div>
       </div>
     </div>
