@@ -6,7 +6,14 @@ import { supabase } from '@/lib/supabase';
 import type { UserParticipation, ClinicalCase, DifficulteEstimee } from '@/types';
 import { RATIO_STATUT, DIFFICULTE_LABELS } from '@/types';
 
-// ─── Mapping Supabase ↔ TypeScript ───────────────────────────────────────────
+// ─── Colonnes directes confirmées dans user_participations ───────────────────
+// id, user_id, case_id, grille_choisie, publication_mode, valeur,
+// extra_data (JSONB), created_at, updated_at
+//
+// Tout le reste (bilan_energetique, strategie, annotations, grille_secondaire,
+// points_traitement, etc.) est stocké dans extra_data.
+// Les fromRow lisent d'abord extra_data, avec fallback sur les anciennes colonnes
+// directes pour rétrocompatibilité avec d'éventuelles lignes déjà en base.
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function fromRow(row: Record<string, any>): UserParticipation {
@@ -16,12 +23,13 @@ function fromRow(row: Record<string, any>): UserParticipation {
     userId: row.user_id,
     caseId: row.case_id,
     grilleChoisie: row.grille_choisie,
-    grilleSecondaire: row.grille_secondaire ?? undefined,
-    bilanEnergetique: row.bilan_energetique ?? undefined,
-    strategie: row.strategie ?? undefined,
+    // extra_data en priorité, fallback sur colonnes directes (rétrocompat)
+    grilleSecondaire: extra.grilleSecondaire ?? row.grille_secondaire ?? undefined,
+    bilanEnergetique: extra.bilanEnergetique ?? row.bilan_energetique ?? undefined,
+    strategie: extra.strategie ?? row.strategie ?? undefined,
     publicationMode: row.publication_mode,
     valeur: row.valeur ?? 1.0,
-    pointsProposer: row.points_traitement ?? [],
+    pointsProposer: extra.pointsProposer ?? row.points_traitement ?? [],
     annotationsInterrogatoire: extra.annotationsInterrogatoire ?? row.annotations ?? [],
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -44,17 +52,19 @@ function fromRow(row: Record<string, any>): UserParticipation {
 }
 
 function toInsertRow(userId: string, data: Partial<UserParticipation> & { caseId: string }) {
+  // Seules les colonnes confirmées comme existantes en DB sont écrites directement.
+  // TOUT le reste va dans extra_data (JSONB) pour éviter les erreurs de schéma.
   return {
     case_id: data.caseId,
     user_id: userId,
     grille_choisie: data.grilleChoisie ?? 'yin_yang',
-    grille_secondaire: data.grilleSecondaire ?? null,
-    bilan_energetique: data.bilanEnergetique ?? null,
-    strategie: data.strategie ?? null,
-    points_traitement: data.pointsProposer ?? [],
     publication_mode: data.publicationMode ?? 'anonyme',
     valeur: data.valeur ?? 1.0,
     extra_data: {
+      grilleSecondaire: data.grilleSecondaire ?? null,
+      bilanEnergetique: data.bilanEnergetique ?? null,
+      strategie: data.strategie ?? null,
+      pointsProposer: data.pointsProposer ?? [],
       polariteIdentifiee: data.polariteIdentifiee,
       localisationIdentifiee: data.localisationIdentifiee,
       categoriesRetenues: data.categoriesRetenues ?? [],
