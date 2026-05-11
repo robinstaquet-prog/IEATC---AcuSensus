@@ -141,8 +141,8 @@ export async function upsertParticipation(
     return fromRow(updated);
   }
 
+  // On ne génère pas l'id : Supabase le crée automatiquement (uuid DEFAULT gen_random_uuid())
   const row = {
-    id: `p-${Date.now()}`,
     ...toInsertRow(userId, data),
     created_at: now,
     updated_at: now,

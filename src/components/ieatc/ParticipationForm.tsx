@@ -669,12 +669,15 @@ function PointRowEditor({
 }) {
   const handleBrutChange = (v: string) => {
     const norm = normalizePoint(v);
+    // norm.action prime sur row.action : si le texte tapé contient un suffixe d'action
+    // (ex: "t ch"), il remplace l'action précédente (ex: "t" → ne bloque pas "t ch").
+    // Si la normalisation ne détecte pas d'action, on conserve l'éventuelle sélection manuelle.
     onChange({
       ...row,
       pointBrut: v,
       normalized: norm,
       pointNormalise: norm.code,
-      action: row.action || norm.action || '',
+      action: norm.action || row.action || '',
     });
   };
 
