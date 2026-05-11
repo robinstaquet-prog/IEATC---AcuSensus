@@ -81,7 +81,7 @@ export default function MembreProfilPage() {
           .order('date_creation', { ascending: false }),
         supabase
           .from('user_participations')
-          .select('id, user_id, case_id, grille_choisie, grille_secondaire, bilan_energetique, publication_mode, valeur, extra_data, created_at')
+          .select('id, user_id, case_id, extra_data, created_at, updated_at')
           .eq('user_id', memberId)
           .filter('extra_data->isExercice', 'neq', 'true')
           .order('created_at', { ascending: false }),
@@ -108,7 +108,7 @@ export default function MembreProfilPage() {
       setParticipations(
         isAdmin
           ? allParts.map(rowToParticipation)
-          : allParts.filter((p) => p.publication_mode === 'public').map(rowToParticipation),
+          : allParts.filter((p) => (p.extra_data?.publicationMode ?? p.extra_data?.publication_mode) === 'public').map(rowToParticipation),
       );
 
       setLoading(false);
@@ -122,18 +122,18 @@ export default function MembreProfilPage() {
       id: row.id,
       userId: row.user_id,
       caseId: row.case_id,
-      grilleChoisie: row.grille_choisie,
-      grilleSecondaire: row.grille_secondaire ?? undefined,
-      bilanEnergetique: row.bilan_energetique ?? undefined,
-      strategie: undefined,
-      publicationMode: row.publication_mode,
-      valeur: row.valeur ?? 1.0,
-      pointsProposer: [],
-      annotationsInterrogatoire: [],
+      grilleChoisie: extra.grilleChoisie ?? 'yin_yang',
+      grilleSecondaire: extra.grilleSecondaire ?? undefined,
+      bilanEnergetique: extra.bilanEnergetique ?? undefined,
+      strategie: extra.strategie ?? undefined,
+      publicationMode: extra.publicationMode ?? 'anonyme',
+      valeur: extra.valeur ?? 1.0,
+      pointsProposer: extra.pointsProposer ?? [],
+      annotationsInterrogatoire: extra.annotationsInterrogatoire ?? [],
       createdAt: row.created_at,
-      updatedAt: row.created_at,
-      categoriesRetenues: [],
-      revelationFaite: false,
+      updatedAt: row.updated_at ?? row.created_at,
+      categoriesRetenues: extra.categoriesRetenues ?? [],
+      revelationFaite: extra.revelationFaite ?? false,
       votes: extra.votes ?? [],
       votePoints: extra.votePoints ?? 0,
     };

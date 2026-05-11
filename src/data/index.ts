@@ -120,7 +120,7 @@ export function computeGlobalStats(): GlobalStats {
     .sort((a, b) => b.count - a.count)
     .slice(0, 12);
 
-  const complexityDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0 };
+  const complexityDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0 };
   const sexeDistribution: Record<string, number> = { masculin: 0, feminin: 0, non_precise: 0 };
 
   for (const c of publie) {

@@ -155,7 +155,7 @@ export default function ProfilPage() {
   const publicPart = participations.filter((p) => p.publicationMode === 'public').length;
   const anonPart = totalPart - publicPart;
   const totalCasSoumis = userCases.length;
-  const publicCasSoumis = userCases.filter((c) => c.auteurId === user.id).length;
+  const publicCasSoumis = userCases.filter((c) => (c.content as { publicationMode?: string }).publicationMode === 'public').length;
   const publicParticipations = participations.filter((p) => p.publicationMode === 'public');
   const unreadNotifCount = notifications.filter((n) => !n.read).length;
   const unreadMsgCount = messages.filter((m) => !m.read).length;

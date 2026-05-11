@@ -66,8 +66,25 @@ export default function AdminPage() {
 
   const deleteCas = async (id: string) => {
     if (!confirm(`Supprimer définitivement le cas "${id}" de Supabase ?\n\nLes participations liées seront aussi supprimées (cascade FK).`)) return;
-    await supabase.from('clinical_cases').delete().eq('id', id);
-    setSupabaseCases((prev) => prev.filter((c) => c.id !== id));
+    try {
+      const session = (await supabase.auth.getSession()).data.session;
+      const res = await fetch('/api/admin/delete-case', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token ?? ''}`,
+        },
+        body: JSON.stringify({ caseId: id }),
+      });
+      if (!res.ok) {
+        const { error } = await res.json();
+        alert('Erreur suppression : ' + (error ?? 'inconnue'));
+        return;
+      }
+      setSupabaseCases((prev) => prev.filter((c) => c.id !== id));
+    } catch (e) {
+      alert('Erreur réseau : ' + String(e));
+    }
   };
 
   const seedAllCorpus = async () => {
@@ -76,6 +93,7 @@ export default function AdminPage() {
     let inserted = 0;
     let skipped = 0;
     for (const cas of CLINICAL_CASES) {
+      const now = new Date().toISOString();
       const { error } = await supabase.from('clinical_cases').upsert(
         {
           id: cas.id,
@@ -87,14 +105,18 @@ export default function AdminPage() {
           sexe: cas.sexe ?? null,
           cas_complet: cas.casComplet,
           exemplaire: cas.exemplaire,
+          qualifie_apprentissage: cas.qualifieApprentissage ?? false,
           grille_principale: cas.grillePrincipale,
           tags: cas.tags,
           content: cas.content,
+          view_count: cas.viewCount ?? 0,
           auteur_id: cas.auteurId ?? null,
           date_creation: cas.dateCreation ?? null,
           date_publication: cas.datePublication ?? null,
+          created_at: cas.dateCreation ?? now,
+          updated_at: now,
         } as Partial<ClinicalCase>,
-        { onConflict: 'id', ignoreDuplicates: true },
+        { onConflict: 'id', ignoreDuplicates: false },
       );
       if (error) skipped++;
       else inserted++;

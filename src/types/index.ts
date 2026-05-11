@@ -37,7 +37,7 @@ export type StatutCas = 'brouillon' | 'en_validation' | 'publie' | 'archive';
 
 // ─── Niveau de complexité ─────────────────────────────────────────────────────
 
-export type NiveauComplexite = 1 | 2 | 3;
+export type NiveauComplexite = 1 | 2 | 3 | 4;
 
 // ─── Pouls structuré ─────────────────────────────────────────────────────────
 // La prise de pouls est l'acte CENTRAL en IEATC — traitement spécifique

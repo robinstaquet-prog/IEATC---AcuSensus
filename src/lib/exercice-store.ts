@@ -3,6 +3,7 @@
 // ─── Store d'exercices d'apprentissage — Supabase ────────────────────────────
 // Les exercices sont PRIVES : pas de publication, pas comptabilisés dans les stats.
 // Stockés dans user_participations avec extra_data.isExercice = true.
+// Schéma réel : id (uuid auto), user_id, case_id, extra_data (JSONB), created_at, updated_at
 
 import { supabase } from '@/lib/supabase';
 import type { UserParticipation } from '@/types';
@@ -14,14 +15,14 @@ function fromRow(row: Record<string, any>): UserParticipation {
     id: row.id,
     userId: row.user_id,
     caseId: row.case_id,
-    grilleChoisie: row.grille_choisie,
-    grilleSecondaire: row.grille_secondaire ?? undefined,
-    bilanEnergetique: row.bilan_energetique ?? undefined,
-    strategie: row.strategie ?? undefined,
+    grilleChoisie: extra.grilleChoisie ?? 'yin_yang',
+    grilleSecondaire: extra.grilleSecondaire ?? undefined,
+    bilanEnergetique: extra.bilanEnergetique ?? undefined,
+    strategie: extra.strategie ?? undefined,
     publicationMode: undefined,
     valeur: 0,
-    pointsProposer: row.points_traitement ?? [],
-    annotationsInterrogatoire: row.annotations ?? [],
+    pointsProposer: extra.pointsProposer ?? [],
+    annotationsInterrogatoire: extra.annotationsInterrogatoire ?? [],
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     polariteIdentifiee: extra.polariteIdentifiee,
@@ -42,33 +43,27 @@ function fromRow(row: Record<string, any>): UserParticipation {
   };
 }
 
-function toRow(userId: string, data: Partial<UserParticipation> & { caseId: string }) {
+function toExtraData(data: Partial<UserParticipation> & { caseId: string }) {
   return {
-    case_id: data.caseId,
-    user_id: userId,
-    grille_choisie: data.grilleChoisie ?? 'yin_yang',
-    grille_secondaire: data.grilleSecondaire ?? null,
-    bilan_energetique: data.bilanEnergetique ?? null,
+    isExercice: true,
+    grilleChoisie: data.grilleChoisie ?? 'yin_yang',
+    grilleSecondaire: data.grilleSecondaire ?? null,
+    bilanEnergetique: data.bilanEnergetique ?? null,
     strategie: data.strategie ?? null,
-    points_traitement: data.pointsProposer ?? [],
-    publication_mode: 'anonyme',
-    valeur: 0,
-    annotations: data.annotationsInterrogatoire ?? [],
-    extra_data: {
-      isExercice: true,
-      polariteIdentifiee: data.polariteIdentifiee,
-      localisationIdentifiee: data.localisationIdentifiee,
-      categoriesRetenues: data.categoriesRetenues ?? [],
-      commentaireLibre: data.commentaireLibre,
-      revelationFaite: data.revelationFaite ?? false,
-      annotationsPouls: data.annotationsPouls,
-      langueTexte: data.langueTexte,
-      annotationsLangue: data.annotationsLangue,
-      examensSupp: data.examensSupp,
-      palpationAbdo: data.palpationAbdo,
-      deuxiemeSeance: data.deuxiemeSeance,
-      difficultéEstimee: data.difficultéEstimee,
-    },
+    pointsProposer: data.pointsProposer ?? [],
+    annotationsInterrogatoire: data.annotationsInterrogatoire ?? [],
+    polariteIdentifiee: data.polariteIdentifiee,
+    localisationIdentifiee: data.localisationIdentifiee,
+    categoriesRetenues: data.categoriesRetenues ?? [],
+    commentaireLibre: data.commentaireLibre,
+    revelationFaite: data.revelationFaite ?? false,
+    annotationsPouls: data.annotationsPouls,
+    langueTexte: data.langueTexte,
+    annotationsLangue: data.annotationsLangue,
+    examensSupp: data.examensSupp,
+    palpationAbdo: data.palpationAbdo,
+    deuxiemeSeance: data.deuxiemeSeance,
+    difficultéEstimee: data.difficultéEstimee,
   };
 }
 
@@ -111,7 +106,7 @@ export async function saveExercice(
   if (existing) {
     const { data: updated, error } = await supabase
       .from('user_participations')
-      .update({ ...toRow(userId, data), updated_at: now })
+      .update({ extra_data: toExtraData(data), updated_at: now })
       .eq('id', existing.id)
       .select()
       .single();
@@ -119,15 +114,16 @@ export async function saveExercice(
     return fromRow(updated);
   }
 
-  const row = {
-    id: `ex-${Date.now()}`,
-    ...toRow(userId, data),
-    created_at: now,
-    updated_at: now,
-  };
+  // Pas d'id custom — Supabase génère un UUID automatiquement
   const { data: inserted, error } = await supabase
     .from('user_participations')
-    .insert(row)
+    .insert({
+      user_id: userId,
+      case_id: data.caseId,
+      extra_data: toExtraData(data),
+      created_at: now,
+      updated_at: now,
+    })
     .select()
     .single();
   if (error || !inserted) throw new Error(error?.message ?? 'Erreur insertion exercice');

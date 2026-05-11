@@ -236,11 +236,13 @@ export default function ModifierCasPage() {
   useEffect(() => {
     getUserCaseById(caseId).then(async (found) => {
       if (!found) { setNotFound(true); return; }
-      if (found.auteurId !== user?.id) { setLoadError('Vous ne pouvez modifier que vos propres cas.'); return; }
+      if (found.auteurId !== user?.id && !user?.is_admin) { setLoadError('Vous ne pouvez modifier que vos propres cas.'); return; }
 
-      // Bloquer la modification si le cas a déjà reçu des analyses
-      const parts = await getParticipationsByCase(caseId);
-      if (parts.length > 0) { setBlocked(true); setCas(found); return; }
+      // Bloquer la modification si le cas a déjà reçu des analyses (pas pour les admins)
+      if (!user?.is_admin) {
+        const parts = await getParticipationsByCase(caseId);
+        if (parts.length > 0) { setBlocked(true); setCas(found); return; }
+      }
 
       setCas(found);
 
