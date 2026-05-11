@@ -104,7 +104,8 @@ export type PointAction =
   | 'dispersion'
   | 'harmonisation'
   | 'tonification_chauffee'
-  | 'dispersion_puis_tonification';
+  | 'dispersion_puis_tonification'
+  | 'gros_sel';           // spécial 8JM uniquement
 
 export interface PointUsage {
   code: string;                // ex: "3R", "33VB", "4GI", "62V", "30VB"

@@ -630,7 +630,7 @@ function NumberedPoints({
 
 // ─── Sous-composant : <PointRowEditor> ────────────────────────────────────────
 
-const ACTION_OPTIONS: { value: PointAction; label: string; color: string }[] = [
+const ACTION_OPTIONS: { value: PointAction; label: string; color: string; onlyFor?: string }[] = [
   { value: 'tonification', label: 'Tonification', color: 'bg-emerald-100 text-emerald-800 border-emerald-300' },
   { value: 'dispersion', label: 'Dispersion', color: 'bg-red-100 text-red-800 border-red-300' },
   { value: 'harmonisation', label: 'Harmonisation', color: 'bg-slate-100 text-slate-700 border-slate-300' },
@@ -639,6 +639,12 @@ const ACTION_OPTIONS: { value: PointAction; label: string; color: string }[] = [
     value: 'dispersion_puis_tonification',
     label: 'Dispersion puis tonification',
     color: 'bg-amber-100 text-amber-800 border-amber-300',
+  },
+  {
+    value: 'gros_sel',
+    label: 'Gros sel',
+    color: 'bg-blue-100 text-blue-800 border-blue-300',
+    onlyFor: '8JM',  // visible uniquement pour le point 8JM
   },
 ];
 
@@ -649,6 +655,7 @@ const POINT_ACTION_LABELS: Record<PointAction, string> = {
   harmonisation: 'harmonisé',
   tonification_chauffee: 'tonifié chauffé',
   dispersion_puis_tonification: 'dispersé puis tonifié',
+  gros_sel: 'gros sel',
 };
 
 function PointRowEditor({
@@ -720,7 +727,9 @@ function PointRowEditor({
             )}
           >
             <option value="">— Choisir —</option>
-            {ACTION_OPTIONS.map((o) => (
+            {ACTION_OPTIONS.filter(
+              (o) => !o.onlyFor || o.onlyFor === row.normalized.code,
+            ).map((o) => (
               <option key={o.value} value={o.value}>
                 {o.label}
               </option>
