@@ -6,14 +6,16 @@ import { supabase } from '@/lib/supabase';
 import type { UserParticipation, ClinicalCase, DifficulteEstimee } from '@/types';
 import { RATIO_STATUT, DIFFICULTE_LABELS } from '@/types';
 
-// ─── Colonnes directes confirmées dans user_participations ───────────────────
-// id, user_id, case_id, grille_choisie, publication_mode, valeur,
-// extra_data (JSONB), created_at, updated_at
+// ─── Colonnes directes RÉELLES dans user_participations ──────────────────────
+// Confirmées par les erreurs PostgREST successives :
+//   ✗ annotations, bilan_energetique, valeur (n'existent PAS)
 //
-// Tout le reste (bilan_energetique, strategie, annotations, grille_secondaire,
-// points_traitement, etc.) est stocké dans extra_data.
-// Les fromRow lisent d'abord extra_data, avec fallback sur les anciennes colonnes
-// directes pour rétrocompatibilité avec d'éventuelles lignes déjà en base.
+// Seules les colonnes ci-dessous sont écrites directement :
+//   id (uuid auto), user_id, case_id, extra_data (JSONB),
+//   created_at, updated_at
+//
+// TOUT le reste (grille_choisie, publication_mode, valeur, bilan_energetique,
+// strategie, annotations, etc.) est stocké dans extra_data.
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function fromRow(row: Record<string, any>): UserParticipation {
@@ -22,13 +24,13 @@ function fromRow(row: Record<string, any>): UserParticipation {
     id: row.id,
     userId: row.user_id,
     caseId: row.case_id,
-    grilleChoisie: row.grille_choisie,
-    // extra_data en priorité, fallback sur colonnes directes (rétrocompat)
+    // extra_data en priorité, fallback colonnes directes (rétrocompat)
+    grilleChoisie: extra.grilleChoisie ?? row.grille_choisie ?? undefined,
     grilleSecondaire: extra.grilleSecondaire ?? row.grille_secondaire ?? undefined,
     bilanEnergetique: extra.bilanEnergetique ?? row.bilan_energetique ?? undefined,
     strategie: extra.strategie ?? row.strategie ?? undefined,
-    publicationMode: row.publication_mode,
-    valeur: row.valeur ?? 1.0,
+    publicationMode: extra.publicationMode ?? row.publication_mode ?? 'anonyme',
+    valeur: extra.valeur ?? row.valeur ?? 1.0,
     pointsProposer: extra.pointsProposer ?? row.points_traitement ?? [],
     annotationsInterrogatoire: extra.annotationsInterrogatoire ?? row.annotations ?? [],
     createdAt: row.created_at,
@@ -51,37 +53,31 @@ function fromRow(row: Record<string, any>): UserParticipation {
   };
 }
 
-function toInsertRow(userId: string, data: Partial<UserParticipation> & { caseId: string }) {
-  // Seules les colonnes confirmées comme existantes en DB sont écrites directement.
-  // TOUT le reste va dans extra_data (JSONB) pour éviter les erreurs de schéma.
+function toExtraData(data: Partial<UserParticipation> & { caseId: string }) {
   return {
-    case_id: data.caseId,
-    user_id: userId,
-    grille_choisie: data.grilleChoisie ?? 'yin_yang',
-    publication_mode: data.publicationMode ?? 'anonyme',
+    grilleChoisie: data.grilleChoisie ?? 'yin_yang',
+    grilleSecondaire: data.grilleSecondaire ?? null,
+    publicationMode: data.publicationMode ?? 'anonyme',
     valeur: data.valeur ?? 1.0,
-    extra_data: {
-      grilleSecondaire: data.grilleSecondaire ?? null,
-      bilanEnergetique: data.bilanEnergetique ?? null,
-      strategie: data.strategie ?? null,
-      pointsProposer: data.pointsProposer ?? [],
-      polariteIdentifiee: data.polariteIdentifiee,
-      localisationIdentifiee: data.localisationIdentifiee,
-      categoriesRetenues: data.categoriesRetenues ?? [],
-      commentaireLibre: data.commentaireLibre,
-      revelationFaite: data.revelationFaite ?? false,
-      annotationsInterrogatoire: data.annotationsInterrogatoire ?? [],
-      annotationsPouls: data.annotationsPouls,
-      langueTexte: data.langueTexte,
-      annotationsLangue: data.annotationsLangue,
-      examensSupp: data.examensSupp,
-      palpationAbdo: data.palpationAbdo,
-      deuxiemeSeance: data.deuxiemeSeance,
-      publiee: data.publiee,
-      votes: data.votes ?? [],
-      votePoints: data.votePoints ?? 0,
-      difficultéEstimee: data.difficultéEstimee,
-    },
+    bilanEnergetique: data.bilanEnergetique ?? null,
+    strategie: data.strategie ?? null,
+    pointsProposer: data.pointsProposer ?? [],
+    polariteIdentifiee: data.polariteIdentifiee,
+    localisationIdentifiee: data.localisationIdentifiee,
+    categoriesRetenues: data.categoriesRetenues ?? [],
+    commentaireLibre: data.commentaireLibre,
+    revelationFaite: data.revelationFaite ?? false,
+    annotationsInterrogatoire: data.annotationsInterrogatoire ?? [],
+    annotationsPouls: data.annotationsPouls,
+    langueTexte: data.langueTexte,
+    annotationsLangue: data.annotationsLangue,
+    examensSupp: data.examensSupp,
+    palpationAbdo: data.palpationAbdo,
+    deuxiemeSeance: data.deuxiemeSeance,
+    publiee: data.publiee,
+    votes: data.votes ?? [],
+    votePoints: data.votePoints ?? 0,
+    difficultéEstimee: data.difficultéEstimee,
   };
 }
 
@@ -106,7 +102,6 @@ export async function getAllParticipations(userId: string): Promise<UserParticip
     .from('user_participations')
     .select('*')
     .eq('user_id', userId)
-    .filter('extra_data->isExercice', 'neq', 'true')
     .order('created_at', { ascending: false });
   if (error || !data) return [];
   return data.map(fromRow);
@@ -132,7 +127,10 @@ export async function upsertParticipation(
   if (existing) {
     const { data: updated, error } = await supabase
       .from('user_participations')
-      .update({ ...toInsertRow(userId, data), updated_at: now })
+      .update({
+        extra_data: toExtraData(data),
+        updated_at: now,
+      })
       .eq('id', existing.id)
       .select()
       .single();
@@ -141,15 +139,16 @@ export async function upsertParticipation(
     return fromRow(updated);
   }
 
-  // On ne génère pas l'id : Supabase le crée automatiquement (uuid DEFAULT gen_random_uuid())
-  const row = {
-    ...toInsertRow(userId, data),
-    created_at: now,
-    updated_at: now,
-  };
+  // Pas d'id custom : Supabase génère automatiquement un UUID
   const { data: inserted, error } = await supabase
     .from('user_participations')
-    .insert(row)
+    .insert({
+      user_id: userId,
+      case_id: data.caseId,
+      extra_data: toExtraData(data),
+      created_at: now,
+      updated_at: now,
+    })
     .select()
     .single();
   if (error || !inserted) throw new Error(error?.message ?? 'Erreur insertion');
@@ -162,7 +161,7 @@ export async function getParticipationsByCase(caseId: string): Promise<UserParti
     .from('user_participations')
     .select('*')
     .eq('case_id', caseId)
-    .order('valeur', { ascending: false });
+    .order('created_at', { ascending: false });
   if (error || !data) return [];
   return data.map(fromRow);
 }
@@ -184,18 +183,16 @@ export async function updateParticipationById(
     ...(patch.votes !== undefined && { votes: patch.votes }),
     ...(patch.votePoints !== undefined && { votePoints: patch.votePoints }),
     ...(patch.revelationFaite !== undefined && { revelationFaite: patch.revelationFaite }),
+    ...(patch.valeur !== undefined && { valeur: patch.valeur }),
+    ...(patch.publicationMode !== undefined && { publicationMode: patch.publicationMode }),
   };
-
-  const update: Record<string, unknown> = {
-    extra_data: newExtra,
-    updated_at: new Date().toISOString(),
-  };
-  if (patch.valeur !== undefined) update.valeur = patch.valeur;
-  if (patch.publicationMode !== undefined) update.publication_mode = patch.publicationMode;
 
   const { data: updated, error } = await supabase
     .from('user_participations')
-    .update(update)
+    .update({
+      extra_data: newExtra,
+      updated_at: new Date().toISOString(),
+    })
     .eq('id', id)
     .select()
     .single();

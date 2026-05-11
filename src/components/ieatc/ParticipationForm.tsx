@@ -1138,14 +1138,22 @@ export function ParticipationForm({
         }
       }
 
-      // Afficher les erreurs, bordures rouges, et scroller vers la première section en erreur
+      // Afficher les erreurs, bordures rouges, et scroller vers le banner de validation (en haut du form)
       if (errors.length > 0) {
         setValidationErrors(errors);
         setErrorSections(errSections);
         setTimeout(() => {
-          // Scroll vers la première section problématique (pas le banner) pour guider l'utilisateur
-          const target = firstErrorRef?.current ?? errorBannerRef.current;
-          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // On scrolle vers le banner d'erreur (qui est en haut du form, au-dessus des sections).
+          // scrollIntoView dans un conteneur overflow-y-auto ramène le banner visible.
+          const banner = errorBannerRef.current;
+          if (banner) {
+            const scrollable = banner.closest('.overflow-y-auto') as HTMLElement | null;
+            if (scrollable) {
+              scrollable.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
         }, 80);
         return;
       }
