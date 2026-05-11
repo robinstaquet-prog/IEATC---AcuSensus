@@ -713,14 +713,22 @@ function Section({
   defaultOpen = true,
   badge,
   hasError,
+  forceOpen,
 }: {
   title: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
   badge?: number;
   hasError?: boolean;
+  forceOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+
+  // Forcer l'ouverture quand une erreur de validation est détectée
+  useEffect(() => {
+    if (forceOpen) setOpen(true);
+  }, [forceOpen]);
+
   return (
     <div className={cn('rounded-xl overflow-hidden border-2', hasError ? 'border-red-400' : 'border-slate-200')}>
       <button
@@ -1070,13 +1078,15 @@ export function ParticipationForm({
         }
       }
 
-      // Afficher les erreurs, bordures rouges, et scroller vers le banner
+      // Afficher les erreurs, bordures rouges, et scroller vers la première section en erreur
       if (errors.length > 0) {
         setValidationErrors(errors);
         setErrorSections(errSections);
         setTimeout(() => {
-          errorBannerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50);
+          // Scroll vers la première section problématique (pas le banner) pour guider l'utilisateur
+          const target = firstErrorRef?.current ?? errorBannerRef.current;
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
         return;
       }
 
@@ -1269,7 +1279,7 @@ export function ParticipationForm({
 
       {/* ── 1. Interrogatoire ── */}
       <div ref={sectionInterrogatoireRef}>
-        <Section title="Interrogatoire" defaultOpen={true} badge={annInterrogatoire.length} hasError={errorSections.has('interrogatoire')}>
+        <Section title="Interrogatoire" defaultOpen={true} badge={annInterrogatoire.length} hasError={errorSections.has('interrogatoire')} forceOpen={errorSections.has('interrogatoire')}>
           <p className="text-xs text-slate-500 bg-teal-50 border border-teal-100 rounded-lg px-3 py-2">
             Sélectionnez du texte pour ajouter une remarque clinique. Les annotations peuvent se
             chevaucher.
@@ -1415,7 +1425,7 @@ export function ParticipationForm({
 
       {/* ── 3. Pouls ── */}
       <div ref={sectionPoulsRef}>
-        <Section title="Pouls" defaultOpen={false} badge={annPouls.length} hasError={errorSections.has('pouls')}>
+        <Section title="Pouls" defaultOpen={false} badge={annPouls.length} hasError={errorSections.has('pouls')} forceOpen={errorSections.has('pouls')}>
           {pulsesCondition && (
             <p className="text-xs text-slate-400 italic">{pulsesCondition}</p>
           )}
@@ -1436,7 +1446,7 @@ export function ParticipationForm({
 
       {/* ── 4. Grilles de lecture — déplacé ici, après les pouls ── */}
       <div ref={sectionGrilleRef}>
-        <Section title="Grilles de lecture" defaultOpen={true} hasError={errorSections.has('grille')}>
+        <Section title="Grilles de lecture" defaultOpen={true} hasError={errorSections.has('grille')} forceOpen={errorSections.has('grille')}>
           <div>
             <label className="block text-xs font-semibold text-slate-600 mb-2 uppercase tracking-wide">
               Grille principale <span className="text-red-400">*</span>
@@ -1511,7 +1521,7 @@ export function ParticipationForm({
 
       {/* ── 5. Bilan énergétique ── */}
       <div ref={sectionBilanRef}>
-        <Section title="Bilan énergétique" defaultOpen={true} hasError={errorSections.has('bilan')}>
+        <Section title="Bilan énergétique" defaultOpen={true} hasError={errorSections.has('bilan')} forceOpen={errorSections.has('bilan')}>
           <p className="text-xs text-slate-500">
             Saisissez votre raisonnement énergétique en points numérotés (max 7 points, 600 caractères au total).
           </p>
@@ -1531,6 +1541,7 @@ export function ParticipationForm({
           title={`Stratégie thérapeutique${mode === 'cas' ? ' (optionnelle)' : ''}`}
           defaultOpen={mode === 'participation'}
           hasError={errorSections.has('strategie')}
+          forceOpen={errorSections.has('strategie')}
         >
           <NumberedPoints
             points={strategie}
