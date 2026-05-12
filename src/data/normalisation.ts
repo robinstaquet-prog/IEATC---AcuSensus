@@ -2970,10 +2970,11 @@ export function reglesConceptIeatc(id: string): string[] {
  */
 export function normaliserTechnique(technique: string): string[] {
   switch (technique) {
-    case 'tonification_chauffee':        return ['tonification'];
-    case 'moxa_tonification':            return ['tonification', 'moxa'];
-    case 'moxa_dispersion':              return ['dispersion', 'moxa'];
-    case 'dispersion_puis_tonification': return ['dispersion', 'tonification'];
+    // Garde le label précis ET ajoute les familles parentes
+    case 'tonification_chauffee':        return ['tonification_chauffee', 'tonification'];
+    case 'moxa_tonification':            return ['moxa_tonification', 'tonification', 'moxa'];
+    case 'moxa_dispersion':              return ['moxa_dispersion', 'dispersion', 'moxa'];
+    case 'dispersion_puis_tonification': return ['dispersion_puis_tonification', 'dispersion', 'tonification'];
     default: return [technique];
   }
 }
