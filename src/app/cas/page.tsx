@@ -89,7 +89,7 @@ function CasCard({ cas, showApprentissage }: { cas: ClinicalCase; showApprentiss
             {cas.age && <span>{cas.age} ans</span>}
             {cas.age && cas.sexe && <span>·</span>}
             {cas.sexe && <span>{cas.sexe === 'feminin' ? 'F' : cas.sexe === 'masculin' ? 'H' : '?'}</span>}
-            {cas.analyses.length > 1 && (
+            {cas.analyses.length > 0 && (
               <>
                 <span>·</span>
                 <span>{cas.analyses.length} analyse{cas.analyses.length > 1 ? 's' : ''}</span>

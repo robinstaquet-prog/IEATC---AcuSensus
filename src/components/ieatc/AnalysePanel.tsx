@@ -49,12 +49,13 @@ interface AnnotationComment {
   participationId: string;
   voteCount: number;
   hasVoted: boolean;
+  /** Passage original complet sélectionné par l'auteur */
+  passage: string;
 }
 
 /** Sélection active d'un passage annoté */
 interface AnnotationSelection {
   ids: string[];
-  passage: string;
 }
 
 // ─── Utilitaires ──────────────────────────────────────────────────────────────
@@ -136,10 +137,10 @@ function AnnotationSidePanel({
 
   return (
     <div className="rounded-xl border border-amber-200 bg-amber-50/30 shadow-lg p-4 space-y-3 w-full max-w-sm">
-      {/* Passage sélectionné */}
+      {/* Titre */}
       <p className="text-sm font-semibold text-slate-800 leading-snug">
         <span className="text-amber-600 mr-1">{'\u{1F4CC}'}</span>
-        &laquo;&nbsp;{selection.passage}&nbsp;&raquo;
+        {comments.length} remarque{comments.length !== 1 ? 's' : ''} sur ce passage
       </p>
 
       {/* Commentaires en cards */}
@@ -150,6 +151,11 @@ function AnnotationSidePanel({
             key={`${c.participationId}-${c.annId}`}
             className="rounded-lg border border-slate-200 bg-white shadow-sm p-3 space-y-2"
           >
+            {/* Passage original sélectionné par l'auteur */}
+            <p className="text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 leading-snug border border-amber-100">
+              &laquo;&nbsp;{c.passage.length > 120 ? c.passage.slice(0, 120) + '…' : c.passage}&nbsp;&raquo;
+            </p>
+
             {/* En-tête : médaille + compteur de votes */}
             <div className="flex items-center gap-2 text-xs text-slate-500">
               {medal && <span className="text-base">{medal}</span>}
@@ -254,12 +260,12 @@ function AnnotatedTextWithPanel({
 
   // Clic sur un passage annoté → ouvre le panneau latéral
   const handleClick = useCallback(
-    (ids: string[], passageText: string) => {
+    (ids: string[]) => {
       if (selection && selection.ids.join(',') === ids.join(',')) {
         setSelection(null);
         return;
       }
-      setSelection({ ids, passage: passageText });
+      setSelection({ ids });
     },
     [selection],
   );
@@ -283,6 +289,11 @@ function AnnotatedTextWithPanel({
               v.cible === 'element' &&
               v.elementKey === `annotation:${x.ann.id}`,
           );
+        // Reconstituer le passage original complet de cette annotation
+        const annStart = Math.max(0, x.ann.start);
+        const annEnd = Math.min(text.length, x.ann.start + x.ann.length);
+        const passage = text.slice(annStart, annEnd);
+
         return {
           annId: x.ann.id,
           comment: x.ann.comment ?? '',
@@ -290,6 +301,7 @@ function AnnotatedTextWithPanel({
           participationId: x.participationId,
           voteCount,
           hasVoted,
+          passage,
         };
       });
   }, [selection, allAnnotationsMeta, participations, user]);
@@ -366,7 +378,7 @@ function AnnotatedTextWithPanel({
                 isSelected ? 'bg-amber-200 text-amber-900' : cls,
                 !isSelected && 'hover:brightness-90',
               )}
-              onClick={() => handleClick(seg.ids, seg.text)}
+              onClick={() => handleClick(seg.ids)}
             >
               {seg.text}
             </mark>

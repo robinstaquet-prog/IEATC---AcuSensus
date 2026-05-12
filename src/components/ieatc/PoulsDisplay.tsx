@@ -25,11 +25,11 @@ const QUALITE_CONFIG: Record<QualitePouls, { label: string; color: string }> = {
 // ─── Labels des positions ─────────────────────────────────────────────────────
 
 const POSITION_LABELS: Record<string, { label: string; side?: string }> = {
-  foyer_superieur_gauche: { label: 'FI gauche — Cœur (9C)', side: 'Gauche' },
-  foyer_moyen_gauche: { label: 'F. Moyen gauche', side: 'Gauche' },
+  foyer_superieur_gauche: { label: 'F. Supérieur gauche — Cœur (9C)', side: 'Gauche' },
+  foyer_moyen_gauche: { label: 'F. Moyen gauche — Foie', side: 'Gauche' },
   foyer_inferieur_gauche: { label: 'F. Inférieur gauche — Rein', side: 'Gauche' },
   foyer_superieur_droit: { label: 'F. Supérieur droit — Poumon (9P)', side: 'Droit' },
-  foyer_moyen_droit: { label: 'F. Moyen droit', side: 'Droit' },
+  foyer_moyen_droit: { label: 'F. Moyen droit — Rate', side: 'Droit' },
   foyer_inferieur_droit: { label: 'F. Inférieur droit — Rein', side: 'Droit' },
   global_superficiel: { label: 'Superficiel global (Yang)' },
   global_profond: { label: 'Profond global (Yin)' },
