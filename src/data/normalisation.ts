@@ -534,6 +534,67 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['merveilleux vaisseaux',          'du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo'],
   ['qi jing ba mai',                 'du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo'],
 
+  // ─── STAGNATION DE QI DE L'ESTOMAC ─────────────────────────────────────────
+  ['blocage de l estomac',           'stagnation qi estomac estomac bloque'],
+  ['blocage d estomac',              'stagnation qi estomac estomac bloque'],
+  ['estomac bloque',                 'stagnation qi estomac'],
+  ['estomac qui se bloque',          'stagnation qi estomac'],
+  ['estomac obstrue',                'stagnation qi estomac'],
+  ['estomac sature',                 'stagnation qi estomac stagnation nourriture'],
+  ['estomac ne fait pas descendre',  'rebellion qi estomac stagnation qi estomac'],
+  ['estomac ne descend plus',        'rebellion qi estomac'],
+  ['qi de l estomac ne descend',     'rebellion qi estomac'],
+  ['qi de l estomac rebelle',        'rebellion qi estomac'],
+  ['estomac rebelle',                'rebellion qi estomac'],
+  ['qi d estomac rebelle',           'rebellion qi estomac'],
+  ['reflux gastrique',               'rebellion qi estomac chaleur estomac'],
+  ['nausees par blocage',            'rebellion qi estomac stagnation qi estomac'],
+  ['digestion bloquee dans l estomac','stagnation qi estomac stagnation nourriture'],
+
+  // ─── STAGNATION DE QI DE LA RATE ───────────────────────────────────────────
+  ['blocage de la rate',             'stagnation qi rate rate bloquee'],
+  ['blocage a la rate',              'stagnation qi rate rate bloquee'],
+  ['rate bloquee',                   'stagnation qi rate'],
+  ['rate qui se bloque',             'stagnation qi rate'],
+  ['rate obstrue',                   'stagnation qi rate'],
+
+  // ─── STAGNATION DE SANG AU FOIE ────────────────────────────────────────────
+  ['sang du foie stagnant',          'stagnation sang foie foie sang stagnant'],
+  ['sang stagnant au foie',          'stagnation sang foie'],
+  ['stase de sang au foie',          'stagnation sang foie stase sanguine foie'],
+  ['sang bloque au foie',            'stagnation sang foie'],
+  ['sang du foie qui se bloque',     'stagnation sang foie'],
+  ['caillots menstruels',            'stagnation sang foie stagnation de sang'],
+  ['regles avec caillots',           'stagnation sang foie stagnation de sang'],
+  ['regles sombres',                 'stagnation sang foie vide sang foie'],
+
+  // ─── YANG APPARENT — toutes formulations ────────────────────────────────────
+  ['yang apparent de vb',            'yang apparent vb feu vide yang foie montant'],
+  ['yang apparent vb',               'yang apparent vb feu vide yang foie montant'],
+  ['faux yang de vb',                'yang apparent vb feu vide'],
+  ['faux yang vb',                   'yang apparent vb feu vide'],
+  ['yang flottant de vb',            'yang apparent vb yang flottant feu vide'],
+  ['yang non ancre vb',              'yang apparent vb yang non ancre feu vide'],
+  ['yang de vb qui monte',           'yang apparent vb yang foie montant'],
+  ['yang vb montant',                'yang apparent vb yang foie montant'],
+  ['yang apparent du foie',          'yang apparent foie feu vide yang foie montant'],
+  ['yang apparent foie',             'yang apparent foie feu vide'],
+  ['faux yang du foie',              'yang apparent foie feu vide'],
+  ['yang flottant du foie',          'yang apparent foie yang flottant feu vide'],
+
+  // ─── VIDE DE QI DU FOIE ─────────────────────────────────────────────────────
+  ['foie en vide de qi',             'vide qi foie foie affaibli'],
+  ['foie energetiquement vide',      'vide qi foie'],
+  ['foie manque de qi',              'vide qi foie'],
+
+  // ─── RÉBELLION QI / DESCENTE PERTURBÉE ──────────────────────────────────────
+  ['qi ne descend pas',              'rebellion qi estomac descente perturbee'],
+  ['descente perturbee',             'rebellion qi estomac'],
+  ['qi monte en rebellion',          'rebellion qi estomac yang foie montant'],
+  ['qi rebelle',                     'rebellion qi estomac'],
+  ['hoquet chronique',               'rebellion qi estomac'],
+  ['vomissements chroniques',        'rebellion qi estomac stagnation qi estomac'],
+
 ];
 
 /**
@@ -1663,6 +1724,243 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     priorite: 2,
     parentFamilleId: 'tan',
+  },
+
+  // ─── Syndromes manquants : Estomac ──────────────────────────────────────────
+  {
+    id: 'stagnation_qi_estomac',
+    label: 'Stagnation de Qi de l\'Estomac',
+    categorie: 'syndrome',
+    description: 'Qi de l\'Estomac bloqué — douleur épigastrique distensive, ballonnements, rot, rots acides. L\'Estomac ne fait plus descendre.',
+    patterns: [
+      'stagnation de qi de l estomac', 'stagnation qi estomac',
+      'qi de l estomac stagnant', 'estomac qi stagnant',
+      'blocage de l estomac', 'estomac bloque',
+      'estomac obstrue', 'qi bloque dans l estomac',
+      'estomac qui se bloque', 'stagnation dans l estomac',
+      'blocage estomac', 'estomac en stagnation',
+    ],
+    priorite: 2,
+    parentFamilleId: 'stagnation_qi',
+  },
+  {
+    id: 'rebellion_qi_estomac',
+    label: 'Rébellion du Qi de l\'Estomac',
+    categorie: 'syndrome',
+    description: 'Le Qi de l\'Estomac monte au lieu de descendre — nausées, vomissements, rots, reflux acide, hoquets.',
+    patterns: [
+      'rebellion du qi de l estomac', 'qi de l estomac rebelle',
+      'qi de l estomac ne descend pas', 'qi estomac qui monte',
+      'estomac rebelle', 'estomac ne fait pas descendre',
+      'reflux qi estomac', 'qi rebelle estomac',
+      'nausees par blocage estomac', 'estomac contre courant',
+      'qi estomac en rebellion', 'estomac ne descend plus',
+      'descente estomac perturbee',
+    ],
+    priorite: 2,
+    parentFamilleId: 'stagnation_qi',
+  },
+  {
+    id: 'stagnation_nourriture',
+    label: 'Rétention de nourriture — Estomac surchargé',
+    categorie: 'syndrome',
+    description: 'Aliments non transformés stagnant dans l\'Estomac — épigastre plein et douloureux, goût acide, selles nauséabondes.',
+    patterns: [
+      'retention de nourriture', 'stagnation de nourriture',
+      'nourriture stagnante', 'estomac surcharge',
+      'aliments qui stagnent', 'digestion bloquee',
+      'accumulation de nourriture', 'nourriture bloquee',
+      'estomac deborde', 'surchauffe digestive',
+    ],
+    priorite: 2,
+    parentFamilleId: 'stagnation_qi',
+  },
+
+  // ─── Syndromes manquants : Rate ─────────────────────────────────────────────
+  {
+    id: 'stagnation_qi_rate',
+    label: 'Stagnation de Qi de la Rate',
+    categorie: 'syndrome',
+    description: 'Qi de la Rate bloqué — ballonnements, lourdeur abdominale, selles irrégulières.',
+    patterns: [
+      'stagnation de qi de la rate', 'stagnation qi rate',
+      'qi de la rate stagnant', 'rate qi stagnant',
+      'blocage de la rate', 'rate bloquee',
+      'rate obstrue', 'rate qui se bloque',
+      'blocage rate', 'rate en stagnation',
+    ],
+    priorite: 2,
+    parentFamilleId: 'stagnation_qi',
+  },
+  {
+    id: 'vide_sang_rate',
+    label: 'Vide de Sang de la Rate',
+    categorie: 'syndrome',
+    description: 'Sang insuffisant au niveau de la Rate — digestion molle, teint terne, fatigue profonde.',
+    patterns: [
+      'vide de sang de la rate', 'sang de la rate vide',
+      'rate sang vide', 'vide sang rate',
+      'insuffisance sang rate', 'sang insuffisant rate',
+      'rate ne produit plus le sang', 'rate ne genere plus le sang',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_sang',
+  },
+
+  // ─── Syndromes manquants : Foie ─────────────────────────────────────────────
+  {
+    id: 'vide_qi_foie',
+    label: 'Vide de Qi du Foie',
+    categorie: 'syndrome',
+    description: 'Qi du Foie insuffisant — fatigue à la décision, vision faible, tendons mous, dépression silencieuse.',
+    patterns: [
+      'vide de qi du foie', 'vide qi foie', 'foie qi vide',
+      'qi du foie vide', 'qi du foie insuffisant',
+      'insuffisance qi foie', 'foie en vide de qi',
+      'foie energetiquement insuffisant',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_qi',
+  },
+  {
+    id: 'stagnation_sang_foie',
+    label: 'Stagnation de Sang au Foie',
+    categorie: 'syndrome',
+    description: 'Sang bloqué au niveau du Foie — hypocondre douloureux fixe, masse abdominale, règles sombres avec caillots.',
+    patterns: [
+      'stagnation de sang au foie', 'stagnation sang foie',
+      'sang du foie stagnant', 'foie sang stagnant',
+      'stase sanguine au foie', 'sang bloque au foie',
+      'stagnation du sang au foie', 'stagnation de sang du foie',
+      'sang stagnant foie', 'xue stagnant foie',
+    ],
+    priorite: 2,
+    parentFamilleId: 'stagnation_sang',
+  },
+  {
+    id: 'vide_yang_foie',
+    label: 'Vide de Yang du Foie',
+    categorie: 'syndrome',
+    description: 'Yang du Foie insuffisant — rare, souvent confondu avec Vide de Yang général. Froid aux hypocondres, fatigue décisionnelle, dépression froide.',
+    patterns: [
+      'vide de yang du foie', 'vide yang foie', 'foie yang vide',
+      'yang du foie vide', 'yang du foie insuffisant',
+      'insuffisance yang foie', 'foie en vide de yang',
+      'yang du bois insuffisant', 'bois en vide de yang',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_yang',
+  },
+
+  // ─── Syndromes manquants : Rein ─────────────────────────────────────────────
+  {
+    id: 'vide_qi_rein',
+    label: 'Vide de Qi du Rein',
+    categorie: 'syndrome',
+    description: 'Qi du Rein insuffisant — lombalgies, urines fréquentes, pollakiurie nocturne, essoufflement à l\'effort.',
+    patterns: [
+      'vide de qi du rein', 'vide qi rein', 'rein qi vide',
+      'qi du rein vide', 'qi du rein insuffisant',
+      'insuffisance qi rein', 'rein en vide de qi',
+      'qi renal insuffisant', 'rein qui ne retient plus',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_qi',
+  },
+
+  // ─── Syndromes manquants : Poumon ────────────────────────────────────────────
+  {
+    id: 'vide_yang_poumon',
+    label: 'Vide de Yang du Poumon',
+    categorie: 'syndrome',
+    description: 'Yang du Poumon insuffisant (rare) — toux froide, expectoration claire, aversion au froid, transpiration spontanée.',
+    patterns: [
+      'vide de yang du poumon', 'vide yang poumon', 'poumon yang vide',
+      'yang du poumon vide', 'yang du poumon insuffisant',
+      'insuffisance yang poumon', 'poumon en vide de yang',
+      'yang pulmonaire insuffisant',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_yang',
+  },
+  {
+    id: 'tan_poumon',
+    label: 'Tan obstruant le Poumon',
+    categorie: 'syndrome',
+    description: 'Phlegme (Tan) dans le Poumon — toux grasse avec expectorations, oppression thoracique, sifflements.',
+    patterns: [
+      'tan dans le poumon', 'phlegme dans le poumon',
+      'tan obstrue le poumon', 'poumon obstrue par le tan',
+      'phlegme poumon', 'tan poumon',
+      'toux avec expectorations', 'accumulation tan poumon',
+      'poumon envahi par le tan', 'tan dans le foyer superieur',
+    ],
+    priorite: 2,
+    parentFamilleId: 'tan',
+  },
+
+  // ─── Syndromes manquants : Cœur/Rate (Feu-Terre) ────────────────────────────
+  {
+    id: 'vide_qi_rate_coeur',
+    label: 'Vide de Qi Rate-Cœur (Feu ne nourrit plus Terre)',
+    categorie: 'syndrome',
+    description: 'Double vide : Rate et Cœur insuffisants ensemble — fatigue profonde, palpitations légères, digestion lente.',
+    patterns: [
+      'vide qi rate coeur', 'vide de qi rate et coeur',
+      'rate coeur en vide de qi', 'coeur rate insuffisants',
+      'double vide qi rate coeur',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_qi',
+  },
+
+  // ─── Syndromes manquants : VB / TR ───────────────────────────────────────────
+  {
+    id: 'vide_qi_vb',
+    label: 'Vide de Qi de la Vésicule Biliaire',
+    categorie: 'syndrome',
+    description: 'Qi de la VB insuffisant — indécision, timidité excessive, peur de se décider, soupirs fréquents.',
+    patterns: [
+      'vide de qi de la vesicule', 'vide qi vb',
+      'vesicule biliaire en vide de qi', 'qi de la vb vide',
+      'vb en vide', 'vesicule insuffisante',
+      'vesicule biliaire affaiblie', 'vb qi vide',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_qi',
+  },
+
+  // ─── Syndromes manquants : Yang apparent composite ───────────────────────────
+  {
+    id: 'yang_apparent_vb',
+    label: 'Yang apparent de VB (Faux Yang — Vide de Yin sous-jacent)',
+    categorie: 'syndrome',
+    description: 'Yang de la VB non ancré qui monte — TOUJOURS secondaire à un vide de Yin (Foie ou Rein). Traiter le Yin, jamais disperser le Yang.',
+    patterns: [
+      'yang apparent de vb', 'yang apparent vb',
+      'yang apparent de la vesicule', 'faux yang vb',
+      'yang flottant vb', 'yang non ancre vb',
+      'yang de vb qui monte', 'yang vb montant',
+      'yang apparent vesicule biliaire',
+    ],
+    regles: ['R3', 'R4'],
+    priorite: 2,
+    parentFamilleId: 'feu_vide',
+  },
+  {
+    id: 'yang_apparent_foie',
+    label: 'Yang apparent du Foie (Faux Yang — Vide de Yin sous-jacent)',
+    categorie: 'syndrome',
+    description: 'Yang du Foie non ancré qui monte — secondaire à vide de Yin du Foie ou du Rein. Traiter le Yin en premier.',
+    patterns: [
+      'yang apparent du foie', 'yang apparent foie',
+      'faux yang foie', 'yang flottant foie',
+      'yang non ancre foie', 'yang du foie non ancre',
+      'yang apparent de foie',
+    ],
+    regles: ['R3', 'R4'],
+    priorite: 2,
+    parentFamilleId: 'feu_vide',
   },
 ];
 
@@ -2996,10 +3294,24 @@ export function normaliserTechnique(technique: string): string[] {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export interface ChaineCausale {
-  texteOriginal: string;   // texte brut du praticien
-  effet: string;           // partie AVANT le marqueur (normalisée, sans accents)
-  cause: string;           // partie APRÈS le marqueur (normalisée, sans accents)
-  marqueur: string;        // marqueur causal détecté (normalisé)
+  texteOriginal: string;
+  effet: string;           // texte normalisé avant le marqueur
+  cause: string;           // texte normalisé après le marqueur
+  marqueur: string;        // marqueur causal détecté
+  conceptsEffet: {         // concepts extraits de l'effet séparément
+    familles: string[];
+    syndromes: string[];
+    organes: string[];
+    strategies: string[];
+    pathologies: string[];
+  };
+  conceptsCause: {         // concepts extraits de la cause séparément
+    familles: string[];
+    syndromes: string[];
+    organes: string[];
+    strategies: string[];
+    pathologies: string[];
+  };
 }
 
 /**
@@ -3078,7 +3390,14 @@ export function extraireChaineCausale(texte: string): ChaineCausale | null {
     const effet = n.slice(0, idx).trim();
     const cause = n.slice(idx + needle.length).trim();
     if (!effet || !cause) continue;
-    return { texteOriginal: texte, effet, cause, marqueur };
+    return {
+      texteOriginal: texte,
+      effet,
+      cause,
+      marqueur,
+      conceptsEffet: extraireConceptsIeatc(effet),
+      conceptsCause: extraireConceptsIeatc(cause),
+    };
   }
   return null;
 }
