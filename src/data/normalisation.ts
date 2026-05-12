@@ -52,6 +52,508 @@ function matchPattern(normalized: string, pattern: string): boolean {
   return (` ${normalized} `).includes(` ${pattern} `);
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// COUCHE SÉMANTIQUE — Expansion des équivalences IEATC
+//
+// Principe : quand un praticien écrit librement, il ne dit PAS toujours
+// "stagnation de Qi du Foie". Il dit "le foie est bloqué", "le foie ne
+// circule pas", "blocage du foie", "foie congestionné"...
+//
+// Cette couche ENRICHIT le texte normalisé avec les formes canoniques
+// correspondantes — sans supprimer l'original. Ainsi les patterns existants
+// peuvent les reconnaître.
+//
+// Règle d'or : toujours AJOUTER, jamais REMPLACER (non-destructif).
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> = [
+
+  // ─── STAGNATION DE QI DU FOIE ────────────────────────────────────────────────
+  // Toutes les façons de dire que le Qi du Foie est bloqué
+  ['le foie ne circule pas',         'stagnation qi foie foie bloque'],
+  ['le foie ne circule plus',        'stagnation qi foie foie bloque'],
+  ['foie ne circule pas',            'stagnation qi foie foie bloque'],
+  ['foie ne circule plus',           'stagnation qi foie foie bloque'],
+  ['le foie est bloque',             'stagnation qi foie foie bloque'],
+  ['foie est bloque',                'stagnation qi foie foie bloque'],
+  ['blocage du foie',                'stagnation qi foie foie bloque'],
+  ['blocage au foie',                'stagnation qi foie foie bloque'],
+  ['blocage de l energie du foie',   'stagnation qi foie foie bloque'],
+  ['energie du foie bloquee',        'stagnation qi foie foie bloque'],
+  ['energie du foie stagnante',      'stagnation qi foie foie bloque'],
+  ['energie du foie entravee',       'stagnation qi foie foie bloque'],
+  ['energie du foie ne passe pas',   'stagnation qi foie foie bloque'],
+  ['qi du foie qui stagne',          'stagnation qi foie'],
+  ['qi du foie en stagnation',       'stagnation qi foie'],
+  ['qi du foie qui se bloque',       'stagnation qi foie foie bloque'],
+  ['qi du foie est retenu',          'stagnation qi foie qi bloque'],
+  ['foie congestionne',              'stagnation qi foie foie bloque'],
+  ['foie est congestionne',          'stagnation qi foie foie bloque'],
+  ['foie entrave',                   'stagnation qi foie foie bloque'],
+  ['foie est entrave',               'stagnation qi foie foie bloque'],
+  ['foie obstrue',                   'stagnation qi foie foie bloque'],
+  ['foie se bloque',                 'stagnation qi foie foie bloque'],
+  ['foie qui se bloque',             'stagnation qi foie bois qui se bloque'],
+  ['foie ne laisse pas circuler',    'stagnation qi foie foie bloque'],
+  ['foie ne fait plus passer',       'stagnation qi foie foie bloque'],
+  ['foie ne fait pas passer le qi',  'stagnation qi foie foie bloque'],
+  ['foie ralenti',                   'stagnation qi foie foie bloque'],
+  ['foie fige',                      'stagnation qi foie foie bloque'],
+  ['foie coince',                    'stagnation qi foie foie bloque'],
+  ['foie sature',                    'stagnation qi foie foie bloque'],
+  ['bois bloque',                    'stagnation qi foie bois qui se bloque'],
+  ['bois est bloque',                'stagnation qi foie bois qui se bloque'],
+  ['bois stagnant',                  'stagnation qi foie bois qui se bloque'],
+  ['bois en stagnation',             'stagnation qi foie bois qui se bloque'],
+  ['stagnation du bois',             'stagnation qi foie bois qui se bloque'],
+  ['blocage du bois',                'stagnation qi foie bois qui se bloque'],
+  ['energie du bois bloquee',        'stagnation qi foie bois qui se bloque'],
+  ['bois ralenti',                   'stagnation qi foie bois qui se bloque'],
+  ['bois qui ne circule pas',        'stagnation qi foie bois qui se bloque'],
+  ['bois qui ne circule plus',       'stagnation qi foie bois qui se bloque'],
+  ['foie vb bloque',                 'stagnation qi foie bois qui se bloque'],
+  ['foie vb en stagnation',          'stagnation qi foie bois qui se bloque'],
+  ['vb bloque',                      'stagnation qi foie foie bloque'],
+  ['vesicule bloquee',               'stagnation qi foie foie bloque'],
+  // Frustration / émotions qui bloquent le Foie
+  ['foie serre',                     'stagnation qi foie foie bloque'],
+  ['foie contracte',                 'stagnation qi foie foie bloque'],
+  ['tension au niveau du foie',      'stagnation qi foie foie bloque'],
+  ['crispation du foie',             'stagnation qi foie foie bloque'],
+
+  // ─── YANG DU FOIE MONTANT ────────────────────────────────────────────────────
+  ['yang qui monte',                 'yang du foie montant yang monte'],
+  ['yang monte',                     'yang du foie montant yang monte'],
+  ['yang ascendant',                 'yang du foie montant yang monte'],
+  ['yang non ancre',                 'yang du foie montant yang non ancre'],
+  ['yang flottant',                  'yang du foie montant yang flottant'],
+  ['yang qui flotte',                'yang du foie montant yang flottant'],
+  ['yang ne descend pas',            'yang du foie montant yang monte'],
+  ['yang s eleve',                   'yang du foie montant yang monte'],
+  ['yang remonte',                   'yang du foie montant yang monte'],
+  ['yang monte vers le haut',        'yang du foie montant yang monte'],
+  ['yang en rebellion',              'yang du foie montant yang en usurpateur'],
+  ['yang monte en usurpateur',       'yang du foie montant yang en usurpateur'],
+  ['yang du foie monte',             'yang du foie montant yang monte'],
+  ['yang foie monte',                'yang du foie montant yang monte'],
+  ['yang du foie non ancre',         'yang du foie montant yang non ancre'],
+  ['yang du foie qui monte',         'yang du foie montant yang monte'],
+  ['yang du foie flotte',            'yang du foie montant yang flottant'],
+  ['yang du foie s eleve',           'yang du foie montant yang monte'],
+  ['yang du foie trop fort',         'yang du foie montant yang du foie en exces'],
+  ['yang du foie en exces',          'yang du foie montant yang du foie en exces'],
+  ['yang du foie en plenitude',      'yang du foie montant yang du foie en plenitude'],
+  ['yang du foie deborde',           'yang du foie montant yang du foie en exces'],
+  ['yang du foie envahit',           'yang du foie montant yang en usurpateur'],
+  ['yang du foie non controle',      'yang du foie montant yang monte'],
+  ['yang du foie qui s eleve',       'yang du foie montant yang monte'],
+  ['yang non ancre par le yin',      'yang du foie montant yang non ancre yang flottant'],
+  ['prosperite du yang',             'yang du foie montant prosperite du yang du foie'],
+  ['yang du bois monte',             'yang du foie montant yang monte'],
+  ['yang du bois en exces',          'yang du foie montant yang du foie en exces'],
+  ['yang sans ancrage yin',          'yang du foie montant yang sans racine yang non ancre'],
+  ['yang libre sans controle',       'yang du foie montant yang non ancre'],
+  // Symptômes typiques → yang du Foie montant
+  ['cephalees aux tempes',           'yang du foie montant yang monte'],
+  ['migraine temporale',             'yang du foie montant yang monte'],
+  ['douleur aux tempes',             'yang du foie montant yang monte'],
+  ['rouge au visage colere',         'yang du foie montant yang du foie en exces'],
+  ['visage rouge qui monte',         'yang du foie montant yang monte feu du foie'],
+  ['pouls corde et rapide',          'yang du foie montant pouls corde arc yang du foie en exces'],
+
+  // ─── VIDE DE YANG DU REIN / MING MEN ────────────────────────────────────────
+  ['yang du rein s epuise',          'vide yang rein yang du rein insuffisant'],
+  ['yang du rein faiblit',           'vide yang rein yang du rein insuffisant'],
+  ['yang du rein ne suffit plus',    'vide yang rein yang du rein insuffisant'],
+  ['yang du rein diminue',           'vide yang rein yang du rein insuffisant'],
+  ['rein manque de yang',            'vide yang rein yang du rein insuffisant'],
+  ['rein yang qui faiblit',          'vide yang rein yang du rein insuffisant'],
+  ['yang renal insuffisant',         'vide yang rein yang du rein insuffisant'],
+  ['yang renal en baisse',           'vide yang rein yang du rein insuffisant'],
+  ['yang du rein qui se vide',       'vide yang rein yang du rein insuffisant'],
+  ['rein ne rechauffe plus',         'vide yang rein yang du rein insuffisant'],
+  ['rein n a plus assez de yang',    'vide yang rein yang du rein insuffisant'],
+  ['yang renal epuise',              'vide yang rein yang du rein insuffisant'],
+  ['carence yang du rein',           'vide yang rein yang du rein insuffisant'],
+  ['rein froid',                     'vide yang rein yang du rein insuffisant'],
+  ['froid au rein',                  'vide yang rein yang du rein insuffisant'],
+  ['yang du rein ne rechauffe plus', 'vide yang rein yang du rein insuffisant'],
+  ['yang du rein trop faible',       'vide yang rein yang du rein insuffisant'],
+  ['yang renal trop faible',         'vide yang rein yang du rein insuffisant'],
+  // Ming Men
+  ['feu du rein s eteint',           'feu du ming men ming men eteint mingmen insuffisant'],
+  ['feu de la vie s eteint',         'feu du ming men ming men eteint'],
+  ['feu de ming men s eteint',       'feu du ming men ming men eteint'],
+  ['feu originel s eteint',          'feu du ming men feu originel insuffisant'],
+  ['feu du ming men s eteint',       'feu du ming men ming men eteint'],
+  ['ming men ne rechauffe plus',     'feu du ming men ming men insuffisant'],
+  ['ming men s affaiblit',           'feu du ming men ming men insuffisant'],
+  ['feu du ming men s affaiblit',    'feu du ming men ming men insuffisant'],
+  ['ming men eteint',                'feu du ming men ming men eteint'],
+  ['porte de vie insuffisante',      'feu du ming men feu originel insuffisant'],
+  // Symptômes typiques → vide de Yang du Rein
+  ['froid lombaire',                 'vide yang rein yang du rein insuffisant'],
+  ['lombes froides',                 'vide yang rein yang du rein insuffisant'],
+  ['dos froid dans le bas',          'vide yang rein yang du rein insuffisant'],
+  ['urines claires et abondantes',   'vide yang rein yang du rein insuffisant'],
+  ['urines claires',                 'vide yang rein yang du rein insuffisant'],
+
+  // ─── VIDE DE YIN DU REIN ─────────────────────────────────────────────────────
+  ['yin du rein s epuise',           'vide yin rein yin du rein insuffisant'],
+  ['yin du rein faiblit',            'vide yin rein yin du rein insuffisant'],
+  ['yin du rein diminue',            'vide yin rein yin du rein insuffisant'],
+  ['rein manque de yin',             'vide yin rein yin du rein insuffisant'],
+  ['yin renal insuffisant',          'vide yin rein yin du rein insuffisant'],
+  ['yin renal epuise',               'vide yin rein yin du rein insuffisant'],
+  ['rein n a plus assez de yin',     'vide yin rein yin du rein insuffisant'],
+  ['essence du rein insuffisante',   'vide yin rein yin du rein insuffisant vide jing rein'],
+  ['rein yin qui se vide',           'vide yin rein yin du rein insuffisant'],
+  ['eau du rein insuffisante',       'vide yin rein eau insuffisante'],
+  ['eau renale insuffisante',        'vide yin rein eau insuffisante'],
+  ['carence yin du rein',            'vide yin rein yin du rein insuffisant'],
+  ['yin renal qui diminue',          'vide yin rein yin du rein insuffisant'],
+  ['yin renal qui se tarit',         'vide yin rein yin du rein insuffisant'],
+  ['substance yin du rein insuffisante', 'vide yin rein yin du rein insuffisant'],
+  ['eau insuffisante pour ancrer',   'vide yin rein eau insuffisante vide profond de l eau'],
+  // Symptômes typiques → vide de Yin du Rein
+  ['chaleur le soir',                'feu du vide chaleur vesperal vide yin rein'],
+  ['chaleur en fin de journee',      'feu du vide chaleur vesperal vide yin rein'],
+  ['chaleur la nuit',                'feu du vide chaleur vesperal vide yin'],
+  ['chaleur vesperal',               'feu du vide chaleur vesperal vide yin rein'],
+  ['sueurs la nuit',                 'vide de yin sueurs nocturnes feu du vide'],
+  ['transpiration nocturne',         'vide de yin sueurs nocturnes'],
+  ['sueurs nocturnes',               'vide de yin sueurs nocturnes feu du vide vide yin rein'],
+  ['bourdonnements vide',            'vide yin rein oreille rein bourdonnements vide'],
+  ['oreilles bourdonnement par vide','vide yin rein bourdonnements vide oreille rein'],
+
+  // ─── FEU DU VIDE — toutes les formulations ───────────────────────────────────
+  ['chaleur apparente',              'feu du vide yang apparent chaleur apparente'],
+  ['chaleur par manque de yin',      'feu du vide chaleur de vide vide avec chaleur'],
+  ['chaleur liee au vide de yin',    'feu du vide chaleur de vide'],
+  ['yang apparent par vide de yin',  'feu du vide yang apparent yang non ancre'],
+  ['yang qui flotte par manque de yin', 'feu du vide yang apparent yang flottant'],
+  ['vide de yin avec chaleur',       'feu du vide chaleur de vide vide avec chaleur'],
+  ['yang sans racine yin',           'feu du vide yang sans racine yang non ancre'],
+  ['chaleur du vide',                'feu du vide chaleur de vide chaleur xu'],
+  ['faux yang',                      'feu du vide yang apparent faux yang'],
+  ['chaleur fictive',                'feu du vide yang apparent chaleur apparente'],
+  ['chaleur qui monte par vide',     'feu du vide chaleur de vide yang monte par manque de yin'],
+  ['yang monte par manque de yin',   'feu du vide yang apparent yang non ancre'],
+
+  // ─── VIDE DE SANG DU FOIE ────────────────────────────────────────────────────
+  ['foie ne nourrit plus',           'vide sang foie foie non nourri foie mal nourri'],
+  ['foie manque de sang',            'vide sang foie sang foie insuffisant'],
+  ['foie n est plus nourri',         'vide sang foie foie non nourri'],
+  ['sang du foie insuffisant',       'vide sang foie sang foie insuffisant'],
+  ['sang du foie appauvri',          'vide sang foie sang foie insuffisant'],
+  ['foie mal alimente',              'vide sang foie foie mal nourri'],
+  ['foie manque de substance',       'vide sang foie foie non nourri'],
+  ['sang insuffisant pour le foie',  'vide sang foie sang foie insuffisant'],
+  ['foie non alimente',              'vide sang foie foie non nourri'],
+  ['bois non nourri en sang',        'vide sang foie sang foie insuffisant'],
+  // Symptômes typiques → vide de Sang du Foie
+  ['crampes nocturnes',              'vide sang foie foie non nourri'],
+  ['crampes la nuit',                'vide sang foie foie non nourri'],
+  ['jambes crampe nuit',             'vide sang foie foie non nourri'],
+  ['crampes aux jambes la nuit',     'vide sang foie foie non nourri'],
+  ['ongles cassants',                'vide sang foie foie non nourri'],
+  ['ongles fragiles',                'vide sang foie foie non nourri'],
+  ['ongles stries',                  'vide sang foie foie non nourri'],
+  ['yeux secs et fatigues',          'vide sang foie foie non nourri vide yin foie'],
+  ['vision trouble le soir',         'vide sang foie foie non nourri'],
+  ['regles pales',                   'vide sang foie sang foie insuffisant vide sang'],
+  ['regles peu abondantes',          'vide sang foie vide sang sang insuffisant'],
+
+  // ─── VIDE DE QI DE LA RATE / FOYER MOYEN ────────────────────────────────────
+  ['rate s affaiblit',               'vide qi rate rate affaiblie'],
+  ['rate s epuise',                  'vide qi rate rate affaiblie'],
+  ['rate ne produit plus',           'vide qi rate rate insuffisante'],
+  ['rate ne transforme plus',        'vide qi rate rate insuffisante'],
+  ['rate ne transporte plus',        'vide qi rate rate insuffisante'],
+  ['rate deficiente',                'vide qi rate rate affaiblie'],
+  ['rate manque de qi',              'vide qi rate qi de la rate insuffisant'],
+  ['qi de la rate qui faiblit',      'vide qi rate qi de la rate insuffisant'],
+  ['terre qui s affaiblit',          'vide qi rate rate affaiblie'],
+  ['terre deficiente',               'vide qi rate rate affaiblie'],
+  ['foyer moyen s affaiblit',        'vide qi rate rate affaiblie'],
+  ['digestion affaiblie',            'vide qi rate rate affaiblie'],
+  ['digestion deficiente',           'vide qi rate rate affaiblie'],
+  ['digestion ne fonctionne plus',   'vide qi rate rate insuffisante'],
+  ['rate fatiguee',                  'vide qi rate rate affaiblie'],
+  ['rate qui se vide',               'vide qi rate rate affaiblie'],
+  ['rate en vide',                   'vide qi rate rate affaiblie'],
+  ['rate epuisee',                   'vide qi rate rate affaiblie rate insuffisante'],
+
+  // ─── EXCÈS DE YIN AU FOYER MOYEN (R5) ───────────────────────────────────────
+  ['foyer moyen trop charge',        'exces yin foyer moyen plenitude au foyer moyen rate surchargee'],
+  ['foyer moyen encombre',           'exces yin foyer moyen plenitude au foyer moyen foyer moyen sature'],
+  ['foyer moyen bloque',             'exces yin foyer moyen foyer moyen sature'],
+  ['foyer moyen sature de yin',      'exces yin foyer moyen plenitude yin foyer moyen'],
+  ['foyer moyen plein',              'plenitude au foyer moyen exces yin foyer moyen'],
+  ['rate surchargee de yin',         'exces yin foyer moyen plenitude yin foyer moyen rate surchargee'],
+  ['rate trop pleine',               'exces yin foyer moyen rate trop forte'],
+  ['rate pleine',                    'exces yin foyer moyen rate trop forte plenitude yin foyer moyen'],
+  ['foyer moyen obstrue',            'exces yin foyer moyen foyer moyen sature'],
+
+  // ─── STAGNATION DE QI (général) ─────────────────────────────────────────────
+  ['energie qui se bloque',          'stagnation de qi qi bloque stagnation energetique'],
+  ['qi qui stagne',                  'stagnation de qi qi stagnant stagnation qi'],
+  ['qi bloque',                      'stagnation de qi qi bloque blocage de qi'],
+  ['energie bloquee',                'stagnation de qi qi bloque stagnation energetique'],
+  ['energie ne circule pas',         'stagnation de qi qi stagnant blocage de la circulation'],
+  ['energie retenue',                'stagnation de qi qi bloque stagnation energetique'],
+  ['blocage energetique',            'stagnation energetique stagnation de qi qi bloque'],
+  ['energie entravee',               'stagnation de qi qi bloque stagnation energetique'],
+  ['tchi bloque',                    'stagnation du tchi qi bloque stagnation de qi'],
+  ['tchi qui stagne',                'stagnation du tchi stagnation de qi qi stagnant'],
+  ['tchi ne circule pas',            'stagnation du tchi stagnation de qi blocage de la circulation'],
+  ['blocage du tchi',                'stagnation du tchi stagnation de qi qi bloque'],
+  ['qi entrave',                     'stagnation de qi qi bloque blocage de la circulation'],
+  ['qi ralenti',                     'stagnation de qi qi stagnant blocage circulation meridienne'],
+  ['qi en stagnation',               'stagnation de qi qi stagnant stagnation energetique'],
+  ['blocage du qi',                  'blocage de qi stagnation de qi qi bloque'],
+
+  // ─── STAGNATION DE SANG ──────────────────────────────────────────────────────
+  ['sang bloque',                    'stagnation de sang sang bloque'],
+  ['sang qui stagne',                'stagnation de sang sang bloque'],
+  ['sang coagule',                   'stagnation de sang sang bloque'],
+  ['stase du sang',                  'stagnation de sang stase sanguine'],
+  ['mauvaise circulation du sang',   'stagnation de sang sang bloque'],
+  ['sang ne circule plus bien',      'stagnation de sang sang bloque'],
+  ['sang stagnant dans',             'stagnation de sang sang bloque'],
+  ['sang fige',                      'stagnation de sang sang bloque'],
+  ['sang ralenti',                   'stagnation de sang sang bloque'],
+  ['microcirculation perturbee',     'stagnation de sang sang bloque'],
+  ['stase sanguine',                 'stagnation de sang stase sanguine'],
+  ['sang qui ne circule plus',       'stagnation de sang sang bloque'],
+
+  // ─── CYCLE CHENG (Sheng) — formulations naturelles ───────────────────────────
+  ['rein ne soutient plus le foie',  'rein ne nourrit plus foie cycle cheng eau bois eau ne nourrit plus bois'],
+  ['rein n alimente plus le foie',   'rein ne nourrit plus foie cycle cheng eau bois'],
+  ['eau ne monte plus vers le bois', 'eau ne nourrit plus bois cycle cheng eau bois'],
+  ['rein ne peut plus nourrir le foie', 'rein ne nourrit plus foie eau ne nourrit plus bois'],
+  ['foie mal nourri par le rein',    'foie mal nourri par le rein cycle cheng eau bois'],
+  ['bois mal nourri par l eau',      'bois mal nourri par l eau cycle cheng eau bois'],
+  ['rein n arrive pas a nourrir le foie', 'rein ne nourrit plus foie cycle cheng eau bois'],
+  ['rein ne peut plus soutenir le foie', 'rein ne nourrit plus foie eau ne soutient plus le bois'],
+  ['rate ne soutient plus le poumon','rate ne nourrit plus le poumon cycle cheng terre metal'],
+  ['rate n alimente plus le poumon', 'rate ne nourrit plus le poumon cycle cheng terre metal'],
+  ['poumon ne soutient plus le rein','poumon ne nourrit plus le rein cycle cheng metal eau'],
+  ['coeur ne soutient plus la rate', 'coeur ne nourrit plus la rate cycle cheng feu terre'],
+  ['feu ne nourrit plus la terre',   'feu ne nourrit plus terre cycle cheng feu terre'],
+
+  // ─── CYCLE KO — formulations naturelles ──────────────────────────────────────
+  ['foie agresse la rate',           'foie agresse la rate bois envahit terre ko pathologique'],
+  ['foie envahit la rate',           'foie envahit rate bois envahit terre ko pathologique'],
+  ['stress affecte la digestion',    'bois envahit terre foie envahit rate stress crise foie rate'],
+  ['colere affecte la digestion',    'bois envahit terre foie envahit rate stress crise foie rate'],
+  ['emotions perturbent la rate',    'bois envahit terre foie envahit rate conflit bois terre'],
+  ['foie perturbe la rate',          'foie envahit rate bois envahit terre conflit bois terre'],
+  ['foie attaque la rate',           'foie agresse la rate bois envahit terre ko pathologique'],
+  ['tension emotionnelle perturbe la digestion', 'bois envahit terre stress crise foie rate'],
+  ['rate fragilisee par le foie',    'rate fragilisee secondairement bois envahit terre'],
+  ['foie bois en exces affecte la terre', 'bois envahit terre ko pathologique bois domine terre'],
+  ['stress perturbe la digestion',   'bois envahit terre stress crise foie rate conflit bois terre'],
+  ['colere affecte l estomac',       'bois envahit terre foie envahit rate ko pathologique'],
+
+  // ─── MING MEN / DIARRHÉES MATINALES ─────────────────────────────────────────
+  ['diarrhee 5h matin',              'diarrhees matinales diarrhee au petit matin'],
+  ['diarrhee tot le matin',          'diarrhees matinales diarrhee au petit matin'],
+  ['va a la selle le matin',         'diarrhees matinales diarrhee au petit matin'],
+  ['selles molles le matin',         'diarrhees matinales yang ming perturbe'],
+  ['diarrhee a l aube',              'diarrhees matinales diarrhee au petit matin'],
+  ['diarrhee entre 5h et 7h',        'diarrhees matinales yang ming sans stimulus'],
+  ['transit le matin de bonne heure','diarrhees matinales diarrhee au petit matin'],
+
+  // ─── VENT INTERNE ────────────────────────────────────────────────────────────
+  ['vertiges par manque de yin',     'vent interne du foie vertiges vent interne vide yin rein'],
+  ['tremblements',                   'vent interne vent interne du foie agitation interne'],
+  ['tremblements des membres',       'vent interne vent interne du foie'],
+  ['mouvements involontaires',       'vent interne agitation interne'],
+  ['spasmes musculaires',            'vent interne tendons non nourris foie vb tendons'],
+  ['convulsions',                    'vent interne agitation interne'],
+  ['pouls corde',                    'pouls corde arc vent interne du foie yang du foie montant'],
+  ['pouls en corde',                 'pouls corde arc vent interne du foie yang du foie montant'],
+  ['pouls tendu',                    'pouls corde arc yang du foie montant'],
+  ['pouls en corde d arc',           'pouls corde arc yang du foie montant vent interne du foie'],
+
+  // ─── HUMIDITÉ / TAN ──────────────────────────────────────────────────────────
+  ['corps lourd',                    'humidite interne charge humide'],
+  ['sensation de lourdeur',          'humidite interne charge humide'],
+  ['lourdeur du corps',              'humidite interne charge humide'],
+  ['lourdeur generale',              'humidite interne charge humide'],
+  ['terrain humide et lourd',        'humidite interne terrain humide'],
+  ['enduit epais',                   'humidite interne humidite excessive'],
+  ['langue enduit epais',            'humidite interne humidite excessive'],
+  ['mucus s accumule',               'accumulation de tan phlegme accumule'],
+  ['glaires qui s accumulent',       'accumulation de tan phlegme accumule glaires pathogenes'],
+  ['phlegme qui s accumule',         'accumulation de tan phlegme accumule'],
+  ['tan qui obstrue',                'tan obstrue obstruction par le tan'],
+  ['mucosites',                      'accumulation de tan retention de tan'],
+  ['mucus pathologique',             'accumulation de tan phlegme accumule'],
+  ['glaires dans les poumons',       'accumulation de tan tan dans les meridiens phlegme coeur'],
+  ['terrain humide',                 'humidite interne retention d humidite terrain humide'],
+
+  // ─── PARADOXE OÉ / IONG (R6) ────────────────────────────────────────────────
+  ['inflammation locale sur vide',   'paradoxe yang local vide yang general chaleur locale vide general inflammation locale'],
+  ['chaleur locale sur fond de vide','paradoxe yang local vide yang general chaleur locale'],
+  ['inflammation en surface sur terrain de vide', 'paradoxe yang local vide general inflammation locale'],
+  ['chaleur locale sur vide yang',   'paradoxe yang local vide yang general chaleur locale'],
+  ['rougeur locale sur terrain de vide yang', 'paradoxe yang local vide yang general chaleur locale'],
+
+  // ─── VIDE QI / YANG GÉNÉRAL ─────────────────────────────────────────────────
+  ['energie generale insuffisante',  'insuffisance energetique vide qi energie insuffisante'],
+  ['vide energetique general',       'insuffisance energetique vide qi energie insuffisante'],
+  ['epuisement global',              'vide qi qi epuise energie insuffisante'],
+  ['terrain vide',                   'vide qi insuffisance energetique'],
+  ['terrain energetique appauvri',   'vide qi vide yang insuffisance energetique'],
+  ['manque d energie general',       'vide qi manque de qi energie insuffisante'],
+  ['epuisement energetique',         'vide qi qi epuise insuffisance energetique'],
+  ['energie appauvrie',              'vide qi insuffisance energetique energie insuffisante'],
+  ['grande fatigue energetique',     'vide qi insuffisance energetique energie insuffisante'],
+  ['yang general qui s effondre',    'vide yang yang general insuffisant'],
+  ['yang tres bas',                  'vide yang yang general insuffisant'],
+
+  // ─── VIDE DE YIN GÉNÉRAL ─────────────────────────────────────────────────────
+  ['substance yin insuffisante',     'vide de yin yin insuffisant yin deficient'],
+  ['yin qui s epuise',               'vide de yin yin vide yin insuffisant'],
+  ['yin appauvri',                   'vide de yin yin vide yin insuffisant'],
+  ['yin diminue',                    'vide de yin yin vide yin insuffisant'],
+  ['manque de yin',                  'vide de yin manque de yin yin insuffisant'],
+  ['yin se tarit',                   'vide de yin yin vide yin insuffisant'],
+  ['carence en yin',                 'vide de yin carence yin yin insuffisant'],
+  ['yin epuise',                     'vide de yin yin vide yin epuise'],
+
+  // ─── SHEN / PSYCHISME ────────────────────────────────────────────────────────
+  ['esprit perturbe',                'shen perturbe coeur perturbe shen agite'],
+  ['esprit agite',                   'shen perturbe shen agite perturbation du shen'],
+  ['psychisme perturbe',             'shen perturbe coeur perturbe'],
+  ['mental instable',                'shen perturbe shen agite'],
+  ['esprit instable',                'shen perturbe shen trouble'],
+  ['sommeil agite par le shen',      'shen perturbe insomnie palpitations'],
+  ['coeur qui n ancre plus le shen', 'shen perturbe coeur ne peut plus ancrer le shen'],
+  ['shen non ancre',                 'shen perturbe shen agite coeur ne peut plus ancrer le shen'],
+  ['pensees qui s emballent',        'shen perturbe shen agite yi perturbe'],
+  ['ruminations',                    'yi perturbe yi insuffisant rumination pathologique'],
+  ['pensees circulaires',            'yi perturbe pensees circulaires'],
+  ['idees fixes',                    'yi perturbe idees fixes'],
+  ['obsessions',                     'yi perturbe idees fixes rumination pathologique'],
+  ['peur profonde',                  'zhi perturbe peur chronique envahissante peur pathologique rein'],
+  ['peur du vide',                   'zhi perturbe peur chronique envahissante'],
+  ['manque de volonte',              'zhi perturbe volonte affaiblie manque de volonte profond'],
+  ['deuil non fait',                 'po perturbe deuil non resolu melancolie profonde'],
+  ['tristesse profonde',             'po perturbe melancolie profonde tristesse metal'],
+
+  // ─── TENDONS / LIGAMENTS ─────────────────────────────────────────────────────
+  ['tendons fragiles',               'tendons foie vb tendons fragiles foie ne gouverne plus les tendons'],
+  ['ligaments fragiles',             'tendons foie vb ligaments non nourris foie vb tendons'],
+  ['tendons non nourris',            'tendons foie vb tendons non nourris vide yin foie vide sang foie'],
+  ['tendons qui lachent',            'tendons foie vb tendons fragiles'],
+  ['genou qui craque',               'tendons foie vb tendons fragiles gonalgie'],
+  ['tendinopathie sur vide de foie', 'tendons foie vb vide sang foie foie ne gouverne plus les tendons'],
+
+  // ─── NOMS DE POINTS ROMANISÉS (pinyin / IEATC) → codes ─────────────────────
+  // Pinyin standard
+  ['tai xi',                         '3r'],
+  ['tai chong',                      '3f'],
+  ['zu san li',                      '36e'],
+  ['san yin jiao',                   '6rte'],
+  ['shen men',                       '7c'],
+  ['he gu',                          '4gi'],
+  ['lie que',                        '7p'],
+  ['nei guan',                       '6mc'],
+  ['tian shu',                       '25e'],
+  ['zhong wan',                      '12jm'],
+  ['guan yuan',                      '4jm'],
+  ['ming men',                       '4tm'],
+  ['bai hui',                        '20tm'],
+  ['fengchi',                        '20vb'],
+  ['feng chi',                       '20vb'],
+  ['yang ling quan',                 '34vb'],
+  ['tai bai',                        '3rte'],
+  ['yin ling quan',                  '9rte'],
+  ['qu quan',                        '8f'],
+  ['fu liu',                         '7r'],
+  ['zhao hai',                       '6r'],
+  ['da zhong',                       '4r'],
+  ['shen shu',                       '23v'],
+  ['fei shu',                        '13v'],
+  ['gan shu',                        '18v'],
+  ['pi shu',                         '20v'],
+  ['xin shu',                        '15v'],
+  ['da chang shu',                   '25v'],
+  ['guan yuan shu',                  '26v'],
+  ['chi ze',                         '5p'],
+  ['kong zui',                       '6p'],
+  ['yu ji',                          '10p'],
+  ['zu lin qi',                      '41vb'],
+  ['dan zhong',                      '17jm'],
+  ['qi hai',                         '6jm'],
+  ['zhong ji',                       '3jm'],
+  ['shui fen',                       '9jm'],
+  ['xue hai',                        '10rte'],
+  ['feng long',                      '40e'],
+  ['tian tu',                        '22jm'],
+  ['lian quan',                      '23jm'],
+  ['bai hui',                        '20tm'],
+  ['yin tang',                       'yin tang'],
+  ['yong quan',                      '1r'],
+  ['da ling',                        '7mc'],
+  ['jian shi',                       '5mc'],
+  // Romanisation IEATC (française)
+  ['tae xi',                         '3r'],
+  ['tai tchong',                     '3f'],
+  ['tsou san li',                    '36e'],
+  ['san yin tsiao',                  '6rte'],
+  ['chen men',                       '7c'],
+  ['ho kou',                         '4gi'],
+  ['lie tsiue',                      '7p'],
+  ['nei kouan',                      '6mc'],
+  ['tae pai',                        '3rte'],
+  ['yin ling tsuan',                 '9rte'],
+  ['tsiu tsuan',                     '8f'],
+  ['fou lieou',                      '7r'],
+  ['tcheou hai',                     '6r'],
+  ['chen chou',                      '23v'],
+  ['fong tche',                      '20vb'],
+  ['yang ling tsuan',                '34vb'],
+
+  // ─── CORRESPONDANCES ÉNERGÉTIQUES IEATC ↔ MTC ───────────────────────────────
+  ['energie nutritive',              'iong iong insuffisante'],
+  ['ying qi',                        'iong iong insuffisante'],
+  ['energie defensive',              'oe wei qi oe en plenitude'],
+  ['wei qi',                         'oe'],
+  ['energie ancestrale',             'tsing jing vide de jing tsing epuise'],
+  ['energie vitale',                 'tchi qi vide de qi'],
+  ['jing qi',                        'tsing vide de jing jing epuise'],
+  ['yuan qi',                        'yuan tchi energie ancestrale'],
+  ['zong qi',                        'tsong tchi'],
+  ['zhen qi',                        'tcheung tchi tchi'],
+  ['xue',                            'sang vide de sang'],
+  ['jin ye',                         'jin ye insuffisants liquides insuffisants'],
+  ['merveilleux vaisseaux',          'du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo'],
+  ['qi jing ba mai',                 'du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo'],
+
+];
+
+/**
+ * Enrichit le texte normalisé avec des formes canoniques supplémentaires.
+ * Principe non-destructif : on AJOUTE des termes canoniques au texte
+ * sans supprimer l'original. Ainsi un praticien qui écrit librement
+ * "le foie ne circule pas" voit son texte enrichi de "stagnation qi foie
+ * foie bloque" — reconnu par les patterns existants.
+ */
+function enrichirTexteIeatc(texteNormalise: string): string {
+  const additions: string[] = [];
+  for (const [phrase, enrichissement] of EQUIVALENCES_SEMANTIQUES) {
+    if (texteNormalise.includes(phrase)) {
+      additions.push(enrichissement);
+    }
+  }
+  if (additions.length === 0) return texteNormalise;
+  return texteNormalise + ' ' + additions.join(' ');
+}
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 /**
@@ -2350,7 +2852,11 @@ export function extraireConceptsIeatc(texte: string): {
   strategies: string[];
   pathologies: string[];
 } {
-  const n = normaliserTexteIeatc(texte);
+  // Étape 1 : normalisation de base (minuscules, sans accents)
+  const nBase = normaliserTexteIeatc(texte);
+  // Étape 2 : enrichissement sémantique (ajoute les formes canoniques correspondant
+  //           aux reformulations naturelles du praticien)
+  const n = enrichirTexteIeatc(nBase);
 
   const familles: string[] = [];
   const syndromes: string[] = [];
