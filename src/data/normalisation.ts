@@ -4133,6 +4133,7 @@ export function normaliserTechnique(technique: string): string[] {
   switch (technique) {
     case 'tonification_chauffee':        return ['tonification_chauffee', 'tonification'];
     case 'moxa_tonification':            return ['moxa_tonification', 'tonification'];
+    case 'moxa_dispersion':              return ['moxa_dispersion', 'dispersion'];
     case 'dispersion_chauffee':          return ['dispersion_chauffee', 'dispersion'];
     case 'dispersion_puis_tonification': return ['dispersion_puis_tonification'];
     default: return [technique];

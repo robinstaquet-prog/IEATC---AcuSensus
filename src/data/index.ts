@@ -261,7 +261,7 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
   return {
     totalCas: CLINICAL_CASES.length,
     casPublies: publie.length,
-    casExemplaires: publie.filter((c) => c.exemplaire).length,
+    casExemplaires: publie.filter((c) => c.exemplaire || c.qualifieApprentissage).length,
     totalAnalyses: allAnalyses.length,
     pointsDistincts: new Set(allPointCodes).size,
     topPoints: computeFrequency(allPointCodes).slice(0, 10),

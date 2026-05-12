@@ -8,9 +8,9 @@ import { BarChart3, BookOpen, Star, GitBranch, Crosshair, ArrowRight, Layers } f
 // ─── Labels métier ────────────────────────────────────────────────────────────
 
 const FOYER_LABELS: Record<string, string> = {
-  superieur: 'Foyer Supérieur (poumons, cœur)',
-  moyen: 'Foyer Moyen (digestif)',
-  inferieur: 'Foyer Inférieur (reins, utérus)',
+  superieur: 'Foyer Supérieur (Cœur, Poumon)',
+  moyen: 'Foyer Moyen (Rate, Estomac)',
+  inferieur: 'Foyer Inférieur (Foie, Rein)',
   multiple: 'Foyers multiples',
 };
 
@@ -23,10 +23,11 @@ const FOYER_COLORS: Record<string, string> = {
 
 const TECHNIQUE_LABELS: Record<string, string> = {
   tonification: 'Tonification',
-  tonification_chauffee: 'Tonification chauffée',
-  moxa_tonification: 'Tonification chauffée (moxa)',
+  tonification_chauffee: 'Tonification chauffée (aiguille)',
+  moxa_tonification: 'Moxa + Tonification',
   dispersion: 'Dispersion',
-  dispersion_chauffee: 'Dispersion chauffée',
+  dispersion_chauffee: 'Dispersion chauffée (aiguille)',
+  moxa_dispersion: 'Moxa + Dispersion',
   dispersion_puis_tonification: 'Dispersion → Tonification',
   harmonisation: 'Harmonisation',
   gros_sel: 'Gros sel (8JM)',
@@ -38,6 +39,7 @@ const TECHNIQUE_COLORS: Record<string, string> = {
   moxa_tonification: 'bg-orange-400',
   dispersion: 'bg-blue-500',
   dispersion_chauffee: 'bg-cyan-500',
+  moxa_dispersion: 'bg-rose-400',
   dispersion_puis_tonification: 'bg-indigo-500',
   harmonisation: 'bg-violet-500',
   gros_sel: 'bg-amber-400',
@@ -47,6 +49,7 @@ const COMPLEXITE_BAR_COLORS: Record<number, string> = {
   1: 'bg-emerald-500',
   2: 'bg-amber-500',
   3: 'bg-orange-500',
+  4: 'bg-red-500',
 };
 
 // ─── Barre de stat générique ──────────────────────────────────────────────────
@@ -347,7 +350,7 @@ export default async function StatistiquesPage() {
                 Niveau de complexité
               </p>
               <div className="space-y-2">
-                {([1, 2, 3] as const).map((level) => {
+                {([1, 2, 3, 4] as const).map((level) => {
                   const count = stats.repartitionComplexite[level] ?? 0;
                   if (count === 0) return null;
                   const pct =

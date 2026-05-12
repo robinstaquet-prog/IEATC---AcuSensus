@@ -463,7 +463,9 @@ const TECHNIQUE_LABELS: Record<string, string> = {
   moxa_dispersion: 'Moxa + Dispersé',
   harmonisation: 'Harmonisé',
   tonification_chauffee: 'Tonifié chauffé',
+  dispersion_chauffee: 'Dispersé chauffé',
   dispersion_puis_tonification: 'Dispersé puis Tonifié',
+  gros_sel: 'Gros sel',
 };
 
 // ─── Carte de participation (Forme 1) ─────────────────────────────────────────
