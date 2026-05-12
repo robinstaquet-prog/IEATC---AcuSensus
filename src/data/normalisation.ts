@@ -2961,20 +2961,19 @@ export function reglesConceptIeatc(id: string): string[] {
  * Décompose une technique en ses composantes de base pour les statistiques.
  *
  * Exemples :
- *   'tonification_chauffee'         → ['tonification']
- *   'moxa_tonification'             → ['tonification', 'moxa']
- *   'moxa_dispersion'               → ['dispersion', 'moxa']
- *   'dispersion_puis_tonification'  → ['dispersion', 'tonification']
- *   'moxa'                          → ['moxa']
+ *   'tonification_chauffee'         → ['tonification_chauffee', 'tonification']
+ *   'moxa_tonification'             → ['moxa_tonification', 'tonification']
+ *   'moxa_dispersion'               → ['moxa_dispersion', 'dispersion']
+ *   'dispersion_puis_tonification'  → ['dispersion_puis_tonification'] (acte propre)
+ *   'moxa'                          → ['moxa'] (sans aiguille, stat propre)
  *   autres                          → [technique] (inchangé)
  */
 export function normaliserTechnique(technique: string): string[] {
   switch (technique) {
-    // Garde le label précis ET ajoute les familles parentes
     case 'tonification_chauffee':        return ['tonification_chauffee', 'tonification'];
-    case 'moxa_tonification':            return ['moxa_tonification', 'tonification', 'moxa'];
-    case 'moxa_dispersion':              return ['moxa_dispersion', 'dispersion', 'moxa'];
-    case 'dispersion_puis_tonification': return ['dispersion_puis_tonification', 'dispersion', 'tonification'];
+    case 'moxa_tonification':            return ['moxa_tonification', 'tonification'];
+    case 'moxa_dispersion':              return ['moxa_dispersion', 'dispersion'];
+    case 'dispersion_puis_tonification': return ['dispersion_puis_tonification'];
     default: return [technique];
   }
 }
