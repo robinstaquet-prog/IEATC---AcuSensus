@@ -1767,10 +1767,10 @@ export function ParticipationForm({
         />
       </Section>
 
-      {/* ── 9. Difficulté estimée ── */}
-      <Section title="Difficulté du cas (optionnel)" defaultOpen={true}>
+      {/* ── 9. Niveau de lecture ── */}
+      <Section title="Niveau de lecture de votre analyse (optionnel)" defaultOpen={true}>
         <p className="text-xs text-slate-500">
-          Comment évaluez-vous la difficulté de ce cas ?
+          À partir de quel niveau d'étude votre analyse est-elle compréhensible ?
         </p>
         <div className="flex flex-col sm:flex-row gap-2 flex-wrap">
           {(Object.entries(DIFFICULTE_LABELS) as [DifficulteEstimee, string][]).map(([val, label]) => (

@@ -274,7 +274,7 @@ export interface ClinicalAnalysis {
   votes?: Vote[];                           // liste des votes reçus
   votePoints?: number;                      // total accumulé (cache)
   valeur?: number;                          // 1.0 + Σ(ratio × 0.1)
-  difficultéEstimee?: DifficulteEstimee;   // évaluation subjective de la difficulté du cas
+  difficultéEstimee?: DifficulteEstimee;   // niveau de lecture de l'analyse (accessible à quel niveau d'étude)
 }
 
 // Alias explicite : dans le nouveau modèle, une "analyse" EST une participation.
@@ -304,7 +304,8 @@ export interface ClinicalCase {
   viewCount: number;
 }
 
-// ─── Difficulté estimée d'un cas ──────────────────────────────────────────────
+// ─── Niveau de lecture de l'analyse ───────────────────────────────────────────
+// Indique à quel niveau d'étude l'analyse est accessible / compréhensible.
 // Évaluation subjective par le participant — optionnelle, non bloquante.
 export type DifficulteEstimee =
   | 'niveau_1ere'
@@ -313,9 +314,9 @@ export type DifficulteEstimee =
   | 'niveau_difficile';
 
 export const DIFFICULTE_LABELS: Record<DifficulteEstimee, string> = {
-  niveau_1ere: '1ère année',
+  niveau_1ere: 'Accessible 1ère année',
   niveau_intermediaire: 'Intermédiaire',
-  niveau_4e: '4ème année',
+  niveau_4e: 'Niveau 4ème année',
   niveau_difficile: 'Avancé',
 };
 

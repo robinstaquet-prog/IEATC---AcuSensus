@@ -169,10 +169,10 @@ function AnalyseBlock({
         </div>
       )}
 
-      {/* Difficulté estimée */}
+      {/* Niveau de lecture */}
       {participation.difficultéEstimee && (
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">Difficulté estimée :</span>
+          <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">Niveau de lecture :</span>
           <span className="text-xs px-1.5 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200">
             {DIFFICULTE_LABELS[participation.difficultéEstimee]}
           </span>
