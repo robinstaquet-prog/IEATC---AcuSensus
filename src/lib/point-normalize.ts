@@ -25,6 +25,7 @@ export type PointAction =
   | 'dispersion'
   | 'harmonisation'
   | 'tonification_chauffee'
+  | 'dispersion_chauffee'
   | 'dispersion_puis_tonification'
   | 'gros_sel';
 
@@ -41,6 +42,7 @@ const ACTION_LABELS: Record<PointAction, string> = {
   dispersion: 'dispersé',
   harmonisation: 'harmonisé',
   tonification_chauffee: 'tonifié chauffé',
+  dispersion_chauffee: 'dispersé chauffé',
   dispersion_puis_tonification: 'dispersé puis tonifié',
   gros_sel: 'gros sel',
 };

@@ -32,6 +32,9 @@ export interface AuthUser {
   photo_profil?: string;
   mail_public?: string;
   telephone?: string;
+  // Paramètres de confidentialité — contrôlent la visibilité pour les autres membres
+  show_mail_membres: boolean;      // true = email visible par les autres membres
+  show_telephone_membres: boolean; // true = téléphone visible par les autres membres
   // Compatibilité avec les composants existants
   pseudo: string;
   statut?: StatutPraticien;
@@ -65,6 +68,7 @@ interface AuthContextValue {
   signOut: () => Promise<void>;
   refreshUser: () => Promise<void>;
   addVotePoints: (delta: number) => void;
+  updatePrivacy: (showMail: boolean, showTelephone: boolean) => Promise<{ error: string | null }>;
 }
 
 // ─── Normalisation email ──────────────────────────────────────────────────────
@@ -104,6 +108,8 @@ function mapProfile(profile: Record<string, any>): AuthUser {
     photo_profil: profile.photo_profil ?? undefined,
     mail_public: profile.mail_public ?? undefined,
     telephone: profile.telephone ?? undefined,
+    show_mail_membres: profile.show_mail_membres ?? true,
+    show_telephone_membres: profile.show_telephone_membres ?? true,
     // Compatibilité
     pseudo: profile.pseudo ?? (`${prenom} ${nom}`.trim() || profile.email),
     statut: profile.statut_ieatc ?? 'etudiant',
@@ -128,6 +134,7 @@ const AuthContext = createContext<AuthContextValue>({
   signOut: async () => {},
   refreshUser: async () => {},
   addVotePoints: () => {},
+  updatePrivacy: async () => ({ error: null }),
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -256,6 +263,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const updatePrivacy = async (showMail: boolean, showTelephone: boolean): Promise<{ error: string | null }> => {
+    if (!user) return { error: 'Non connecté' };
+    const { error } = await supabase
+      .from('users')
+      .update({ show_mail_membres: showMail, show_telephone_membres: showTelephone })
+      .eq('id', user.id);
+    if (error) return { error: error.message };
+    setUser((prev) => prev ? { ...prev, show_mail_membres: showMail, show_telephone_membres: showTelephone } : prev);
+    return { error: null };
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -268,6 +286,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signOut,
         refreshUser,
         addVotePoints,
+        updatePrivacy,
       }}
     >
       {children}

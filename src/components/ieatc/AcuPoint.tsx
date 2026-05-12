@@ -6,13 +6,12 @@ import { cn } from '@/lib/utils';
 const TECHNIQUE_CONFIG: Record<TechniquePoint, { label: string; className: string }> = {
   tonification: { label: 'Ton.', className: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
   dispersion: { label: 'Dis.', className: 'bg-red-100 text-red-800 border-red-200' },
-  neutre: { label: 'Neutre', className: 'bg-slate-100 text-slate-600 border-slate-200' },
-  moxa: { label: 'Moxa', className: 'bg-orange-100 text-orange-800 border-orange-200' },
-  moxa_tonification: { label: 'Moxa Ton.', className: 'bg-orange-100 text-orange-800 border-orange-200' },
-  moxa_dispersion: { label: 'Moxa Dis.', className: 'bg-rose-100 text-rose-800 border-rose-200' },
   harmonisation: { label: 'Harmo.', className: 'bg-slate-100 text-slate-700 border-slate-300' },
+  moxa_tonification: { label: 'Moxa Ton.', className: 'bg-orange-100 text-orange-800 border-orange-200' },
   tonification_chauffee: { label: 'Ton. ch.', className: 'bg-orange-200 text-orange-900 border-orange-300' },
+  dispersion_chauffee: { label: 'Dis. ch.', className: 'bg-cyan-100 text-cyan-800 border-cyan-200' },
   dispersion_puis_tonification: { label: 'Dis.→Ton.', className: 'bg-amber-100 text-amber-800 border-amber-300' },
+  gros_sel: { label: 'Gros sel', className: 'bg-yellow-100 text-yellow-800 border-yellow-200' },
 };
 
 // ─── Composant AcuPoint inline ────────────────────────────────────────────────

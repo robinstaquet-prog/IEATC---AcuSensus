@@ -12,14 +12,14 @@
  *   1. Familles diag     — Vide, Plénitude, Stagnation, Facteur pathogène
  *   2. Syndromes         — Vide de Yin du Rein, Yang du Foie montant, etc.
  *   3. Organes/Foyers    — Rein, Foie, Rate, Foyer Moyen, etc.
- *   4. Stratégies        — Nourrir Yin, Tonifier Yang, Pacifier Vent, etc.
+ *   4. Stratégies        — Nourrir Yin, Tonifier Yang, Disperser Fong, etc.
  *
  * ─── RÈGLES CLINIQUES FONDAMENTALES (intégrées dans la données) ──────────────
  *
  * R1. Yin/Yang prime TOUJOURS — orienter la polarité avant tout autre lecture.
  * R2. Traiter le général AVANT le local — un Yang local sur vide Yang général
  *     sera absorbé sans effet durable.
- * R3. Feu du vide ≠ Chaleur réelle — le traiter en TONIFIANT le Yin,
+ * R3. Yang apparent (Feu apparent) ≠ Chaleur réelle — le traiter en TONIFIANT le Yin,
  *     JAMAIS en dispersant la chaleur (risque d'aggravation).
  * R4. Vide de Yin du Rein → Yang du Foie monte (cause indirecte).
  *     Traiter le Rein, pas le Foie en premier.
@@ -365,17 +365,20 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['diarrhee entre 5h et 7h',        'diarrhees matinales yang ming sans stimulus'],
   ['transit le matin de bonne heure','diarrhees matinales diarrhee au petit matin'],
 
-  // ─── VENT INTERNE ────────────────────────────────────────────────────────────
-  ['vertiges par manque de yin',     'vent interne du foie vertiges vent interne vide yin rein'],
-  ['tremblements',                   'vent interne vent interne du foie agitation interne'],
-  ['tremblements des membres',       'vent interne vent interne du foie'],
-  ['mouvements involontaires',       'vent interne agitation interne'],
-  ['spasmes musculaires',            'vent interne tendons non nourris foie vb tendons'],
-  ['convulsions',                    'vent interne agitation interne'],
-  ['pouls corde',                    'pouls corde arc vent interne du foie yang du foie montant'],
-  ['pouls en corde',                 'pouls corde arc vent interne du foie yang du foie montant'],
+  // ─── FONG INTERNE (Vent interne) ─────────────────────────────────────────────
+  ['fong',                           'fong interne du foie fong interne'],
+  ['fongs',                          'fong interne du foie fong interne'],
+  ['fong interne',                   'fong interne du foie fong interne'],
+  ['vertiges par manque de yin',     'fong interne du foie vertiges fong interne vide yin rein vent interne du foie'],
+  ['tremblements',                   'fong interne fong interne du foie agitation interne vent interne'],
+  ['tremblements des membres',       'fong interne fong interne du foie vent interne du foie'],
+  ['mouvements involontaires',       'fong interne agitation interne vent interne'],
+  ['spasmes musculaires',            'fong interne tendons non nourris foie vb tendons vent interne'],
+  ['convulsions',                    'fong interne agitation interne vent interne'],
+  ['pouls corde',                    'pouls corde arc fong interne du foie yang du foie montant vent interne du foie'],
+  ['pouls en corde',                 'pouls corde arc fong interne du foie yang du foie montant vent interne du foie'],
   ['pouls tendu',                    'pouls corde arc yang du foie montant'],
-  ['pouls en corde d arc',           'pouls corde arc yang du foie montant vent interne du foie'],
+  ['pouls en corde d arc',           'pouls corde arc yang du foie montant fong interne du foie vent interne du foie'],
 
   // ─── HUMIDITÉ / TAN ──────────────────────────────────────────────────────────
   ['corps lourd',                    'humidite interne charge humide'],
@@ -663,6 +666,313 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['qi en stagnation',               'stagnation qi'],
   ['qi stagnant',                    'stagnation qi'],
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // TERMINOLOGIE IEATC PROPRE — Tsang, Fu, TT, Tchi, Iong, Oé, Tsing
+  // Ces termes sont SPÉCIFIQUES à l'IEATC et doivent être reconnus
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ─── TSANG (organes Yin pleins — équivalent Zang) ────────────────────────
+  ['tsang foie',                     'foie zang foie'],
+  ['tsang rate',                     'rate zang rate'],
+  ['tsang coeur',                    'coeur zang coeur'],
+  ['tsang poumon',                   'poumon zang poumon'],
+  ['tsang rein',                     'rein zang rein'],
+  ['les tsang',                      'organes yin tsang zang'],
+  ['les cinq tsang',                 'organes yin tsang zang foie rate coeur poumon rein'],
+
+  // ─── FU (viscères Yang creux) ────────────────────────────────────────────
+  ['fu estomac',                     'estomac fu'],
+  ['fu vesicule biliaire',           'vesicule biliaire fu'],
+  ['fu intestin grele',              'intestin grele fu'],
+  ['fu gros intestin',               'gros intestin fu'],
+  ['fu vessie',                      'vessie fu'],
+  ['les fu',                         'visceres yang fu'],
+  ['les six fu',                     'visceres yang fu estomac vesicule biliaire intestin grele gros intestin vessie triple rechauffeur'],
+
+  // ─── TCHI (Qi en IEATC) ──────────────────────────────────────────────────
+  ['le tchi',                        'qi tchi energie vitale'],
+  ['tchi insuffisant',               'vide de qi qi insuffisant tchi vide'],
+  ['tchi en vide',                   'vide de qi qi vide tchi vide'],
+  ['tchi epuise',                    'vide de qi qi epuise tchi vide'],
+  ['tchi qui stagne',                'stagnation de qi qi stagnant tchi bloque'],
+  ['tchi bloque',                    'stagnation de qi qi bloque tchi bloque'],
+  ['le tchi ne circule plus',        'stagnation de qi obstruction meridien tchi bloque'],
+  ['tchi en exces',                  'plenitude de qi tchi en exces'],
+  ['manque de tchi',                 'vide de qi manque de qi tchi vide'],
+
+  // ─── IONG (énergie nutritive — Ying Qi) ──────────────────────────────────
+  ['iong',                           'iong energie nutritive ying qi'],
+  ['l iong',                         'iong energie nutritive'],
+  ['iong vide',                      'iong insuffisante vide d iong'],
+  ['iong insuffisante',              'iong insuffisante vide d iong'],
+  ['iong faiblit',                   'iong insuffisante vide d iong'],
+  ['iong epuisee',                   'iong insuffisante vide d iong'],
+  ['l iong ne nourrit plus',         'iong insuffisante vide d iong'],
+  ['deficit d iong',                 'iong insuffisante vide d iong'],
+
+  // ─── OÉ (énergie défensive — Wei Qi) ────────────────────────────────────
+  ['oe',                             'oe energie defensive wei qi'],
+  ['l oe',                           'oe energie defensive'],
+  ['oe en exces',                    'oe en plenitude plenitude d oe'],
+  ['oe locale excessive',            'oe en plenitude plenitude d oe'],
+  ['oe qui monte',                   'oe en plenitude chaleur de surface'],
+  ['oe qui ne circule plus',         'oe bloquee stagnation de qi'],
+  ['oe locale en exces',             'oe en plenitude chaleur locale'],
+  ['oe ne protege plus',             'vide d oe energie defensive insuffisante'],
+  ['oe insuffisante',                'vide d oe energie defensive insuffisante'],
+  ['defense insuffisante',           'vide d oe oe insuffisante'],
+
+  // ─── TSING (énergie ancestrale — Jing) ───────────────────────────────────
+  ['tsing',                          'tsing jing essence energie ancestrale'],
+  ['le tsing',                       'tsing jing essence'],
+  ['tsing vide',                     'vide de jing tsing epuise jing vide'],
+  ['tsing insuffisant',              'vide de jing tsing epuise jing insuffisant'],
+  ['tsing epuise',                   'vide de jing tsing epuise jing epuise'],
+  ['tsing du rein',                  'jing du rein essence renale tsing rein'],
+  ['tsing du rein vide',             'vide de jing du rein jing du rein vide tsing epuise'],
+  ['l energie ancestrale s epuise',  'vide de jing tsing epuise energie ancestrale epuisee'],
+  ['l energie ancestrale faiblit',   'vide de jing tsing epuise energie ancestrale epuisee'],
+
+  // ─── TT / TCHING TCHENG (méridien principal) ────────────────────────────
+  ['meridien principal',             'obstruction meridien meridien atteint'],
+  ['meridien principal atteint',     'obstruction meridien meridien atteint'],
+  ['meridien principal bloque',      'obstruction meridien meridien bloque'],
+  ['meridien principal obstrue',     'obstruction meridien meridien obstrue'],
+  ['atteinte du meridien principal', 'obstruction meridien atteinte meridien'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ÉMOTIONS → ORGANES (correspondances fondamentales IEATC)
+  // Colère → Foie | Joie → Cœur | Rumination → Rate | Tristesse → Poumon | Peur → Rein
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ─── COLÈRE / FRUSTRATION → FOIE (Bois) ──────────────────────────────────
+  ['colere',                         'stagnation qi foie foie bloque'],
+  ['colere refoulee',                'stagnation qi foie foie bloque'],
+  ['colere contenue',                'stagnation qi foie foie bloque'],
+  ['frustration',                    'stagnation qi foie foie bloque'],
+  ['frustration refoulee',           'stagnation qi foie foie bloque'],
+  ['irritabilite',                   'yang du foie montant stagnation qi foie'],
+  ['impatience',                     'stagnation qi foie yang du foie montant'],
+  ['enervement',                     'stagnation qi foie yang du foie montant'],
+  ['rage',                           'feu du foie yang du foie montant'],
+  ['agacement',                      'stagnation qi foie'],
+  ['ressentiment',                   'stagnation qi foie foie bloque'],
+
+  // ─── JOIE EXCESSIVE / AGITATION → CŒUR (Feu) ────────────────────────────
+  ['joie excessive',                 'shen perturbe shen agite coeur perturbe'],
+  ['excitation excessive',           'shen perturbe shen agite'],
+  ['manie',                          'shen perturbe shen agite feu du coeur'],
+  ['agitation mentale',              'shen perturbe shen agite'],
+
+  // ─── RUMINATION / SOUCI → RATE (Terre) ───────────────────────────────────
+  ['souci',                          'yi perturbe vide qi rate rate affaiblie'],
+  ['soucis',                         'yi perturbe vide qi rate rate affaiblie'],
+  ['inquietude',                     'yi perturbe vide qi rate'],
+  ['surmenage intellectuel',         'yi perturbe vide qi rate rate epuisee'],
+  ['pensee excessive',               'yi perturbe rumination pathologique'],
+  ['reflexion excessive',            'yi perturbe rumination pathologique vide qi rate'],
+
+  // ─── TRISTESSE / DEUIL → POUMON (Métal) ──────────────────────────────────
+  ['tristesse',                      'po perturbe melancolie profonde tristesse metal poumon'],
+  ['deuil',                          'po perturbe deuil non resolu tristesse metal'],
+  ['chagrin',                        'po perturbe melancolie profonde tristesse metal'],
+  ['melancolie',                     'po perturbe melancolie profonde tristesse metal'],
+  ['nostalgie envahissante',         'po perturbe melancolie profonde'],
+
+  // ─── PEUR / TERREUR → REIN (Eau) ─────────────────────────────────────────
+  ['peur',                           'zhi perturbe peur chronique envahissante rein'],
+  ['peur chronique',                 'zhi perturbe peur chronique envahissante rein'],
+  ['terreur',                        'zhi perturbe rein peur pathologique rein'],
+  ['frayeur',                        'shen perturbe zhi perturbe rein'],
+  ['angoisse profonde',              'zhi perturbe peur chronique envahissante rein'],
+  ['manque de volonte',              'zhi perturbe volonte affaiblie vide yang rein'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FONCTIONS ORGANIQUES — le praticien décrit la fonction défaillante
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ─── FOIE gouverne les tendons, stocke le Sang, assure le libre flux du Qi
+  ['le foie ne gouverne plus les tendons', 'vide sang foie tendons non nourris foie vb tendons'],
+  ['le foie ne stocke plus le sang',       'vide sang foie sang du foie vide'],
+  ['le foie ne draine plus',               'stagnation qi foie foie bloque'],
+  ['le libre flux du foie est entrave',    'stagnation qi foie foie bloque'],
+
+  // ─── RATE gouverne le transport-transformation, retient le Sang, monte le Qi pur
+  ['la rate ne transforme plus',           'vide qi rate rate insuffisante'],
+  ['la rate ne transporte plus',           'vide qi rate rate insuffisante'],
+  ['la rate ne monte plus',               'vide qi rate qi de la rate ne monte plus prolapsus'],
+  ['le qi de la rate ne monte plus',       'vide qi rate qi de la rate ne monte plus prolapsus'],
+  ['la rate ne retient plus le sang',      'vide qi rate rate ne retient plus le sang'],
+  ['la rate ne produit plus le sang',      'vide qi rate vide sang rate'],
+  ['la terre ne transforme plus',          'vide qi rate rate insuffisante terre affaiblie'],
+
+  // ─── POUMON gouverne le Qi, diffuse, fait descendre ──────────────────────
+  ['le poumon ne diffuse plus',            'vide qi poumon qi du poumon insuffisant'],
+  ['le poumon ne fait plus descendre',     'vide qi poumon rebellion qi'],
+  ['le poumon ne gouverne plus le qi',     'vide qi poumon qi du poumon insuffisant'],
+  ['diffusion du poumon insuffisante',     'vide qi poumon qi du poumon insuffisant'],
+  ['le metal ne descend plus',            'vide qi poumon rebellion qi'],
+
+  // ─── REIN gouverne l'Eau, stocke le Jing, produit la moelle ─────────────
+  ['le rein ne gouverne plus l eau',       'vide yang rein yang du rein insuffisant'],
+  ['le rein ne stocke plus le jing',       'vide jing rein jing du rein vide'],
+  ['le rein ne retient plus',              'vide qi rein rein qui ne retient plus'],
+  ['le rein ne rechauffe plus la rate',    'rate non rechauffee vide yang rein yang du rein insuffisant'],
+  ['le feu du ming men ne rechauffe plus', 'ming men insuffisant vide yang rein feu du ming men'],
+
+  // ─── CŒUR gouverne le Sang, abrite le Shen ──────────────────────────────
+  ['le coeur ne gouverne plus le sang',    'vide qi coeur vide sang coeur'],
+  ['le coeur n abrite plus le shen',       'shen perturbe coeur ne peut plus ancrer le shen'],
+  ['le coeur ne propulse plus',            'vide qi coeur stagnation de sang'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FONG EXTERNE — expressions naturelles
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['fong externe',                   'vent externe fong externe invasion de fong'],
+  ['invasion de fong',               'vent externe fong externe agression de fong'],
+  ['agression de fong',              'vent externe fong externe invasion de fong'],
+  ['fong froid',                     'vent externe fong externe vent froid fong froid'],
+  ['fong chaleur',                   'vent externe fong externe vent chaleur fong chaleur'],
+  ['attrape un fong',                'vent externe fong externe invasion de fong'],
+  ['pris un fong',                   'vent externe fong externe invasion de fong'],
+  ['fong attaque le poumon',         'vent externe fong externe poumon attaque par le vent invasion externe poumon'],
+  ['fong envahit la surface',        'vent externe fong externe invasion de fong vent froid en surface'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MERVEILLEUX VAISSEAUX — expressions naturelles IEATC
+  // Tou Mo, Jenn Mo, Tchrong Mo, Taé Mo, Yang/Yin Tsiao Mo, Yang/Yin Oé Mo
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['tou mo',                         'du mai vaisseau gouverneur tou mo'],
+  ['tou mo insuffisant',             'du mai insuffisant tou mo vide yang ne monte plus'],
+  ['tou mo fragilise',               'du mai fragilise tou mo vide'],
+  ['jenn mo',                        'ren mai vaisseau conception jenn mo'],
+  ['jenn mo fragilise',              'ren mai fragilise jenn mo vide yin insuffisant pour ancrer'],
+  ['jenn mo insuffisant',            'ren mai insuffisant jenn mo vide'],
+  ['tchrong mo',                     'chong mai vaisseau penetrant tchrong mo'],
+  ['le tchrong mo ne distribue plus','chong mai insuffisant tchrong mo vide'],
+  ['tae mo',                         'dai mai vaisseau ceinture tae mo'],
+  ['yang tsiao mo',                  'yang qiao mo yang tsiao mo'],
+  ['yin tsiao mo',                   'yin qiao mo yin tsiao mo'],
+  ['yang oe mo',                     'yang wei mo yang oe mo'],
+  ['yin oe mo',                      'yin wei mo yin oe mo'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SIX ÉNERGIES / GRANDS MÉRIDIENS — présentations cliniques
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['atteinte du tae yang',           'tae yang tai yang niveau tae yang'],
+  ['syndrome tae yang',              'tae yang tai yang niveau tae yang'],
+  ['atteinte du chao yang',          'chao yang shao yang niveau chao yang'],
+  ['syndrome chao yang',             'chao yang shao yang niveau chao yang'],
+  ['demi surface demi profondeur',   'chao yang shao yang niveau chao yang'],
+  ['charniere',                      'chao yang shao yang niveau chao yang'],
+  ['atteinte du yang ming',          'yang ming niveau yang ming'],
+  ['syndrome yang ming',             'yang ming niveau yang ming'],
+  ['atteinte du tae yin',            'tae yin tai yin niveau tae yin'],
+  ['syndrome tae yin',               'tae yin tai yin niveau tae yin'],
+  ['atteinte du chao yin',           'chao yin shao yin niveau chao yin'],
+  ['syndrome chao yin',              'chao yin shao yin niveau chao yin'],
+  ['atteinte du tsieu yin',          'tsieu yin tsiue yin jue yin niveau tsieu yin'],
+  ['atteinte du tsiue yin',          'tsieu yin tsiue yin jue yin niveau tsiue yin'],
+  ['syndrome tsieu yin',             'tsieu yin tsiue yin jue yin niveau tsieu yin'],
+  ['syndrome tsiue yin',             'tsieu yin tsiue yin jue yin niveau tsiue yin'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // AXE CŒUR–REIN (Eau–Feu) — dysharmonie fondamentale
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['coeur et rein ne communiquent plus', 'dysharmonie coeur rein axe eau feu brise vide yin rein shen perturbe'],
+  ['le feu et l eau ne communiquent plus', 'dysharmonie coeur rein axe eau feu brise'],
+  ['axe coeur rein brise',           'dysharmonie coeur rein axe eau feu brise'],
+  ['axe eau feu brise',              'dysharmonie coeur rein axe eau feu brise'],
+  ['l eau ne monte plus vers le feu','dysharmonie coeur rein vide yin rein axe eau feu brise'],
+  ['le feu ne descend plus vers l eau', 'dysharmonie coeur rein axe eau feu brise'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // YANG APPARENT — enrichir toutes les variantes avec les deux termes
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['yang apparent du rein',          'yang apparent feu du vide yang flottant rein vide yin rein'],
+  ['faux yang du rein',              'yang apparent feu du vide rein vide yin rein'],
+  ['chaleur sur vide de yin',        'yang apparent feu du vide chaleur de vide vide yin'],
+  ['feu sur vide de yin',            'yang apparent feu du vide vide yin'],
+  ['yang monte car le yin ne retient plus', 'yang apparent feu du vide yang non ancre vide yin'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PROLAPSUS / QI QUI NE MONTE PLUS — Rate fondamentale
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['prolapsus',                      'vide qi rate qi de la rate ne monte plus prolapsus'],
+  ['ptose',                          'vide qi rate qi de la rate ne monte plus prolapsus'],
+  ['descente d organe',              'vide qi rate qi de la rate ne monte plus prolapsus'],
+  ['les chairs ne tiennent plus',    'vide qi rate qi de la rate ne monte plus'],
+  ['qi ne monte plus',               'vide qi rate qi de la rate ne monte plus'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CIRCULATION DU SANG — faire circuler, disperser les stases
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['faire circuler le sang',         'faire circuler le sang disperser stases sanguines'],
+  ['activer le sang',                'faire circuler le sang disperser stases sanguines'],
+  ['mobiliser le sang',              'faire circuler le sang'],
+  ['disperser les stases',           'disperser stases sanguines stagnation de sang'],
+  ['lever les stases',               'disperser stases sanguines stagnation de sang'],
+  ['sang a faire circuler',          'faire circuler le sang stagnation de sang'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FAIRE CIRCULER LE QI — stratégie générale
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['faire circuler le qi',           'faire circuler le qi stagnation qi'],
+  ['faire circuler l energie',       'faire circuler le qi stagnation qi'],
+  ['relancer la circulation du qi',  'faire circuler le qi stagnation qi'],
+  ['debloquer le qi',                'faire circuler le qi stagnation qi qi bloque'],
+  ['relancer le qi',                 'faire circuler le qi'],
+  ['relancer l energie',             'faire circuler le qi'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FAIRE DESCENDRE LE QI — pour rébellion
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['faire descendre le qi',          'faire descendre le qi rebellion qi estomac'],
+  ['abaisser le qi',                 'faire descendre le qi'],
+  ['le qi doit redescendre',         'faire descendre le qi rebellion qi estomac'],
+  ['ramener le qi vers le bas',      'faire descendre le qi'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ANCRER LE YANG — stratégie spécifique
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['ancrer le yang',                 'ancrer le yang nourrir le yin yang non ancre'],
+  ['le yang doit etre ancre',        'ancrer le yang yang non ancre'],
+  ['ramener le yang vers le bas',    'ancrer le yang disperser le yang du foie'],
+  ['yang a ancrer',                  'ancrer le yang yang non ancre yang flottant'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // DISPERSER / CLARIFIER LA CHALEUR RÉELLE (≠ Yang apparent)
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['disperser la chaleur',           'disperser la chaleur clarifier la chaleur'],
+  ['clarifier la chaleur',           'disperser la chaleur clarifier la chaleur'],
+  ['evacuer la chaleur',             'disperser la chaleur clarifier la chaleur'],
+  ['rafraichir la chaleur',          'disperser la chaleur clarifier la chaleur'],
+  ['eteindre le feu',                'disperser la chaleur clarifier la chaleur'],
+  ['purger la chaleur',              'disperser la chaleur purgation chaleur'],
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // OBSERVATIONS CLINIQUES — Langue, Teint, Symptômes constitutionnels
+  // ═══════════════════════════════════════════════════════════════════════════
+  ['langue rouge sans enduit',       'vide de yin chaleur de vide yang apparent feu du vide'],
+  ['langue pale',                    'vide de yang vide de sang vide qi'],
+  ['langue pale et gonflée',         'vide de yang vide qi humidite'],
+  ['langue rouge avec enduit jaune', 'chaleur humidite chaleur'],
+  ['enduit blanc',                   'froid interne vide yang'],
+  ['enduit jaune',                   'chaleur humidite chaleur'],
+  ['langue violette',                'stagnation de sang stase sanguine'],
+  ['langue foncee',                  'stagnation de sang stase sanguine'],
+  ['teint pale',                     'vide de yang vide de sang vide qi'],
+  ['teint terne',                    'vide de sang stagnation de sang'],
+  ['teint jaune',                    'vide qi rate humidite rate'],
+  ['teint rouge',                    'chaleur yang du foie montant feu'],
+
+  // ─── Os / Vieillissement → Jing du Rein ──────────────────────────────────
+  ['os fragiles',                    'vide jing rein jing du rein vide'],
+  ['osteoporose',                    'vide jing rein jing du rein vide vide yin rein'],
+  ['vieillissement premature',       'vide jing rein jing du rein vide tsing epuise'],
+  ['cheveux blancs precoces',        'vide jing rein jing du rein vide'],
+  ['dents qui se dechaussent',       'vide jing rein jing du rein vide'],
+
 ];
 
 /**
@@ -900,6 +1210,10 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
       'meridien vb bloque', 'meridien foie bloque',
       'vide meridien', 'meridien en vide', 'stagnation dans le meridien',
       'stagnation locale sur terrain de vide meridien',
+      'meridien poumon obstrue', 'meridien coeur obstrue',
+      'meridien rate obstrue', 'meridien estomac obstrue',
+      'meridien poumon bloque', 'meridien coeur bloque',
+      'meridien rate bloque', 'meridien estomac bloque',
     ],
     priorite: 2,
   },
@@ -923,9 +1237,9 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'feu_vide',
-    label: 'Feu du vide (Xu Huo) — Chaleur de Vide',
+    label: 'Yang apparent / Feu apparent (Xu Huo)',
     categorie: 'famille_diag',
-    description: 'CRITIQUE : chaleur produite par un vide de Yin, pas par un excès. NE JAMAIS disperser — tonifier le Yin. = Yang apparent : le Yang monte non parce qu\'il est en excès, mais parce que le Yin ne l\'ancre plus. Traitement : TONIFIER le Yin — JAMAIS disperser.',
+    description: 'CRITIQUE (IEATC) : chaleur produite par un vide de Yin — le Yang monte non parce qu\'il est en excès, mais parce que le Yin ne l\'ancre plus. On appelle ça le Yang apparent ou Feu apparent. NE JAMAIS disperser — NOURRIR le Yin pour que le Yang apparent s\'éteigne de lui-même.',
     patterns: [
       'feu du vide', 'chaleur de vide', 'feu de vide', 'xu huo',
       'chaleur xu', 'chaleur vide', 'vide avec chaleur',
@@ -992,10 +1306,12 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'vent_interne',
-    label: 'Vent interne',
+    label: 'Fong interne',
     categorie: 'famille_diag',
-    description: 'Vent interne (du Foie) — vertiges, tremblements, mouvements involontaires, pouls corde-arc.',
+    description: 'Fong interne (du Foie) — IEATC : le Vent s\'appelle Fong. On le disperse, expulse, chasse ou fait sortir. Vertiges, tremblements, mouvements involontaires, pouls corde-arc.',
     patterns: [
+      'fong interne', 'fong du foie', 'fong interne du foie',
+      'fong', 'fongs', 'le fong', 'les fong', 'les fongs', 'un fong',
       'vent interne', 'vent du foie', 'vent interne du foie',
       'agitation interne', 'yang monte en usurpateur',
       'yang ascendant', 'yang ne descend pas',
@@ -1005,10 +1321,13 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'vent_externe',
-    label: 'Vent externe',
+    label: 'Fong externe (Vent externe)',
     categorie: 'famille_diag',
-    description: 'Invasion de Vent externe — début brusque, symptômes mobiles, crainte du vent.',
+    description: 'Invasion de Fong externe — début brusque, symptômes mobiles, crainte du vent. IEATC : Fong = Vent.',
     patterns: [
+      'fong externe', 'invasion de fong', 'fong pathogene',
+      'agression de fong', 'fong froid', 'fong chaleur',
+      'fong froid externe', 'fong chaleur externe',
       'vent externe', 'invasion de vent', 'vent pathogene',
       'agression de vent', 'vent froid externe', 'vent chaleur externe',
     ],
@@ -1037,10 +1356,12 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
       'phlegme', 'flegme', 'glaires pathogenes', 'mucus pathologique',
       'accumulation de tan', 'retention de tan', 'formation de tan',
       'production de tan', 'tan obstrue', 'tan dans les meridiens',
-      'tan humide', 'tan chaud', 'tan froid', 'tan vent',
+      'tan humide', 'tan chaud', 'tan froid', 'tan vent', 'tan feu',
       'humidite epaissie', 'humidite epaissie en tan',
       'humidite transformee en tan', 'obstruction par le tan',
       'phlegme obstruant', 'phlegme accumule',
+      'mucosites epaisses', 'glaires', 'tan invisible',
+      'tan pervers', 'le tan obstrue', 'le tan bloque',
     ],
     priorite: 2,
   },
@@ -1087,7 +1408,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yin_rein',
     label: 'Vide de Yin du Rein',
     categorie: 'syndrome',
-    description: 'Insuffisance Yin du Rein — cause profonde du Yang du Foie montant et du Feu du vide. Traiter en premier.',
+    description: 'Insuffisance Yin du Rein — cause profonde du Yang du Foie montant et du Yang apparent (Feu apparent). Traiter en premier.',
     patterns: [
       'vide de yin du rein', 'vide yin rein', 'yin du rein vide',
       'yin du rein insuffisant', 'rein yin vide', 'rein en vide de yin',
@@ -1194,13 +1515,15 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'vent_interne_foie',
-    label: 'Vent interne du Foie (Gan Feng Nei Dong)',
+    label: 'Fong interne du Foie (Gan Feng Nei Dong)',
     categorie: 'syndrome',
-    description: 'Vent interne — toujours secondaire à vide Yin/Sang du Foie ou Rein. Pouls corde-arc caractéristique.',
+    description: 'Fong interne du Foie (IEATC : Fong = Vent) — toujours secondaire à vide Yin/Sang du Foie ou Rein. On le disperse/expulse/chasse, jamais on ne le "pacifie". Pouls corde-arc caractéristique.',
     patterns: [
+      'fong interne du foie', 'fong du foie', 'fong interne foie',
+      'fong foie', 'foie fong', 'fongs du foie',
       'vent interne du foie', 'vent du foie', 'gan feng',
       'vent interne foie', 'foie vent interne',
-      'pouls corde arc', 'vertiges vent interne',
+      'pouls corde arc', 'vertiges fong interne', 'vertiges vent interne',
     ],
     regles: ['R4'],
     priorite: 2,
@@ -1696,14 +2019,14 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'oreille_rein_shao_yang',
-    label: 'Oreille interne — domaine Rein / Shao Yang',
+    label: 'Oreille interne — domaine Rein / Chao Yang',
     categorie: 'syndrome',
-    description: 'L\'oreille est l\'orifice du Rein. Les méridiens TR et VB (Shao Yang) passent dans l\'oreille. Bourdonnements ou surdité = diagnostic différentiel vide/plein.',
+    description: 'L\'oreille est l\'orifice du Rein. Les méridiens TR et VB (Chao Yang) passent dans l\'oreille. Bourdonnements ou surdité = diagnostic différentiel vide/plein.',
     patterns: [
       'oreille interne', 'oreille rein', 'oreille domaine rein',
       'bourdonnements vide', 'bourdonnements rein',
-      'surdite vide', 'shao yang oreille', 'tr vb oreille',
-      'feu vide irrite oreille',
+      'surdite vide', 'chao yang oreille', 'shao yang oreille', 'tr vb oreille',
+      'yang apparent irrite oreille', 'feu vide irrite oreille',
     ],
     regles: ['R3'],
     priorite: 2,
@@ -2030,6 +2353,58 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     priorite: 2,
     parentFamilleId: 'feu_vide',
   },
+
+  // ─── Dysharmonie Cœur–Rein (axe Eau-Feu) ────────────────────────────────
+  {
+    id: 'rein_coeur_dysharmonie',
+    label: 'Dysharmonie Cœur–Rein (axe Eau-Feu brisé)',
+    categorie: 'syndrome',
+    description: 'L\'Eau (Rein) ne monte plus vers le Feu (Cœur) et/ou le Feu ne descend plus vers l\'Eau — insomnie profonde, anxiété avec lombalgie, chaleur du haut et froid du bas.',
+    patterns: [
+      'dysharmonie coeur rein', 'axe coeur rein brise',
+      'axe eau feu brise', 'coeur et rein ne communiquent plus',
+      'coeur rein deconnectes', 'eau ne monte plus vers le feu',
+      'feu ne descend plus vers l eau', 'rein coeur non connectes',
+      'dysharmonie eau feu',
+    ],
+    regles: ['R4'],
+    priorite: 1,
+  },
+
+  // ─── Qi de la Rate ne monte plus (prolapsus) ────────────────────────────
+  {
+    id: 'qi_rate_ne_monte_plus',
+    label: 'Qi de la Rate ne monte plus (prolapsus)',
+    categorie: 'syndrome',
+    description: 'Le Qi de la Rate n\'a plus la force de monter (ascension du pur). Conséquences : prolapsus d\'organes, ptoses, hémorragies par non-rétention.',
+    patterns: [
+      'qi de la rate ne monte plus', 'rate ne monte plus',
+      'qi ne monte plus', 'prolapsus', 'ptose',
+      'descente d organe', 'affaissement', 'rate ne soutient plus',
+      'les chairs ne tiennent plus',
+      'rate ne retient plus le sang',
+    ],
+    priorite: 1,
+    parentFamilleId: 'vide_qi',
+  },
+
+  // ─── Vent-Chaleur envahissant le Poumon ──────────────────────────────────
+  {
+    id: 'vent_chaleur_poumon',
+    label: 'Fong-Chaleur envahissant le Poumon',
+    categorie: 'syndrome',
+    description: 'Invasion de Fong-Chaleur dans le Poumon — fièvre, gorge douloureuse, toux avec expectoration jaune, soif.',
+    patterns: [
+      'vent chaleur poumon', 'fong chaleur poumon',
+      'vent chaleur envahit le poumon', 'fong chaleur envahit le poumon',
+      'invasion vent chaleur', 'invasion fong chaleur',
+      'poumon envahi par le vent chaleur', 'poumon envahi par le fong chaleur',
+      'agression vent chaleur', 'agression fong chaleur',
+      'vent chaleur en surface', 'fong chaleur en surface',
+    ],
+    priorite: 2,
+    parentFamilleId: 'vent_externe',
+  },
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -2043,37 +2418,37 @@ export const ORGANES_LOCA: ConceptIeatc[] = [
     id: 'rein',
     label: 'Rein',
     categorie: 'organe',
-    patterns: ['rein', 'reins', 'zang rein'],
+    patterns: ['rein', 'reins', 'zang rein', 'tsang rein', 'shen rein'],
   },
   {
     id: 'foie',
     label: 'Foie',
     categorie: 'organe',
-    patterns: ['foie', 'zang foie', 'hepatique'],
+    patterns: ['foie', 'zang foie', 'tsang foie', 'gan foie', 'hepatique'],
   },
   {
     id: 'rate',
     label: 'Rate',
     categorie: 'organe',
-    patterns: ['rate', 'zang rate'],
+    patterns: ['rate', 'zang rate', 'tsang rate', 'pi rate'],
   },
   {
     id: 'coeur',
     label: 'Cœur',
     categorie: 'organe',
-    patterns: ['coeur', 'zang coeur'],
+    patterns: ['coeur', 'zang coeur', 'tsang coeur', 'xin coeur'],
   },
   {
     id: 'poumon',
     label: 'Poumon',
     categorie: 'organe',
-    patterns: ['poumon', 'poumons', 'zang poumon'],
+    patterns: ['poumon', 'poumons', 'zang poumon', 'tsang poumon', 'fei poumon'],
   },
   {
     id: 'maitre_coeur',
-    label: 'Maître du Cœur',
+    label: 'Maître du Cœur (MC)',
     categorie: 'organe',
-    patterns: ['maitre du coeur', 'maitre coeur', 'pericarde'],
+    patterns: ['maitre du coeur', 'maitre coeur', 'pericarde', 'xin bao', 'enveloppe du coeur'],
   },
 
   // ─── Viscères Fu ─────────────────────────────────────────────────────────────
@@ -2081,37 +2456,37 @@ export const ORGANES_LOCA: ConceptIeatc[] = [
     id: 'estomac',
     label: 'Estomac',
     categorie: 'organe',
-    patterns: ['estomac', 'fu estomac'],
+    patterns: ['estomac', 'fu estomac', 'wei estomac'],
   },
   {
     id: 'vb',
     label: 'Vésicule Biliaire',
     categorie: 'organe',
-    patterns: ['vesicule biliaire', 'vesicule', 'vb'],
+    patterns: ['vesicule biliaire', 'vesicule', 'vb', 'fu vb', 'dan vb'],
   },
   {
     id: 'intestin_grele',
     label: 'Intestin Grêle',
     categorie: 'organe',
-    patterns: ['intestin grele'],
+    patterns: ['intestin grele', 'fu intestin grele', 'xiao chang'],
   },
   {
     id: 'gros_intestin',
     label: 'Gros Intestin',
     categorie: 'organe',
-    patterns: ['gros intestin'],
+    patterns: ['gros intestin', 'fu gros intestin', 'da chang'],
   },
   {
     id: 'vessie',
-    label: 'Vessie (méridien)',
+    label: 'Vessie',
     categorie: 'organe',
-    patterns: ['meridien vessie', 'meridien v'],
+    patterns: ['vessie', 'meridien vessie', 'meridien v', 'pang guang'],
   },
   {
     id: 'triple_rec',
     label: 'Triple Réchauffeur (TR)',
     categorie: 'organe',
-    patterns: ['triple rechauffeur', 'tr '],
+    patterns: ['triple rechauffeur', 'san jiao', 'trois foyers organe'],
   },
 
   // ─── Localisations Trois Foyers ──────────────────────────────────────────────
@@ -2185,74 +2560,79 @@ export const ORGANES_LOCA: ConceptIeatc[] = [
     patterns: ['yin wei mo', 'yin wei', 'yin oe mo'],
   },
 
-  // ─── Axes Grands Méridiens ───────────────────────────────────────────────────
+  // ─── Axes Grands Méridiens / Six Énergies ────────────────────────────────────
+  // Variantes acceptées : orthographe IEATC (Taé/Chao) + MTC courante (Tai/Shao)
   {
     id: 'shao_yang',
-    label: 'Shao Yang (TR + VB)',
+    label: 'Chao Yang (TR + VB)',
     categorie: 'localisation',
-    patterns: ['shao yang'],
+    // "chao yang" = IEATC | "shao yang" = MTC | les deux sont acceptés
+    patterns: ['chao yang', 'shao yang'],
   },
   {
     id: 'yang_ming',
     label: 'Yang Ming (E + GI)',
     categorie: 'localisation',
-    patterns: ['yang ming'],
+    patterns: ['yang ming', 'yan ming'],
   },
   {
     id: 'tai_yin',
-    label: 'Tai Yin (Rate + Poumon)',
+    label: 'Taé Yin (Rate + Poumon)',
     categorie: 'localisation',
-    patterns: ['tai yin'],
+    // "tae yin" = IEATC | "tai yin" = MTC courante
+    patterns: ['tae yin', 'tai yin'],
   },
   {
     id: 'jue_yin',
-    label: 'Jue Yin (Foie + MC)',
+    label: 'Tsiué Yin (Foie + MC)',
     categorie: 'localisation',
-    patterns: ['jue yin'],
+    patterns: ['tsieu yin', 'tsiue yin', 'jue yin', 'tjue yin', 'jue-yin'],
   },
   {
     id: 'shao_yin',
-    label: 'Shao Yin (Rein + Cœur)',
+    label: 'Chao Yin (Rein + Cœur)',
     categorie: 'localisation',
-    patterns: ['shao yin'],
+    // "chao yin" = IEATC | "shao yin" = MTC courante
+    patterns: ['chao yin', 'shao yin'],
   },
   {
     id: 'tai_yang',
-    label: 'Tai Yang (Vessie + IG)',
+    label: 'Taé Yang (Vessie + IG)',
     categorie: 'localisation',
-    patterns: ['tai yang'],
+    // "tae yang" = IEATC | "tai yang" = MTC courante
+    patterns: ['tae yang', 'tai yang'],
   },
 
   // ─── Éléments wuxing ─────────────────────────────────────────────────────────
   {
     id: 'element_eau',
-    label: 'Eau (Rein / VB)',
+    label: 'Eau (Rein / Vessie)',
     categorie: 'element',
-    patterns: ['element eau', 'eau element'],
+    patterns: ['element eau', 'eau element', 'l eau', 'mouvement eau'],
   },
   {
     id: 'element_bois',
     label: 'Bois (Foie / VB)',
     categorie: 'element',
-    patterns: ['element bois', 'bois element'],
+    patterns: ['element bois', 'bois element', 'le bois', 'mouvement bois'],
   },
   {
     id: 'element_feu',
     label: 'Feu (Cœur / IG)',
     categorie: 'element',
-    patterns: ['element feu', 'feu element'],
+    patterns: ['element feu', 'feu element', 'le feu', 'mouvement feu'],
   },
   {
     id: 'element_terre',
     label: 'Terre (Rate / Estomac)',
     categorie: 'element',
-    patterns: ['element terre', 'terre element'],
+    patterns: ['element terre', 'terre element', 'la terre', 'mouvement terre'],
   },
   {
     id: 'element_metal',
     label: 'Métal (Poumon / GI)',
     categorie: 'element',
-    patterns: ['element metal', 'metal element'],
+    patterns: ['element metal', 'metal element', 'le metal', 'mouvement metal'],
   },
 ];
 
@@ -2281,6 +2661,19 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     patterns: [
       'tonifier le yang general', 'tonification yang general',
       'soutenir le yang general', 'yang general tonifie',
+      'tonifier le yang', 'soutenir le yang', 'relever le yang',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'tonifier_yin_general',
+    label: 'Tonifier le Yin général',
+    categorie: 'strategie',
+    patterns: [
+      'tonifier le yin general', 'tonification yin general',
+      'nourrir le yin general', 'soutenir le yin general',
+      'yin general tonifie', 'nourrir le grand yin',
+      'tonifier le yin', 'nourrir le yin', 'soutenir le yin',
     ],
     priorite: 1,
   },
@@ -2294,6 +2687,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
       'tonifier ming men', 'ranimer le feu du ming men',
       'ranimer ming men', 'soutenir le yang du rein',
       'augmenter le feu du ming men',
+      'travailler sur rein yang', 'nourrir le rein yang',
+      'technique rein yang', 'rein yang', 'yang du rein',
     ],
     regles: ['R2'],
     priorite: 1,
@@ -2308,6 +2703,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
       'tonifier le yin du rein', 'soutenir le yin du rein',
       'yin du rein tonifie', 'nourrir l eau',
       'nourrir la base yin',
+      'travailler sur rein yin', 'nourrir le rein yin',
+      'rein yin', 'yin du rein',
     ],
     regles: ['R4'],
     priorite: 1,
@@ -2326,25 +2723,51 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 2,
   },
   {
-    id: 'clarifier_feu_vide',
-    label: 'Clarifier le Feu du vide (tonifier Yin)',
+    id: 'traiter_yang_apparent',
+    label: 'Traiter le Yang apparent / Feu apparent (vide de Yin)',
     categorie: 'strategie',
-    description: 'RÈGLE CRITIQUE : clarifier = tonifier le Yin, PAS disperser la chaleur.',
+    description: 'IEATC : un Yang apparent ou Feu apparent est dû à un vide de Yin — traiter = nourrir le Yin, pas disperser la chaleur.',
     patterns: [
+      'yang apparent', 'feu apparent', 'chaleur apparente',
+      'echauffement par vide de yin', 'chaleur par vide de yin',
+      'feu par vide de yin', 'yang apparent par vide de yin',
+      'traiter le yang apparent', 'traiter le feu apparent',
+      'nourrir le yin pour calmer le feu', 'nourrir le yin pour eteindre le feu',
       'clarifier le feu du vide', 'clarifier feu vide',
-      'traiter le feu du vide', 'tonifier le yin clarifier',
-      'nourrir le yin pour clarifier',
+      'traiter le feu du vide', 'nourrir le yin pour clarifier',
     ],
     regles: ['R3'],
     priorite: 1,
   },
   {
-    id: 'pacifier_vent_interne',
-    label: 'Pacifier le Vent interne du Foie',
+    id: 'traiter_yin_apparent',
+    label: 'Traiter le Yin apparent / Froid apparent (vide de Yang)',
     categorie: 'strategie',
+    description: 'IEATC : un Yin apparent ou Froid apparent est dû à un vide de Yang — traiter = tonifier le Yang.',
     patterns: [
-      'pacifier le vent interne', 'pacifier vent interne',
-      'calmer le vent interne', 'vent interne pacifie',
+      'yin apparent', 'froid apparent', 'froid par vide de yang',
+      'yin apparent par vide de yang', 'froid apparent par vide de yang',
+      'traiter le yin apparent', 'traiter le froid apparent',
+      'tonifier le yang pour chasser le froid', 'rechauffer le yang',
+    ],
+    regles: ['R2'],
+    priorite: 1,
+  },
+  {
+    id: 'disperser_fong',
+    label: 'Disperser / Expulser le Fong interne',
+    categorie: 'strategie',
+    description: 'IEATC : le Vent s\'appelle Fong. On ne pacifie pas le Fong — on le disperse, expulse, chasse ou fait sortir.',
+    patterns: [
+      'disperser le fong', 'expulser le fong', 'chasser le fong',
+      'faire sortir le fong', 'fong disperser', 'fong interne',
+      'disperser les fong', 'expulser les fong', 'chasser les fong',
+      'faire sortir les fong', 'disperser les fongs', 'expulser les fongs',
+      'disperser le vent', 'expulser le vent', 'chasser le vent',
+      'faire sortir le vent',
+      'disperser le vent interne', 'expulser le vent interne',
+      'chasser le vent interne', 'faire sortir le vent interne',
+      'pacifier le vent interne', 'calmer le vent interne',
     ],
     regles: ['R4'],
     priorite: 2,
@@ -2358,6 +2781,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
       'disperser le foyer moyen', 'lever l exces de yin au foyer moyen',
       'lever l exces yin foyer moyen', 'disperser la plenitude du foyer moyen',
       'vider le foyer moyen', 'abaisser le foyer moyen',
+      'faire circuler le foyer moyen', 'debloquer le foyer moyen',
+      'faire circuler le rechauffeur moyen', 'debloquer le rechauffeur moyen',
     ],
     regles: ['R5'],
     priorite: 1,
@@ -2369,22 +2794,108 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     patterns: [
       'tonifier le foyer inferieur', 'soutenir le foyer inferieur',
       'tonification foyer inferieur', 'renforcer le foyer inferieur',
+      'nourrir le foyer inferieur', 'faire circuler le foyer inferieur',
+      'debloquer le foyer inferieur', 'nourrir le rechauffeur inferieur',
     ],
     regles: ['R2'],
+    priorite: 1,
+  },
+  {
+    id: 'tonifier_foyer_superieur',
+    label: 'Tonifier / Soutenir le Foyer Supérieur',
+    categorie: 'strategie',
+    patterns: [
+      'tonifier le foyer superieur', 'soutenir le foyer superieur',
+      'nourrir le foyer superieur', 'renforcer le foyer superieur',
+      'faire circuler le foyer superieur', 'debloquer le foyer superieur',
+      'tonification foyer superieur', 'nourrir le rechauffeur superieur',
+    ],
     priorite: 1,
   },
   {
     id: 'relancer_cycle_sheng',
     label: 'Relancer le cycle Cheng Eau → Bois',
     categorie: 'strategie',
+    description: 'Le Rein (Eau) nourrit le Foie (Bois) — Cycle Cheng nourricier.',
     patterns: [
       'relancer le cycle cheng', 'relancer le cycle sheng',
       'nourrir l eau pour relancer le bois',
       'relancer cycle cheng', 'relancer cycle sheng',
       'relancer cheng eau bois', 'relancer sheng eau bois',
       'nourrir eau pour bois', 'relancer l eau et le bois',
+      'debloquer le bois', 'faire circuler le bois',
+      'debloquer eau bois', 'relancer l eau vers le bois',
     ],
     regles: ['R4'],
+    priorite: 1,
+  },
+  {
+    id: 'relancer_cycle_sheng_bois_feu',
+    label: 'Relancer le cycle Cheng Bois → Feu',
+    categorie: 'strategie',
+    description: 'Le Foie (Bois) nourrit le Cœur (Feu) — Cycle Cheng nourricier.',
+    patterns: [
+      'relancer cycle cheng bois feu', 'relancer cycle sheng bois feu',
+      'relancer bois feu', 'nourrir le bois pour le feu',
+      'soutenir le bois pour le coeur', 'relancer bois vers feu',
+      'debloquer le feu', 'faire circuler le feu',
+      'debloquer bois feu', 'foie nourrit coeur',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'relancer_cycle_sheng_feu_terre',
+    label: 'Relancer le cycle Cheng Feu → Terre',
+    categorie: 'strategie',
+    description: 'Le Cœur (Feu) nourrit la Rate (Terre) — Cycle Cheng nourricier.',
+    patterns: [
+      'relancer cycle cheng feu terre', 'relancer cycle sheng feu terre',
+      'relancer feu terre', 'nourrir le feu pour la terre',
+      'soutenir le coeur pour la rate', 'relancer feu vers terre',
+      'debloquer la terre par le feu', 'faire circuler feu terre',
+      'coeur nourrit rate',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'debloquer_cycles_cheng',
+    label: 'Débloquer les cycles Cheng (global)',
+    categorie: 'strategie',
+    description: 'Action globale sur le cycle nourricier (Cheng/Sheng) — sans cibler un élément spécifique.',
+    patterns: [
+      'debloquer les cycles cheng', 'debloquer les cycles sheng',
+      'cycle d engendrement', 'cycle nourricier',
+      'relancer le cycle nourricier', 'debloquer le cycle nourricier',
+      'faire circuler le cycle cheng', 'harmoniser les cycles cheng',
+      'debloquer le cycle d engendrement',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'traiter_ko_pathologique',
+    label: 'Traiter un cycle Ko pathologique (attaque)',
+    categorie: 'strategie',
+    description: 'Ko physiologique = contrôle. Ko pathologique = attaque d\'un élément par un autre (ex: Bois attaque Terre). Traitement : disperser l\'élément agresseur, soutenir l\'attaqué.',
+    patterns: [
+      'ko pathologique', 'cycle ko pathologique', 'attaque par le cycle ko',
+      'disperser l element agresseur', 'soutenir l element attaque',
+      'bois attaque terre', 'eau attaque feu', 'feu attaque metal',
+      'metal attaque bois', 'terre attaque eau',
+      'traiter le cycle ko pathologique',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'corriger_cycle_rae',
+    label: 'Corriger un cycle Raé (Ko inversé / Rébellion)',
+    categorie: 'strategie',
+    description: 'Cycle Raé = Ko inversé : l\'élément normalement contrôlé se rebelle et attaque son contrôleur. Ex: l\'Eau (contrôlée par la Terre) contre-attaque la Terre.',
+    patterns: [
+      'cycle rae', 'rae', 'ko inverse', 'rebellion du cycle ko',
+      'cycle ko inverse', 'element rebelle', 'rébellion element',
+      'corriger le cycle rae', 'traiter le cycle rae',
+      'contre-attaque cycle ko',
+    ],
     priorite: 1,
   },
   {
@@ -2395,6 +2906,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
       'lever l humidite', 'disperser l humidite',
       'drainer l humidite', 'eliminer l humidite',
       'dispersion humidite', 'drainage humidite',
+      'assecher l humidite', 'transformer l humidite',
+      'chasser l humidite', 'resoudre l humidite',
     ],
     priorite: 2,
   },
@@ -2405,7 +2918,9 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     patterns: [
       'liberer le meridien', 'debloquer le meridien',
       'lever l obstruction meridienne', 'liberer la circulation meridienne',
-      'ouvrir le meridien',
+      'ouvrir le meridien', 'deverrouiller le meridien',
+      'faire circuler dans le meridien', 'restaurer le meridien',
+      'repermeabiliser le meridien',
     ],
     priorite: 2,
   },
@@ -2416,6 +2931,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     patterns: [
       'pacifier le shen', 'calmer le shen', 'shen pacifie',
       'apaiser le coeur', 'calmer le coeur', 'soutenir le coeur',
+      'ancrer le shen', 'stabiliser le shen', 'apaiser le shen',
+      'rasseoir le shen', 'shen a pacifier', 'shen a calmer',
     ],
     priorite: 2,
   },
@@ -2448,7 +2965,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     categorie: 'strategie',
     patterns: [
       'nourrir le sang', 'tonifier le sang', 'soutenir le sang',
-      'nourrir le xue',
+      'nourrir le xue', 'renforcer le sang', 'reconstituer le sang',
+      'sang a nourrir', 'sang insuffisant a tonifier',
     ],
     priorite: 1,
   },
@@ -2458,7 +2976,9 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     categorie: 'strategie',
     patterns: [
       'calmer le bois', 'calmer le foie', 'disperser le bois',
-      'apaiser le bois', 'drainer le foie',
+      'apaiser le bois', 'drainer le foie', 'apaiser le foie',
+      'foie a calmer', 'bois en exces a calmer',
+      'ramener le foie', 'reduire l exces de bois',
     ],
     regles: ['R7'],
     priorite: 2,
@@ -2470,6 +2990,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     patterns: [
       'consolider la terre', 'soutenir la rate', 'consolider rate estomac',
       'soutenir la rate estomac', 'tonifier la rate',
+      'renforcer la terre', 'terre a consolider',
+      'soutenir la terre', 'la terre a besoin de soutien',
     ],
     regles: ['R7'],
     priorite: 2,
@@ -2599,6 +3121,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
       'soutenir rate pour poumon', 'nourrir la rate pour le poumon',
       'relancer cheng terre vers metal', 'relancer sheng terre vers metal',
       'consolider la terre pour le metal',
+      'debloquer le metal par la terre', 'faire circuler terre metal',
+      'rate nourrit poumon',
     ],
     priorite: 1,
   },
@@ -2612,6 +3136,277 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
       'soutenir poumon pour rein', 'nourrir le poumon pour le rein',
       'relancer cheng metal vers eau', 'relancer sheng metal vers eau',
       'consolider le metal pour l eau',
+      'debloquer l eau par le metal', 'faire circuler metal eau',
+      'poumon nourrit rein',
+    ],
+    priorite: 1,
+  },
+
+  // ─── Nouvelles stratégies IEATC ──────────────────────────────────────────────
+  {
+    id: 'consolider_yang_ming',
+    label: 'Traiter le Yang Ming / Grand Yang Ming (E / GI)',
+    categorie: 'strategie',
+    description: 'Yang Ming = Estomac (E) + Gros Intestin (GI). Niveau Yang du milieu — chaleur, plénitude, axe digestif. Grand Yang Ming = technique spécifique.',
+    patterns: [
+      'consolider le yang ming', 'soutenir le yang ming',
+      'tonifier le yang ming', 'yang ming', 'grand yang ming',
+      'technique yang ming', 'travailler sur le yang ming',
+      'traiter le yang ming', 'niveau yang ming',
+      'debloquer le yang ming', 'liberer le yang ming',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'harmoniser_foie_rate',
+    label: 'Harmoniser Foie / Rate (Bois-Terre)',
+    categorie: 'strategie',
+    description: 'Dysharmonie Foie-Rate = Bois qui attaque la Terre (Ko pathologique courant). Harmoniser = calmer le Foie + tonifier la Rate.',
+    patterns: [
+      'harmoniser le foie et la rate', 'harmoniser foie rate',
+      'calmer le foie soutenir la rate', 'bois terre harmonisation',
+      'harmoniser bois terre', 'lever l agression foie rate',
+      'foie rate dysharmonie', 'dysharmonie foie rate',
+      'harmoniser le bois et la terre',
+    ],
+    regles: ['R7'],
+    priorite: 1,
+  },
+  {
+    id: 'nourrir_yin_foie',
+    label: 'Nourrir le Yin du Foie',
+    categorie: 'strategie',
+    description: 'Distinct du Yin du Rein. Le Yin du Foie nourrit le Sang et ancre le Yang du Foie.',
+    patterns: [
+      'nourrir le yin du foie', 'nourrir yin foie',
+      'tonifier le yin du foie', 'soutenir le yin du foie',
+      'yin du foie tonifie', 'nourrir le foie yin',
+      'yin foie', 'nourrir le bois yin',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'sudation',
+    label: 'Méthode sudation (Han Fa)',
+    categorie: 'strategie',
+    description: 'Han Fa = méthode de transpiration — ouvre les pores, expulse les facteurs pathogènes externes.',
+    patterns: [
+      'sudation', 'han fa', 'methode sudation',
+      'provoquer la sudation', 'ouvrir les pores',
+      'expulser par la sudation', 'faire transpirer',
+      'traitement par sudation',
+    ],
+    priorite: 2,
+  },
+  {
+    id: 'purgation',
+    label: 'Méthode purgation (Xia Fa)',
+    categorie: 'strategie',
+    description: 'Xia Fa = méthode de purgation — évacue les facteurs pathogènes par le bas.',
+    patterns: [
+      'purgation', 'xia fa', 'methode purgation',
+      'purger', 'evacuer par le bas', 'traitement par purgation',
+      'purger les intestins',
+    ],
+    priorite: 2,
+  },
+
+  // ─── Stratégies Six Énergies (niveaux énergétiques IEATC) ────────────────────
+  {
+    id: 'traiter_tae_yang',
+    label: 'Traiter le niveau Taé Yang (V / IG)',
+    categorie: 'strategie',
+    description: 'Niveau Taé Yang = Vessie (V) + Intestin Grêle (IG). Premier niveau Yang — superficie, défenses, dos.',
+    patterns: [
+      'tae yang', 'tai yang', 'niveau tae yang', 'niveau tai yang',
+      'traiter le tae yang', 'traiter le tai yang',
+      'soutenir le tae yang', 'soutenir le tai yang',
+      'debloquer le tae yang', 'debloquer le tai yang',
+      'liberer le tae yang', 'liberer le tai yang',
+      'travailler sur le tae yang', 'travailler sur le tai yang',
+      'tonifier le tae yang', 'tonifier le tai yang',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'traiter_chao_yang',
+    label: 'Traiter le niveau Chao Yang (VB / TR)',
+    categorie: 'strategie',
+    description: 'Niveau Chao Yang = Vésicule Biliaire (VB) + Triple Réchauffeur (TR). Niveau charnière — demi-superficie, demi-profondeur.',
+    patterns: [
+      'chao yang', 'shao yang', 'niveau chao yang', 'niveau shao yang',
+      'traiter le chao yang', 'traiter le shao yang',
+      'soutenir le chao yang', 'soutenir le shao yang',
+      'debloquer le chao yang', 'debloquer le shao yang',
+      'liberer le chao yang', 'liberer le shao yang',
+      'travailler sur le chao yang', 'travailler sur le shao yang',
+      'harmoniser le chao yang', 'harmoniser le shao yang',
+      'tonifier le chao yang', 'tonifier le shao yang',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'traiter_tae_yin',
+    label: 'Traiter le niveau Taé Yin (P / Rt)',
+    categorie: 'strategie',
+    description: 'Niveau Taé Yin = Poumon (P) + Rate (Rt). Premier niveau Yin — surface Yin, Qi et liquides.',
+    patterns: [
+      'tae yin', 'tai yin', 'niveau tae yin', 'niveau tai yin',
+      'traiter le tae yin', 'traiter le tai yin',
+      'soutenir le tae yin', 'soutenir le tai yin',
+      'tonifier le tae yin', 'tonifier le tai yin',
+      'debloquer le tae yin', 'debloquer le tai yin',
+      'travailler sur le tae yin', 'travailler sur le tai yin',
+      'nourrir le tae yin', 'nourrir le tai yin',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'traiter_chao_yin',
+    label: 'Traiter le niveau Chao Yin (C / R)',
+    categorie: 'strategie',
+    description: 'Niveau Chao Yin = Cœur (C) + Rein (R). Niveau profond Yin — Feu et Eau, axe Cœur-Rein.',
+    patterns: [
+      'chao yin', 'shao yin', 'niveau chao yin', 'niveau shao yin',
+      'traiter le chao yin', 'traiter le shao yin',
+      'soutenir le chao yin', 'soutenir le shao yin',
+      'tonifier le chao yin', 'tonifier le shao yin',
+      'debloquer le chao yin', 'debloquer le shao yin',
+      'travailler sur le chao yin', 'travailler sur le shao yin',
+      'nourrir le chao yin', 'nourrir le shao yin',
+      'axe coeur rein chao yin', 'axe coeur rein shao yin',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'traiter_jue_yin',
+    label: 'Traiter le niveau Tsiué Yin (F / MC)',
+    categorie: 'strategie',
+    description: 'Niveau Tsiué Yin = Foie (F) + Maître Cœur (MC). Niveau le plus profond Yin — terminal, récapitule Yin et Yang.',
+    patterns: [
+      'tsieu yin', 'tsiue yin', 'niveau tsieu yin', 'niveau tsiue yin',
+      'jue yin', 'tjue yin', 'niveau jue yin', 'niveau tjue yin',
+      'traiter le tsieu yin', 'traiter le tsiue yin',
+      'traiter le jue yin', 'traiter le tjue yin',
+      'soutenir le tsieu yin', 'soutenir le tsiue yin',
+      'soutenir le jue yin', 'soutenir le tjue yin',
+      'tonifier le tsieu yin', 'tonifier le tsiue yin',
+      'tonifier le jue yin', 'tonifier le tjue yin',
+      'debloquer le tsieu yin', 'debloquer le tsiue yin',
+      'debloquer le jue yin', 'debloquer le tjue yin',
+      'nourrir le tsieu yin', 'nourrir le tsiue yin',
+      'nourrir le jue yin', 'nourrir le tjue yin',
+      'travailler sur le tsieu yin', 'travailler sur le tsiue yin',
+      'travailler sur le jue yin', 'travailler sur le tjue yin',
+      'axe foie maitre coeur tsieu yin',
+    ],
+    priorite: 1,
+  },
+
+  // ─── Stratégies complémentaires fondamentales ────────────────────────────
+  {
+    id: 'faire_circuler_qi',
+    label: 'Faire circuler le Qi (débloquer)',
+    categorie: 'strategie',
+    description: 'Remettre le Qi en mouvement — contre toute stagnation. Action générale avant de cibler un organe.',
+    patterns: [
+      'faire circuler le qi', 'relancer la circulation du qi',
+      'relancer le qi', 'debloquer le qi', 'mobiliser le qi',
+      'faire circuler l energie', 'relancer l energie',
+      'remettre le qi en mouvement', 'liberer le qi',
+    ],
+    priorite: 2,
+  },
+  {
+    id: 'disperser_chaleur',
+    label: 'Disperser / Clarifier la Chaleur réelle',
+    categorie: 'strategie',
+    description: 'Chaleur réelle (plénitude) — NE PAS confondre avec le Yang apparent (vide de Yin). Ici on disperse car c\'est une vraie chaleur.',
+    patterns: [
+      'disperser la chaleur', 'clarifier la chaleur',
+      'evacuer la chaleur', 'rafraichir la chaleur',
+      'purger la chaleur', 'eteindre le feu',
+      'chaleur a disperser', 'drainer la chaleur',
+    ],
+    regles: ['R3'],
+    priorite: 2,
+  },
+  {
+    id: 'faire_descendre_qi',
+    label: 'Faire descendre le Qi (rébellion)',
+    categorie: 'strategie',
+    description: 'Le Qi monte au lieu de descendre (Estomac, Poumon). Stratégie : ramener vers le bas.',
+    patterns: [
+      'faire descendre le qi', 'abaisser le qi',
+      'ramener le qi vers le bas', 'le qi doit redescendre',
+      'abaisser le qi de l estomac', 'faire descendre qi estomac',
+      'faire descendre qi poumon',
+    ],
+    priorite: 2,
+  },
+  {
+    id: 'ancrer_yang',
+    label: 'Ancrer le Yang (nourrir le Yin pour stabiliser)',
+    categorie: 'strategie',
+    description: 'Le Yang flotte car le Yin ne l\'ancre plus. Stratégie = nourrir le Yin pour que le Yang redescende et se stabilise. Distinct de disperser.',
+    patterns: [
+      'ancrer le yang', 'yang a ancrer', 'le yang doit etre ancre',
+      'ramener le yang vers le bas', 'stabiliser le yang',
+      'enraciner le yang', 'yang a enraciner',
+      'reenraciner le yang', 'yang flottant a ancrer',
+    ],
+    regles: ['R3', 'R4'],
+    priorite: 1,
+  },
+  {
+    id: 'faire_circuler_sang',
+    label: 'Faire circuler le Sang / Disperser les stases',
+    categorie: 'strategie',
+    description: 'Remettre le Sang en mouvement, dissoudre les stases sanguines.',
+    patterns: [
+      'faire circuler le sang', 'activer le sang', 'mobiliser le sang',
+      'disperser les stases', 'lever les stases', 'lever les stases sanguines',
+      'disperser stases sanguines', 'dissoudre les stases',
+      'traiter la stase sanguine', 'sang a faire circuler',
+    ],
+    priorite: 2,
+  },
+  {
+    id: 'nourrir_sang_foie',
+    label: 'Nourrir le Sang du Foie',
+    categorie: 'strategie',
+    description: 'Sang du Foie insuffisant — nourrir spécifiquement pour renforcer les tendons, la vision, le cycle menstruel.',
+    patterns: [
+      'nourrir le sang du foie', 'nourrir sang foie',
+      'tonifier le sang du foie', 'soutenir le sang du foie',
+      'nourrir le foie en sang', 'sang du foie a nourrir',
+      'renourrir le foie', 'alimenter le foie en sang',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'monter_yang_rate',
+    label: 'Monter le Yang de la Rate (relever le Qi)',
+    categorie: 'strategie',
+    description: 'Le Qi pur de la Rate doit monter. Quand il ne monte plus = prolapsus, ptoses, hémorragies. Stratégie de relèvement du Qi.',
+    patterns: [
+      'monter le yang de la rate', 'relever le qi de la rate',
+      'relever le qi', 'faire monter le qi de la rate',
+      'soutenir l ascension du qi pur', 'relever le qi pur',
+      'monter le qi de la rate', 'ascending qi rate',
+    ],
+    priorite: 1,
+  },
+  {
+    id: 'reconnecter_coeur_rein',
+    label: 'Reconnecter l\'axe Cœur–Rein (Eau-Feu)',
+    categorie: 'strategie',
+    description: 'Rétablir la communication entre le Feu (Cœur) et l\'Eau (Rein) — le Feu descend, l\'Eau monte.',
+    patterns: [
+      'reconnecter coeur rein', 'reconnecter l axe coeur rein',
+      'retablir l axe eau feu', 'retablir l axe coeur rein',
+      'reconnecter eau et feu', 'faire communiquer coeur et rein',
+      'harmoniser coeur et rein', 'harmoniser l axe eau feu',
     ],
     priorite: 1,
   },
@@ -3338,7 +4133,7 @@ export function normaliserTechnique(technique: string): string[] {
   switch (technique) {
     case 'tonification_chauffee':        return ['tonification_chauffee', 'tonification'];
     case 'moxa_tonification':            return ['moxa_tonification', 'tonification'];
-    case 'moxa_dispersion':              return ['moxa_dispersion', 'dispersion'];
+    case 'dispersion_chauffee':          return ['dispersion_chauffee', 'dispersion'];
     case 'dispersion_puis_tonification': return ['dispersion_puis_tonification'];
     default: return [technique];
   }

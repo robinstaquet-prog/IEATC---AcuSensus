@@ -1,7 +1,8 @@
 'use client';
 
 // ─── Page Mode Apprentissage ─────────────────────────────────────────────────
-// Liste les cas qualifies pour l'apprentissage (expert ou valeur >= 50).
+// Liste uniquement les cas certifiés pour l'apprentissage :
+// - exemplaire (marqué par l'éditeur) OU qualifieApprentissage (seuil communautaire)
 // Chaque cas propose un bouton "S'entrainer" qui redirige vers /apprentissage/[id].
 
 import { useState, useMemo, useEffect } from 'react';
@@ -102,9 +103,7 @@ export default function ApprentissagePage() {
   const casApprentissage = useMemo(() => {
     if (!mounted) return [];
     const allCases = getCasesPublies();
-    return allCases.filter((c) => {
-      return c.exemplaire || c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
-    });
+    return allCases.filter((c) => c.exemplaire || c.qualifieApprentissage);
   }, [mounted]);
 
   const filtered = useMemo(() => {
@@ -162,8 +161,8 @@ export default function ApprentissagePage() {
           <GraduationCap size={40} className="text-slate-200 mx-auto mb-4" />
           <p className="text-slate-500 font-medium mb-1">Aucun cas d&apos;apprentissage disponible.</p>
           <p className="text-sm text-slate-400 max-w-sm mx-auto">
-            Les cas deviennent disponibles lorsqu&apos;ils ont une analyse d&apos;expert
-            ou une participation très votée par la communauté.
+            Les cas deviennent disponibles lorsqu&apos;ils sont certifiés :
+            marqués exemplaires par l&apos;éditeur ou qualifiés par la communauté.
           </p>
           <Link
             href="/cas"

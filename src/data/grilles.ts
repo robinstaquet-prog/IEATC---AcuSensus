@@ -93,7 +93,7 @@ export const GRILLES: ReadingGrid[] = [
     nom: 'Grands Méridiens & Climats',
     nomCourt: 'Gr. Méridiens',
     description:
-      "Les six grands méridiens (Tai Yang, Shao Yang, Yang Ming, Tai Yin, Jue Yin, Shao Yin) et leur rapport aux six facteurs climatiques pathogènes (Vent, Froid, Chaleur-Été, Humidité, Sécheresse, Chaleur-Feu).",
+      "Les six grands méridiens (Taé Yang, Chao Yang, Yang Ming, Taé Yin, Tsiué Yin, Chao Yin) et leur rapport aux six facteurs climatiques pathogènes (Vent/Fong, Froid, Chaleur-Été, Humidité, Sécheresse, Chaleur-Feu).",
     ordre: 8,
     colorClass: 'bg-rose-700',
     textClass: 'text-white',

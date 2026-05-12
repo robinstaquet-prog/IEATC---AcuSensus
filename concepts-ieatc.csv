@@ -1,0 +1,954 @@
+﻿"Catégorie";"ID";"Label IEATC";"Correspondance MTC";"Patterns directs";"Expressions sémantiques reconnues"
+"1 — Famille diagnostique";"chaleur";"Chaleur (plénitude)";"Shi Re — Chaleur plénitude (实热)";"chaleur interne | chaleur de | chaleur dans | chaleur au | accumulation de chaleur | exces de chaleur | chaleur pathogene | feu de | feu dans | accumulation de feu | chaleur plein | chaleur reelle | chaleur locale | plenitude chaleur | chaleur en plenitude | feu montant | feu qui monte";"chaleur par manque de yin | chaleur liee au vide de yin | vide de yin avec chaleur | chaleur du vide | chaleur qui monte par vide | inflammation locale sur vide | chaleur locale sur fond de vide | chaleur locale sur vide yang | rougeur locale sur terrain de vide yang | oe qui monte | oe locale en exces | chaleur sur vide de yin | langue rouge sans enduit"
+"1 — Famille diagnostique";"exces_yang";"Excès / Plénitude de Yang";"Yang Shi (阳实)";"exces de yang | exces yang | yang en exces | plenitude yang | plenitude de yang | yang plenitude | trop de yang | yang trop fort | yang excessif | yang local | yang en plenitude | plenitude yang reelle | yang en plein | yang reel en exces";"inflammation locale sur vide | chaleur locale sur fond de vide | inflammation en surface sur terrain de vide | chaleur locale sur vide yang | rougeur locale sur terrain de vide yang"
+"1 — Famille diagnostique";"exces_yin";"Excès / Plénitude de Yin";"Yin Shi (阴实)";"exces de yin | exces yin | yin en exces | plenitude yin | plenitude de yin | yin plenitude | trop de yin | yin trop fort | yin excessif";"foyer moyen trop charge | foyer moyen encombre | foyer moyen bloque | foyer moyen sature de yin | foyer moyen plein | rate surchargee de yin | rate trop pleine | rate pleine | foyer moyen obstrue"
+"1 — Famille diagnostique";"vent_externe";"Fong externe (Vent externe)";"Wai Feng — Vent externe (外风)";"fong externe | invasion de fong | fong pathogene | agression de fong | fong froid | fong chaleur | fong froid externe | fong chaleur externe | vent externe | invasion de vent | vent pathogene | agression de vent | vent froid externe | vent chaleur externe";"fong externe | invasion de fong | agression de fong | fong froid | fong chaleur | attrape un fong | pris un fong | fong attaque le poumon | fong envahit la surface"
+"1 — Famille diagnostique";"vent_interne";"Fong interne";"Nei Feng — Vent interne (内风)";"fong interne | fong du foie | fong interne du foie | fong | fongs | le fong | les fong | les fongs | un fong | vent interne | vent du foie | vent interne du foie | agitation interne | yang monte en usurpateur | yang ascendant | yang ne descend pas";"fong | fongs | fong interne | vertiges par manque de yin | tremblements | tremblements des membres | mouvements involontaires | spasmes musculaires | convulsions | pouls corde | pouls en corde | pouls en corde d arc | fong externe | invasion de fong | agression de fong | fong froid | fong chaleur | attrape un fong | pris un fong | fong attaque le poumon | fong envahit la surface"
+"1 — Famille diagnostique";"froid_interne";"Froid interne";"Han — Froid (寒)";"froid interne | froid de | froid dans | froid au | invasion de froid | froid pathogene | accumulation de froid | blocage par le froid | manque de chaleur yang";"enduit blanc"
+"1 — Famille diagnostique";"humidite";"Humidité";"Shi — Humidité (湿)";"humidite interne | retention d humidite | accumulation d humidite | humidite de | humidite dans | humidite au | exces d humidite | humidite pathogene | retention humidite | masse d humidite | humidite excessive | charge humide | l humidite | envahi par l humidite | humidite envahissante | humidite stagnante | humidite predominante | terrain humide";"corps lourd | sensation de lourdeur | lourdeur du corps | lourdeur generale | terrain humide et lourd | enduit epais | langue enduit epais | terrain humide"
+"1 — Famille diagnostique";"humidite_chaleur";"Humidité-Chaleur";"Shi Re (湿热)";"humidite chaleur | chaleur humidite | humidite et chaleur | chaleur et humidite | enduit jaune gras | chaleur humide";"langue rouge avec enduit jaune | enduit jaune"
+"1 — Famille diagnostique";"humidite_froid";"Humidité-Froid";"Han Shi (寒湿)";"humidite froid | froid humidite | humidite et froid | froid et humidite | froid humide | enduit blanc epais";
+"1 — Famille diagnostique";"obstruction_meridien";"Obstruction / Atteinte de méridien";"Jing Luo Zu — Obstruction méridien";"obstruction du meridien | obstruction meridien | atteinte du meridien | atteinte meridien | meridien obstrue | meridien bloque | meridien atteint | vide du meridien | sequelle meridien | meridien perturbe | meridien insuffisant | circulation meridienne perturbee | obstruction chronique du meridien | obstruction chronique | meridien vb obstrue | meridien foie obstrue | meridien rein obstrue | meridien vb bloque | meridien foie bloque | vide meridien | meridien en vide | stagnation dans le meridien | stagnation locale sur terrain de vide meridien | meridien poumon obstrue | meridien coeur obstrue | meridien rate obstrue | meridien estomac obstrue | meridien poumon bloque | meridien coeur bloque | meridien rate bloque | meridien estomac bloque";"stagnation du poumon | blocage du poumon | poumon bloque | poumon en stagnation | qi du poumon bloque | qi du poumon stagnant | blocage du coeur | stagnation du rein | blocage du rein | rein bloque | circulation bloquee | le qi ne circule plus | le qi ne circule pas | le tchi ne circule plus | meridien principal | meridien principal atteint | meridien principal bloque | meridien principal obstrue | atteinte du meridien principal"
+"1 — Famille diagnostique";"plenitude_oe";"Plénitude d'Oé (Wei Qi en excès)";"Wei Qi Shi — Plénitude de Wei Qi";"oe en plenitude | plenitude d oe | oe en exces | oé en plenitude | wei qi en exces | oé excessif | exces d oe | chaleur de surface | oé locale excessive";"energie defensive | oe en exces | oe locale excessive | oe qui monte | oe locale en exces"
+"1 — Famille diagnostique";"secheresse";"Sécheresse";"Zao — Sécheresse (燥)";"secheresse interne | secheresse de | secheresse dans | manque de liquides | assechement des | liquides insuffisants | jin ye insuffisants | jin ye vide | manque de jin ye";"jin ye"
+"1 — Famille diagnostique";"stagnation_qi";"Stagnation de Qi";"Qi Zhi (气滞)";"stagnation de qi | stagnation qi | qi stagnant | stagnation energetique | stagnation d energie | energie stagnante | blocage de qi | stagnation du qi | qi bloque | stagnation du tchi | stagnation yang | yang en stagnation | yang bloque au | blocage de la circulation | blocage de la descente | blocage circulation meridienne";"le foie ne circule pas | le foie ne circule plus | foie ne circule pas | foie ne circule plus | le foie est bloque | foie est bloque | blocage du foie | blocage au foie | blocage de l energie du foie | energie du foie bloquee | energie du foie stagnante | energie du foie entravee | energie du foie ne passe pas | qi du foie qui stagne | qi du foie en stagnation | qi du foie qui se bloque | qi du foie est retenu | foie congestionne | foie est congestionne | foie entrave | foie est entrave | foie obstrue | foie se bloque | foie qui se bloque | foie ne laisse pas circuler | foie ne fait plus passer | foie ne fait pas passer le qi | foie ralenti | foie fige | foie coince | foie sature | bois bloque | bois est bloque | bois stagnant | bois en stagnation | stagnation du bois | blocage du bois | energie du bois bloquee | bois ralenti | bois qui ne circule pas | bois qui ne circule plus | foie vb bloque | foie vb en stagnation | vb bloque | vesicule bloquee | foie serre | foie contracte | tension au niveau du foie | crispation du foie | energie qui se bloque | qi qui stagne | qi bloque | energie bloquee | energie ne circule pas | energie retenue | blocage energetique | energie entravee | tchi bloque | tchi qui stagne | tchi ne circule pas | blocage du tchi | qi entrave | qi ralenti | qi en stagnation | blocage du qi | blocage de l estomac | blocage d estomac | estomac bloque | estomac qui se bloque | estomac obstrue | estomac sature | estomac ne fait pas descendre | nausees par blocage | digestion bloquee dans l estomac | blocage de la rate | blocage a la rate | rate bloquee | rate qui se bloque | rate obstrue | vomissements chroniques | stagnation du foie | stagnation au foie | stagnation de l energie du foie | stagnation du qi du foie | stagnation de qi foie | foie en stagnation | le foie stagne | foie qui stagne | stagnation de la vesicule | stagnation de la vb | stagnation du bois vb | blocage de la vb | blocage de la vesicule | vesicule bloquee | vb stagnante | stagnation de l estomac | stagnation a l estomac | stagnation du qi de l estomac | estomac en stagnation | l estomac stagne | stagnation de qi d estomac | stagnation de la rate | stagnation a la rate | stagnation du qi de la rate | rate en stagnation | la rate stagne | stagnation du poumon | blocage du poumon | poumon bloque | poumon en stagnation | qi du poumon stagnant | stagnation du coeur | coeur bloque | qi du coeur bloque | stagnation du rein | blocage du rein | rein bloque | energie bloquee | circulation bloquee | qi bloque | le qi ne circule plus | le qi ne circule pas | qi en stagnation | qi stagnant | tchi qui stagne | tchi bloque | le tchi ne circule plus | oe qui ne circule plus | colere | colere refoulee | colere contenue | frustration | frustration refoulee | irritabilite | impatience | enervement | agacement | ressentiment | le foie ne draine plus | le libre flux du foie est entrave | faire circuler le qi | faire circuler l energie | relancer la circulation du qi | debloquer le qi"
+"1 — Famille diagnostique";"stagnation_sang";"Stagnation de Sang";"Xue Yu (血瘀)";"stagnation de sang | stagnation sang | sang stagnant | sang bloque | stase sanguine | stase de sang | xue stagnant | stagnation du sang";"sang bloque | sang qui stagne | sang coagule | stase du sang | mauvaise circulation du sang | sang ne circule plus bien | sang stagnant dans | sang fige | sang ralenti | microcirculation perturbee | stase sanguine | sang qui ne circule plus | sang du foie stagnant | sang stagnant au foie | stase de sang au foie | sang bloque au foie | sang du foie qui se bloque | caillots menstruels | regles avec caillots | regles sombres | stagnation du coeur | blocage du coeur | coeur bloque | le coeur ne propulse plus | disperser les stases | lever les stases | sang a faire circuler | langue violette | langue foncee | teint terne"
+"1 — Famille diagnostique";"tan";"Tan (Phlegme / Flegme)";;"phlegme | flegme | glaires pathogenes | mucus pathologique | accumulation de tan | retention de tan | formation de tan | production de tan | tan obstrue | tan dans les meridiens | tan humide | tan chaud | tan froid | tan vent | tan feu | humidite epaissie | humidite epaissie en tan | humidite transformee en tan | obstruction par le tan | phlegme obstruant | phlegme accumule | mucosites epaisses | glaires | tan invisible | tan pervers | le tan obstrue | le tan bloque";"mucus s accumule | glaires qui s accumulent | phlegme qui s accumule | tan qui obstrue | mucosites | mucus pathologique | glaires dans les poumons"
+"1 — Famille diagnostique";"vide_iong";"Vide d'Iong (Ying Qi insuffisante)";;"iong insuffisante | iong vide | vide d iong | vide de iong | ying qi insuffisante | insuffisance iong | iong affaiblie";"energie nutritive | ying qi | iong vide | iong insuffisante | iong faiblit | iong epuisee | l iong ne nourrit plus | deficit d iong"
+"1 — Famille diagnostique";"vide_jing";"Vide de Jing / Tsing (Ancestrale)";;"vide de jing | vide jing | jing vide | tsing vide | vide de tsing | insuffisance jing | jing epuise | tsing epuise | vide d essence | essence insuffisante | energie ancestrale epuisee | epuisement du jing";"essence du rein insuffisante | energie ancestrale | jing qi | tsing vide | tsing insuffisant | tsing epuise | tsing du rein vide | l energie ancestrale s epuise | l energie ancestrale faiblit | le rein ne stocke plus le jing | os fragiles | osteoporose | vieillissement premature | cheveux blancs precoces | dents qui se dechaussent"
+"1 — Famille diagnostique";"vide_qi";"Vide de Qi / Tchi";"Qi Xu (气虚)";"vide de qi | vide qi | qi vide | vide de tchi | tchi vide | insuffisance qi | qi insuffisant | qi deficient | insuffisance energetique | energie insuffisante | manque de qi | qi affaibli | qi epuise";"rate s affaiblit | rate s epuise | rate ne produit plus | rate ne transforme plus | rate ne transporte plus | rate deficiente | rate manque de qi | qi de la rate qui faiblit | terre qui s affaiblit | terre deficiente | foyer moyen s affaiblit | digestion affaiblie | digestion deficiente | digestion ne fonctionne plus | rate fatiguee | rate qui se vide | rate en vide | rate epuisee | energie generale insuffisante | vide energetique general | epuisement global | terrain vide | terrain energetique appauvri | manque d energie general | epuisement energetique | energie appauvrie | grande fatigue energetique | energie vitale | foie en vide de qi | foie energetiquement vide | foie manque de qi | qi du poumon bloque | qi du coeur bloque | tchi insuffisant | tchi en vide | tchi epuise | manque de tchi | souci | soucis | inquietude | surmenage intellectuel | reflexion excessive | la rate ne transforme plus | la rate ne transporte plus | la rate ne monte plus | le qi de la rate ne monte plus | la rate ne retient plus le sang | la rate ne produit plus le sang | la terre ne transforme plus | le poumon ne diffuse plus | le poumon ne fait plus descendre | le poumon ne gouverne plus le qi | diffusion du poumon insuffisante | le metal ne descend plus | le rein ne retient plus | le coeur ne gouverne plus le sang | le coeur ne propulse plus | prolapsus | ptose | descente d organe | les chairs ne tiennent plus | qi ne monte plus | langue pale | langue pale et gonflée | teint pale | teint jaune"
+"1 — Famille diagnostique";"vide_sang";"Vide de Sang (Xue Xu)";"Xue Xu (血虚)";"vide de sang | vide sang | sang vide | insuffisance sang | sang insuffisant | xue vide | sang non nourri | carence sanguine | sang deficient";"foie ne nourrit plus | foie manque de sang | foie n est plus nourri | sang du foie insuffisant | sang du foie appauvri | foie mal alimente | foie manque de substance | sang insuffisant pour le foie | foie non alimente | bois non nourri en sang | crampes nocturnes | crampes la nuit | jambes crampe nuit | crampes aux jambes la nuit | ongles cassants | ongles fragiles | ongles stries | yeux secs et fatigues | vision trouble le soir | regles pales | regles peu abondantes | tendons non nourris | tendinopathie sur vide de foie | xue | regles sombres | le foie ne gouverne plus les tendons | le foie ne stocke plus le sang | la rate ne produit plus le sang | le coeur ne gouverne plus le sang | langue pale | teint pale | teint terne"
+"1 — Famille diagnostique";"vide_yang";"Vide de Yang";"Yang Xu (阳虚)";"vide de yang | vide yang | yang vide | insuffisance yang | yang insuffisant | yang deficient | carence yang | manque de yang | yang manquant | yang general insuffisant";"yang du rein s epuise | yang du rein faiblit | yang du rein ne suffit plus | yang du rein diminue | rein manque de yang | rein yang qui faiblit | yang renal insuffisant | yang renal en baisse | yang du rein qui se vide | rein ne rechauffe plus | rein n a plus assez de yang | yang renal epuise | carence yang du rein | rein froid | froid au rein | yang du rein ne rechauffe plus | yang du rein trop faible | yang renal trop faible | froid lombaire | lombes froides | dos froid dans le bas | urines claires et abondantes | urines claires | chaleur apparente | yang apparent par vide de yin | yang qui flotte par manque de yin | yang sans racine yin | faux yang | chaleur fictive | chaleur qui monte par vide | yang monte par manque de yin | inflammation locale sur vide | chaleur locale sur fond de vide | chaleur locale sur vide yang | rougeur locale sur terrain de vide yang | terrain energetique appauvri | yang general qui s effondre | yang tres bas | yang apparent de vb | yang apparent vb | yang apparent du foie | manque de volonte | le rein ne gouverne plus l eau | le rein ne rechauffe plus la rate | le feu du ming men ne rechauffe plus | tou mo insuffisant | yang apparent du rein | yang monte car le yin ne retient plus | langue rouge sans enduit | langue pale | langue pale et gonflée | enduit blanc | teint pale"
+"1 — Famille diagnostique";"vide_yin";"Vide de Yin";"Yin Xu (阴虚)";"vide de yin | vide yin | yin vide | insuffisance yin | yin insuffisant | yin deficient | carence yin | manque de yin | yin manquant | yin insuffisant";"yin du rein s epuise | yin du rein faiblit | yin du rein diminue | rein manque de yin | yin renal insuffisant | yin renal epuise | rein n a plus assez de yin | essence du rein insuffisante | rein yin qui se vide | eau du rein insuffisante | eau renale insuffisante | carence yin du rein | yin renal qui diminue | yin renal qui se tarit | substance yin du rein insuffisante | eau insuffisante pour ancrer | chaleur le soir | chaleur en fin de journee | chaleur la nuit | chaleur vesperal | sueurs la nuit | transpiration nocturne | sueurs nocturnes | bourdonnements vide | oreilles bourdonnement par vide | chaleur qui monte par vide | yeux secs et fatigues | vertiges par manque de yin | substance yin insuffisante | yin qui s epuise | yin appauvri | yin diminue | manque de yin | yin se tarit | carence en yin | yin epuise | tendons non nourris | jenn mo fragilise | coeur et rein ne communiquent plus | l eau ne monte plus vers le feu | yang apparent du rein | faux yang du rein | chaleur sur vide de yin | feu sur vide de yin | yang monte car le yin ne retient plus | langue rouge sans enduit | osteoporose"
+"1 — Famille diagnostique";"feu_vide";"Yang apparent / Feu apparent (Xu Huo)";"Xu Huo — Feu du vide (虚火)";"feu du vide | chaleur de vide | feu de vide | xu huo | chaleur xu | chaleur vide | vide avec chaleur | chaleur d origine xu | yang relatif ascendant | chaleur vesperal | chaleur le soir | chaleur en fin de journee | yang apparent | faux yang | yang flottant | yang non ancre | yang sans racine | yang qui flotte | chaleur apparente | chaleur fausse | jia yang | yin ne peut plus ancrer | yang monte par manque de yin";"yang non ancre | yang flottant | yang qui flotte | yang du foie non ancre | yang du foie flotte | yang non ancre par le yin | yang sans ancrage yin | yang libre sans controle | chaleur le soir | chaleur en fin de journee | chaleur la nuit | chaleur vesperal | sueurs la nuit | sueurs nocturnes | chaleur apparente | chaleur par manque de yin | chaleur liee au vide de yin | yang apparent par vide de yin | yang qui flotte par manque de yin | vide de yin avec chaleur | yang sans racine yin | chaleur du vide | faux yang | chaleur fictive | chaleur qui monte par vide | yang monte par manque de yin | yang apparent de vb | yang apparent vb | faux yang de vb | faux yang vb | yang flottant de vb | yang non ancre vb | yang de vb qui monte | yang vb montant | yang apparent du foie | yang apparent foie | faux yang du foie | yang flottant du foie | yang apparent du rein | faux yang du rein | chaleur sur vide de yin | feu sur vide de yin | yang monte car le yin ne retient plus | ancrer le yang | le yang doit etre ancre | yang a ancrer | langue rouge sans enduit"
+"2 — Syndrome";"bois_envahit_terre";"Bois envahit Terre (cycle Ko pathologique)";;"bois envahit terre | foie envahit rate | bois sur terre | ko pathologique | cycle ko pathologique | foie vb envahit | bois domine terre | rate affaiblie par le foie | foie agresse la rate | conflit bois terre | stress crise foie rate | chaleur du bois debordant | bois f vb envahit | terre fragilisee | rate fragilisee secondairement | terre affaiblie secondairement";"foie agresse la rate | foie envahit la rate | stress affecte la digestion | colere affecte la digestion | emotions perturbent la rate | foie perturbe la rate | foie attaque la rate | tension emotionnelle perturbe la digestion | rate fragilisee par le foie | foie bois en exces affecte la terre | stress perturbe la digestion | colere affecte l estomac"
+"2 — Syndrome";"chaleur_estomac";"Chaleur de l'Estomac";;"chaleur de l estomac | chaleur estomac | estomac en chaleur | feu de l estomac | estomac chaud | feu estomac | chaleur dans l estomac | brulures d estomac";"reflux gastrique"
+"2 — Syndrome";"chaleur_poumon";"Chaleur du Poumon";;"chaleur du poumon | poumon en chaleur | feu du poumon | chaleur poumon | poumon chaud | chaleur metal | chaleur dans le poumon | inflammation poumon | poumon envahi par la chaleur";
+"2 — Syndrome";"cycle_sheng_bois_feu";"Cycle Cheng Bois → Feu brisé";;"bois ne nourrit plus feu | cycle cheng bois feu | cycle sheng bois feu | cascade eau bois feu | bois vers feu defaillant | cycle eau bois feu";
+"2 — Syndrome";"cycle_sheng_eau_bois";"Cycle Cheng Eau → Bois brisé (Rein ne nourrit plus Foie)";;"eau ne nourrit plus bois | cycle cheng eau bois | cycle sheng eau bois | cheng eau vers bois | sheng eau vers bois | rein ne nourrit plus foie | eau insuffisante bois | insuffisance eau bois | cycle cheng brise | cycle sheng brise | eau vers bois defaillant | bois mal nourri par l eau | foie mal nourri par le rein | eau ne soutient plus le bois | foie non nourri par le rein | rein ne soutient plus le foie | insuffisance eau vers bois";"rein ne soutient plus le foie | rein n alimente plus le foie | eau ne monte plus vers le bois | rein ne peut plus nourrir le foie | foie mal nourri par le rein | bois mal nourri par l eau | rein n arrive pas a nourrir le foie | rein ne peut plus soutenir le foie"
+"2 — Syndrome";"cycle_sheng_feu_terre";"Cycle Cheng Feu → Terre brisé (Cœur ne nourrit plus Rate)";;"feu ne nourrit plus terre | cycle cheng feu terre | cycle sheng feu terre | coeur ne nourrit plus la rate | feu vers terre defaillant | cascade feu terre | coeur rate cycle cheng | feu insuffisant pour la terre";"coeur ne soutient plus la rate | feu ne nourrit plus la terre"
+"2 — Syndrome";"cycle_sheng_metal_eau";"Cycle Cheng Métal → Eau brisé (Poumon ne nourrit plus Rein)";;"metal ne nourrit plus eau | cycle cheng metal eau | cycle sheng metal eau | poumon ne nourrit plus le rein | metal vers eau defaillant | cascade metal eau | poumon rein cycle cheng | diffusion du poumon vers le rein insuffisante | poumon ne soutient plus le rein";"poumon ne soutient plus le rein"
+"2 — Syndrome";"cycle_sheng_terre_metal";"Cycle Cheng Terre → Métal brisé (Rate ne nourrit plus Poumon)";;"terre ne nourrit plus metal | cycle cheng terre metal | cycle sheng terre metal | rate ne nourrit plus le poumon | terre vers metal defaillant | cascade terre metal | rate poumon cycle cheng | digestion ne soutient plus le poumon | rate ne soutient plus poumon";"rate ne soutient plus le poumon | rate n alimente plus le poumon"
+"2 — Syndrome";"cycle_ko_inverse";"Cycle Raé (Ko inversé / Rébellion)";;"cycle rae | rae | cycle de rebellion | cycle ko inverse | ko inverse | ko brise | ko inversee | relation ko brisee | cycle ko perturbe | rebellion ko | element qui se retourne | invasion ko";
+"2 — Syndrome";"diarrhees_matinales_mingmen";"Diarrhées matinales — Ming Men (Yang Ming)";;"diarrhees matinales | diarrhee au petit matin | diarrhees le matin | yang ming sans stimulus | gros intestin non active le matin | yang ming perturbe | souffles yang ne montent plus | yang ne monte pas le matin";"diarrhee 5h matin | diarrhee tot le matin | va a la selle le matin | selles molles le matin | diarrhee a l aube | diarrhee entre 5h et 7h | transit le matin de bonne heure"
+"2 — Syndrome";"rein_coeur_dysharmonie";"Dysharmonie Cœur–Rein (axe Eau-Feu brisé)";;"dysharmonie coeur rein | axe coeur rein brise | axe eau feu brise | coeur et rein ne communiquent plus | coeur rein deconnectes | eau ne monte plus vers le feu | feu ne descend plus vers l eau | rein coeur non connectes | dysharmonie eau feu";"coeur et rein ne communiquent plus | le feu et l eau ne communiquent plus | axe coeur rein brise | axe eau feu brise | l eau ne monte plus vers le feu | le feu ne descend plus vers l eau"
+"2 — Syndrome";"exces_yin_foyer_moyen";"Excès de Yin au Foyer Moyen (Rate chargée)";;"exces yin foyer moyen | yin foyer moyen excessif | foyer moyen sature | rate surchargee | rate trop forte | rate en exces de yin | plenitude yin foyer moyen | plenitude au foyer moyen | exces de yin au foyer moyen | plenitude de yin au foyer moyen | plenitude yin au foyer moyen | plenitude de yin foyer moyen | exces de yin foyer moyen | yin en exces au foyer moyen | foyer moyen en exces de yin | exces yin au foyer moyen";"foyer moyen trop charge | foyer moyen encombre | foyer moyen bloque | foyer moyen sature de yin | foyer moyen plein | rate surchargee de yin | rate trop pleine | rate pleine | foyer moyen obstrue"
+"2 — Syndrome";"feu_foie";"Feu du Foie / Chaleur du Foie";"Gan Huo (肝火)";"feu du foie | chaleur du foie | chaleur foie | chaleur du bois | bois en chaleur | feu foie | foie en feu | foie chaud | plénitude chaleur foie | plenitude chaleur foie";"visage rouge qui monte | rage"
+"2 — Syndrome";"feu_monte_au_coeur";"Feu du Foie monte au Cœur";;"feu monte au coeur | yang foie feu coeur | feu foie monte | bois vers feu coeur | chaleur foie coeur | foie feu coeur";
+"2 — Syndrome";"vent_interne_foie";"Fong interne du Foie (Gan Feng Nei Dong)";"Gan Feng Nei Dong (肝风内动)";"fong interne du foie | fong du foie | fong interne foie | fong foie | foie fong | fongs du foie | vent interne du foie | vent du foie | gan feng | vent interne foie | foie vent interne | pouls corde arc | vertiges fong interne | vertiges vent interne";"pouls corde et rapide | fong | fongs | fong interne | vertiges par manque de yin | tremblements | tremblements des membres | pouls corde | pouls en corde | pouls tendu | pouls en corde d arc"
+"2 — Syndrome";"vent_chaleur_poumon";"Fong-Chaleur envahissant le Poumon";;"vent chaleur poumon | fong chaleur poumon | vent chaleur envahit le poumon | fong chaleur envahit le poumon | invasion vent chaleur | invasion fong chaleur | poumon envahi par le vent chaleur | poumon envahi par le fong chaleur | agression vent chaleur | agression fong chaleur | vent chaleur en surface | fong chaleur en surface";
+"2 — Syndrome";"foyer_inferieur_vide_yang";"Foyer Inférieur en vide de Yang";;"foyer inferieur vide de yang | foyer inferieur vide yang | foyer inferieur yang vide | vide yang foyer inferieur | vide de yang au foyer inferieur | yang vide foyer inferieur | foyer inferieur en vide | yang foyer inferieur insuffisant | foyer inferieur insuffisant | foyer inferieur non rechauffe | foyer inferieur froid | foyer inferieur ne retient | yang vide au foyer inferieur | yin et froid vainqueurs";
+"2 — Syndrome";"humidite_rate";"Humidité envahissant la Rate";"Pi Shi (脾湿)";"humidite envahit la rate | humidite rate | rate envahie par l humidite | rate sature d humidite | humidite bloque la rate | rate sous l humidite | rate bloquee par l humidite | humidite obstrue rate estomac | humidite foyer moyen | rate sous charge humide | rate chargee en humidite";"teint jaune"
+"2 — Syndrome";"hun_perturbe";"Hun perturbé (âme végétative — domaine Foie)";;"hun perturbe | hun instable | hun non ancre | esprit du foie perturbe | hun agite | foie hun | ame vegetative perturbee | hun fragilise | reves perturbants foie | instabilite psychique foie";
+"2 — Syndrome";"ren_mai_fragilise";"Jenn Mo (Ren Mai) fragilisé — Yin insuffisant pour ancrer";;"ren mai fragilise | ren mai insuffisant | ren mai vide | jenn mo fragilise | jenn mo insuffisant | jenn mo vide | yin insuffisant pour ancrer | yin de base insuffisant | vaisseau conception fragilise | vc insuffisant";"jenn mo fragilise | jenn mo insuffisant"
+"2 — Syndrome";"mingmen_insuffisant";"Ming Men insuffisant — Feu de la Porte de la Vie";;"ming men insuffisant | ming men eteint | feu du ming men | feu de ming men | feu du rein | feu originel insuffisant | porte de la vie | yang du rein ming men | ming men declinant | du mai insuffisant feu";"feu du rein s eteint | feu de la vie s eteint | feu de ming men s eteint | feu originel s eteint | feu du ming men s eteint | ming men ne rechauffe plus | ming men s affaiblit | feu du ming men s affaiblit | ming men eteint | porte de vie insuffisante | le feu du ming men ne rechauffe plus"
+"2 — Syndrome";"oreille_rein_shao_yang";"Oreille interne — domaine Rein / Chao Yang";"Er — Oreille / Shen (Rein)";"oreille interne | oreille rein | oreille domaine rein | bourdonnements vide | bourdonnements rein | surdite vide | chao yang oreille | shao yang oreille | tr vb oreille | yang apparent irrite oreille | feu vide irrite oreille";"bourdonnements vide | oreilles bourdonnement par vide"
+"2 — Syndrome";"paradoxe_oe_iong";"Paradoxe : Oé plein local / Iong vide général";"Wei Ying Bu He (卫营不和)";"paradoxe yang local | paradoxe local general | vide yang general chaleur locale | oé plenitude iong vide | chaleur locale vide general | iong vide oe plenitude | vide general inflammation locale | oe plenitude iong insuffisante | iong insuffisante oe plenitude | plenitude locale iong insuffisante | oe en plenitude iong vide";"inflammation locale sur vide | chaleur locale sur fond de vide | inflammation en surface sur terrain de vide | chaleur locale sur vide yang | rougeur locale sur terrain de vide yang"
+"2 — Syndrome";"po_perturbe";"Po perturbé (âme corporelle — domaine Poumon)";;"po perturbe | po non ancre | esprit du poumon perturbe | po agite | poumon po | ame corporelle perturbee | deuil non resolu | melancolie profonde | tristesse metal | po fragilise";"deuil non fait | tristesse profonde | tristesse | deuil | chagrin | melancolie | nostalgie envahissante"
+"2 — Syndrome";"qi_rate_ne_monte_plus";"Qi de la Rate ne monte plus (prolapsus)";;"qi de la rate ne monte plus | rate ne monte plus | qi ne monte plus | prolapsus | ptose | descente d organe | affaissement | rate ne soutient plus | les chairs ne tiennent plus | rate ne retient plus le sang";"la rate ne monte plus | le qi de la rate ne monte plus | la rate ne retient plus le sang | prolapsus | ptose | descente d organe | les chairs ne tiennent plus | qi ne monte plus"
+"2 — Syndrome";"rate_non_rechauffee";"Rate non réchauffée par le Feu du Rein";;"rate non rechauffee | rate sans soutien yang | digestion froide | rate non soutenue | rate non soutenue par le feu | foyer moyen non soutenu par le foyer inferieur | foyer moyen non rechauffe | rechauffeur moyen non soutenu | yang insuffisant pour rechauffer | rechauffeur moyen insuffisant | foyer moyen non alimente";"le rein ne rechauffe plus la rate"
+"2 — Syndrome";"rebellion_qi_estomac";"Rébellion du Qi de l'Estomac";;"rebellion du qi de l estomac | qi de l estomac rebelle | qi de l estomac ne descend pas | qi estomac qui monte | estomac rebelle | estomac ne fait pas descendre | reflux qi estomac | qi rebelle estomac | nausees par blocage estomac | estomac contre courant | qi estomac en rebellion | estomac ne descend plus | descente estomac perturbee";
+"2 — Syndrome";"stagnation_nourriture";"Rétention de nourriture — Estomac surchargé";;"retention de nourriture | stagnation de nourriture | nourriture stagnante | estomac surcharge | aliments qui stagnent | digestion bloquee | accumulation de nourriture | nourriture bloquee | estomac deborde | surchauffe digestive";
+"2 — Syndrome";"shen_perturbe";"Shen perturbé (Cœur troublé)";"Shen Bu Ning (神不宁)";"shen perturbe | coeur perturbe | shen trouble | insomnie palpitations | coeur shen | shen agite | perturbation du shen";"esprit perturbe | esprit agite | psychisme perturbe | mental instable | esprit instable | sommeil agite par le shen | coeur qui n ancre plus le shen | shen non ancre | pensees qui s emballent | joie excessive | excitation excessive | manie | agitation mentale | frayeur | le coeur n abrite plus le shen | coeur et rein ne communiquent plus"
+"2 — Syndrome";"stagnation_qi_estomac";"Stagnation de Qi de l'Estomac";;"stagnation de qi de l estomac | stagnation qi estomac | qi de l estomac stagnant | estomac qi stagnant | blocage de l estomac | estomac bloque | estomac obstrue | qi bloque dans l estomac | estomac qui se bloque | stagnation dans l estomac | blocage estomac | estomac en stagnation";"blocage de l estomac | blocage d estomac | estomac bloque | estomac qui se bloque | estomac obstrue | estomac sature | estomac ne fait pas descendre | nausees par blocage | digestion bloquee dans l estomac | vomissements chroniques | stagnation de l estomac | stagnation a l estomac | stagnation du qi de l estomac | estomac en stagnation | l estomac stagne | stagnation de qi d estomac"
+"2 — Syndrome";"stagnation_qi_rate";"Stagnation de Qi de la Rate";;"stagnation de qi de la rate | stagnation qi rate | qi de la rate stagnant | rate qi stagnant | blocage de la rate | rate bloquee | rate obstrue | rate qui se bloque | blocage rate | rate en stagnation";"blocage de la rate | blocage a la rate | rate bloquee | rate qui se bloque | rate obstrue | stagnation de la rate | stagnation a la rate | stagnation du qi de la rate | rate en stagnation | la rate stagne"
+"2 — Syndrome";"stagnation_qi_foie";"Stagnation de Qi du Foie";"Gan Qi Yu Jie (肝气郁结)";"stagnation de qi du foie | qi du foie stagnant | foie qi stagnant | stagnation qi foie | foie bloque | qi foie stagne | bois qui se bloque";"le foie ne circule pas | le foie ne circule plus | foie ne circule pas | foie ne circule plus | le foie est bloque | foie est bloque | blocage du foie | blocage au foie | blocage de l energie du foie | energie du foie bloquee | energie du foie stagnante | energie du foie entravee | energie du foie ne passe pas | qi du foie qui stagne | qi du foie en stagnation | qi du foie qui se bloque | qi du foie est retenu | foie congestionne | foie est congestionne | foie entrave | foie est entrave | foie obstrue | foie se bloque | foie qui se bloque | foie ne laisse pas circuler | foie ne fait plus passer | foie ne fait pas passer le qi | foie ralenti | foie fige | foie coince | foie sature | bois bloque | bois est bloque | bois stagnant | bois en stagnation | stagnation du bois | blocage du bois | energie du bois bloquee | bois ralenti | bois qui ne circule pas | bois qui ne circule plus | foie vb bloque | foie vb en stagnation | vb bloque | vesicule bloquee | foie serre | foie contracte | tension au niveau du foie | crispation du foie | stagnation du foie | stagnation au foie | stagnation de l energie du foie | stagnation du qi du foie | stagnation de qi foie | foie en stagnation | le foie stagne | foie qui stagne | stagnation de la vesicule | stagnation de la vb | stagnation du bois vb | blocage de la vb | blocage de la vesicule | vesicule bloquee | vb stagnante | energie bloquee | colere | colere refoulee | colere contenue | frustration | frustration refoulee | irritabilite | impatience | enervement | agacement | ressentiment | le foie ne draine plus | le libre flux du foie est entrave"
+"2 — Syndrome";"stagnation_sang_foie";"Stagnation de Sang au Foie";;"stagnation de sang au foie | stagnation sang foie | sang du foie stagnant | foie sang stagnant | stase sanguine au foie | sang bloque au foie | stagnation du sang au foie | stagnation de sang du foie | sang stagnant foie | xue stagnant foie";"sang du foie stagnant | sang stagnant au foie | stase de sang au foie | sang bloque au foie | sang du foie qui se bloque | caillots menstruels | regles avec caillots | regles sombres"
+"2 — Syndrome";"tan_coeur";"Tan obstruant le Cœur (Phlegme-Feu)";;"tan obstrue le coeur | phlegme coeur | flegme coeur | tan coeur | phlegme feu coeur | tan feu monte au coeur | coeur obstrue par le tan | orifices du coeur obstrues | phlegme obscurcit le coeur | tan obscurcit les orifices";"glaires dans les poumons"
+"2 — Syndrome";"tan_poumon";"Tan obstruant le Poumon";;"tan dans le poumon | phlegme dans le poumon | tan obstrue le poumon | poumon obstrue par le tan | phlegme poumon | tan poumon | toux avec expectorations | accumulation tan poumon | poumon envahi par le tan | tan dans le foyer superieur";
+"2 — Syndrome";"tan_meridiens";"Tan obstruant les méridiens";;"tan dans les meridiens | phlegme dans les meridiens | tan obstrue les meridiens | accumulation de phlegme dans les meridiens | phlegme meridien | tan bloque meridien | obstruction par le tan | tan et stagnation de sang | phlegme stagnant dans les meridiens";"tan qui obstrue | glaires dans les poumons"
+"2 — Syndrome";"tendons_foie_vb";"Tendons / Ligaments — domaine Foie/VB";;"tendons non nourris | tendons insuffisamment nourris | tendons fragiles | tendons vulnerables | ligaments non nourris | foie ne gouverne plus les tendons | tendons foie vb | tendons et ligaments insuffisants | foie vb tendons";"spasmes musculaires | tendons fragiles | ligaments fragiles | tendons non nourris | tendons qui lachent | genou qui craque | tendinopathie sur vide de foie | le foie ne gouverne plus les tendons"
+"2 — Syndrome";"du_mai_insuffisant";"Tou Mo (Du Mai) insuffisant — Yang ne monte plus";;"du mai insuffisant | du mai fragilise | du mai vide | tou mo insuffisant | tou mo fragilise | tou mo vide | yang ne monte plus le long du du mai | yang du dos insuffisant | vaisseau gouverneur insuffisant | vg insuffisant";"tou mo insuffisant | tou mo fragilise"
+"2 — Syndrome";"vent_froid_poumon";"Vent-Froid envahissant le Poumon";;"vent froid poumon | vent froid envahit le poumon | invasion vent froid | poumon envahi par le vent froid | agression vent froid | vent froid en surface | poumon attaque par le vent | invasion externe poumon | poumon sous vent froid";"fong attaque le poumon | fong envahit la surface"
+"2 — Syndrome";"vb_sans_drainage";"Vésicule Biliaire sans drainage — reflux vers Foie";;"vb ne se draine pas | vesicule biliaire sans drainage | vb sature | refluence vers le foie | chaleur vb | vesicule en chaleur | vesicule biliaire qui ne se draine | vesicule biliaire ne se draine | vesicule biliaire non drainee | vb non drainee | vesicule non drainee";
+"2 — Syndrome";"vide_jing_rein";"Vide de Jing / Tsing du Rein";;"vide de jing du rein | jing du rein vide | tsing du rein vide | essence renale insuffisante | epuisement du jing du rein | jing rein insuffisant";"tsing du rein vide | le rein ne stocke plus le jing | os fragiles | osteoporose | vieillissement premature | cheveux blancs precoces | dents qui se dechaussent"
+"2 — Syndrome";"vide_qi_rate";"Vide de Qi de la Rate";"Pi Qi Xu (脾气虚)";"vide de qi de la rate | vide qi rate | rate qi vide | qi de la rate vide | qi de la rate insuffisant | insuffisance qi rate | rate en vide de qi | rate affaiblie | rate insuffisante | zang rate vide | rate non soutenue | rate carencee | rate fragilisee | digestion insuffisante par vide de rate";"rate s affaiblit | rate s epuise | rate ne produit plus | rate ne transforme plus | rate ne transporte plus | rate deficiente | rate manque de qi | qi de la rate qui faiblit | terre qui s affaiblit | terre deficiente | foyer moyen s affaiblit | digestion affaiblie | digestion deficiente | digestion ne fonctionne plus | rate fatiguee | rate qui se vide | rate en vide | rate epuisee | rate fragilisee par le foie | souci | soucis | inquietude | surmenage intellectuel | reflexion excessive | la rate ne transforme plus | la rate ne transporte plus | la rate ne monte plus | le qi de la rate ne monte plus | la rate ne retient plus le sang | la rate ne produit plus le sang | la terre ne transforme plus | prolapsus | ptose | descente d organe | les chairs ne tiennent plus | qi ne monte plus | teint jaune"
+"2 — Syndrome";"vide_qi_vb";"Vide de Qi de la Vésicule Biliaire";;"vide de qi de la vesicule | vide qi vb | vesicule biliaire en vide de qi | qi de la vb vide | vb en vide | vesicule insuffisante | vesicule biliaire affaiblie | vb qi vide";
+"2 — Syndrome";"vide_qi_coeur";"Vide de Qi du Cœur";;"vide de qi du coeur | vide qi coeur | coeur qi vide | qi du coeur vide | qi du coeur insuffisant | insuffisance qi coeur | coeur en vide de qi | coeur affaibli | qi cardiaque insuffisant | feu insuffisant coeur | coeur en vide";"qi du coeur bloque | le coeur ne gouverne plus le sang | le coeur ne propulse plus"
+"2 — Syndrome";"vide_qi_foie";"Vide de Qi du Foie";;"vide de qi du foie | vide qi foie | foie qi vide | qi du foie vide | qi du foie insuffisant | insuffisance qi foie | foie en vide de qi | foie energetiquement insuffisant";"foie en vide de qi | foie energetiquement vide | foie manque de qi"
+"2 — Syndrome";"vide_qi_poumon";"Vide de Qi du Poumon (Métal insuffisant)";"Fei Qi Xu (肺气虚)";"vide de qi du poumon | vide qi poumon | poumon qi vide | poumon en vide de qi | qi du poumon vide | qi du poumon insuffisant | insuffisance qi poumon | poumon affaibli | qi pulmonaire insuffisant | metal insuffisant | vide du metal | element metal vide | souffle insuffisant | souffle affaibli | fatigue profonde poumon";"qi du poumon bloque | le poumon ne diffuse plus | le poumon ne fait plus descendre | le poumon ne gouverne plus le qi | diffusion du poumon insuffisante | le metal ne descend plus"
+"2 — Syndrome";"vide_qi_rein";"Vide de Qi du Rein";;"vide de qi du rein | vide qi rein | rein qi vide | qi du rein vide | qi du rein insuffisant | insuffisance qi rein | rein en vide de qi | qi renal insuffisant | rein qui ne retient plus";"le rein ne retient plus"
+"2 — Syndrome";"vide_qi_rate_coeur";"Vide de Qi Rate-Cœur (Feu ne nourrit plus Terre)";;"vide qi rate coeur | vide de qi rate et coeur | rate coeur en vide de qi | coeur rate insuffisants | double vide qi rate coeur";
+"2 — Syndrome";"vide_sang_rate";"Vide de Sang de la Rate";;"vide de sang de la rate | sang de la rate vide | rate sang vide | vide sang rate | insuffisance sang rate | sang insuffisant rate | rate ne produit plus le sang | rate ne genere plus le sang";"la rate ne produit plus le sang"
+"2 — Syndrome";"vide_sang_coeur";"Vide de Sang du Cœur";"Xin Xue Xu (心血虚)";"vide de sang du coeur | sang du coeur vide | coeur sang vide | sang coeur insuffisant | coeur non nourri par le sang | sang insuffisant pour nourrir le coeur | xue du coeur vide | vide sang coeur";"le coeur ne gouverne plus le sang"
+"2 — Syndrome";"vide_sang_foie";"Vide de Sang du Foie";"Gan Xue Xu (肝血虚)";"vide de sang du foie | sang du foie vide | foie sang vide | foie non nourri | foie mal nourri | sang foie insuffisant | vide sang foie | vide du foie | vide du zang foie | foie en vide | zang foie vide | foie affaibli | tsang foie vide";"foie ne nourrit plus | foie manque de sang | foie n est plus nourri | sang du foie insuffisant | sang du foie appauvri | foie mal alimente | foie manque de substance | sang insuffisant pour le foie | foie non alimente | bois non nourri en sang | crampes nocturnes | crampes la nuit | jambes crampe nuit | crampes aux jambes la nuit | ongles cassants | ongles fragiles | ongles stries | yeux secs et fatigues | vision trouble le soir | regles pales | regles peu abondantes | foie mal nourri par le rein | tendons non nourris | tendinopathie sur vide de foie | regles sombres | foie en vide de qi | le foie ne gouverne plus les tendons | le foie ne stocke plus le sang"
+"2 — Syndrome";"vide_yang_rate";"Vide de Yang de la Rate";;"vide de yang de la rate | vide yang rate | rate yang vide | yang de la rate vide | yang rate insuffisant | insuffisance yang rate | rate en vide de yang | rate froide | yang splenique insuffisant | vide yang splenique";
+"2 — Syndrome";"vide_yang_coeur";"Vide de Yang du Cœur";;"vide de yang du coeur | yang du coeur vide | coeur yang vide | vide yang coeur | insuffisance yang coeur | yang cardiaque insuffisant | coeur froid | froid thoracique | yang du coeur insuffisant";
+"2 — Syndrome";"vide_yang_foie";"Vide de Yang du Foie";;"vide de yang du foie | vide yang foie | foie yang vide | yang du foie vide | yang du foie insuffisant | insuffisance yang foie | foie en vide de yang | yang du bois insuffisant | bois en vide de yang";"yang apparent de vb | yang apparent vb | yang apparent du foie"
+"2 — Syndrome";"vide_yang_poumon";"Vide de Yang du Poumon";;"vide de yang du poumon | vide yang poumon | poumon yang vide | yang du poumon vide | yang du poumon insuffisant | insuffisance yang poumon | poumon en vide de yang | yang pulmonaire insuffisant";
+"2 — Syndrome";"vide_yang_rein";"Vide de Yang du Rein";"Shen Yang Xu (肾阳虚)";"vide de yang du rein | vide yang rein | yang du rein vide | yang du rein insuffisant | rein yang vide | yang rein insuffisant | vide yang rein | rein en vide de yang";"yang du rein s epuise | yang du rein faiblit | yang du rein ne suffit plus | yang du rein diminue | rein manque de yang | rein yang qui faiblit | yang renal insuffisant | yang renal en baisse | yang du rein qui se vide | rein ne rechauffe plus | rein n a plus assez de yang | yang renal epuise | carence yang du rein | rein froid | froid au rein | yang du rein ne rechauffe plus | yang du rein trop faible | yang renal trop faible | froid lombaire | lombes froides | dos froid dans le bas | urines claires et abondantes | urines claires | manque de volonte | le rein ne gouverne plus l eau | le rein ne rechauffe plus la rate | le feu du ming men ne rechauffe plus"
+"2 — Syndrome";"vide_yin_estomac";"Vide de Yin de l'Estomac";"Wei Yin Xu (胃阴虚)";"vide de yin de l estomac | yin de l estomac vide | estomac yin vide | vide yin estomac | insuffisance yin estomac | estomac en vide de yin | yin gastrique insuffisant | estomac sec";
+"2 — Syndrome";"vide_yin_coeur";"Vide de Yin du Cœur";"Xin Yin Xu (心阴虚)";"vide de yin du coeur | yin du coeur vide | coeur yin vide | vide yin coeur | insuffisance yin coeur | coeur ne peut plus ancrer le shen | yin cardiaque vide | yin coeur insuffisant | vide de yin cardiaque";"coeur qui n ancre plus le shen | shen non ancre | le coeur n abrite plus le shen"
+"2 — Syndrome";"vide_yin_foie";"Vide de Yin du Foie";;"vide de yin du foie | yin du foie vide | foie yin vide | vide yin foie | insuffisance yin foie | tendons non nourris | tendons insuffisamment nourris | foie ne nourrit plus les tendons | foie vb ne gouverne plus";"yeux secs et fatigues | spasmes musculaires | tendons non nourris | le foie ne gouverne plus les tendons"
+"2 — Syndrome";"vide_yin_poumon";"Vide de Yin du Poumon";"Fei Yin Xu (肺阴虚)";"vide de yin du poumon | yin du poumon vide | poumon yin vide | vide yin poumon | insuffisance yin poumon | yin pulmonaire vide | poumon sec | muqueuses seches poumon | secheresse du poumon | yin du metal vide | metal en vide de yin | poumon ne peut plus humidifier | muqueuses non humidifiees";
+"2 — Syndrome";"vide_yin_rein";"Vide de Yin du Rein";"Shen Yin Xu (肾阴虚)";"vide de yin du rein | vide yin rein | yin du rein vide | yin du rein insuffisant | rein yin vide | rein en vide de yin | insuffisance yin du rein | yin renal insuffisant | eau insuffisante | vide profond de l eau | vide de yin rein";"yin du rein s epuise | yin du rein faiblit | yin du rein diminue | rein manque de yin | yin renal insuffisant | yin renal epuise | rein n a plus assez de yin | essence du rein insuffisante | rein yin qui se vide | eau du rein insuffisante | eau renale insuffisante | carence yin du rein | yin renal qui diminue | yin renal qui se tarit | substance yin du rein insuffisante | eau insuffisante pour ancrer | chaleur le soir | chaleur en fin de journee | chaleur vesperal | sueurs nocturnes | bourdonnements vide | oreilles bourdonnement par vide | vertiges par manque de yin | coeur et rein ne communiquent plus | l eau ne monte plus vers le feu | yang apparent du rein | faux yang du rein | osteoporose"
+"2 — Syndrome";"yang_apparent_vb";"Yang apparent de VB (Faux Yang — Vide de Yin sous-jacent)";;"yang apparent de vb | yang apparent vb | yang apparent de la vesicule | faux yang vb | yang flottant vb | yang non ancre vb | yang de vb qui monte | yang vb montant | yang apparent vesicule biliaire";"yang apparent de vb | yang apparent vb | faux yang de vb | faux yang vb | yang flottant de vb | yang non ancre vb | yang de vb qui monte | yang vb montant"
+"2 — Syndrome";"yang_apparent_foie";"Yang apparent du Foie (Faux Yang — Vide de Yin sous-jacent)";;"yang apparent du foie | yang apparent foie | faux yang foie | yang flottant foie | yang non ancre foie | yang du foie non ancre | yang apparent de foie";"yang apparent du foie | yang apparent foie | faux yang du foie | yang flottant du foie"
+"2 — Syndrome";"yang_foie_montant";"Yang du Foie montant (Gan Yang Shang Kang)";"Gan Yang Shang Kang (肝阳上亢)";"yang du foie montant | yang foie montant | yang du foie en exces | prosperite du yang du foie | foie yang montant | yang montant du foie | yang monte | yang en usurpateur | bois non contenu | feu du foie montant | foie en plenitude yang | yang du foie en plenitude | yang du foie en exces reel";"yang qui monte | yang monte | yang ascendant | yang non ancre | yang flottant | yang qui flotte | yang ne descend pas | yang s eleve | yang remonte | yang monte vers le haut | yang en rebellion | yang monte en usurpateur | yang du foie monte | yang foie monte | yang du foie non ancre | yang du foie qui monte | yang du foie flotte | yang du foie s eleve | yang du foie trop fort | yang du foie en exces | yang du foie en plenitude | yang du foie deborde | yang du foie envahit | yang du foie non controle | yang du foie qui s eleve | yang non ancre par le yin | prosperite du yang | yang du bois monte | yang du bois en exces | yang sans ancrage yin | yang libre sans controle | cephalees aux tempes | migraine temporale | douleur aux tempes | rouge au visage colere | visage rouge qui monte | pouls corde et rapide | chaleur qui monte par vide | pouls corde | pouls en corde | pouls tendu | pouls en corde d arc | yang apparent de vb | yang apparent vb | yang de vb qui monte | yang vb montant | yang apparent du foie | qi monte en rebellion | irritabilite | impatience | enervement | rage | teint rouge"
+"2 — Syndrome";"yi_perturbe";"Yi perturbé (intellect — domaine Rate)";;"yi perturbe | yi insuffisant | esprit de la rate perturbe | intellectualite perturbee | rate yi | rumination pathologique | pensees circulaires | idees fixes | yi fragilise";"pensees qui s emballent | ruminations | pensees circulaires | idees fixes | obsessions | souci | soucis | inquietude | surmenage intellectuel | pensee excessive | reflexion excessive"
+"2 — Syndrome";"zhi_perturbe";"Zhi perturbé (volonté — domaine Rein)";;"zhi perturbe | zhi insuffisant | esprit du rein perturbe | volonte affaiblie | rein zhi | zhi vide | manque de volonte profond | peur chronique envahissante | peur pathologique rein";"peur profonde | peur du vide | manque de volonte | peur | peur chronique | terreur | frayeur | angoisse profonde | manque de volonte"
+"3 — Organe / Zang-Fu";"coeur";"Cœur";"Xin (心)";"coeur | zang coeur | tsang coeur | xin coeur";"coeur ne soutient plus la rate | glaires dans les poumons | esprit perturbe | psychisme perturbe | coeur qui n ancre plus le shen | shen non ancre | qi du coeur bloque | tsang coeur | les cinq tsang | joie excessive | manie | le coeur ne gouverne plus le sang | le coeur n abrite plus le shen | le coeur ne propulse plus | coeur et rein ne communiquent plus | le feu et l eau ne communiquent plus | axe coeur rein brise | axe eau feu brise | l eau ne monte plus vers le feu | le feu ne descend plus vers l eau"
+"3 — Organe / Zang-Fu";"estomac";"Estomac";;"estomac | fu estomac | wei estomac";"blocage de l estomac | blocage d estomac | estomac bloque | estomac qui se bloque | estomac obstrue | estomac sature | estomac ne fait pas descendre | estomac ne descend plus | qi de l estomac ne descend | qi de l estomac rebelle | estomac rebelle | qi d estomac rebelle | reflux gastrique | nausees par blocage | digestion bloquee dans l estomac | qi ne descend pas | descente perturbee | qi monte en rebellion | qi rebelle | hoquet chronique | vomissements chroniques | stagnation de l estomac | stagnation a l estomac | stagnation du qi de l estomac | estomac en stagnation | l estomac stagne | stagnation de qi d estomac | fu estomac | les six fu | faire descendre le qi | le qi doit redescendre"
+"3 — Organe / Zang-Fu";"foie";"Foie";"Gan (肝)";"foie | zang foie | tsang foie | gan foie | hepatique";"le foie ne circule pas | le foie ne circule plus | foie ne circule pas | foie ne circule plus | le foie est bloque | foie est bloque | blocage du foie | blocage au foie | blocage de l energie du foie | energie du foie bloquee | energie du foie stagnante | energie du foie entravee | energie du foie ne passe pas | qi du foie qui stagne | qi du foie en stagnation | qi du foie qui se bloque | qi du foie est retenu | foie congestionne | foie est congestionne | foie entrave | foie est entrave | foie obstrue | foie se bloque | foie qui se bloque | foie ne laisse pas circuler | foie ne fait plus passer | foie ne fait pas passer le qi | foie ralenti | foie fige | foie coince | foie sature | bois bloque | bois est bloque | bois stagnant | bois en stagnation | stagnation du bois | blocage du bois | energie du bois bloquee | bois ralenti | bois qui ne circule pas | bois qui ne circule plus | foie vb bloque | foie vb en stagnation | vb bloque | vesicule bloquee | foie serre | foie contracte | tension au niveau du foie | crispation du foie | yang qui monte | yang monte | yang ascendant | yang non ancre | yang flottant | yang qui flotte | yang ne descend pas | yang s eleve | yang remonte | yang monte vers le haut | yang en rebellion | yang monte en usurpateur | yang du foie monte | yang foie monte | yang du foie non ancre | yang du foie qui monte | yang du foie flotte | yang du foie s eleve | yang du foie trop fort | yang du foie en exces | yang du foie en plenitude | yang du foie deborde | yang du foie envahit | yang du foie non controle | yang du foie qui s eleve | yang non ancre par le yin | prosperite du yang | yang du bois monte | yang du bois en exces | yang sans ancrage yin | yang libre sans controle | cephalees aux tempes | migraine temporale | douleur aux tempes | rouge au visage colere | visage rouge qui monte | pouls corde et rapide | foie ne nourrit plus | foie manque de sang | foie n est plus nourri | sang du foie insuffisant | sang du foie appauvri | foie mal alimente | foie manque de substance | sang insuffisant pour le foie | foie non alimente | bois non nourri en sang | crampes nocturnes | crampes la nuit | jambes crampe nuit | crampes aux jambes la nuit | ongles cassants | ongles fragiles | ongles stries | yeux secs et fatigues | vision trouble le soir | regles pales | regles peu abondantes | rein ne soutient plus le foie | rein n alimente plus le foie | rein ne peut plus nourrir le foie | foie mal nourri par le rein | rein n arrive pas a nourrir le foie | rein ne peut plus soutenir le foie | foie agresse la rate | foie envahit la rate | stress affecte la digestion | colere affecte la digestion | emotions perturbent la rate | foie perturbe la rate | foie attaque la rate | tension emotionnelle perturbe la digestion | stress perturbe la digestion | colere affecte l estomac | fong | fongs | fong interne | vertiges par manque de yin | tremblements | tremblements des membres | spasmes musculaires | pouls corde | pouls en corde | pouls tendu | pouls en corde d arc | tendons fragiles | ligaments fragiles | tendons non nourris | tendons qui lachent | genou qui craque | tendinopathie sur vide de foie | sang du foie stagnant | sang stagnant au foie | stase de sang au foie | sang bloque au foie | sang du foie qui se bloque | caillots menstruels | regles avec caillots | regles sombres | yang apparent de vb | yang apparent vb | yang de vb qui monte | yang vb montant | yang apparent du foie | yang apparent foie | faux yang du foie | yang flottant du foie | foie en vide de qi | foie energetiquement vide | foie manque de qi | qi monte en rebellion | stagnation du foie | stagnation au foie | stagnation de l energie du foie | stagnation du qi du foie | stagnation de qi foie | foie en stagnation | le foie stagne | foie qui stagne | stagnation de la vesicule | stagnation de la vb | stagnation du bois vb | blocage de la vb | blocage de la vesicule | vesicule bloquee | vb stagnante | energie bloquee | tsang foie | les cinq tsang | colere | colere refoulee | colere contenue | frustration | frustration refoulee | irritabilite | impatience | enervement | rage | agacement | ressentiment | le foie ne gouverne plus les tendons | le foie ne stocke plus le sang | le foie ne draine plus | le libre flux du foie est entrave | ramener le yang vers le bas | teint rouge"
+"3 — Organe / Zang-Fu";"gros_intestin";"Gros Intestin";"Da Chang (大肠)";"gros intestin | fu gros intestin | da chang";"fu gros intestin | les six fu"
+"3 — Organe / Zang-Fu";"intestin_grele";"Intestin Grêle";"Xiao Chang (小肠)";"intestin grele | fu intestin grele | xiao chang";"fu intestin grele | les six fu"
+"3 — Organe / Zang-Fu";"maitre_coeur";"Maître du Cœur (MC)";"Xin Bao (心包)";"maitre du coeur | maitre coeur | pericarde | xin bao | enveloppe du coeur";
+"3 — Organe / Zang-Fu";"poumon";"Poumon";"Fei (肺)";"poumon | poumons | zang poumon | tsang poumon | fei poumon";"rate ne soutient plus le poumon | rate n alimente plus le poumon | poumon ne soutient plus le rein | poumon bloque | poumon en stagnation | qi du poumon bloque | tsang poumon | les cinq tsang | tristesse | le poumon ne diffuse plus | le poumon ne fait plus descendre | le poumon ne gouverne plus le qi | diffusion du poumon insuffisante | le metal ne descend plus | fong attaque le poumon"
+"3 — Organe / Zang-Fu";"rate";"Rate";"Pi (脾)";"rate | zang rate | tsang rate | pi rate";"rate s affaiblit | rate s epuise | rate ne produit plus | rate ne transforme plus | rate ne transporte plus | rate deficiente | rate manque de qi | qi de la rate qui faiblit | terre qui s affaiblit | terre deficiente | foyer moyen s affaiblit | digestion affaiblie | digestion deficiente | digestion ne fonctionne plus | rate fatiguee | rate qui se vide | rate en vide | rate epuisee | foyer moyen trop charge | rate surchargee de yin | rate trop pleine | rate pleine | rate ne soutient plus le poumon | rate n alimente plus le poumon | coeur ne soutient plus la rate | foie agresse la rate | foie envahit la rate | stress affecte la digestion | colere affecte la digestion | emotions perturbent la rate | foie perturbe la rate | foie attaque la rate | tension emotionnelle perturbe la digestion | rate fragilisee par le foie | stress perturbe la digestion | colere affecte l estomac | blocage de la rate | blocage a la rate | rate bloquee | rate qui se bloque | rate obstrue | stagnation de la rate | stagnation a la rate | stagnation du qi de la rate | rate en stagnation | la rate stagne | tsang rate | les cinq tsang | souci | soucis | inquietude | surmenage intellectuel | reflexion excessive | la rate ne transforme plus | la rate ne transporte plus | la rate ne monte plus | le qi de la rate ne monte plus | la rate ne retient plus le sang | la rate ne produit plus le sang | la terre ne transforme plus | le rein ne rechauffe plus la rate | prolapsus | ptose | descente d organe | les chairs ne tiennent plus | qi ne monte plus | teint jaune"
+"3 — Organe / Zang-Fu";"rein";"Rein";"Shen (肾)";"rein | reins | zang rein | tsang rein | shen rein";"yang du rein s epuise | yang du rein faiblit | yang du rein ne suffit plus | yang du rein diminue | rein manque de yang | rein yang qui faiblit | yang renal insuffisant | yang renal en baisse | yang du rein qui se vide | rein ne rechauffe plus | rein n a plus assez de yang | yang renal epuise | carence yang du rein | rein froid | froid au rein | yang du rein ne rechauffe plus | yang du rein trop faible | yang renal trop faible | froid lombaire | lombes froides | dos froid dans le bas | urines claires et abondantes | urines claires | yin du rein s epuise | yin du rein faiblit | yin du rein diminue | rein manque de yin | yin renal insuffisant | yin renal epuise | rein n a plus assez de yin | essence du rein insuffisante | rein yin qui se vide | eau du rein insuffisante | eau renale insuffisante | carence yin du rein | yin renal qui diminue | yin renal qui se tarit | substance yin du rein insuffisante | eau insuffisante pour ancrer | chaleur le soir | chaleur en fin de journee | chaleur vesperal | sueurs nocturnes | bourdonnements vide | oreilles bourdonnement par vide | rein ne soutient plus le foie | rein n alimente plus le foie | rein ne peut plus nourrir le foie | foie mal nourri par le rein | rein n arrive pas a nourrir le foie | rein ne peut plus soutenir le foie | poumon ne soutient plus le rein | vertiges par manque de yin | peur profonde | tsang rein | les cinq tsang | tsing du rein | tsing du rein vide | peur | peur chronique | terreur | frayeur | angoisse profonde | manque de volonte | le rein ne gouverne plus l eau | le rein ne stocke plus le jing | le rein ne retient plus | le rein ne rechauffe plus la rate | le feu du ming men ne rechauffe plus | coeur et rein ne communiquent plus | le feu et l eau ne communiquent plus | axe coeur rein brise | axe eau feu brise | l eau ne monte plus vers le feu | le feu ne descend plus vers l eau | yang apparent du rein | faux yang du rein | os fragiles | osteoporose | vieillissement premature | cheveux blancs precoces | dents qui se dechaussent"
+"3 — Organe / Zang-Fu";"triple_rec";"Triple Réchauffeur (TR)";"San Jiao (三焦)";"triple rechauffeur | san jiao | trois foyers organe";"les six fu"
+"3 — Organe / Zang-Fu";"vb";"Vésicule Biliaire";"Dan (胆)";"vesicule biliaire | vesicule | vb | fu vb | dan vb";"spasmes musculaires | tendons fragiles | ligaments fragiles | tendons non nourris | tendons qui lachent | genou qui craque | tendinopathie sur vide de foie | yang apparent de vb | yang apparent vb | faux yang de vb | faux yang vb | yang flottant de vb | yang non ancre vb | yang de vb qui monte | yang vb montant | fu vesicule biliaire | les six fu | le foie ne gouverne plus les tendons"
+"3 — Organe / Zang-Fu";"vessie";"Vessie";"Pang Guang (膀胱)";"vessie | meridien vessie | meridien v | pang guang";"fu vessie | les six fu"
+"3 — Localisation / Axe";"shao_yang";"Chao Yang (TR + VB)";"Shao Yang (少阳)";"chao yang | shao yang";"atteinte du chao yang | syndrome chao yang | demi surface demi profondeur | charniere"
+"3 — Localisation / Axe";"shao_yin";"Chao Yin (Rein + Cœur)";"Shao Yin (少阴)";"chao yin | shao yin";"atteinte du chao yin | syndrome chao yin"
+"3 — Localisation / Axe";"foyer_inferieur";"Foyer Inférieur";"Xia Jiao (下焦)";"foyer inferieur";
+"3 — Localisation / Axe";"foyer_moyen";"Foyer Moyen";"Zhong Jiao (中焦)";"foyer moyen";"foyer moyen trop charge | foyer moyen encombre | foyer moyen bloque | foyer moyen sature de yin | foyer moyen plein | rate surchargee de yin | rate trop pleine | rate pleine | foyer moyen obstrue"
+"3 — Localisation / Axe";"foyer_superieur";"Foyer Supérieur";"Shang Jiao (上焦)";"foyer superieur";
+"3 — Localisation / Axe";"tai_yang";"Taé Yang (Vessie + IG)";"Tai Yang (太阳)";"tae yang | tai yang";"atteinte du tae yang | syndrome tae yang"
+"3 — Localisation / Axe";"tai_yin";"Taé Yin (Rate + Poumon)";"Tai Yin (太阴)";"tae yin | tai yin";"atteinte du tae yin | syndrome tae yin"
+"3 — Localisation / Axe";"jue_yin";"Tsiué Yin (Foie + MC)";"Jue Yin (厥阴)";"tsieu yin | tsiue yin | jue yin | tjue yin | jue-yin";"atteinte du tsieu yin | atteinte du tsiue yin | syndrome tsieu yin | syndrome tsiue yin"
+"3 — Localisation / Axe";"yang_ming";"Yang Ming (E + GI)";"Yang Ming (阳明)";"yang ming | yan ming";"selles molles le matin | diarrhee entre 5h et 7h | atteinte du yang ming | syndrome yang ming"
+"3 — Vaisseau merveilleux";"ren_mai";"Jenn Mo / Ren Mai (Vaisseau Conception)";"Ren Mai (任脉)";"ren mai | vaisseau conception | jenn mo";"merveilleux vaisseaux | qi jing ba mai | jenn mo | jenn mo fragilise | jenn mo insuffisant"
+"3 — Vaisseau merveilleux";"dai_mai";"Taé Mo / Dai Mai (Vaisseau Ceinture)";"Dai Mai (带脉)";"dai mai | vaisseau ceinture | tae mo";"merveilleux vaisseaux | qi jing ba mai | tae mo"
+"3 — Vaisseau merveilleux";"chong_mai";"Tchrong Mo / Chong Mai (Vaisseau Pénétrant)";"Chong Mai (冲脉)";"chong mai | vaisseau penetrant | tchrong mo | tchrong mai";"merveilleux vaisseaux | qi jing ba mai | tchrong mo | le tchrong mo ne distribue plus"
+"3 — Vaisseau merveilleux";"du_mai";"Tou Mo / Du Mai (Vaisseau Gouverneur)";;"du mai | vaisseau gouverneur | tou mo";"merveilleux vaisseaux | qi jing ba mai | tou mo | tou mo insuffisant | tou mo fragilise"
+"3 — Vaisseau merveilleux";"yang_wei_mo";"Yang Oé Mo / Yang Wei Mo";"Yang Wei Mai (阳维脉)";"yang wei mo | yang wei | yang oe mo";"merveilleux vaisseaux | qi jing ba mai | yang oe mo"
+"3 — Vaisseau merveilleux";"yang_qiao";"Yang Tsiao Mo / Yang Qiao Mo";"Yang Qiao Mai (阳跷脉)";"yang qiao | yang qiao mo | yang tsiao mo | yang tsiao";"merveilleux vaisseaux | qi jing ba mai | yang tsiao mo"
+"3 — Vaisseau merveilleux";"yin_wei_mo";"Yin Oé Mo / Yin Wei Mo";"Yin Wei Mai (阴维脉)";"yin wei mo | yin wei | yin oe mo";"merveilleux vaisseaux | qi jing ba mai | yin oe mo"
+"3 — Vaisseau merveilleux";"yin_qiao";"Yin Tsiao Mo / Yin Qiao Mo";"Yin Qiao Mai (阴跷脉)";"yin qiao | yin qiao mo | yin tsiao mo | yin tsiao";"merveilleux vaisseaux | qi jing ba mai | yin tsiao mo"
+"3 — Élément (5E)";"element_bois";"Bois (Foie / VB)";"Mu (木)";"element bois | bois element | le bois | mouvement bois";"rein ne peut plus soutenir le foie"
+"3 — Élément (5E)";"element_eau";"Eau (Rein / Vessie)";"Shui (水)";"element eau | eau element | l eau | mouvement eau";"eau insuffisante pour ancrer | bois mal nourri par l eau"
+"3 — Élément (5E)";"element_feu";"Feu (Cœur / IG)";"Huo (火)";"element feu | feu element | le feu | mouvement feu";
+"3 — Élément (5E)";"element_metal";"Métal (Poumon / GI)";"Jin (金)";"element metal | metal element | le metal | mouvement metal";
+"3 — Élément (5E)";"element_terre";"Terre (Rate / Estomac)";"Tu (土)";"element terre | terre element | la terre | mouvement terre";
+"4 — Stratégie thérapeutique";"ancrer_yang";"Ancrer le Yang (nourrir le Yin pour stabiliser)";;"ancrer le yang | yang a ancrer | le yang doit etre ancre | ramener le yang vers le bas | stabiliser le yang | enraciner le yang | yang a enraciner | reenraciner le yang | yang flottant a ancrer";"ancrer le yang | le yang doit etre ancre | ramener le yang vers le bas | yang a ancrer"
+"4 — Stratégie thérapeutique";"calmer_bois";"Calmer le Bois (Foie/VB en excès)";"Ping Gan (平肝)";"calmer le bois | calmer le foie | disperser le bois | apaiser le bois | drainer le foie | apaiser le foie | foie a calmer | bois en exces a calmer | ramener le foie | reduire l exces de bois";
+"4 — Stratégie thérapeutique";"consolider_terre";"Consolider la Terre (Rate/Estomac)";"Bu Tu (补土)";"consolider la terre | soutenir la rate | consolider rate estomac | soutenir la rate estomac | tonifier la rate | renforcer la terre | terre a consolider | soutenir la terre | la terre a besoin de soutien";
+"4 — Stratégie thérapeutique";"corriger_cycle_rae";"Corriger un cycle Raé (Ko inversé / Rébellion)";"Fan Ke — Contre-attaque / Ko inversé";"cycle rae | rae | ko inverse | rebellion du cycle ko | cycle ko inverse | element rebelle | rébellion element | corriger le cycle rae | traiter le cycle rae | contre-attaque cycle ko";
+"4 — Stratégie thérapeutique";"debloquer_cycles_cheng";"Débloquer les cycles Cheng (global)";"Sheng Ke — Cycle d'engendrement global";"debloquer les cycles cheng | debloquer les cycles sheng | cycle d engendrement | cycle nourricier | relancer le cycle nourricier | debloquer le cycle nourricier | faire circuler le cycle cheng | harmoniser les cycles cheng | debloquer le cycle d engendrement";
+"4 — Stratégie thérapeutique";"disperser_yang_foie";"Disperser / Abaisser le Yang du Foie";"Ping Gan Qian Yang (平肝潜阳)";"disperser le yang du foie | abaisser le yang du foie | disperser yang foie | descendre le yang du foie | calmer le yang du foie | yang foie dispersé";"ramener le yang vers le bas"
+"4 — Stratégie thérapeutique";"disperser_chaleur";"Disperser / Clarifier la Chaleur réelle";;"disperser la chaleur | clarifier la chaleur | evacuer la chaleur | rafraichir la chaleur | purger la chaleur | eteindre le feu | chaleur a disperser | drainer la chaleur";"disperser la chaleur | clarifier la chaleur | evacuer la chaleur | rafraichir la chaleur | eteindre le feu | purger la chaleur"
+"4 — Stratégie thérapeutique";"disperser_fong";"Disperser / Expulser le Fong interne";"Xi Feng — Calmer/éteindre le Vent (熄风)";"disperser le fong | expulser le fong | chasser le fong | faire sortir le fong | fong disperser | fong interne | disperser les fong | expulser les fong | chasser les fong | faire sortir les fong | disperser les fongs | expulser les fongs | disperser le vent | expulser le vent | chasser le vent | faire sortir le vent | disperser le vent interne | expulser le vent interne | chasser le vent interne | faire sortir le vent interne | pacifier le vent interne | calmer le vent interne";"fong | fongs | fong interne | vertiges par manque de yin | tremblements | tremblements des membres | mouvements involontaires | spasmes musculaires | convulsions | pouls corde | pouls en corde | pouls en corde d arc"
+"4 — Stratégie thérapeutique";"disperser_oe";"Disperser l'Oé locale";"Xie Wei Qi (泻卫气)";"disperser l oe | disperser l oe locale | disperser l oe en exces | dispersion oe | vider l oe locale";
+"4 — Stratégie thérapeutique";"disperser_foyer_moyen";"Disperser le Foyer Moyen (excès de Yin)";"Xie Zhong Jiao (泻中焦)";"disperser le foyer moyen | lever l exces de yin au foyer moyen | lever l exces yin foyer moyen | disperser la plenitude du foyer moyen | vider le foyer moyen | abaisser le foyer moyen | faire circuler le foyer moyen | debloquer le foyer moyen | faire circuler le rechauffeur moyen | debloquer le rechauffeur moyen";
+"4 — Stratégie thérapeutique";"eliminer_tan";"Éliminer le Tan (Phlegme)";"Hua Tan (化痰)";"eliminer le tan | dissoudre le tan | resoudre le phlegme | drainer le tan | disperser le phlegme | elimination du tan | traiter le phlegme | lever le tan | transformer le phlegme | eliminer phlegme";
+"4 — Stratégie thérapeutique";"equilibrer_yy";"Équilibrer le Yin/Yang général";"Tiao He Yin Yang (调和阴阳)";"equilibrer le yin yang | traiter le yy | traiter le yin yang general | equilibre yin yang | yin yang general | yy general";
+"4 — Stratégie thérapeutique";"faire_circuler_qi";"Faire circuler le Qi (débloquer)";;"faire circuler le qi | relancer la circulation du qi | relancer le qi | debloquer le qi | mobiliser le qi | faire circuler l energie | relancer l energie | remettre le qi en mouvement | liberer le qi";"faire circuler le qi | faire circuler l energie | relancer la circulation du qi | debloquer le qi | relancer le qi | relancer l energie"
+"4 — Stratégie thérapeutique";"faire_circuler_sang";"Faire circuler le Sang / Disperser les stases";;"faire circuler le sang | activer le sang | mobiliser le sang | disperser les stases | lever les stases | lever les stases sanguines | disperser stases sanguines | dissoudre les stases | traiter la stase sanguine | sang a faire circuler";"faire circuler le sang | activer le sang | mobiliser le sang | disperser les stases | lever les stases | sang a faire circuler"
+"4 — Stratégie thérapeutique";"faire_descendre_qi";"Faire descendre le Qi (rébellion)";;"faire descendre le qi | abaisser le qi | ramener le qi vers le bas | le qi doit redescendre | abaisser le qi de l estomac | faire descendre qi estomac | faire descendre qi poumon";"faire descendre le qi | abaisser le qi | le qi doit redescendre | ramener le qi vers le bas"
+"4 — Stratégie thérapeutique";"harmoniser_foie_rate";"Harmoniser Foie / Rate (Bois-Terre)";"Shu Gan Jian Pi (疏肝健脾)";"harmoniser le foie et la rate | harmoniser foie rate | calmer le foie soutenir la rate | bois terre harmonisation | harmoniser bois terre | lever l agression foie rate | foie rate dysharmonie | dysharmonie foie rate | harmoniser le bois et la terre";
+"4 — Stratégie thérapeutique";"lever_humidite";"Lever l'humidité";"Qu Shi (祛湿)";"lever l humidite | disperser l humidite | drainer l humidite | eliminer l humidite | dispersion humidite | drainage humidite | assecher l humidite | transformer l humidite | chasser l humidite | resoudre l humidite";
+"4 — Stratégie thérapeutique";"liberer_meridien";"Libérer / Débloquer le méridien";"Tong Jing Luo (通经络)";"liberer le meridien | debloquer le meridien | lever l obstruction meridienne | liberer la circulation meridienne | ouvrir le meridien | deverrouiller le meridien | faire circuler dans le meridien | restaurer le meridien | repermeabiliser le meridien";
+"4 — Stratégie thérapeutique";"purgation";"Méthode purgation (Xia Fa)";"Xia Fa (下法)";"purgation | xia fa | methode purgation | purger | evacuer par le bas | traitement par purgation | purger les intestins";"purger la chaleur"
+"4 — Stratégie thérapeutique";"sudation";"Méthode sudation (Han Fa)";"Han Fa (汗法)";"sudation | han fa | methode sudation | provoquer la sudation | ouvrir les pores | expulser par la sudation | faire transpirer | traitement par sudation";
+"4 — Stratégie thérapeutique";"monter_yang_rate";"Monter le Yang de la Rate (relever le Qi)";;"monter le yang de la rate | relever le qi de la rate | relever le qi | faire monter le qi de la rate | soutenir l ascension du qi pur | relever le qi pur | monter le qi de la rate | ascending qi rate";
+"4 — Stratégie thérapeutique";"nourrir_sang";"Nourrir le Sang";"Bu Xue (补血)";"nourrir le sang | tonifier le sang | soutenir le sang | nourrir le xue | renforcer le sang | reconstituer le sang | sang a nourrir | sang insuffisant a tonifier";
+"4 — Stratégie thérapeutique";"nourrir_sang_coeur";"Nourrir le Sang du Cœur";"Bu Xin Xue (补心血)";"nourrir le sang du coeur | nourrir sang coeur | tonifier le sang du coeur | soutenir le sang du coeur | nourrir le coeur en sang";
+"4 — Stratégie thérapeutique";"nourrir_sang_foie";"Nourrir le Sang du Foie";;"nourrir le sang du foie | nourrir sang foie | tonifier le sang du foie | soutenir le sang du foie | nourrir le foie en sang | sang du foie a nourrir | renourrir le foie | alimenter le foie en sang";
+"4 — Stratégie thérapeutique";"nourrir_yin_estomac";"Nourrir le Yin de l'Estomac";"Zi Wei Yin (滋胃阴)";"nourrir le yin de l estomac | nourrir yin estomac | tonifier le yin de l estomac | humidifier l estomac | nourrir les liquides de l estomac | yin gastrique";
+"4 — Stratégie thérapeutique";"nourrir_yin_coeur";"Nourrir le Yin du Cœur";"Zi Xin Yin (滋心阴)";"nourrir le yin du coeur | nourrir yin coeur | tonifier le yin du coeur | soutenir le yin du coeur | yin coeur tonifie | nourrir le coeur yin";
+"4 — Stratégie thérapeutique";"nourrir_yin_foie";"Nourrir le Yin du Foie";"Zi Gan Yin (滋肝阴)";"nourrir le yin du foie | nourrir yin foie | tonifier le yin du foie | soutenir le yin du foie | yin du foie tonifie | nourrir le foie yin | yin foie | nourrir le bois yin";"yeux secs et fatigues | tendons non nourris"
+"4 — Stratégie thérapeutique";"nourrir_yin_poumon";"Nourrir le Yin du Poumon";"Zi Fei Yin (滋肺阴)";"nourrir le yin du poumon | nourrir yin poumon | tonifier le yin du poumon | humidifier le poumon | nourrir le metal yin | yin poumon tonifie | humidifier les muqueuses respiratoires";
+"4 — Stratégie thérapeutique";"nourrir_yin_rein";"Nourrir le Yin du Rein";"Zi Shen Yin (滋肾阴)";"nourrir le yin du rein | nourrir yin rein | tonifier le yin du rein | soutenir le yin du rein | yin du rein tonifie | nourrir l eau | nourrir la base yin | travailler sur rein yin | nourrir le rein yin | rein yin | yin du rein";"yin du rein s epuise | yin du rein faiblit | yin du rein diminue | rein manque de yin | yin renal insuffisant | yin renal epuise | rein n a plus assez de yin | essence du rein insuffisante | rein yin qui se vide | carence yin du rein | yin renal qui diminue | yin renal qui se tarit | substance yin du rein insuffisante"
+"4 — Stratégie thérapeutique";"pacifier_shen";"Pacifier le Shen (Cœur)";"An Shen (安神)";"pacifier le shen | calmer le shen | shen pacifie | apaiser le coeur | calmer le coeur | soutenir le coeur | ancrer le shen | stabiliser le shen | apaiser le shen | rasseoir le shen | shen a pacifier | shen a calmer";"coeur qui n ancre plus le shen | shen non ancre | le coeur n abrite plus le shen"
+"4 — Stratégie thérapeutique";"rechauffer_rate";"Réchauffer la Rate / Foyer Moyen";"Wen Pi (温脾)";"rechauffer la rate | rechauffer le foyer moyen | rechauffer rate estomac | rechauffement rate | apporter yang a la rate | yang pour rechauffer la rate | rechauffer le rechauffeur moyen | rechauffer la terre";
+"4 — Stratégie thérapeutique";"reconnecter_coeur_rein";"Reconnecter l'axe Cœur–Rein (Eau-Feu)";;"reconnecter coeur rein | reconnecter l axe coeur rein | retablir l axe eau feu | retablir l axe coeur rein | reconnecter eau et feu | faire communiquer coeur et rein | harmoniser coeur et rein | harmoniser l axe eau feu";
+"4 — Stratégie thérapeutique";"relancer_cycle_sheng_bois_feu";"Relancer le cycle Cheng Bois → Feu";"Mu Sheng Huo — Bois engendre Feu";"relancer cycle cheng bois feu | relancer cycle sheng bois feu | relancer bois feu | nourrir le bois pour le feu | soutenir le bois pour le coeur | relancer bois vers feu | debloquer le feu | faire circuler le feu | debloquer bois feu | foie nourrit coeur";
+"4 — Stratégie thérapeutique";"relancer_cycle_sheng";"Relancer le cycle Cheng Eau → Bois";"Shui Sheng Mu — Eau engendre Bois";"relancer le cycle cheng | relancer le cycle sheng | nourrir l eau pour relancer le bois | relancer cycle cheng | relancer cycle sheng | relancer cheng eau bois | relancer sheng eau bois | nourrir eau pour bois | relancer l eau et le bois | debloquer le bois | faire circuler le bois | debloquer eau bois | relancer l eau vers le bois";
+"4 — Stratégie thérapeutique";"relancer_cycle_sheng_feu_terre";"Relancer le cycle Cheng Feu → Terre";"Huo Sheng Tu — Feu engendre Terre";"relancer cycle cheng feu terre | relancer cycle sheng feu terre | relancer feu terre | nourrir le feu pour la terre | soutenir le coeur pour la rate | relancer feu vers terre | debloquer la terre par le feu | faire circuler feu terre | coeur nourrit rate";
+"4 — Stratégie thérapeutique";"relancer_cycle_sheng_metal_eau";"Relancer le cycle Cheng Métal → Eau";"Jin Sheng Shui — Métal engendre Eau";"relancer cycle cheng metal eau | relancer cycle sheng metal eau | relancer metal eau | soutenir poumon pour rein | nourrir le poumon pour le rein | relancer cheng metal vers eau | relancer sheng metal vers eau | consolider le metal pour l eau | debloquer l eau par le metal | faire circuler metal eau | poumon nourrit rein";
+"4 — Stratégie thérapeutique";"relancer_cycle_sheng_terre_metal";"Relancer le cycle Cheng Terre → Métal";"Tu Sheng Jin — Terre engendre Métal";"relancer cycle cheng terre metal | relancer cycle sheng terre metal | relancer terre metal | soutenir rate pour poumon | nourrir la rate pour le poumon | relancer cheng terre vers metal | relancer sheng terre vers metal | consolider la terre pour le metal | debloquer le metal par la terre | faire circuler terre metal | rate nourrit poumon";
+"4 — Stratégie thérapeutique";"tonifier_foyer_superieur";"Tonifier / Soutenir le Foyer Supérieur";"Bu Shang Jiao (补上焦)";"tonifier le foyer superieur | soutenir le foyer superieur | nourrir le foyer superieur | renforcer le foyer superieur | faire circuler le foyer superieur | debloquer le foyer superieur | tonification foyer superieur | nourrir le rechauffeur superieur";
+"4 — Stratégie thérapeutique";"tonifier_iong";"Tonifier l'Iong (Ying Qi)";"Bu Ying Qi (补营气)";"tonifier l iong | tonifier l iong generale | tonification iong | nourrir l iong | soutenir l iong";
+"4 — Stratégie thérapeutique";"tonifier_foyer_inferieur";"Tonifier le Foyer Inférieur";"Bu Xia Jiao (补下焦)";"tonifier le foyer inferieur | soutenir le foyer inferieur | tonification foyer inferieur | renforcer le foyer inferieur | nourrir le foyer inferieur | faire circuler le foyer inferieur | debloquer le foyer inferieur | nourrir le rechauffeur inferieur";
+"4 — Stratégie thérapeutique";"tonifier_qi_rate";"Tonifier le Qi de la Rate";"Bu Pi Qi (补脾气)";"tonifier le qi de la rate | tonifier qi rate | soutenir la rate | renforcer le qi de la rate | tonification qi rate | fortifier la rate | tonifier la terre | renforcer la terre";
+"4 — Stratégie thérapeutique";"tonifier_qi_poumon";"Tonifier le Qi du Poumon";"Bu Fei Qi (补肺气)";"tonifier le qi du poumon | tonifier qi poumon | soutenir le poumon | renforcer le qi du poumon | tonification qi poumon | fortifier le poumon | soutenir le metal | tonifier le metal";
+"4 — Stratégie thérapeutique";"tonifier_yang_rein";"Tonifier le Yang du Rein / Ming Men";"Wen Bu Shen Yang (温补肾阳)";"tonifier le yang du rein | tonifier yang rein | tonifier ming men | ranimer le feu du ming men | ranimer ming men | soutenir le yang du rein | augmenter le feu du ming men | travailler sur rein yang | nourrir le rein yang | technique rein yang | rein yang | yang du rein";"yang du rein s epuise | yang du rein faiblit | yang du rein ne suffit plus | yang du rein diminue | rein manque de yang | rein yang qui faiblit | yang renal insuffisant | yang renal en baisse | yang du rein qui se vide | rein ne rechauffe plus | rein n a plus assez de yang | yang renal epuise | carence yang du rein | rein froid | froid au rein | yang du rein ne rechauffe plus | yang du rein trop faible | yang renal trop faible | froid lombaire | lombes froides | dos froid dans le bas | urines claires et abondantes | urines claires | le rein ne gouverne plus l eau | le rein ne rechauffe plus la rate"
+"4 — Stratégie thérapeutique";"tonifier_yang_general";"Tonifier le Yang général";"Bu Yang (补阳)";"tonifier le yang general | tonification yang general | soutenir le yang general | yang general tonifie | tonifier le yang | soutenir le yang | relever le yang";
+"4 — Stratégie thérapeutique";"tonifier_yin_general";"Tonifier le Yin général";"Bu Yin (补阴)";"tonifier le yin general | tonification yin general | nourrir le yin general | soutenir le yin general | yin general tonifie | nourrir le grand yin | tonifier le yin | nourrir le yin | soutenir le yin";"ancrer le yang"
+"4 — Stratégie thérapeutique";"traitement_local";"Traitement local (dernier temps)";;"traitement local | traitement local en dernier | local en dernier | traiter localement | traitement secondaire local";
+"4 — Stratégie thérapeutique";"traiter_chao_yang";"Traiter le niveau Chao Yang (VB / TR)";"Shao Yang (少阳)";"chao yang | shao yang | niveau chao yang | niveau shao yang | traiter le chao yang | traiter le shao yang | soutenir le chao yang | soutenir le shao yang | debloquer le chao yang | debloquer le shao yang | liberer le chao yang | liberer le shao yang | travailler sur le chao yang | travailler sur le shao yang | harmoniser le chao yang | harmoniser le shao yang | tonifier le chao yang | tonifier le shao yang";"atteinte du chao yang | syndrome chao yang | demi surface demi profondeur | charniere"
+"4 — Stratégie thérapeutique";"traiter_chao_yin";"Traiter le niveau Chao Yin (C / R)";"Shao Yin (少阴)";"chao yin | shao yin | niveau chao yin | niveau shao yin | traiter le chao yin | traiter le shao yin | soutenir le chao yin | soutenir le shao yin | tonifier le chao yin | tonifier le shao yin | debloquer le chao yin | debloquer le shao yin | travailler sur le chao yin | travailler sur le shao yin | nourrir le chao yin | nourrir le shao yin | axe coeur rein chao yin | axe coeur rein shao yin";"atteinte du chao yin | syndrome chao yin"
+"4 — Stratégie thérapeutique";"traiter_tae_yang";"Traiter le niveau Taé Yang (V / IG)";"Tai Yang (太阳)";"tae yang | tai yang | niveau tae yang | niveau tai yang | traiter le tae yang | traiter le tai yang | soutenir le tae yang | soutenir le tai yang | debloquer le tae yang | debloquer le tai yang | liberer le tae yang | liberer le tai yang | travailler sur le tae yang | travailler sur le tai yang | tonifier le tae yang | tonifier le tai yang";"atteinte du tae yang | syndrome tae yang"
+"4 — Stratégie thérapeutique";"traiter_tae_yin";"Traiter le niveau Taé Yin (P / Rt)";"Tai Yin (太阴)";"tae yin | tai yin | niveau tae yin | niveau tai yin | traiter le tae yin | traiter le tai yin | soutenir le tae yin | soutenir le tai yin | tonifier le tae yin | tonifier le tai yin | debloquer le tae yin | debloquer le tai yin | travailler sur le tae yin | travailler sur le tai yin | nourrir le tae yin | nourrir le tai yin";"atteinte du tae yin | syndrome tae yin"
+"4 — Stratégie thérapeutique";"traiter_jue_yin";"Traiter le niveau Tsiué Yin (F / MC)";"Jue Yin (厥阴)";"tsieu yin | tsiue yin | niveau tsieu yin | niveau tsiue yin | jue yin | tjue yin | niveau jue yin | niveau tjue yin | traiter le tsieu yin | traiter le tsiue yin | traiter le jue yin | traiter le tjue yin | soutenir le tsieu yin | soutenir le tsiue yin | soutenir le jue yin | soutenir le tjue yin | tonifier le tsieu yin | tonifier le tsiue yin | tonifier le jue yin | tonifier le tjue yin | debloquer le tsieu yin | debloquer le tsiue yin | debloquer le jue yin | debloquer le tjue yin | nourrir le tsieu yin | nourrir le tsiue yin | nourrir le jue yin | nourrir le tjue yin | travailler sur le tsieu yin | travailler sur le tsiue yin | travailler sur le jue yin | travailler sur le tjue yin | axe foie maitre coeur tsieu yin";"atteinte du tsieu yin | atteinte du tsiue yin | syndrome tsieu yin | syndrome tsiue yin"
+"4 — Stratégie thérapeutique";"traiter_yang_apparent";"Traiter le Yang apparent / Feu apparent (vide de Yin)";"Zi Yin Jiang Huo (滋阴降火)";"yang apparent | feu apparent | chaleur apparente | echauffement par vide de yin | chaleur par vide de yin | feu par vide de yin | yang apparent par vide de yin | traiter le yang apparent | traiter le feu apparent | nourrir le yin pour calmer le feu | nourrir le yin pour eteindre le feu | clarifier le feu du vide | clarifier feu vide | traiter le feu du vide | nourrir le yin pour clarifier";"chaleur apparente | yang apparent par vide de yin | yang qui flotte par manque de yin | faux yang | chaleur fictive | yang monte par manque de yin | yang apparent de vb | yang apparent vb | faux yang de vb | faux yang vb | yang flottant de vb | yang non ancre vb | yang de vb qui monte | yang vb montant | yang apparent du foie | yang apparent foie | faux yang du foie | yang flottant du foie | yang apparent du rein | faux yang du rein | chaleur sur vide de yin | feu sur vide de yin | yang monte car le yin ne retient plus | langue rouge sans enduit"
+"4 — Stratégie thérapeutique";"consolider_yang_ming";"Traiter le Yang Ming / Grand Yang Ming (E / GI)";"Bu Yang Ming";"consolider le yang ming | soutenir le yang ming | tonifier le yang ming | yang ming | grand yang ming | technique yang ming | travailler sur le yang ming | traiter le yang ming | niveau yang ming | debloquer le yang ming | liberer le yang ming";"selles molles le matin | diarrhee entre 5h et 7h | atteinte du yang ming | syndrome yang ming"
+"4 — Stratégie thérapeutique";"traiter_yin_apparent";"Traiter le Yin apparent / Froid apparent (vide de Yang)";"Wen Yang Qu Han (温阳祛寒)";"yin apparent | froid apparent | froid par vide de yang | yin apparent par vide de yang | froid apparent par vide de yang | traiter le yin apparent | traiter le froid apparent | tonifier le yang pour chasser le froid | rechauffer le yang";
+"4 — Stratégie thérapeutique";"traiter_ko_pathologique";"Traiter un cycle Ko pathologique (attaque)";"Ke — Cycle de contrôle pathologique";"ko pathologique | cycle ko pathologique | attaque par le cycle ko | disperser l element agresseur | soutenir l element attaque | bois attaque terre | eau attaque feu | feu attaque metal | metal attaque bois | terre attaque eau | traiter le cycle ko pathologique";"foie agresse la rate | foie envahit la rate | foie attaque la rate | foie bois en exces affecte la terre | colere affecte l estomac"
+"5 — Pathologie / Motif";"acne";"Acné / Imperfections cutanées";;"acne | boutons | imperfection cutanee | peau grasse | couperose | rougeurs cutanees | peau impure";
+"5 — Pathologie / Motif";"acouphenes";"Acouphènes / Bourdonnements d'oreille";;"acouphene | acouphenes | bourdonnement | bourdonnements | bourdonnement d oreille | bourdonnements d oreille | tinnitus | sifflement oreille | sifflements oreille";"bourdonnements vide | oreilles bourdonnement par vide"
+"5 — Pathologie / Motif";"alopecie";"Alopécie / Chute de cheveux";;"alopecie | chute de cheveux | perte de cheveux | calvitie | cheveux qui tombent | clairseme | perte capillaire | cheveux fragiles";
+"5 — Pathologie / Motif";"anxiete";"Anxiété / Stress";;"anxiete | stress | angoisse | angoisses | nervosité | nervosité excessive | agitation | irritabilite | burn out | burnout | epuisement professionnel";"stress affecte la digestion | colere affecte la digestion | tension emotionnelle perturbe la digestion | stress perturbe la digestion | tremblements | mouvements involontaires | convulsions"
+"5 — Pathologie / Motif";"arthralgie";"Arthralgie / Arthrite / Goutte";;"arthralgie | arthralgies | arthrite | arthrites | douleur articulaire | douleurs articulaires | polyarthrite | rhumatisme | rhumatismes | goutte | crise de goutte | hyperuricemie";
+"5 — Pathologie / Motif";"asthme";"Asthme / Dyspnée";;"asthme | dyspnee | essoufflement | difficulte respiratoire | difficultes respiratoires | oppression thoracique | souffle court | gene respiratoire";
+"5 — Pathologie / Motif";"ballonnements";"Ballonnements / Distension abdominale";;"ballonnement | ballonnements | distension abdominale | gaz intestinaux | flatulences | meteorisme | ventre gonflé | ventre gonfle | abdomen distendu";
+"5 — Pathologie / Motif";"bouffees_chaleur";"Bouffées de chaleur";;"bouffee de chaleur | bouffees de chaleur | flush | montee de chaleur | montees de chaleur | chaleur montante soudaine | chaleur soudaine";
+"5 — Pathologie / Motif";"cephalees";"Céphalées / Migraines";;"cephalee | cephalees | migraine | migraines | mal de tete | maux de tete | mal a la tete | douleur cephalique | cephalee temporale | cephalee frontale | cephalee occipitale | algie de la face";
+"5 — Pathologie / Motif";"cervicalgie";"Cervicalgie / Douleur cervicale";;"cervicalgie | cervicalgies | douleur cervicale | douleurs cervicales | douleur au cou | douleur dans le cou | raideur cervicale | raideur du cou | torticolis | nuque douloureuse | nuque raide";
+"5 — Pathologie / Motif";"constipation";"Constipation";;"constipation | constipations | selles dures | transit lent | difficulte a aller a la selle";
+"5 — Pathologie / Motif";"depression";"Dépression / Mélancolie";;"depression | depressions | deprime | abattement | melancolie | tristesse persistante | humeur sombre";"deuil non fait | tristesse profonde | tristesse | chagrin | melancolie | nostalgie envahissante"
+"5 — Pathologie / Motif";"diarrhees";"Diarrhées / Transit accéléré";;"diarrhee | diarrhees | selles molles | selles liquides | transit accelere | colon irritable | intestin irritable | syndrome intestin irritable | sii | colite";"diarrhee 5h matin | diarrhee tot le matin | va a la selle le matin | selles molles le matin | diarrhee a l aube | diarrhee entre 5h et 7h | transit le matin de bonne heure"
+"5 — Pathologie / Motif";"douleur_thoracique";"Douleur thoracique / Oppression";;"douleur thoracique | douleurs thoraciques | oppression thoracique | oppression de poitrine | serrement poitrine | douleur poitrine | angine de poitrine | angor | douleur precordiale";
+"5 — Pathologie / Motif";"dysmenorrhee";"Dysménorrhée / Règles douloureuses";;"dysmenorrhee | regles douloureuses | douleurs menstruelles | crampes menstruelles | douleurs regles | douleur regles | douleur pendant les regles | algodysmenorrhee";
+"5 — Pathologie / Motif";"eczema";"Eczéma / Prurit / Dermatite";;"eczema | dermatite | prurit | demangeaison | demangeaisons | psoriasis | urticaire | eruption cutanee";
+"5 — Pathologie / Motif";"enuresie";"Énurésie / Incontinence nocturne";;"enuresie | pipi au lit | incontinence nocturne | mictions nocturnes involontaires | lit mouille nuit";
+"5 — Pathologie / Motif";"epaule_douloureuse";"Épaule douloureuse";;"epaule douloureuse | douleur epaule | douleur a l epaule | douleur de l epaule | blocage epaule | epaule bloquee | epaule droite | epaule gauche";
+"5 — Pathologie / Motif";"fatigue";"Fatigue / Asthénie";;"fatigue | fatigues | asthenie | epuisement | manque d energie | manque d energies | fatigue chronique | fatigue generale | grande fatigue | tres fatigue";
+"5 — Pathologie / Motif";"fibromyalgie";"Fibromyalgie / Douleurs diffuses";;"fibromyalgie | fibromyalgies | douleur diffuse | douleurs diffuses | syndrome douloureux diffus | douleur generalisee";
+"5 — Pathologie / Motif";"gonalgie";"Gonalgie / Douleur de genou";;"gonalgie | gonalgies | douleur genou | douleur au genou | douleurs genou | douleur du genou | genou douloureux | genou droit | genou gauche | chondropathie | menisque";"genou qui craque"
+"5 — Pathologie / Motif";"hyperactivite";"Hyperactivité / TDAH";;"hyperactivite | tdah | deficit d attention | trouble attention | difficulte de concentration | hyperactivite avec deficit attention | agitation enfant";
+"5 — Pathologie / Motif";"hypertension";"Hypertension artérielle (HTA)";;"hypertension | hta | tension elevee | tension arterielle elevee | pression arterielle haute | tension trop haute";
+"5 — Pathologie / Motif";"infections_repetees";"Infections répétées / Immunité faible";;"infection repetee | infections repetees | rhumes frequents | fragilite immunitaire | immunite faible | rhumes a repetition | otite repetee | otites repetees | bronchite repetee | infections frequentes | terrain fragile infections";
+"5 — Pathologie / Motif";"infertilite";"Infertilité / Difficultés à concevoir";;"infertilite | infertilites | sterilite | difficulte a concevoir | difficulte a tomber enceinte | pma | fiv | aide medicale a la procreation | hypofertilite";
+"5 — Pathologie / Motif";"insomnie";"Insomnie / Troubles du sommeil";;"insomnie | insomnies | trouble du sommeil | troubles du sommeil | difficulte a dormir | difficultes a dormir | difficulte d endormissement | endormissement difficile | sommeil perturbe | sommeil de mauvaise qualite | reveil nocturne | reveils nocturnes | reveil precoce";"sommeil agite par le shen"
+"5 — Pathologie / Motif";"irregularite_menstruelle";"Irrégularité menstruelle / Aménorrhée";;"amenorrhee | absence de regles | regles absentes | irregularite menstruelle | regles irregulieres | cycle irregulier | oligomenorrhee | spanioménorrhée | cycles trop longs";
+"5 — Pathologie / Motif";"lithiase";"Lithiase / Calculs (rein, vésicule)";;"lithiase | calcul | calculs | calcul renal | calcul urinaire | colique nephretique | lithiase biliaire | calcul vesiculaire";
+"5 — Pathologie / Motif";"lombalgie";"Lombalgie / Douleur lombaire";;"lombalgie | lombalgies | lumbago | douleur lombaire | douleurs lombaires | mal de dos | mal au dos | douleur au dos | douleur bas du dos | douleur en bas du dos";
+"5 — Pathologie / Motif";"menopause";"Ménopause / Périménopause";;"menopause | perimenopause | premenopause | post menopause | syndrome menopausique | cessation des regles | arret des regles menopause";
+"5 — Pathologie / Motif";"mononucleose";"Mononucléose / Epstein-Barr (séquelles)";;"mononucleose | epstein barr | ebv | sequelles mononucleose | fatigue post mononucleose | post mononucleose | infection epstein barr | syndrome mononucleosique";
+"5 — Pathologie / Motif";"nausees";"Nausées / Vomissements";;"nausee | nausees | vomissement | vomissements | sensation de nausee | envie de vomir";
+"5 — Pathologie / Motif";"nycturie";"Nycturie / Réveils nocturnes pour uriner";;"nycturie | nycturiés | se lever la nuit pour uriner | lever la nuit | mictions nocturnes | reveils pour uriner | envie d uriner la nuit";
+"5 — Pathologie / Motif";"oedeme";"Œdème / Rétention d'eau";;"oedeme | oedemes | retention d eau | retention hydrique | gonflement des membres | jambes lourdes | jambes gonflees | infiltration hydrique | prise de poids oedeme | chevilles gonflees";
+"5 — Pathologie / Motif";"palpitations";"Palpitations / Arythmie";;"palpitation | palpitations | tachycardie | arythmie | extrasystole | extrasystoles | coeur qui s emballe | coeur rapide";"sommeil agite par le shen"
+"5 — Pathologie / Motif";"pharyngite";"Pharyngite / Amygdalite chronique";;"pharyngite | amygdalite | gorge irritee | gorge douloureuse | mal de gorge chronique | angine a repetition | noeud dans la gorge | sensation de boule gorge";
+"5 — Pathologie / Motif";"pollakiurie";"Pollakiurie / Mictions fréquentes";;"pollakiurie | mictions frequentes | envie frequente d uriner | envie d uriner souvent | incontinence urinaire | fuites urinaires | besoins frequents | urgences mictionnelles";
+"5 — Pathologie / Motif";"reflux";"Reflux / RGO / Brûlures d'estomac";;"reflux | rgo | pyrosis | brulure estomac | brulures estomac | remontees acides | acidite gastrique | gastrite";
+"5 — Pathologie / Motif";"sciatique";"Sciatique / Névralgie sciatique";;"sciatique | sciatalgie | nevralgique sciatique | irradiation sciatique | douleur irradiante jambe | douleur irradiation fessiere | crural";
+"5 — Pathologie / Motif";"sinusite";"Sinusite / Rhinite / Rhume";;"sinusite | sinusites | rhinite | rhinites | congestion nasale | nez bouche | rhume chronique | rhino sinusite | ecoulement nasal | mouchage frequent";
+"5 — Pathologie / Motif";"sueurs_nocturnes";"Sueurs nocturnes";;"sueur nocturne | sueurs nocturnes | transpiration nocturne | transpire la nuit | mouille de sueur la nuit | sueurs pendant le sommeil";"sueurs la nuit | transpiration nocturne | sueurs nocturnes"
+"5 — Pathologie / Motif";"surdite";"Surdité / Hypoacousie";;"surdite | surdites | hypoacousie | perte d audition | baisse de l audition | trouble auditif | oreille qui entend moins | difficile entendre";
+"5 — Pathologie / Motif";"surpoids";"Surpoids / Obésité";;"surpoids | obesite | prise de poids | embonpoint | difficulte a maigrir | poids excessif | kilos en trop";
+"5 — Pathologie / Motif";"fatigue_chronique";"Syndrome de fatigue chronique (SFC)";;"syndrome de fatigue chronique | sfc | encephalomyelite myalgique | em sfc | epuisement chronique | fatigue extreme persistante | fatigue invalidante | fibromyalgie fatigue";
+"5 — Pathologie / Motif";"spm";"Syndrome prémenstruel (SPM)";;"spm | syndrome premenstruel | premenstruel | syndrome pre menstruel | tension premenstruelle";
+"5 — Pathologie / Motif";"syndrome_sec";"Syndrome sec / Sécheresse généralisée (Sjögren)";;"syndrome sec | secheresse generalisee | sjogren | yeux secs | bouche seche | secheresse buccale | secheresse des muqueuses | manque de secretions";
+"5 — Pathologie / Motif";"tendinite";"Tendinite / Tendinopathie";;"tendinite | tendinites | tendinopathie | tendinopathies | tendinose | epicondylite | epicondylites | epicondyle | epitrochleite | rotulien | tendon | periarthrite | coiffe des rotateurs";
+"5 — Pathologie / Motif";"toc";"TOC / Pensées obsessionnelles";;"toc | trouble obsessionnel compulsif | pensee obsessionnelle | rumination obsessionnelle | pensees intrusives | obsession | compulsion";
+"5 — Pathologie / Motif";"toux";"Toux / Toux chronique";;"toux | toux chronique | toux seche | toux grasse | toux persistante | toux irritative";
+"5 — Pathologie / Motif";"trouble_sexuel";"Trouble sexuel / Dysfonction";;"impuissance | dysfonction erectile | trouble erectil | frigidite | baisse de libido | libido faible | dysfonction sexuelle | trouble de la sexualite | perte de libido | ejaculation precoce";
+"5 — Pathologie / Motif";"varices";"Varices / Insuffisance veineuse";;"varices | varice | insuffisance veineuse | phlebite | thrombose veineuse | jambes varices | telangiectasies";
+"5 — Pathologie / Motif";"vertiges";"Vertiges / Étourdissements";;"vertige | vertiges | etourdissement | etourdissements | sensation de vertige | instabilite | troubles de l equilibre";"vertiges par manque de yin"
+"5 — Pathologie / Motif";"zona";"Zona / Herpès";;"zona | herpes zoster | herpes | nevralgie post zoosterienne | sequelles de zona | douleurs post zona | post zona";
+
+
+"─── TABLE DES EQUIVALENCES SEMANTIQUES ───";;;;;
+"Expression écrite par le praticien";;;"Tags enrichis (termes canoniques injectés)";;
+"le foie ne circule pas";;;"stagnation qi foie foie bloque";;
+"le foie ne circule plus";;;"stagnation qi foie foie bloque";;
+"foie ne circule pas";;;"stagnation qi foie foie bloque";;
+"foie ne circule plus";;;"stagnation qi foie foie bloque";;
+"le foie est bloque";;;"stagnation qi foie foie bloque";;
+"foie est bloque";;;"stagnation qi foie foie bloque";;
+"blocage du foie";;;"stagnation qi foie foie bloque";;
+"blocage au foie";;;"stagnation qi foie foie bloque";;
+"blocage de l energie du foie";;;"stagnation qi foie foie bloque";;
+"energie du foie bloquee";;;"stagnation qi foie foie bloque";;
+"energie du foie stagnante";;;"stagnation qi foie foie bloque";;
+"energie du foie entravee";;;"stagnation qi foie foie bloque";;
+"energie du foie ne passe pas";;;"stagnation qi foie foie bloque";;
+"qi du foie qui stagne";;;"stagnation qi foie";;
+"qi du foie en stagnation";;;"stagnation qi foie";;
+"qi du foie qui se bloque";;;"stagnation qi foie foie bloque";;
+"qi du foie est retenu";;;"stagnation qi foie qi bloque";;
+"foie congestionne";;;"stagnation qi foie foie bloque";;
+"foie est congestionne";;;"stagnation qi foie foie bloque";;
+"foie entrave";;;"stagnation qi foie foie bloque";;
+"foie est entrave";;;"stagnation qi foie foie bloque";;
+"foie obstrue";;;"stagnation qi foie foie bloque";;
+"foie se bloque";;;"stagnation qi foie foie bloque";;
+"foie qui se bloque";;;"stagnation qi foie bois qui se bloque";;
+"foie ne laisse pas circuler";;;"stagnation qi foie foie bloque";;
+"foie ne fait plus passer";;;"stagnation qi foie foie bloque";;
+"foie ne fait pas passer le qi";;;"stagnation qi foie foie bloque";;
+"foie ralenti";;;"stagnation qi foie foie bloque";;
+"foie fige";;;"stagnation qi foie foie bloque";;
+"foie coince";;;"stagnation qi foie foie bloque";;
+"foie sature";;;"stagnation qi foie foie bloque";;
+"bois bloque";;;"stagnation qi foie bois qui se bloque";;
+"bois est bloque";;;"stagnation qi foie bois qui se bloque";;
+"bois stagnant";;;"stagnation qi foie bois qui se bloque";;
+"bois en stagnation";;;"stagnation qi foie bois qui se bloque";;
+"stagnation du bois";;;"stagnation qi foie bois qui se bloque";;
+"blocage du bois";;;"stagnation qi foie bois qui se bloque";;
+"energie du bois bloquee";;;"stagnation qi foie bois qui se bloque";;
+"bois ralenti";;;"stagnation qi foie bois qui se bloque";;
+"bois qui ne circule pas";;;"stagnation qi foie bois qui se bloque";;
+"bois qui ne circule plus";;;"stagnation qi foie bois qui se bloque";;
+"foie vb bloque";;;"stagnation qi foie bois qui se bloque";;
+"foie vb en stagnation";;;"stagnation qi foie bois qui se bloque";;
+"vb bloque";;;"stagnation qi foie foie bloque";;
+"vesicule bloquee";;;"stagnation qi foie foie bloque";;
+"foie serre";;;"stagnation qi foie foie bloque";;
+"foie contracte";;;"stagnation qi foie foie bloque";;
+"tension au niveau du foie";;;"stagnation qi foie foie bloque";;
+"crispation du foie";;;"stagnation qi foie foie bloque";;
+"yang qui monte";;;"yang du foie montant yang monte";;
+"yang monte";;;"yang du foie montant yang monte";;
+"yang ascendant";;;"yang du foie montant yang monte";;
+"yang non ancre";;;"yang du foie montant yang non ancre";;
+"yang flottant";;;"yang du foie montant yang flottant";;
+"yang qui flotte";;;"yang du foie montant yang flottant";;
+"yang ne descend pas";;;"yang du foie montant yang monte";;
+"yang s eleve";;;"yang du foie montant yang monte";;
+"yang remonte";;;"yang du foie montant yang monte";;
+"yang monte vers le haut";;;"yang du foie montant yang monte";;
+"yang en rebellion";;;"yang du foie montant yang en usurpateur";;
+"yang monte en usurpateur";;;"yang du foie montant yang en usurpateur";;
+"yang du foie monte";;;"yang du foie montant yang monte";;
+"yang foie monte";;;"yang du foie montant yang monte";;
+"yang du foie non ancre";;;"yang du foie montant yang non ancre";;
+"yang du foie qui monte";;;"yang du foie montant yang monte";;
+"yang du foie flotte";;;"yang du foie montant yang flottant";;
+"yang du foie s eleve";;;"yang du foie montant yang monte";;
+"yang du foie trop fort";;;"yang du foie montant yang du foie en exces";;
+"yang du foie en exces";;;"yang du foie montant yang du foie en exces";;
+"yang du foie en plenitude";;;"yang du foie montant yang du foie en plenitude";;
+"yang du foie deborde";;;"yang du foie montant yang du foie en exces";;
+"yang du foie envahit";;;"yang du foie montant yang en usurpateur";;
+"yang du foie non controle";;;"yang du foie montant yang monte";;
+"yang du foie qui s eleve";;;"yang du foie montant yang monte";;
+"yang non ancre par le yin";;;"yang du foie montant yang non ancre yang flottant";;
+"prosperite du yang";;;"yang du foie montant prosperite du yang du foie";;
+"yang du bois monte";;;"yang du foie montant yang monte";;
+"yang du bois en exces";;;"yang du foie montant yang du foie en exces";;
+"yang sans ancrage yin";;;"yang du foie montant yang sans racine yang non ancre";;
+"yang libre sans controle";;;"yang du foie montant yang non ancre";;
+"cephalees aux tempes";;;"yang du foie montant yang monte";;
+"migraine temporale";;;"yang du foie montant yang monte";;
+"douleur aux tempes";;;"yang du foie montant yang monte";;
+"rouge au visage colere";;;"yang du foie montant yang du foie en exces";;
+"visage rouge qui monte";;;"yang du foie montant yang monte feu du foie";;
+"pouls corde et rapide";;;"yang du foie montant pouls corde arc yang du foie en exces";;
+"yang du rein s epuise";;;"vide yang rein yang du rein insuffisant";;
+"yang du rein faiblit";;;"vide yang rein yang du rein insuffisant";;
+"yang du rein ne suffit plus";;;"vide yang rein yang du rein insuffisant";;
+"yang du rein diminue";;;"vide yang rein yang du rein insuffisant";;
+"rein manque de yang";;;"vide yang rein yang du rein insuffisant";;
+"rein yang qui faiblit";;;"vide yang rein yang du rein insuffisant";;
+"yang renal insuffisant";;;"vide yang rein yang du rein insuffisant";;
+"yang renal en baisse";;;"vide yang rein yang du rein insuffisant";;
+"yang du rein qui se vide";;;"vide yang rein yang du rein insuffisant";;
+"rein ne rechauffe plus";;;"vide yang rein yang du rein insuffisant";;
+"rein n a plus assez de yang";;;"vide yang rein yang du rein insuffisant";;
+"yang renal epuise";;;"vide yang rein yang du rein insuffisant";;
+"carence yang du rein";;;"vide yang rein yang du rein insuffisant";;
+"rein froid";;;"vide yang rein yang du rein insuffisant";;
+"froid au rein";;;"vide yang rein yang du rein insuffisant";;
+"yang du rein ne rechauffe plus";;;"vide yang rein yang du rein insuffisant";;
+"yang du rein trop faible";;;"vide yang rein yang du rein insuffisant";;
+"yang renal trop faible";;;"vide yang rein yang du rein insuffisant";;
+"feu du rein s eteint";;;"feu du ming men ming men eteint mingmen insuffisant";;
+"feu de la vie s eteint";;;"feu du ming men ming men eteint";;
+"feu de ming men s eteint";;;"feu du ming men ming men eteint";;
+"feu originel s eteint";;;"feu du ming men feu originel insuffisant";;
+"feu du ming men s eteint";;;"feu du ming men ming men eteint";;
+"ming men ne rechauffe plus";;;"feu du ming men ming men insuffisant";;
+"ming men s affaiblit";;;"feu du ming men ming men insuffisant";;
+"feu du ming men s affaiblit";;;"feu du ming men ming men insuffisant";;
+"ming men eteint";;;"feu du ming men ming men eteint";;
+"porte de vie insuffisante";;;"feu du ming men feu originel insuffisant";;
+"froid lombaire";;;"vide yang rein yang du rein insuffisant";;
+"lombes froides";;;"vide yang rein yang du rein insuffisant";;
+"dos froid dans le bas";;;"vide yang rein yang du rein insuffisant";;
+"urines claires et abondantes";;;"vide yang rein yang du rein insuffisant";;
+"urines claires";;;"vide yang rein yang du rein insuffisant";;
+"yin du rein s epuise";;;"vide yin rein yin du rein insuffisant";;
+"yin du rein faiblit";;;"vide yin rein yin du rein insuffisant";;
+"yin du rein diminue";;;"vide yin rein yin du rein insuffisant";;
+"rein manque de yin";;;"vide yin rein yin du rein insuffisant";;
+"yin renal insuffisant";;;"vide yin rein yin du rein insuffisant";;
+"yin renal epuise";;;"vide yin rein yin du rein insuffisant";;
+"rein n a plus assez de yin";;;"vide yin rein yin du rein insuffisant";;
+"essence du rein insuffisante";;;"vide yin rein yin du rein insuffisant vide jing rein";;
+"rein yin qui se vide";;;"vide yin rein yin du rein insuffisant";;
+"eau du rein insuffisante";;;"vide yin rein eau insuffisante";;
+"eau renale insuffisante";;;"vide yin rein eau insuffisante";;
+"carence yin du rein";;;"vide yin rein yin du rein insuffisant";;
+"yin renal qui diminue";;;"vide yin rein yin du rein insuffisant";;
+"yin renal qui se tarit";;;"vide yin rein yin du rein insuffisant";;
+"substance yin du rein insuffisante";;;"vide yin rein yin du rein insuffisant";;
+"eau insuffisante pour ancrer";;;"vide yin rein eau insuffisante vide profond de l eau";;
+"chaleur le soir";;;"feu du vide chaleur vesperal vide yin rein";;
+"chaleur en fin de journee";;;"feu du vide chaleur vesperal vide yin rein";;
+"chaleur la nuit";;;"feu du vide chaleur vesperal vide yin";;
+"chaleur vesperal";;;"feu du vide chaleur vesperal vide yin rein";;
+"sueurs la nuit";;;"vide de yin sueurs nocturnes feu du vide";;
+"transpiration nocturne";;;"vide de yin sueurs nocturnes";;
+"sueurs nocturnes";;;"vide de yin sueurs nocturnes feu du vide vide yin rein";;
+"bourdonnements vide";;;"vide yin rein oreille rein bourdonnements vide";;
+"oreilles bourdonnement par vide";;;"vide yin rein bourdonnements vide oreille rein";;
+"chaleur apparente";;;"feu du vide yang apparent chaleur apparente";;
+"chaleur par manque de yin";;;"feu du vide chaleur de vide vide avec chaleur";;
+"chaleur liee au vide de yin";;;"feu du vide chaleur de vide";;
+"yang apparent par vide de yin";;;"feu du vide yang apparent yang non ancre";;
+"yang qui flotte par manque de yin";;;"feu du vide yang apparent yang flottant";;
+"vide de yin avec chaleur";;;"feu du vide chaleur de vide vide avec chaleur";;
+"yang sans racine yin";;;"feu du vide yang sans racine yang non ancre";;
+"chaleur du vide";;;"feu du vide chaleur de vide chaleur xu";;
+"faux yang";;;"feu du vide yang apparent faux yang";;
+"chaleur fictive";;;"feu du vide yang apparent chaleur apparente";;
+"chaleur qui monte par vide";;;"feu du vide chaleur de vide yang monte par manque de yin";;
+"yang monte par manque de yin";;;"feu du vide yang apparent yang non ancre";;
+"foie ne nourrit plus";;;"vide sang foie foie non nourri foie mal nourri";;
+"foie manque de sang";;;"vide sang foie sang foie insuffisant";;
+"foie n est plus nourri";;;"vide sang foie foie non nourri";;
+"sang du foie insuffisant";;;"vide sang foie sang foie insuffisant";;
+"sang du foie appauvri";;;"vide sang foie sang foie insuffisant";;
+"foie mal alimente";;;"vide sang foie foie mal nourri";;
+"foie manque de substance";;;"vide sang foie foie non nourri";;
+"sang insuffisant pour le foie";;;"vide sang foie sang foie insuffisant";;
+"foie non alimente";;;"vide sang foie foie non nourri";;
+"bois non nourri en sang";;;"vide sang foie sang foie insuffisant";;
+"crampes nocturnes";;;"vide sang foie foie non nourri";;
+"crampes la nuit";;;"vide sang foie foie non nourri";;
+"jambes crampe nuit";;;"vide sang foie foie non nourri";;
+"crampes aux jambes la nuit";;;"vide sang foie foie non nourri";;
+"ongles cassants";;;"vide sang foie foie non nourri";;
+"ongles fragiles";;;"vide sang foie foie non nourri";;
+"ongles stries";;;"vide sang foie foie non nourri";;
+"yeux secs et fatigues";;;"vide sang foie foie non nourri vide yin foie";;
+"vision trouble le soir";;;"vide sang foie foie non nourri";;
+"regles pales";;;"vide sang foie sang foie insuffisant vide sang";;
+"regles peu abondantes";;;"vide sang foie vide sang sang insuffisant";;
+"rate s affaiblit";;;"vide qi rate rate affaiblie";;
+"rate s epuise";;;"vide qi rate rate affaiblie";;
+"rate ne produit plus";;;"vide qi rate rate insuffisante";;
+"rate ne transforme plus";;;"vide qi rate rate insuffisante";;
+"rate ne transporte plus";;;"vide qi rate rate insuffisante";;
+"rate deficiente";;;"vide qi rate rate affaiblie";;
+"rate manque de qi";;;"vide qi rate qi de la rate insuffisant";;
+"qi de la rate qui faiblit";;;"vide qi rate qi de la rate insuffisant";;
+"terre qui s affaiblit";;;"vide qi rate rate affaiblie";;
+"terre deficiente";;;"vide qi rate rate affaiblie";;
+"foyer moyen s affaiblit";;;"vide qi rate rate affaiblie";;
+"digestion affaiblie";;;"vide qi rate rate affaiblie";;
+"digestion deficiente";;;"vide qi rate rate affaiblie";;
+"digestion ne fonctionne plus";;;"vide qi rate rate insuffisante";;
+"rate fatiguee";;;"vide qi rate rate affaiblie";;
+"rate qui se vide";;;"vide qi rate rate affaiblie";;
+"rate en vide";;;"vide qi rate rate affaiblie";;
+"rate epuisee";;;"vide qi rate rate affaiblie rate insuffisante";;
+"foyer moyen trop charge";;;"exces yin foyer moyen plenitude au foyer moyen rate surchargee";;
+"foyer moyen encombre";;;"exces yin foyer moyen plenitude au foyer moyen foyer moyen sature";;
+"foyer moyen bloque";;;"exces yin foyer moyen foyer moyen sature";;
+"foyer moyen sature de yin";;;"exces yin foyer moyen plenitude yin foyer moyen";;
+"foyer moyen plein";;;"plenitude au foyer moyen exces yin foyer moyen";;
+"rate surchargee de yin";;;"exces yin foyer moyen plenitude yin foyer moyen rate surchargee";;
+"rate trop pleine";;;"exces yin foyer moyen rate trop forte";;
+"rate pleine";;;"exces yin foyer moyen rate trop forte plenitude yin foyer moyen";;
+"foyer moyen obstrue";;;"exces yin foyer moyen foyer moyen sature";;
+"energie qui se bloque";;;"stagnation de qi qi bloque stagnation energetique";;
+"qi qui stagne";;;"stagnation de qi qi stagnant stagnation qi";;
+"qi bloque";;;"stagnation de qi qi bloque blocage de qi";;
+"energie bloquee";;;"stagnation de qi qi bloque stagnation energetique";;
+"energie ne circule pas";;;"stagnation de qi qi stagnant blocage de la circulation";;
+"energie retenue";;;"stagnation de qi qi bloque stagnation energetique";;
+"blocage energetique";;;"stagnation energetique stagnation de qi qi bloque";;
+"energie entravee";;;"stagnation de qi qi bloque stagnation energetique";;
+"tchi bloque";;;"stagnation du tchi qi bloque stagnation de qi";;
+"tchi qui stagne";;;"stagnation du tchi stagnation de qi qi stagnant";;
+"tchi ne circule pas";;;"stagnation du tchi stagnation de qi blocage de la circulation";;
+"blocage du tchi";;;"stagnation du tchi stagnation de qi qi bloque";;
+"qi entrave";;;"stagnation de qi qi bloque blocage de la circulation";;
+"qi ralenti";;;"stagnation de qi qi stagnant blocage circulation meridienne";;
+"qi en stagnation";;;"stagnation de qi qi stagnant stagnation energetique";;
+"blocage du qi";;;"blocage de qi stagnation de qi qi bloque";;
+"sang bloque";;;"stagnation de sang sang bloque";;
+"sang qui stagne";;;"stagnation de sang sang bloque";;
+"sang coagule";;;"stagnation de sang sang bloque";;
+"stase du sang";;;"stagnation de sang stase sanguine";;
+"mauvaise circulation du sang";;;"stagnation de sang sang bloque";;
+"sang ne circule plus bien";;;"stagnation de sang sang bloque";;
+"sang stagnant dans";;;"stagnation de sang sang bloque";;
+"sang fige";;;"stagnation de sang sang bloque";;
+"sang ralenti";;;"stagnation de sang sang bloque";;
+"microcirculation perturbee";;;"stagnation de sang sang bloque";;
+"stase sanguine";;;"stagnation de sang stase sanguine";;
+"sang qui ne circule plus";;;"stagnation de sang sang bloque";;
+"rein ne soutient plus le foie";;;"rein ne nourrit plus foie cycle cheng eau bois eau ne nourrit plus bois";;
+"rein n alimente plus le foie";;;"rein ne nourrit plus foie cycle cheng eau bois";;
+"eau ne monte plus vers le bois";;;"eau ne nourrit plus bois cycle cheng eau bois";;
+"rein ne peut plus nourrir le foie";;;"rein ne nourrit plus foie eau ne nourrit plus bois";;
+"foie mal nourri par le rein";;;"foie mal nourri par le rein cycle cheng eau bois";;
+"bois mal nourri par l eau";;;"bois mal nourri par l eau cycle cheng eau bois";;
+"rein n arrive pas a nourrir le foie";;;"rein ne nourrit plus foie cycle cheng eau bois";;
+"rein ne peut plus soutenir le foie";;;"rein ne nourrit plus foie eau ne soutient plus le bois";;
+"rate ne soutient plus le poumon";;;"rate ne nourrit plus le poumon cycle cheng terre metal";;
+"rate n alimente plus le poumon";;;"rate ne nourrit plus le poumon cycle cheng terre metal";;
+"poumon ne soutient plus le rein";;;"poumon ne nourrit plus le rein cycle cheng metal eau";;
+"coeur ne soutient plus la rate";;;"coeur ne nourrit plus la rate cycle cheng feu terre";;
+"feu ne nourrit plus la terre";;;"feu ne nourrit plus terre cycle cheng feu terre";;
+"foie agresse la rate";;;"foie agresse la rate bois envahit terre ko pathologique";;
+"foie envahit la rate";;;"foie envahit rate bois envahit terre ko pathologique";;
+"stress affecte la digestion";;;"bois envahit terre foie envahit rate stress crise foie rate";;
+"colere affecte la digestion";;;"bois envahit terre foie envahit rate stress crise foie rate";;
+"emotions perturbent la rate";;;"bois envahit terre foie envahit rate conflit bois terre";;
+"foie perturbe la rate";;;"foie envahit rate bois envahit terre conflit bois terre";;
+"foie attaque la rate";;;"foie agresse la rate bois envahit terre ko pathologique";;
+"tension emotionnelle perturbe la digestion";;;"bois envahit terre stress crise foie rate";;
+"rate fragilisee par le foie";;;"rate fragilisee secondairement bois envahit terre";;
+"foie bois en exces affecte la terre";;;"bois envahit terre ko pathologique bois domine terre";;
+"stress perturbe la digestion";;;"bois envahit terre stress crise foie rate conflit bois terre";;
+"colere affecte l estomac";;;"bois envahit terre foie envahit rate ko pathologique";;
+"diarrhee 5h matin";;;"diarrhees matinales diarrhee au petit matin";;
+"diarrhee tot le matin";;;"diarrhees matinales diarrhee au petit matin";;
+"va a la selle le matin";;;"diarrhees matinales diarrhee au petit matin";;
+"selles molles le matin";;;"diarrhees matinales yang ming perturbe";;
+"diarrhee a l aube";;;"diarrhees matinales diarrhee au petit matin";;
+"diarrhee entre 5h et 7h";;;"diarrhees matinales yang ming sans stimulus";;
+"transit le matin de bonne heure";;;"diarrhees matinales diarrhee au petit matin";;
+"fong";;;"fong interne du foie fong interne";;
+"fongs";;;"fong interne du foie fong interne";;
+"fong interne";;;"fong interne du foie fong interne";;
+"vertiges par manque de yin";;;"fong interne du foie vertiges fong interne vide yin rein vent interne du foie";;
+"tremblements";;;"fong interne fong interne du foie agitation interne vent interne";;
+"tremblements des membres";;;"fong interne fong interne du foie vent interne du foie";;
+"mouvements involontaires";;;"fong interne agitation interne vent interne";;
+"spasmes musculaires";;;"fong interne tendons non nourris foie vb tendons vent interne";;
+"convulsions";;;"fong interne agitation interne vent interne";;
+"pouls corde";;;"pouls corde arc fong interne du foie yang du foie montant vent interne du foie";;
+"pouls en corde";;;"pouls corde arc fong interne du foie yang du foie montant vent interne du foie";;
+"pouls tendu";;;"pouls corde arc yang du foie montant";;
+"pouls en corde d arc";;;"pouls corde arc yang du foie montant fong interne du foie vent interne du foie";;
+"corps lourd";;;"humidite interne charge humide";;
+"sensation de lourdeur";;;"humidite interne charge humide";;
+"lourdeur du corps";;;"humidite interne charge humide";;
+"lourdeur generale";;;"humidite interne charge humide";;
+"terrain humide et lourd";;;"humidite interne terrain humide";;
+"enduit epais";;;"humidite interne humidite excessive";;
+"langue enduit epais";;;"humidite interne humidite excessive";;
+"mucus s accumule";;;"accumulation de tan phlegme accumule";;
+"glaires qui s accumulent";;;"accumulation de tan phlegme accumule glaires pathogenes";;
+"phlegme qui s accumule";;;"accumulation de tan phlegme accumule";;
+"tan qui obstrue";;;"tan obstrue obstruction par le tan";;
+"mucosites";;;"accumulation de tan retention de tan";;
+"mucus pathologique";;;"accumulation de tan phlegme accumule";;
+"glaires dans les poumons";;;"accumulation de tan tan dans les meridiens phlegme coeur";;
+"terrain humide";;;"humidite interne retention d humidite terrain humide";;
+"inflammation locale sur vide";;;"paradoxe yang local vide yang general chaleur locale vide general inflammation locale";;
+"chaleur locale sur fond de vide";;;"paradoxe yang local vide yang general chaleur locale";;
+"inflammation en surface sur terrain de vide";;;"paradoxe yang local vide general inflammation locale";;
+"chaleur locale sur vide yang";;;"paradoxe yang local vide yang general chaleur locale";;
+"rougeur locale sur terrain de vide yang";;;"paradoxe yang local vide yang general chaleur locale";;
+"energie generale insuffisante";;;"insuffisance energetique vide qi energie insuffisante";;
+"vide energetique general";;;"insuffisance energetique vide qi energie insuffisante";;
+"epuisement global";;;"vide qi qi epuise energie insuffisante";;
+"terrain vide";;;"vide qi insuffisance energetique";;
+"terrain energetique appauvri";;;"vide qi vide yang insuffisance energetique";;
+"manque d energie general";;;"vide qi manque de qi energie insuffisante";;
+"epuisement energetique";;;"vide qi qi epuise insuffisance energetique";;
+"energie appauvrie";;;"vide qi insuffisance energetique energie insuffisante";;
+"grande fatigue energetique";;;"vide qi insuffisance energetique energie insuffisante";;
+"yang general qui s effondre";;;"vide yang yang general insuffisant";;
+"yang tres bas";;;"vide yang yang general insuffisant";;
+"substance yin insuffisante";;;"vide de yin yin insuffisant yin deficient";;
+"yin qui s epuise";;;"vide de yin yin vide yin insuffisant";;
+"yin appauvri";;;"vide de yin yin vide yin insuffisant";;
+"yin diminue";;;"vide de yin yin vide yin insuffisant";;
+"manque de yin";;;"vide de yin manque de yin yin insuffisant";;
+"yin se tarit";;;"vide de yin yin vide yin insuffisant";;
+"carence en yin";;;"vide de yin carence yin yin insuffisant";;
+"yin epuise";;;"vide de yin yin vide yin epuise";;
+"esprit perturbe";;;"shen perturbe coeur perturbe shen agite";;
+"esprit agite";;;"shen perturbe shen agite perturbation du shen";;
+"psychisme perturbe";;;"shen perturbe coeur perturbe";;
+"mental instable";;;"shen perturbe shen agite";;
+"esprit instable";;;"shen perturbe shen trouble";;
+"sommeil agite par le shen";;;"shen perturbe insomnie palpitations";;
+"coeur qui n ancre plus le shen";;;"shen perturbe coeur ne peut plus ancrer le shen";;
+"shen non ancre";;;"shen perturbe shen agite coeur ne peut plus ancrer le shen";;
+"pensees qui s emballent";;;"shen perturbe shen agite yi perturbe";;
+"ruminations";;;"yi perturbe yi insuffisant rumination pathologique";;
+"pensees circulaires";;;"yi perturbe pensees circulaires";;
+"idees fixes";;;"yi perturbe idees fixes";;
+"obsessions";;;"yi perturbe idees fixes rumination pathologique";;
+"peur profonde";;;"zhi perturbe peur chronique envahissante peur pathologique rein";;
+"peur du vide";;;"zhi perturbe peur chronique envahissante";;
+"manque de volonte";;;"zhi perturbe volonte affaiblie manque de volonte profond";;
+"deuil non fait";;;"po perturbe deuil non resolu melancolie profonde";;
+"tristesse profonde";;;"po perturbe melancolie profonde tristesse metal";;
+"tendons fragiles";;;"tendons foie vb tendons fragiles foie ne gouverne plus les tendons";;
+"ligaments fragiles";;;"tendons foie vb ligaments non nourris foie vb tendons";;
+"tendons non nourris";;;"tendons foie vb tendons non nourris vide yin foie vide sang foie";;
+"tendons qui lachent";;;"tendons foie vb tendons fragiles";;
+"genou qui craque";;;"tendons foie vb tendons fragiles gonalgie";;
+"tendinopathie sur vide de foie";;;"tendons foie vb vide sang foie foie ne gouverne plus les tendons";;
+"tai xi";;;"3r";;
+"tai chong";;;"3f";;
+"zu san li";;;"36e";;
+"san yin jiao";;;"6rte";;
+"shen men";;;"7c";;
+"he gu";;;"4gi";;
+"lie que";;;"7p";;
+"nei guan";;;"6mc";;
+"tian shu";;;"25e";;
+"zhong wan";;;"12jm";;
+"guan yuan";;;"4jm";;
+"ming men";;;"4tm";;
+"bai hui";;;"20tm";;
+"fengchi";;;"20vb";;
+"feng chi";;;"20vb";;
+"yang ling quan";;;"34vb";;
+"tai bai";;;"3rte";;
+"yin ling quan";;;"9rte";;
+"qu quan";;;"8f";;
+"fu liu";;;"7r";;
+"zhao hai";;;"6r";;
+"da zhong";;;"4r";;
+"shen shu";;;"23v";;
+"fei shu";;;"13v";;
+"gan shu";;;"18v";;
+"pi shu";;;"20v";;
+"xin shu";;;"15v";;
+"da chang shu";;;"25v";;
+"guan yuan shu";;;"26v";;
+"chi ze";;;"5p";;
+"kong zui";;;"6p";;
+"yu ji";;;"10p";;
+"zu lin qi";;;"41vb";;
+"dan zhong";;;"17jm";;
+"qi hai";;;"6jm";;
+"zhong ji";;;"3jm";;
+"shui fen";;;"9jm";;
+"xue hai";;;"10rte";;
+"feng long";;;"40e";;
+"tian tu";;;"22jm";;
+"lian quan";;;"23jm";;
+"bai hui";;;"20tm";;
+"yin tang";;;"yin tang";;
+"yong quan";;;"1r";;
+"da ling";;;"7mc";;
+"jian shi";;;"5mc";;
+"tae xi";;;"3r";;
+"tai tchong";;;"3f";;
+"tsou san li";;;"36e";;
+"san yin tsiao";;;"6rte";;
+"chen men";;;"7c";;
+"ho kou";;;"4gi";;
+"lie tsiue";;;"7p";;
+"nei kouan";;;"6mc";;
+"tae pai";;;"3rte";;
+"yin ling tsuan";;;"9rte";;
+"tsiu tsuan";;;"8f";;
+"fou lieou";;;"7r";;
+"tcheou hai";;;"6r";;
+"chen chou";;;"23v";;
+"fong tche";;;"20vb";;
+"yang ling tsuan";;;"34vb";;
+"energie nutritive";;;"iong iong insuffisante";;
+"ying qi";;;"iong iong insuffisante";;
+"energie defensive";;;"oe wei qi oe en plenitude";;
+"wei qi";;;"oe";;
+"energie ancestrale";;;"tsing jing vide de jing tsing epuise";;
+"energie vitale";;;"tchi qi vide de qi";;
+"jing qi";;;"tsing vide de jing jing epuise";;
+"yuan qi";;;"yuan tchi energie ancestrale";;
+"zong qi";;;"tsong tchi";;
+"zhen qi";;;"tcheung tchi tchi";;
+"xue";;;"sang vide de sang";;
+"jin ye";;;"jin ye insuffisants liquides insuffisants";;
+"merveilleux vaisseaux";;;"du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo";;
+"qi jing ba mai";;;"du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo";;
+"blocage de l estomac";;;"stagnation qi estomac estomac bloque";;
+"blocage d estomac";;;"stagnation qi estomac estomac bloque";;
+"estomac bloque";;;"stagnation qi estomac";;
+"estomac qui se bloque";;;"stagnation qi estomac";;
+"estomac obstrue";;;"stagnation qi estomac";;
+"estomac sature";;;"stagnation qi estomac stagnation nourriture";;
+"estomac ne fait pas descendre";;;"rebellion qi estomac stagnation qi estomac";;
+"estomac ne descend plus";;;"rebellion qi estomac";;
+"qi de l estomac ne descend";;;"rebellion qi estomac";;
+"qi de l estomac rebelle";;;"rebellion qi estomac";;
+"estomac rebelle";;;"rebellion qi estomac";;
+"qi d estomac rebelle";;;"rebellion qi estomac";;
+"reflux gastrique";;;"rebellion qi estomac chaleur estomac";;
+"nausees par blocage";;;"rebellion qi estomac stagnation qi estomac";;
+"digestion bloquee dans l estomac";;;"stagnation qi estomac stagnation nourriture";;
+"blocage de la rate";;;"stagnation qi rate rate bloquee";;
+"blocage a la rate";;;"stagnation qi rate rate bloquee";;
+"rate bloquee";;;"stagnation qi rate";;
+"rate qui se bloque";;;"stagnation qi rate";;
+"rate obstrue";;;"stagnation qi rate";;
+"sang du foie stagnant";;;"stagnation sang foie foie sang stagnant";;
+"sang stagnant au foie";;;"stagnation sang foie";;
+"stase de sang au foie";;;"stagnation sang foie stase sanguine foie";;
+"sang bloque au foie";;;"stagnation sang foie";;
+"sang du foie qui se bloque";;;"stagnation sang foie";;
+"caillots menstruels";;;"stagnation sang foie stagnation de sang";;
+"regles avec caillots";;;"stagnation sang foie stagnation de sang";;
+"regles sombres";;;"stagnation sang foie vide sang foie";;
+"yang apparent de vb";;;"yang apparent vb feu vide yang foie montant";;
+"yang apparent vb";;;"yang apparent vb feu vide yang foie montant";;
+"faux yang de vb";;;"yang apparent vb feu vide";;
+"faux yang vb";;;"yang apparent vb feu vide";;
+"yang flottant de vb";;;"yang apparent vb yang flottant feu vide";;
+"yang non ancre vb";;;"yang apparent vb yang non ancre feu vide";;
+"yang de vb qui monte";;;"yang apparent vb yang foie montant";;
+"yang vb montant";;;"yang apparent vb yang foie montant";;
+"yang apparent du foie";;;"yang apparent foie feu vide yang foie montant";;
+"yang apparent foie";;;"yang apparent foie feu vide";;
+"faux yang du foie";;;"yang apparent foie feu vide";;
+"yang flottant du foie";;;"yang apparent foie yang flottant feu vide";;
+"foie en vide de qi";;;"vide qi foie foie affaibli";;
+"foie energetiquement vide";;;"vide qi foie";;
+"foie manque de qi";;;"vide qi foie";;
+"qi ne descend pas";;;"rebellion qi estomac descente perturbee";;
+"descente perturbee";;;"rebellion qi estomac";;
+"qi monte en rebellion";;;"rebellion qi estomac yang foie montant";;
+"qi rebelle";;;"rebellion qi estomac";;
+"hoquet chronique";;;"rebellion qi estomac";;
+"vomissements chroniques";;;"rebellion qi estomac stagnation qi estomac";;
+"stagnation du foie";;;"stagnation qi foie foie bloque";;
+"stagnation au foie";;;"stagnation qi foie foie bloque";;
+"stagnation de l energie du foie";;;"stagnation qi foie foie bloque";;
+"stagnation du qi du foie";;;"stagnation qi foie";;
+"stagnation de qi foie";;;"stagnation qi foie";;
+"foie en stagnation";;;"stagnation qi foie foie bloque";;
+"le foie stagne";;;"stagnation qi foie foie bloque";;
+"foie qui stagne";;;"stagnation qi foie foie bloque";;
+"stagnation de la vesicule";;;"stagnation qi foie bois qui se bloque";;
+"stagnation de la vb";;;"stagnation qi foie bois qui se bloque";;
+"stagnation du bois vb";;;"stagnation qi foie bois qui se bloque";;
+"blocage de la vb";;;"stagnation qi foie bois qui se bloque";;
+"blocage de la vesicule";;;"stagnation qi foie bois qui se bloque";;
+"vesicule bloquee";;;"stagnation qi foie bois qui se bloque";;
+"vb stagnante";;;"stagnation qi foie bois qui se bloque";;
+"stagnation de l estomac";;;"stagnation qi estomac estomac bloque";;
+"stagnation a l estomac";;;"stagnation qi estomac estomac bloque";;
+"stagnation du qi de l estomac";;;"stagnation qi estomac";;
+"estomac en stagnation";;;"stagnation qi estomac";;
+"l estomac stagne";;;"stagnation qi estomac";;
+"stagnation de qi d estomac";;;"stagnation qi estomac";;
+"stagnation de la rate";;;"stagnation qi rate rate bloquee";;
+"stagnation a la rate";;;"stagnation qi rate rate bloquee";;
+"stagnation du qi de la rate";;;"stagnation qi rate";;
+"rate en stagnation";;;"stagnation qi rate";;
+"la rate stagne";;;"stagnation qi rate";;
+"stagnation du poumon";;;"obstruction meridien stagnation qi";;
+"blocage du poumon";;;"obstruction meridien stagnation qi";;
+"poumon bloque";;;"obstruction meridien stagnation qi poumon";;
+"poumon en stagnation";;;"obstruction meridien stagnation qi poumon";;
+"qi du poumon bloque";;;"obstruction meridien vide qi poumon";;
+"qi du poumon stagnant";;;"obstruction meridien stagnation qi";;
+"stagnation du coeur";;;"stagnation de sang stagnation qi";;
+"blocage du coeur";;;"stagnation de sang obstruction meridien";;
+"coeur bloque";;;"stagnation de sang stagnation qi";;
+"qi du coeur bloque";;;"stagnation qi vide qi coeur";;
+"stagnation du rein";;;"obstruction meridien stagnation qi";;
+"blocage du rein";;;"obstruction meridien stagnation qi";;
+"rein bloque";;;"obstruction meridien stagnation qi";;
+"energie bloquee";;;"stagnation qi foie bloque";;
+"circulation bloquee";;;"stagnation qi obstruction meridien";;
+"qi bloque";;;"stagnation qi";;
+"le qi ne circule plus";;;"stagnation qi obstruction meridien";;
+"le qi ne circule pas";;;"stagnation qi obstruction meridien";;
+"qi en stagnation";;;"stagnation qi";;
+"qi stagnant";;;"stagnation qi";;
+"tsang foie";;;"foie zang foie";;
+"tsang rate";;;"rate zang rate";;
+"tsang coeur";;;"coeur zang coeur";;
+"tsang poumon";;;"poumon zang poumon";;
+"tsang rein";;;"rein zang rein";;
+"les tsang";;;"organes yin tsang zang";;
+"les cinq tsang";;;"organes yin tsang zang foie rate coeur poumon rein";;
+"fu estomac";;;"estomac fu";;
+"fu vesicule biliaire";;;"vesicule biliaire fu";;
+"fu intestin grele";;;"intestin grele fu";;
+"fu gros intestin";;;"gros intestin fu";;
+"fu vessie";;;"vessie fu";;
+"les fu";;;"visceres yang fu";;
+"les six fu";;;"visceres yang fu estomac vesicule biliaire intestin grele gros intestin vessie triple rechauffeur";;
+"le tchi";;;"qi tchi energie vitale";;
+"tchi insuffisant";;;"vide de qi qi insuffisant tchi vide";;
+"tchi en vide";;;"vide de qi qi vide tchi vide";;
+"tchi epuise";;;"vide de qi qi epuise tchi vide";;
+"tchi qui stagne";;;"stagnation de qi qi stagnant tchi bloque";;
+"tchi bloque";;;"stagnation de qi qi bloque tchi bloque";;
+"le tchi ne circule plus";;;"stagnation de qi obstruction meridien tchi bloque";;
+"tchi en exces";;;"plenitude de qi tchi en exces";;
+"manque de tchi";;;"vide de qi manque de qi tchi vide";;
+"iong";;;"iong energie nutritive ying qi";;
+"l iong";;;"iong energie nutritive";;
+"iong vide";;;"iong insuffisante vide d iong";;
+"iong insuffisante";;;"iong insuffisante vide d iong";;
+"iong faiblit";;;"iong insuffisante vide d iong";;
+"iong epuisee";;;"iong insuffisante vide d iong";;
+"l iong ne nourrit plus";;;"iong insuffisante vide d iong";;
+"deficit d iong";;;"iong insuffisante vide d iong";;
+"oe";;;"oe energie defensive wei qi";;
+"l oe";;;"oe energie defensive";;
+"oe en exces";;;"oe en plenitude plenitude d oe";;
+"oe locale excessive";;;"oe en plenitude plenitude d oe";;
+"oe qui monte";;;"oe en plenitude chaleur de surface";;
+"oe qui ne circule plus";;;"oe bloquee stagnation de qi";;
+"oe locale en exces";;;"oe en plenitude chaleur locale";;
+"oe ne protege plus";;;"vide d oe energie defensive insuffisante";;
+"oe insuffisante";;;"vide d oe energie defensive insuffisante";;
+"defense insuffisante";;;"vide d oe oe insuffisante";;
+"tsing";;;"tsing jing essence energie ancestrale";;
+"le tsing";;;"tsing jing essence";;
+"tsing vide";;;"vide de jing tsing epuise jing vide";;
+"tsing insuffisant";;;"vide de jing tsing epuise jing insuffisant";;
+"tsing epuise";;;"vide de jing tsing epuise jing epuise";;
+"tsing du rein";;;"jing du rein essence renale tsing rein";;
+"tsing du rein vide";;;"vide de jing du rein jing du rein vide tsing epuise";;
+"l energie ancestrale s epuise";;;"vide de jing tsing epuise energie ancestrale epuisee";;
+"l energie ancestrale faiblit";;;"vide de jing tsing epuise energie ancestrale epuisee";;
+"meridien principal";;;"obstruction meridien meridien atteint";;
+"meridien principal atteint";;;"obstruction meridien meridien atteint";;
+"meridien principal bloque";;;"obstruction meridien meridien bloque";;
+"meridien principal obstrue";;;"obstruction meridien meridien obstrue";;
+"atteinte du meridien principal";;;"obstruction meridien atteinte meridien";;
+"colere";;;"stagnation qi foie foie bloque";;
+"colere refoulee";;;"stagnation qi foie foie bloque";;
+"colere contenue";;;"stagnation qi foie foie bloque";;
+"frustration";;;"stagnation qi foie foie bloque";;
+"frustration refoulee";;;"stagnation qi foie foie bloque";;
+"irritabilite";;;"yang du foie montant stagnation qi foie";;
+"impatience";;;"stagnation qi foie yang du foie montant";;
+"enervement";;;"stagnation qi foie yang du foie montant";;
+"rage";;;"feu du foie yang du foie montant";;
+"agacement";;;"stagnation qi foie";;
+"ressentiment";;;"stagnation qi foie foie bloque";;
+"joie excessive";;;"shen perturbe shen agite coeur perturbe";;
+"excitation excessive";;;"shen perturbe shen agite";;
+"manie";;;"shen perturbe shen agite feu du coeur";;
+"agitation mentale";;;"shen perturbe shen agite";;
+"souci";;;"yi perturbe vide qi rate rate affaiblie";;
+"soucis";;;"yi perturbe vide qi rate rate affaiblie";;
+"inquietude";;;"yi perturbe vide qi rate";;
+"surmenage intellectuel";;;"yi perturbe vide qi rate rate epuisee";;
+"pensee excessive";;;"yi perturbe rumination pathologique";;
+"reflexion excessive";;;"yi perturbe rumination pathologique vide qi rate";;
+"tristesse";;;"po perturbe melancolie profonde tristesse metal poumon";;
+"deuil";;;"po perturbe deuil non resolu tristesse metal";;
+"chagrin";;;"po perturbe melancolie profonde tristesse metal";;
+"melancolie";;;"po perturbe melancolie profonde tristesse metal";;
+"nostalgie envahissante";;;"po perturbe melancolie profonde";;
+"peur";;;"zhi perturbe peur chronique envahissante rein";;
+"peur chronique";;;"zhi perturbe peur chronique envahissante rein";;
+"terreur";;;"zhi perturbe rein peur pathologique rein";;
+"frayeur";;;"shen perturbe zhi perturbe rein";;
+"angoisse profonde";;;"zhi perturbe peur chronique envahissante rein";;
+"manque de volonte";;;"zhi perturbe volonte affaiblie vide yang rein";;
+"le foie ne gouverne plus les tendons";;;"vide sang foie tendons non nourris foie vb tendons";;
+"le foie ne stocke plus le sang";;;"vide sang foie sang du foie vide";;
+"le foie ne draine plus";;;"stagnation qi foie foie bloque";;
+"le libre flux du foie est entrave";;;"stagnation qi foie foie bloque";;
+"la rate ne transforme plus";;;"vide qi rate rate insuffisante";;
+"la rate ne transporte plus";;;"vide qi rate rate insuffisante";;
+"la rate ne monte plus";;;"vide qi rate qi de la rate ne monte plus prolapsus";;
+"le qi de la rate ne monte plus";;;"vide qi rate qi de la rate ne monte plus prolapsus";;
+"la rate ne retient plus le sang";;;"vide qi rate rate ne retient plus le sang";;
+"la rate ne produit plus le sang";;;"vide qi rate vide sang rate";;
+"la terre ne transforme plus";;;"vide qi rate rate insuffisante terre affaiblie";;
+"le poumon ne diffuse plus";;;"vide qi poumon qi du poumon insuffisant";;
+"le poumon ne fait plus descendre";;;"vide qi poumon rebellion qi";;
+"le poumon ne gouverne plus le qi";;;"vide qi poumon qi du poumon insuffisant";;
+"diffusion du poumon insuffisante";;;"vide qi poumon qi du poumon insuffisant";;
+"le metal ne descend plus";;;"vide qi poumon rebellion qi";;
+"le rein ne gouverne plus l eau";;;"vide yang rein yang du rein insuffisant";;
+"le rein ne stocke plus le jing";;;"vide jing rein jing du rein vide";;
+"le rein ne retient plus";;;"vide qi rein rein qui ne retient plus";;
+"le rein ne rechauffe plus la rate";;;"rate non rechauffee vide yang rein yang du rein insuffisant";;
+"le feu du ming men ne rechauffe plus";;;"ming men insuffisant vide yang rein feu du ming men";;
+"le coeur ne gouverne plus le sang";;;"vide qi coeur vide sang coeur";;
+"le coeur n abrite plus le shen";;;"shen perturbe coeur ne peut plus ancrer le shen";;
+"le coeur ne propulse plus";;;"vide qi coeur stagnation de sang";;
+"fong externe";;;"vent externe fong externe invasion de fong";;
+"invasion de fong";;;"vent externe fong externe agression de fong";;
+"agression de fong";;;"vent externe fong externe invasion de fong";;
+"fong froid";;;"vent externe fong externe vent froid fong froid";;
+"fong chaleur";;;"vent externe fong externe vent chaleur fong chaleur";;
+"attrape un fong";;;"vent externe fong externe invasion de fong";;
+"pris un fong";;;"vent externe fong externe invasion de fong";;
+"fong attaque le poumon";;;"vent externe fong externe poumon attaque par le vent invasion externe poumon";;
+"fong envahit la surface";;;"vent externe fong externe invasion de fong vent froid en surface";;
+"tou mo";;;"du mai vaisseau gouverneur tou mo";;
+"tou mo insuffisant";;;"du mai insuffisant tou mo vide yang ne monte plus";;
+"tou mo fragilise";;;"du mai fragilise tou mo vide";;
+"jenn mo";;;"ren mai vaisseau conception jenn mo";;
+"jenn mo fragilise";;;"ren mai fragilise jenn mo vide yin insuffisant pour ancrer";;
+"jenn mo insuffisant";;;"ren mai insuffisant jenn mo vide";;
+"tchrong mo";;;"chong mai vaisseau penetrant tchrong mo";;
+"le tchrong mo ne distribue plus";;;"chong mai insuffisant tchrong mo vide";;
+"tae mo";;;"dai mai vaisseau ceinture tae mo";;
+"yang tsiao mo";;;"yang qiao mo yang tsiao mo";;
+"yin tsiao mo";;;"yin qiao mo yin tsiao mo";;
+"yang oe mo";;;"yang wei mo yang oe mo";;
+"yin oe mo";;;"yin wei mo yin oe mo";;
+"atteinte du tae yang";;;"tae yang tai yang niveau tae yang";;
+"syndrome tae yang";;;"tae yang tai yang niveau tae yang";;
+"atteinte du chao yang";;;"chao yang shao yang niveau chao yang";;
+"syndrome chao yang";;;"chao yang shao yang niveau chao yang";;
+"demi surface demi profondeur";;;"chao yang shao yang niveau chao yang";;
+"charniere";;;"chao yang shao yang niveau chao yang";;
+"atteinte du yang ming";;;"yang ming niveau yang ming";;
+"syndrome yang ming";;;"yang ming niveau yang ming";;
+"atteinte du tae yin";;;"tae yin tai yin niveau tae yin";;
+"syndrome tae yin";;;"tae yin tai yin niveau tae yin";;
+"atteinte du chao yin";;;"chao yin shao yin niveau chao yin";;
+"syndrome chao yin";;;"chao yin shao yin niveau chao yin";;
+"atteinte du tsieu yin";;;"tsieu yin tsiue yin jue yin niveau tsieu yin";;
+"atteinte du tsiue yin";;;"tsieu yin tsiue yin jue yin niveau tsiue yin";;
+"syndrome tsieu yin";;;"tsieu yin tsiue yin jue yin niveau tsieu yin";;
+"syndrome tsiue yin";;;"tsieu yin tsiue yin jue yin niveau tsiue yin";;
+"coeur et rein ne communiquent plus";;;"dysharmonie coeur rein axe eau feu brise vide yin rein shen perturbe";;
+"le feu et l eau ne communiquent plus";;;"dysharmonie coeur rein axe eau feu brise";;
+"axe coeur rein brise";;;"dysharmonie coeur rein axe eau feu brise";;
+"axe eau feu brise";;;"dysharmonie coeur rein axe eau feu brise";;
+"l eau ne monte plus vers le feu";;;"dysharmonie coeur rein vide yin rein axe eau feu brise";;
+"le feu ne descend plus vers l eau";;;"dysharmonie coeur rein axe eau feu brise";;
+"yang apparent du rein";;;"yang apparent feu du vide yang flottant rein vide yin rein";;
+"faux yang du rein";;;"yang apparent feu du vide rein vide yin rein";;
+"chaleur sur vide de yin";;;"yang apparent feu du vide chaleur de vide vide yin";;
+"feu sur vide de yin";;;"yang apparent feu du vide vide yin";;
+"yang monte car le yin ne retient plus";;;"yang apparent feu du vide yang non ancre vide yin";;
+"prolapsus";;;"vide qi rate qi de la rate ne monte plus prolapsus";;
+"ptose";;;"vide qi rate qi de la rate ne monte plus prolapsus";;
+"descente d organe";;;"vide qi rate qi de la rate ne monte plus prolapsus";;
+"les chairs ne tiennent plus";;;"vide qi rate qi de la rate ne monte plus";;
+"qi ne monte plus";;;"vide qi rate qi de la rate ne monte plus";;
+"faire circuler le sang";;;"faire circuler le sang disperser stases sanguines";;
+"activer le sang";;;"faire circuler le sang disperser stases sanguines";;
+"mobiliser le sang";;;"faire circuler le sang";;
+"disperser les stases";;;"disperser stases sanguines stagnation de sang";;
+"lever les stases";;;"disperser stases sanguines stagnation de sang";;
+"sang a faire circuler";;;"faire circuler le sang stagnation de sang";;
+"faire circuler le qi";;;"faire circuler le qi stagnation qi";;
+"faire circuler l energie";;;"faire circuler le qi stagnation qi";;
+"relancer la circulation du qi";;;"faire circuler le qi stagnation qi";;
+"debloquer le qi";;;"faire circuler le qi stagnation qi qi bloque";;
+"relancer le qi";;;"faire circuler le qi";;
+"relancer l energie";;;"faire circuler le qi";;
+"faire descendre le qi";;;"faire descendre le qi rebellion qi estomac";;
+"abaisser le qi";;;"faire descendre le qi";;
+"le qi doit redescendre";;;"faire descendre le qi rebellion qi estomac";;
+"ramener le qi vers le bas";;;"faire descendre le qi";;
+"ancrer le yang";;;"ancrer le yang nourrir le yin yang non ancre";;
+"le yang doit etre ancre";;;"ancrer le yang yang non ancre";;
+"ramener le yang vers le bas";;;"ancrer le yang disperser le yang du foie";;
+"yang a ancrer";;;"ancrer le yang yang non ancre yang flottant";;
+"disperser la chaleur";;;"disperser la chaleur clarifier la chaleur";;
+"clarifier la chaleur";;;"disperser la chaleur clarifier la chaleur";;
+"evacuer la chaleur";;;"disperser la chaleur clarifier la chaleur";;
+"rafraichir la chaleur";;;"disperser la chaleur clarifier la chaleur";;
+"eteindre le feu";;;"disperser la chaleur clarifier la chaleur";;
+"purger la chaleur";;;"disperser la chaleur purgation chaleur";;
+"langue rouge sans enduit";;;"vide de yin chaleur de vide yang apparent feu du vide";;
+"langue pale";;;"vide de yang vide de sang vide qi";;
+"langue pale et gonflée";;;"vide de yang vide qi humidite";;
+"langue rouge avec enduit jaune";;;"chaleur humidite chaleur";;
+"enduit blanc";;;"froid interne vide yang";;
+"enduit jaune";;;"chaleur humidite chaleur";;
+"langue violette";;;"stagnation de sang stase sanguine";;
+"langue foncee";;;"stagnation de sang stase sanguine";;
+"teint pale";;;"vide de yang vide de sang vide qi";;
+"teint terne";;;"vide de sang stagnation de sang";;
+"teint jaune";;;"vide qi rate humidite rate";;
+"teint rouge";;;"chaleur yang du foie montant feu";;
+"os fragiles";;;"vide jing rein jing du rein vide";;
+"osteoporose";;;"vide jing rein jing du rein vide vide yin rein";;
+"vieillissement premature";;;"vide jing rein jing du rein vide tsing epuise";;
+"cheveux blancs precoces";;;"vide jing rein jing du rein vide";;
+"dents qui se dechaussent";;;"vide jing rein jing du rein vide";;

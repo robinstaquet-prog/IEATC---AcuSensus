@@ -1641,7 +1641,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
           {
             position: 'foyer_superieur_gauche',
             qualites: ['rapide', 'corde_arc'],
-            interpretation: "Pouls corde-arc au Foie, rapide — Yang du Foie montant, vent interne.",
+            interpretation: "Pouls corde-arc au Foie, rapide — Yang du Foie montant, Fong interne.",
           },
           {
             position: 'global_superficiel',
@@ -1671,7 +1671,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         raisonnement: `**Lecture par les Cinq Éléments — relation Eau/Bois** :
 L'Eau (Rein) est le fondement du Bois (Foie). Dans le cycle d'engendrement (Sheng), l'Eau nourrit le Bois. Si l'Eau est insuffisante, elle ne peut plus contenir le Bois. Le Bois (Yang du Foie) monte alors librement, sans frein.
 
-**Physiopathologie selon le Nei Jing** : "Si l'Eau ne peut contenir le Bois, le Sang ne peut nourrir le Foie. Le Yin est vide et le Yang prospère — le vent du Foie monte en usurpateur." C'est l'hypertension d'apparence Yang avec une cause profonde Yin.
+**Physiopathologie selon le Nei Jing** : "Si l'Eau ne peut contenir le Bois, le Sang ne peut nourrir le Foie. Le Yin est vide et le Yang prospère — le Fong du Foie monte en usurpateur." C'est l'hypertension d'apparence Yang avec une cause profonde Yin.
 
 **Mécanisme vasculaire** : La faiblesse du Rein (Yin insuffisant) signifie moins de liquides circulants dans l'organisme. Ce déséquilibre induit une vasoconstriction réflexe — d'où l'hypertension. C'est une forme de "séchage" de l'arbre vasculaire.
 
@@ -1681,7 +1681,7 @@ L'Eau (Rein) est le fondement du Bois (Foie). Dans le cycle d'engendrement (Shen
         categoriesDiagnostiques: [
           "Vide de Yin du Rein — Eau insuffisante",
           "Prospérité du Yang du Foie — Bois non contenu",
-          "Vent interne du Foie — Yang monte en usurpateur",
+          "Fong interne du Foie — Yang monte en usurpateur",
           "Insuffisance Eau-Bois dans le cycle Sheng",
           "Sang non nourri → Foie non nourri → Yang monte",
         ],
@@ -1775,23 +1775,23 @@ Cascade Eau→Bois→Feu défaillante.`,
         grillesSecondaires: ['zang_fu'],
         polarite: 'yang',
         localisationFoyer: 'superieur',
-        raisonnement: "Lecture climatique : le Vent interne (pouls corde-arc) est le facteur pathogène principal. Le Vent interne du Foie monte vers la tête, produisant vertiges, maux de tête et instabilité. En grille Grands Méridiens/Climats, le Vent interne est toujours secondaire à un vide de Yin ou de Sang du Foie. Ici : vide de Yin du Rein → Eau ne nourrit plus le Foie → Foie dessèche → Vent interne. Traiter le Vent en pacifiant le Foie et en nourrissant le Yin.",
+        raisonnement: "Lecture climatique : le Fong interne (pouls corde-arc) est le facteur pathogène principal. Le Fong interne du Foie monte vers la tête, produisant vertiges, maux de tête et instabilité. En grille Grands Méridiens/Climats, le Fong interne est toujours secondaire à un vide de Yin ou de Sang du Foie. Ici : vide de Yin du Rein → Eau ne nourrit plus le Foie → Foie dessèche → Fong interne. Traiter le Fong en le dispersant et en nourrissant le Yin du Foie.",
         categoriesDiagnostiques: [
-          "Vent interne du Foie (pouls corde-arc, vertiges, maux de tête)",
-          "Vide de Yin du Rein — source du Vent interne",
+          "Fong interne du Foie (pouls corde-arc, vertiges, maux de tête)",
+          "Vide de Yin du Rein — source du Fong interne",
           "Feu du Foie montant en usurpateur",
         ],
-        strategieTherapeutique: `1. Pacifier le Vent interne du Foie.
+        strategieTherapeutique: `1. Disperser le Fong interne du Foie.
 2. Nourrir le Yin du Rein.
 3. Abaisser le Yang montant.`,
         pointsUtilises: [
-          { code: '20VB', technique: 'dispersion', justification: "Pacifie le Vent du Foie — point clé du Vent interne", ordre: 1 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Pacifie le Foie et le Vent interne", ordre: 2 },
+          { code: '20VB', technique: 'dispersion', justification: "Disperse le Fong du Foie — point clé du Fong interne", ordre: 1 },
+          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Disperse le Foie et le Fong interne", ordre: 2 },
           { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — traite la cause", ordre: 3 },
           { code: '6Rte', technique: 'tonification', justification: "Nourrit le Yin en général — soutien du Sang", ordre: 4 },
           { code: '20TM', technique: 'dispersion', justification: "Abaisser le Yang en excès au sommet — utiliser avec précaution", ordre: 5 },
         ],
-        bilanEnergetique: `Vent interne du Foie (pouls corde-arc).
+        bilanEnergetique: `Fong interne du Foie (pouls corde-arc).
 Vide de Yin du Rein → Foie desséché.
 Yang montant en usurpateur.`,
         niveauConfiance: 'standard',
@@ -1807,7 +1807,7 @@ Yang montant en usurpateur.`,
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 5 — BOURDONNEMENTS ET SURDITÉ — Vide de Yin du Rein
   // Source : PVI EEA tome 3 — Pathologies de l'Oreille
-  // Grille principale : Zang/Fu + Méridiens (Shao Yang)
+  // Grille principale : Zang/Fu + Méridiens (Chao Yang)
   // CAS PARTIEL — motif + interrogatoire + pouls uniquement
   // ───────────────────────────────────────────────────────────────────────────
   {
@@ -1822,7 +1822,7 @@ Yang montant en usurpateur.`,
     casComplet: false,  // Cas partiel : pas de traitement fourni par le rédacteur
     exemplaire: false,
     grillePrincipale: 'zang_fu',
-    tags: ['surdité', 'bourdonnements', 'oreille', 'Rein', 'Vésicule Biliaire', 'Shao Yang', 'Yin'],
+    tags: ['surdité', 'bourdonnements', 'oreille', 'Rein', 'Vésicule Biliaire', 'Chao Yang', 'Yin'],
     viewCount: 143,
     content: {
       motif: "Bourdonnements d'oreille chroniques et intermittents depuis 2 ans. Légère diminution de l'acuité auditive.",
@@ -1840,7 +1840,7 @@ Yang montant en usurpateur.`,
           {
             position: 'foyer_inferieur_gauche',
             qualites: ['vide', 'profond', 'etroit'],
-            interpretation: "Vide profond et étroit au Rein gauche — vide de Yin du Rein, Feu du vide.",
+            interpretation: "Vide profond et étroit au Rein gauche — vide de Yin du Rein, Yang apparent (Feu apparent).",
           },
           {
             position: 'foyer_superieur_gauche',
@@ -1868,7 +1868,7 @@ Yang montant en usurpateur.`,
         grillesSecondaires: ['meridiens', 'yin_yang'],
         polarite: 'yin',
         localisationFoyer: 'inferieur',
-        raisonnement: `**L'oreille et le Rein** : En IEATC, l'oreille est l'orifice extérieur des Reins (Su Wen). Les méridiens du Triple Réchauffeur et de la Vésicule Biliaire (Shao Yang) se rassemblent au milieu de l'oreille. La relation oreille-Rein est directe.
+        raisonnement: `**L'oreille et le Rein** : En IEATC, l'oreille est l'orifice extérieur des Reins (Su Wen). Les méridiens du Triple Réchauffeur et de la Vésicule Biliaire (Chao Yang) se rassemblent au milieu de l'oreille. La relation oreille-Rein est directe.
 
 **Différentiation vide/plénitude** : Le caractère du son est déterminant.
 - Vide : bruits de cigale, flûte, continus mais tenus, s'aggravent à la fatigue, bourdonnements intermittents.
@@ -1876,22 +1876,22 @@ Yang montant en usurpateur.`,
 
 **Ici** : Le son est tenu, les bourdonnements s'aggravent à la fatigue et non lors de crises de colère. C'est un tableau de Vide.
 
-**Mécanisme du Feu du vide** : La chaleur qui provient d'un manque de Yin du Rein monte faire des inflammations. C'est le "Feu du vide" — inflammations provenant de la déficience du Yin du Rein. Ce Feu ascending irrite le Shao Yang (méridiens TR et VB) qui passent dans l'oreille.
+**Mécanisme du Yang apparent** : La chaleur qui provient d'un manque de Yin du Rein monte faire des inflammations. C'est le Yang apparent — un Feu apparent issu de la déficience du Yin du Rein. Ce Yang apparent ascendant irrite le Chao Yang (méridiens TR et VB) qui passent dans l'oreille.
 
 **Distinction avec le plein** : Un tableau de plein aurait : brusques surdités, tête lourde, bouche amère, côtes douloureuses, colères — ce qui est absent ici.`,
         categoriesDiagnostiques: [
           "Vide de Yin du Rein",
-          "Feu du vide ascendant — irrite l'oreille via le Shao Yang",
+          "Yang apparent (Feu apparent) ascendant — irrite l'oreille via le Chao Yang",
           "Oreille interne atteinte (domaine Rein)",
           "Bourdonnements par vide — différencié du plein",
         ],
-        strategieTherapeutique: "Tonifier le Yin du Rein et du Foie. Clarifier le Feu du vide. Utiliser les moxas avec précaution (chaleur du vide).",
+        strategieTherapeutique: "Tonifier le Yin du Rein et du Foie. Traiter le Yang apparent (Feu apparent) — nourrir le Yin pour éteindre la chaleur, jamais disperser. Éviter les moxas (chaleur par vide de Yin).",
         traitementPropose: `**Tonifier Rein et Yin du Foie :**
 23VB tonification — tonifier les Souffles des Reins.
 4VG tonification — renforcer le Yang des Reins (base du Yin).
 R3 tonification — tonifier directement le Yin du Rein.
 6Rte tonification — augmenter le Yin du Foie et des Reins.
-2F tonification — augmenter le Yin du Foie et clarifier le Feu du vide.
+2F tonification — augmenter le Yin du Foie et traiter le Yang apparent (Feu apparent).
 
 Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la dispersion 2F pour vider le Yang (hypertension).`,
         pointsUtilises: [
@@ -1899,7 +1899,7 @@ Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la di
           { code: '4TM', nomIeatc: 'Ming Men', technique: 'tonification', justification: "Renforce le Yang des Reins (base du Yin)", ordre: 2 },
           { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Tonifie directement le Yin du Rein", ordre: 3 },
           { code: '6Rte', technique: 'tonification', justification: "Augmente le Yin du Foie et des Reins", ordre: 4 },
-          { code: '2F', technique: 'tonification', justification: "Augmente le Yin du Foie — clarifie le Feu du vide", ordre: 5 },
+          { code: '2F', technique: 'tonification', justification: "Augmente le Yin du Foie — traite le Yang apparent (Feu apparent)", ordre: 5 },
         ],
         niveauConfiance: 'standard',
         sourceType: 'editoriale',
@@ -2138,10 +2138,10 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
         condition: "Patient allongé, respiration calmée",
         lectures: [
           { position: 'foyer_superieur_gauche', qualites: ['vide', 'rapide'], interpretation: "Cœur vide et rapide — Shen sans ancrage, Yin insuffisant." },
-          { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Yin du Rein vide profond — cause du vide de Yin général et du feu du vide." },
+          { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Yin du Rein vide profond — cause du vide de Yin général et du Yang apparent (Feu apparent)." },
           { position: 'foyer_superieur_droit', qualites: ['vide', 'faible'], interpretation: "Poumon vide — Qi général insuffisant." },
         ],
-        synthese: "Vide de Yin du Rein → Feu du vide irrite le Cœur → Shen perturbé. Tableau post-burn-out classique : épuisement du Yin par surmenage chronique.",
+        synthese: "Vide de Yin du Rein → Yang apparent (Feu apparent) irrite le Cœur → Shen perturbé. Tableau post-burn-out classique : épuisement du Yin par surmenage chronique.",
       },
     },
     analyses: [
@@ -2159,21 +2159,21 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
         grillesSecondaires: ['yin_yang'],
         polarite: 'yin',
         localisationFoyer: 'superieur',
-        raisonnement: `Tableau de Vide de Yin du Rein → Feu du vide → Shen perturbé. C'est la séquence classique du burn-out en IEATC.
+        raisonnement: `Tableau de Vide de Yin du Rein → Yang apparent (Feu apparent) → Shen perturbé. C'est la séquence classique du burn-out en IEATC.
 
-La chaleur vespérale, les sueurs nocturnes, la bouche sèche la nuit, le pouls vide et rapide au Cœur — tout indique le Feu du vide (Xu Huo). Règle R3 absolue : ne jamais disperser cette chaleur, elle n'est pas réelle. Il faut NOURRIR le Yin pour que le Feu du vide s'éteigne de lui-même.
+La chaleur vespérale, les sueurs nocturnes, la bouche sèche la nuit, le pouls vide et rapide au Cœur — tout indique le Yang apparent / Feu apparent (Xu Huo). Règle R3 absolue : ne jamais disperser cette chaleur, elle n'est pas réelle. Il faut NOURRIR le Yin pour que le Yang apparent s'éteigne de lui-même.
 
 Le Cœur héberge le Shen. Sans Yin pour l'ancrer, le Shen erre → anxiété, insomnie, palpitations.`,
         categoriesDiagnostiques: [
           "Vide de Yin du Rein — épuisement post burn-out",
-          "Feu du vide (Xu Huo) — chaleur vespérale, sueurs nocturnes",
+          "Yang apparent / Feu apparent (Xu Huo) — chaleur vespérale, sueurs nocturnes",
           "Shen perturbé par vide de Yin du Cœur — insomnie, anxiété",
           "Vide de Qi du Poumon — fatigue profonde, souffle insuffisant",
         ],
-        strategieTherapeutique: "1. Nourrir le Yin du Rein et du Cœur (R3, R6, MC6). 2. Clarifier le Feu du vide (NON disperser). 3. Pacifier le Shen (C7, R6). 4. Soutenir le Qi (36E, P7).",
-        traitementPropose: `R3 + R6 tonification (nourrit le Yin du Rein — source du Feu du vide). MC6 tonification (pacifie le Shen, nourrit le Yin du Cœur). C7 tonification (Shen Men — porte du Shen). R6 + C7 tonification (paire de MV : Yin Qiao Mo — excellent pour l'insomnie). 36E tonification (Qi général).`,
+        strategieTherapeutique: "1. Nourrir le Yin du Rein et du Cœur (R3, R6, MC6). 2. Traiter le Yang apparent / Feu apparent (Xu Huo) — NOURRIR le Yin, jamais disperser. 3. Pacifier le Shen (C7, R6). 4. Soutenir le Qi (36E, P7).",
+        traitementPropose: `R3 + R6 tonification (nourrit le Yin du Rein — source du Yang apparent). MC6 tonification (pacifie le Shen, nourrit le Yin du Cœur). C7 tonification (Shen Men — porte du Shen). R6 + C7 tonification (paire de MV : Yin Qiao Mo — excellent pour l'insomnie). 36E tonification (Qi général).`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — source profonde du Feu du vide", ordre: 1 },
+          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — source profonde du Yang apparent (Feu apparent)", ordre: 1 },
           { code: '6R', nomIeatc: 'Zhao Hai', technique: 'tonification', justification: "Yin Qiao Mo + Yin Rein — insomnie et anxiété", ordre: 2 },
           { code: '6MC', nomIeatc: 'Nei Guan', technique: 'tonification', justification: "Pacifie le Shen, calme les palpitations, nourrit le Yin Cœur", ordre: 3 },
           { code: '7C', nomIeatc: 'Shen Men', technique: 'tonification', justification: "Porte du Shen — ancrage direct du Shen dans le Cœur", ordre: 4 },
@@ -2182,7 +2182,7 @@ Le Cœur héberge le Shen. Sans Yin pour l'ancrer, le Shen erre → anxiété, i
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
         version: 1,
-        enseignementCle: "Feu du vide post burn-out : NOURRIR le Yin, jamais disperser la chaleur. La paire R6 + C7 est le traitement de fond de l'insomnie par vide de Yin.",
+        enseignementCle: "Yang apparent (Feu apparent) post burn-out : NOURRIR le Yin, jamais disperser la chaleur. La paire R6 + C7 est le traitement de fond de l'insomnie par vide de Yin.",
       },
     ],
   },

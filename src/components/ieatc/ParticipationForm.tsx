@@ -635,6 +635,7 @@ const ACTION_OPTIONS: { value: PointAction; label: string; color: string; onlyFo
   { value: 'dispersion', label: 'Dispersion', color: 'bg-red-100 text-red-800 border-red-300' },
   { value: 'harmonisation', label: 'Harmonisation', color: 'bg-slate-100 text-slate-700 border-slate-300' },
   { value: 'tonification_chauffee', label: 'Tonifié chauffé', color: 'bg-orange-200 text-orange-900 border-orange-300' },
+  { value: 'dispersion_chauffee', label: 'Dispersé chauffé', color: 'bg-cyan-100 text-cyan-800 border-cyan-300' },
   {
     value: 'dispersion_puis_tonification',
     label: 'Dispersion puis tonification',
@@ -644,7 +645,7 @@ const ACTION_OPTIONS: { value: PointAction; label: string; color: string; onlyFo
     value: 'gros_sel',
     label: 'Gros sel',
     color: 'bg-blue-100 text-blue-800 border-blue-300',
-    onlyFor: '8JM',  // visible uniquement pour le point 8JM
+    onlyFor: '8JM',
   },
 ];
 
@@ -654,6 +655,7 @@ const POINT_ACTION_LABELS: Record<PointAction, string> = {
   dispersion: 'dispersé',
   harmonisation: 'harmonisé',
   tonification_chauffee: 'tonifié chauffé',
+  dispersion_chauffee: 'dispersé chauffé',
   dispersion_puis_tonification: 'dispersé puis tonifié',
   gros_sel: 'gros sel',
 };
@@ -1192,9 +1194,13 @@ export function ParticipationForm({
                     ? 'harmonisation'
                     : r.action === 'tonification_chauffee'
                       ? 'tonification_chauffee'
-                      : r.action === 'dispersion_puis_tonification'
-                        ? 'dispersion_puis_tonification'
-                        : 'neutre',
+                      : r.action === 'dispersion_chauffee'
+                        ? 'dispersion_chauffee'
+                        : r.action === 'dispersion_puis_tonification'
+                          ? 'dispersion_puis_tonification'
+                          : r.action === 'gros_sel'
+                            ? 'gros_sel'
+                            : 'harmonisation',
           })),
         commentaireLibre: commentaire || undefined,
         deuxiemeSeance: showDeuxiemeSeance
@@ -1216,9 +1222,13 @@ export function ParticipationForm({
                           ? 'harmonisation'
                           : r.action === 'tonification_chauffee'
                             ? 'tonification_chauffee'
-                            : r.action === 'dispersion_puis_tonification'
-                              ? 'dispersion_puis_tonification'
-                              : 'neutre',
+                            : r.action === 'dispersion_chauffee'
+                              ? 'dispersion_chauffee'
+                              : r.action === 'dispersion_puis_tonification'
+                                ? 'dispersion_puis_tonification'
+                                : r.action === 'gros_sel'
+                                  ? 'gros_sel'
+                                  : 'harmonisation',
                 })),
             }
           : undefined,

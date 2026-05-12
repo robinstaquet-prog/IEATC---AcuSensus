@@ -37,6 +37,8 @@ interface MemberProfile {
   telephone?: string;
   photo_profil?: string;
   is_admin?: boolean;
+  show_mail_membres?: boolean;
+  show_telephone_membres?: boolean;
 }
 
 export default function MembreProfilPage() {
@@ -71,7 +73,7 @@ export default function MembreProfilPage() {
       const [profileRes, casesRes, partsRes] = await Promise.all([
         supabase
           .from('users')
-          .select('id, prenom, nom, statut_ieatc, annee_promotion, lieu_pratique, mail_public, telephone, photo_profil, is_admin')
+          .select('id, prenom, nom, statut_ieatc, annee_promotion, lieu_pratique, mail_public, telephone, photo_profil, is_admin, show_mail_membres, show_telephone_membres')
           .eq('id', memberId)
           .single(),
         supabase
@@ -253,15 +255,15 @@ export default function MembreProfilPage() {
             </div>
           </div>
 
-          {(membre.lieu_pratique || membre.mail_public || membre.telephone) && (
+          {(membre.lieu_pratique || (membre.mail_public && membre.show_mail_membres !== false) || (membre.telephone && membre.show_telephone_membres !== false)) && (
             <div className="mt-4 flex flex-wrap gap-3 text-xs text-slate-400">
               {membre.lieu_pratique && (
                 <span className="inline-flex items-center gap-1"><MapPin size={11} /> {membre.lieu_pratique}</span>
               )}
-              {membre.mail_public && (
+              {membre.mail_public && membre.show_mail_membres !== false && (
                 <span className="inline-flex items-center gap-1"><Mail size={11} /> {membre.mail_public}</span>
               )}
-              {membre.telephone && (
+              {membre.telephone && membre.show_telephone_membres !== false && (
                 <span className="inline-flex items-center gap-1"><Phone size={11} /> {membre.telephone}</span>
               )}
             </div>

@@ -90,13 +90,12 @@ export interface PrisePouls {
 export type TechniquePoint =
   | 'tonification'
   | 'dispersion'
-  | 'neutre'
-  | 'moxa'
-  | 'moxa_tonification'
-  | 'moxa_dispersion'
   | 'harmonisation'
+  | 'moxa_tonification'        // alias de tonification_chauffee (données historiques)
   | 'tonification_chauffee'
-  | 'dispersion_puis_tonification';
+  | 'dispersion_chauffee'
+  | 'dispersion_puis_tonification'
+  | 'gros_sel';                // spécial 8JM uniquement
 
 // Action pédagogique (plus fine que TechniquePoint côté saisie utilisateur)
 export type PointAction =
@@ -104,8 +103,9 @@ export type PointAction =
   | 'dispersion'
   | 'harmonisation'
   | 'tonification_chauffee'
+  | 'dispersion_chauffee'
   | 'dispersion_puis_tonification'
-  | 'gros_sel';           // spécial 8JM uniquement
+  | 'gros_sel';                // spécial 8JM uniquement
 
 export interface PointUsage {
   code: string;                // ex: "3R", "33VB", "4GI", "62V", "30VB"

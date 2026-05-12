@@ -2,7 +2,8 @@ import { computeGlobalStats } from '@/data';
 import { getGrille } from '@/data/grilles';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import { COMPLEXITE_LABELS } from '@/lib/constants';
-import { BarChart3, BookOpen, Star, GitBranch, Crosshair } from 'lucide-react';
+import Link from 'next/link';
+import { BarChart3, BookOpen, Star, GitBranch, Crosshair, ArrowRight, Layers } from 'lucide-react';
 
 // ─── Labels métier ────────────────────────────────────────────────────────────
 
@@ -22,26 +23,24 @@ const FOYER_COLORS: Record<string, string> = {
 
 const TECHNIQUE_LABELS: Record<string, string> = {
   tonification: 'Tonification',
-  moxa_tonification: 'Moxa + Tonification',
   tonification_chauffee: 'Tonification chauffée',
+  moxa_tonification: 'Tonification chauffée (moxa)',
   dispersion: 'Dispersion',
-  moxa_dispersion: 'Moxa + Dispersion',
+  dispersion_chauffee: 'Dispersion chauffée',
   dispersion_puis_tonification: 'Dispersion → Tonification',
-  moxa: 'Moxa seul',
   harmonisation: 'Harmonisation',
-  neutre: 'Neutre',
+  gros_sel: 'Gros sel (8JM)',
 };
 
 const TECHNIQUE_COLORS: Record<string, string> = {
   tonification: 'bg-emerald-500',
-  moxa_tonification: 'bg-orange-500',
   tonification_chauffee: 'bg-lime-500',
+  moxa_tonification: 'bg-orange-400',
   dispersion: 'bg-blue-500',
-  moxa_dispersion: 'bg-amber-500',
-  dispersion_puis_tonification: 'bg-cyan-500',
-  moxa: 'bg-red-500',
+  dispersion_chauffee: 'bg-cyan-500',
+  dispersion_puis_tonification: 'bg-indigo-500',
   harmonisation: 'bg-violet-500',
-  neutre: 'bg-slate-400',
+  gros_sel: 'bg-amber-400',
 };
 
 const COMPLEXITE_BAR_COLORS: Record<number, string> = {
@@ -110,6 +109,16 @@ export default async function StatistiquesPage() {
           Ces données reflètent les analyses du corpus éditorial.
         </p>
       </div>
+
+      {/* Lien explorateur */}
+      <Link
+        href="/statistiques/explorer"
+        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-teal-200 bg-teal-50 text-teal-700 hover:bg-teal-100 transition-colors text-sm font-medium mb-8"
+      >
+        <Layers size={15} />
+        Explorer les corrélations — syndrome ↔ points ↔ techniques
+        <ArrowRight size={14} className="ml-1" />
+      </Link>
 
       {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -362,6 +371,29 @@ export default async function StatistiquesPage() {
             </div>
           </div>
         </div>
+
+        {/* Chaînes causales */}
+        {stats.topChaines && stats.topChaines.length > 0 && (
+          <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:col-span-2">
+            <h2 className="font-bold text-slate-900 mb-1">Chaînes causales</h2>
+            <p className="text-sm text-slate-500 mb-5">
+              Relations Effet → Cause les plus fréquentes dans les bilans énergétiques
+            </p>
+            <div className="space-y-2">
+              {stats.topChaines.map((c, i) => (
+                <div key={i} className="flex items-center gap-3 rounded-lg border border-slate-100 px-4 py-2.5 hover:border-slate-200 transition-colors">
+                  <span className="text-xs text-slate-400 w-5 shrink-0 font-mono">{i + 1}</span>
+                  <span className="text-sm font-medium text-slate-800 flex-1 min-w-0">{c.effet}</span>
+                  <ArrowRight size={13} className="text-slate-300 shrink-0" />
+                  <span className="text-xs text-slate-500 italic shrink-0">{c.marqueur}</span>
+                  <ArrowRight size={13} className="text-slate-300 shrink-0" />
+                  <span className="text-sm font-medium text-violet-700 flex-1 min-w-0 text-right">{c.cause}</span>
+                  <span className="text-xs font-semibold text-slate-400 w-6 text-right shrink-0">{c.count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Roadmap statistiques communautaires */}
         <div className="bg-teal-50 rounded-xl border border-teal-200 p-6 lg:col-span-2">
