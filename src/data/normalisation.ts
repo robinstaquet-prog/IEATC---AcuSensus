@@ -2947,3 +2947,152 @@ export function descriptionConceptIeatc(id: string): string | undefined {
 export function reglesConceptIeatc(id: string): string[] {
   return TOUS_CONCEPTS.find((c) => c.id === id)?.regles ?? [];
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// NORMALISATION DES TECHNIQUES
+//
+// En MTC/IEATC, une technique peut être composite : "tonification chauffée"
+// EST une tonification (avec chaleur). "dispersion puis tonification" compte
+// pour les DEUX familles. Les stats doivent refléter l'action thérapeutique
+// de fond, pas uniquement la modalité de mise en œuvre.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Décompose une technique en ses composantes de base pour les statistiques.
+ *
+ * Exemples :
+ *   'tonification_chauffee'         → ['tonification']
+ *   'moxa_tonification'             → ['tonification', 'moxa']
+ *   'moxa_dispersion'               → ['dispersion', 'moxa']
+ *   'dispersion_puis_tonification'  → ['dispersion', 'tonification']
+ *   'moxa'                          → ['moxa']
+ *   autres                          → [technique] (inchangé)
+ */
+export function normaliserTechnique(technique: string): string[] {
+  switch (technique) {
+    case 'tonification_chauffee':        return ['tonification'];
+    case 'moxa_tonification':            return ['tonification', 'moxa'];
+    case 'moxa_dispersion':              return ['dispersion', 'moxa'];
+    case 'dispersion_puis_tonification': return ['dispersion', 'tonification'];
+    default: return [technique];
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ANALYSE DES CHAÎNES CAUSALES
+//
+// Un bilan clinique contient souvent une structure "Effet [marqueur] Cause" :
+//   "Yang apparent de VB par vide de Yin du Foie"
+//   → effet   : "yang apparent de vb"
+//   → marqueur: "par vide de"
+//   → cause   : "yin du foie"
+//
+// Cette structure est CLINIQUEMENT essentielle : le même symptôme (Yang apparent
+// de VB) avec une cause différente (blocage Foie vs. vide Yin Foie) implique
+// un traitement radicalement différent.
+//
+// Le parser détecte toutes les formulations naturelles :
+//   "par / dû à / à cause de / secondaire à / sur fond de / consécutif à..."
+// ═══════════════════════════════════════════════════════════════════════════════
+
+export interface ChaineCausale {
+  texteOriginal: string;   // texte brut du praticien
+  effet: string;           // partie AVANT le marqueur (normalisée, sans accents)
+  cause: string;           // partie APRÈS le marqueur (normalisée, sans accents)
+  marqueur: string;        // marqueur causal détecté (normalisé)
+}
+
+/**
+ * Marqueurs causaux ordonnés du plus long/spécifique au plus court/général.
+ * Cet ordre est CRITIQUE pour éviter les faux positifs :
+ * "par vide de" doit être testé avant "par".
+ * Tous écrits en forme normalisée (sans accents, minuscules).
+ */
+const MARQUEURS_CAUSALITE: string[] = [
+  // ── Forme "secondaire à" ──────────────────────────────────────────────────
+  'secondaire a un vide de',
+  'secondaire a un blocage de',
+  'secondaire a un',
+  'secondaire a',
+  // ── Forme "sur fond de" ───────────────────────────────────────────────────
+  'sur fond de vide de',
+  'sur fond de',
+  // ── Forme "à cause de" ───────────────────────────────────────────────────
+  'a cause d un vide de',
+  'a cause d un blocage de',
+  'a cause d un',
+  'a cause de',
+  // ── Forme "en raison de" ──────────────────────────────────────────────────
+  'en raison d un vide de',
+  'en raison d un blocage de',
+  'en raison d un',
+  'en raison de',
+  // ── Forme "consécutif à" ──────────────────────────────────────────────────
+  'consecutif a un vide de',
+  'consecutif a un',
+  'consecutif a',
+  // ── Forme "dû à" ─────────────────────────────────────────────────────────
+  'du a un vide de',
+  'du a un blocage de',
+  'du a un',
+  'du a',
+  'du au vide de',
+  'du au blocage de',
+  'du au',
+  // ── Forme "engendré / généré / provoqué par" ──────────────────────────────
+  'engendre par un vide de',
+  'engendre par un blocage de',
+  'engendre par',
+  'genere par un vide de',
+  'genere par',
+  'provoque par un vide de',
+  'provoque par',
+  // ── Forme "par" (la plus fréquente, la plus ambiguë — en dernier) ─────────
+  'par vide de',
+  'par blocage de',
+  'par manque de',
+  'par insuffisance de',
+  'par deficience de',
+  'par exces de',
+  'par stagnation de',
+  'par',
+];
+
+/**
+ * Détecte et parse une chaîne causale dans un texte libre.
+ * Retourne null si aucun marqueur causal n'est trouvé, ou si l'effet
+ * ou la cause est vide après parsing.
+ *
+ * Exemples reconnus :
+ *   "Yang apparent de VB par vide de Yin du Foie"
+ *   "Yang flottant de VB dû à un blocage du Foie"
+ *   "Yang de VB qui monte secondaire à un vide de Yin du Rein"
+ *   "Faux yang de VB à cause d'un Foie bloqué"
+ */
+export function extraireChaineCausale(texte: string): ChaineCausale | null {
+  const n = normaliserTexteIeatc(texte);
+  for (const marqueur of MARQUEURS_CAUSALITE) {
+    const needle = ` ${marqueur} `;
+    const idx = n.indexOf(needle);
+    if (idx === -1) continue;
+    const effet = n.slice(0, idx).trim();
+    const cause = n.slice(idx + needle.length).trim();
+    if (!effet || !cause) continue;
+    return { texteOriginal: texte, effet, cause, marqueur };
+  }
+  return null;
+}
+
+/**
+ * Extrait toutes les chaînes causales d'un ensemble de textes.
+ * Un texte sans marqueur causal est simplement ignoré.
+ */
+export function extraireChaines(textes: string[]): ChaineCausale[] {
+  const chains: ChaineCausale[] = [];
+  for (const t of textes) {
+    if (!t) continue;
+    const c = extraireChaineCausale(t);
+    if (c) chains.push(c);
+  }
+  return chains;
+}

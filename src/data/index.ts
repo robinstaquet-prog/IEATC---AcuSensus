@@ -27,10 +27,16 @@ export function getCasesPublies(): ClinicalCase[] {
 // ─── Statistiques globales calculées ─────────────────────────────────────────
 
 import { CLINICAL_CASES } from './cases';
-import { normaliserTextes, labelConceptIeatc, SYNDROMES_IEATC } from './normalisation';
+import {
+  normaliserTextes,
+  labelConceptIeatc,
+  SYNDROMES_IEATC,
+  normaliserTechnique,
+  extraireChaineCausale,
+} from './normalisation';
 import { normalizePoint } from '@/lib/point-normalize';
 import { createClient } from '@supabase/supabase-js';
-import type { GlobalStats, FrequencyEntry, NiveauComplexite } from '@/types';
+import type { GlobalStats, FrequencyEntry, NiveauComplexite, ChaineCausaleFreq } from '@/types';
 
 function computeFrequency(ids: string[]): FrequencyEntry[] {
   const map: Record<string, number> = {};
@@ -77,8 +83,11 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
     .filter((f): f is NonNullable<typeof f> => !!f && f !== 'non_applicable')
     .map(String);
 
-  // Techniques de traitement — extraites des points proposés dans chaque analyse
-  const allTechniques = allAnalyses.flatMap((a) => a.pointsUtilises.map((p) => p.technique));
+  // Techniques de traitement — extraites et normalisées (composite → base)
+  // Ex : tonification_chauffee → tonification | dispersion_puis_tonification → [dispersion, tonification]
+  const allTechniques: string[] = allAnalyses.flatMap((a) =>
+    a.pointsUtilises.flatMap((p) => normaliserTechnique(p.technique)),
+  );
 
   // ── Normalisation sémantique à 4 couches ─────────────────────────────────────
   // Sources : categoriesDiagnostiques (requis) + bilanEnergetique + strategie (optionnels)
@@ -90,6 +99,8 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
   const organesCounts: Record<string, number> = {};
   const strategiesCounts: Record<string, number> = {};
   const pathologiesCounts: Record<string, number> = {};
+  // Chaînes causales — clé = "effet|cause" pour déduplication
+  const chainesCounts: Record<string, { effet: string; cause: string; marqueur: string; count: number }> = {};
 
   for (const a of allAnalyses) {
     const textesDiag: string[] = [
@@ -112,6 +123,19 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
     for (const s of syndromes) syndromesCounts[s] = (syndromesCounts[s] ?? 0) + 1;
     for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
     for (const s of strategies) strategiesCounts[s] = (strategiesCounts[s] ?? 0) + 1;
+
+    // Chaînes causales — extraites des textes diagnostiques + bilan
+    for (const t of textesDiag) {
+      const chaine = extraireChaineCausale(t);
+      if (chaine) {
+        const key = `${chaine.effet}|${chaine.cause}`;
+        if (chainesCounts[key]) {
+          chainesCounts[key].count += 1;
+        } else {
+          chainesCounts[key] = { effet: chaine.effet, cause: chaine.cause, marqueur: chaine.marqueur, count: 1 };
+        }
+      }
+    }
   }
 
   // ── Pathologies — extraites du motif de consultation (par cas, non par analyse) ──
@@ -145,8 +169,7 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
       const pointsProposer: Array<{ code?: string; technique?: string }> = extra.pointsProposer ?? [];
       for (const p of pointsProposer) {
         if (p.code) allPointCodes.push(normalizePoint(p.code).code);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if (p.technique) allTechniques.push(p.technique as any);
+        if (p.technique) allTechniques.push(...normaliserTechnique(p.technique));
       }
 
       // Grille choisie
@@ -177,6 +200,19 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
         for (const s of syndromes) syndromesCounts[s] = (syndromesCounts[s] ?? 0) + 1;
         for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
         for (const s of strategies) strategiesCounts[s] = (strategiesCounts[s] ?? 0) + 1;
+
+        // Chaînes causales — participations Supabase
+        for (const t of textesDiag) {
+          const chaine = extraireChaineCausale(t);
+          if (chaine) {
+            const key = `${chaine.effet}|${chaine.cause}`;
+            if (chainesCounts[key]) {
+              chainesCounts[key].count += 1;
+            } else {
+              chainesCounts[key] = { effet: chaine.effet, cause: chaine.cause, marqueur: chaine.marqueur, count: 1 };
+            }
+          }
+        }
       }
     }
   } catch {
@@ -218,6 +254,10 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
     sexeDistribution[sexe] = (sexeDistribution[sexe] ?? 0) + 1;
   }
 
+  const topChaines: ChaineCausaleFreq[] = Object.values(chainesCounts)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 15);
+
   return {
     totalCas: CLINICAL_CASES.length,
     casPublies: publie.length,
@@ -233,6 +273,7 @@ export async function computeGlobalStats(): Promise<GlobalStats> {
     topOrganes,
     topStrategies,
     topPathologies,
+    topChaines,
     repartitionComplexite: complexityDistribution as Record<NiveauComplexite, number>,
     repartitionSexe: sexeDistribution,
   };

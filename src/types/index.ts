@@ -418,6 +418,13 @@ export interface FrequencyEntry {
   label?: string;
 }
 
+export interface ChaineCausaleFreq {
+  effet: string;      // partie avant le marqueur (texte normalisé)
+  cause: string;      // partie après le marqueur (texte normalisé)
+  marqueur: string;   // marqueur causal détecté
+  count: number;      // nombre d'occurrences dans le corpus
+}
+
 export interface GlobalStats {
   totalCas: number;
   casPublies: number;
@@ -427,12 +434,13 @@ export interface GlobalStats {
   topPoints: FrequencyEntry[];
   topGrilles: FrequencyEntry[];
   topFoyers: FrequencyEntry[];        // distribution localisationFoyer (Sup/Moy/Inf)
-  topTechniques: FrequencyEntry[];    // distribution des techniques de traitement
+  topTechniques: FrequencyEntry[];    // distribution des techniques (normalisées — moxa_tonif → tonif + moxa)
   topFamillesDiag: FrequencyEntry[];  // familles diag normalisées (couche 1)
   topSyndromes: FrequencyEntry[];     // syndromes nommés spécifiques (couche 2)
   topOrganes: FrequencyEntry[];       // organes/localisations (couche 3)
   topStrategies: FrequencyEntry[];    // stratégies thérapeutiques (couche 4)
   topPathologies: FrequencyEntry[];   // motifs de consultation normalisés (couche 5)
+  topChaines: ChaineCausaleFreq[];    // chaînes causales les plus fréquentes (Effet par Cause)
   repartitionComplexite: Record<NiveauComplexite, number>;
   repartitionSexe: Record<string, number>;
 }
