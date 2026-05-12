@@ -595,6 +595,74 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['hoquet chronique',               'rebellion qi estomac'],
   ['vomissements chroniques',        'rebellion qi estomac stagnation qi estomac'],
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // RÈGLE FONDAMENTALE : BLOCAGE = STAGNATION (synonymes absolus en IEATC)
+  // "Foie bloqué" = "blocage du Foie" = "stagnation du Foie"
+  // Le système doit reconnaître les deux formes pour chaque organe.
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ─── FOIE (Bois) ─────────────────────────────────────────────────────────
+  ['stagnation du foie',             'stagnation qi foie foie bloque'],
+  ['stagnation au foie',             'stagnation qi foie foie bloque'],
+  ['stagnation de l energie du foie','stagnation qi foie foie bloque'],
+  ['stagnation du qi du foie',       'stagnation qi foie'],
+  ['stagnation de qi foie',          'stagnation qi foie'],
+  ['foie en stagnation',             'stagnation qi foie foie bloque'],
+  ['le foie stagne',                 'stagnation qi foie foie bloque'],
+  ['foie qui stagne',                'stagnation qi foie foie bloque'],
+
+  // ─── VÉSICULE BILIAIRE (Bois — même famille que Foie) ────────────────────
+  ['stagnation de la vesicule',      'stagnation qi foie bois qui se bloque'],
+  ['stagnation de la vb',            'stagnation qi foie bois qui se bloque'],
+  ['stagnation du bois vb',          'stagnation qi foie bois qui se bloque'],
+  ['blocage de la vb',               'stagnation qi foie bois qui se bloque'],
+  ['blocage de la vesicule',         'stagnation qi foie bois qui se bloque'],
+  ['vesicule bloquee',               'stagnation qi foie bois qui se bloque'],
+  ['vb stagnante',                   'stagnation qi foie bois qui se bloque'],
+
+  // ─── ESTOMAC ──────────────────────────────────────────────────────────────
+  ['stagnation de l estomac',        'stagnation qi estomac estomac bloque'],
+  ['stagnation a l estomac',         'stagnation qi estomac estomac bloque'],
+  ['stagnation du qi de l estomac',  'stagnation qi estomac'],
+  ['estomac en stagnation',          'stagnation qi estomac'],
+  ['l estomac stagne',               'stagnation qi estomac'],
+  ['stagnation de qi d estomac',     'stagnation qi estomac'],
+
+  // ─── RATE (Terre) ─────────────────────────────────────────────────────────
+  ['stagnation de la rate',          'stagnation qi rate rate bloquee'],
+  ['stagnation a la rate',           'stagnation qi rate rate bloquee'],
+  ['stagnation du qi de la rate',    'stagnation qi rate'],
+  ['rate en stagnation',             'stagnation qi rate'],
+  ['la rate stagne',                 'stagnation qi rate'],
+
+  // ─── POUMON (Métal) ───────────────────────────────────────────────────────
+  ['stagnation du poumon',           'obstruction meridien stagnation qi'],
+  ['blocage du poumon',              'obstruction meridien stagnation qi'],
+  ['poumon bloque',                  'obstruction meridien stagnation qi poumon'],
+  ['poumon en stagnation',           'obstruction meridien stagnation qi poumon'],
+  ['qi du poumon bloque',            'obstruction meridien vide qi poumon'],
+  ['qi du poumon stagnant',          'obstruction meridien stagnation qi'],
+
+  // ─── CŒUR ─────────────────────────────────────────────────────────────────
+  ['stagnation du coeur',            'stagnation de sang stagnation qi'],
+  ['blocage du coeur',               'stagnation de sang obstruction meridien'],
+  ['coeur bloque',                   'stagnation de sang stagnation qi'],
+  ['qi du coeur bloque',             'stagnation qi vide qi coeur'],
+
+  // ─── REIN (Eau) — stagnation Rein = souvent obstruction méridien ──────────
+  ['stagnation du rein',             'obstruction meridien stagnation qi'],
+  ['blocage du rein',                'obstruction meridien stagnation qi'],
+  ['rein bloque',                    'obstruction meridien stagnation qi'],
+
+  // ─── FORME GÉNÉRIQUE (organe + bloqué/stagnant sans précision) ───────────
+  ['energie bloquee',                'stagnation qi foie bloque'],
+  ['circulation bloquee',            'stagnation qi obstruction meridien'],
+  ['qi bloque',                      'stagnation qi'],
+  ['le qi ne circule plus',          'stagnation qi obstruction meridien'],
+  ['le qi ne circule pas',           'stagnation qi obstruction meridien'],
+  ['qi en stagnation',               'stagnation qi'],
+  ['qi stagnant',                    'stagnation qi'],
+
 ];
 
 /**
