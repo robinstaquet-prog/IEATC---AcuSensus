@@ -656,29 +656,32 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'cycle_ko_inverse',
-    label: 'Cycle Ko inversé',
+    label: 'Cycle Raé (Ko inversé / Rébellion)',
     categorie: 'syndrome',
-    description: 'L\'élément contrôlé se retourne contre celui qui contrôle — signe de désordre profond.',
+    description: 'Cycle Raé (侮 Wǔ) : l\'élément contrôlé se retourne contre son contrôlant — désordre profond, épuisement du contrôle.',
     patterns: [
+      'cycle rae', 'rae', 'cycle de rebellion',
       'cycle ko inverse', 'ko inverse', 'ko brise',
       'ko inversee', 'relation ko brisee', 'cycle ko perturbe',
+      'rebellion ko', 'element qui se retourne',
       'invasion ko',
     ],
     regles: ['R7'],
     priorite: 2,
   },
 
-  // ─── Cycle Sheng ─────────────────────────────────────────────────────────────
+  // ─── Cycle Cheng (génération) ────────────────────────────────────────────────
+  // Terminologie IEATC : Cycle Cheng (生 Shēng) — le cycle nourricier/générateur.
   {
     id: 'cycle_sheng_eau_bois',
-    label: 'Cycle Sheng Eau → Bois brisé',
+    label: 'Cycle Cheng Eau → Bois brisé (Rein ne nourrit plus Foie)',
     categorie: 'syndrome',
     description: 'Le Rein (Eau) n\'alimente plus le Foie/VB (Bois) — tendons fragiles, fatigabilité, mononucléose séquellaire.',
     patterns: [
-      'eau ne nourrit plus bois', 'eau bois cycle sheng',
-      'cycle sheng eau bois', 'sheng eau vers bois',
+      'eau ne nourrit plus bois', 'cycle cheng eau bois', 'cycle sheng eau bois',
+      'cheng eau vers bois', 'sheng eau vers bois',
       'rein ne nourrit plus foie', 'eau insuffisante bois',
-      'insuffisance eau bois', 'cycle sheng brise',
+      'insuffisance eau bois', 'cycle cheng brise', 'cycle sheng brise',
       'eau vers bois defaillant', 'bois mal nourri par l eau',
       'foie mal nourri par le rein',
       'eau ne soutient plus le bois', 'foie non nourri par le rein',
@@ -689,53 +692,53 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'cycle_sheng_bois_feu',
-    label: 'Cycle Sheng Bois → Feu brisé',
+    label: 'Cycle Cheng Bois → Feu brisé',
     categorie: 'syndrome',
     description: 'Le Foie/VB (Bois) n\'alimente plus le Cœur/IG (Feu) — cascade énergétique défaillante.',
     patterns: [
-      'bois ne nourrit plus feu', 'cycle sheng bois feu',
+      'bois ne nourrit plus feu', 'cycle cheng bois feu', 'cycle sheng bois feu',
       'cascade eau bois feu', 'bois vers feu defaillant',
       'cycle eau bois feu',
     ],
     priorite: 1,
   },
 
-  // ─── Cycles Sheng supplémentaires ────────────────────────────────────────────
+  // ─── Cycles Cheng supplémentaires ────────────────────────────────────────────
   {
     id: 'cycle_sheng_feu_terre',
-    label: 'Cycle Sheng Feu → Terre brisé (Cœur ne nourrit plus Rate)',
+    label: 'Cycle Cheng Feu → Terre brisé (Cœur ne nourrit plus Rate)',
     categorie: 'syndrome',
     description: 'Le Cœur (Feu) n\'alimente plus la Rate (Terre) — fatigue digestive profonde sur fond de faiblesse cardiaque.',
     patterns: [
-      'feu ne nourrit plus terre', 'cycle sheng feu terre',
+      'feu ne nourrit plus terre', 'cycle cheng feu terre', 'cycle sheng feu terre',
       'coeur ne nourrit plus la rate', 'feu vers terre defaillant',
-      'cascade feu terre', 'coeur rate cycle sheng',
+      'cascade feu terre', 'coeur rate cycle cheng',
       'feu insuffisant pour la terre',
     ],
     priorite: 1,
   },
   {
     id: 'cycle_sheng_terre_metal',
-    label: 'Cycle Sheng Terre → Métal brisé (Rate ne nourrit plus Poumon)',
+    label: 'Cycle Cheng Terre → Métal brisé (Rate ne nourrit plus Poumon)',
     categorie: 'syndrome',
     description: 'La Rate (Terre) n\'alimente plus le Poumon (Métal) — infections respiratoires répétées sur fond de vide digestif.',
     patterns: [
-      'terre ne nourrit plus metal', 'cycle sheng terre metal',
+      'terre ne nourrit plus metal', 'cycle cheng terre metal', 'cycle sheng terre metal',
       'rate ne nourrit plus le poumon', 'terre vers metal defaillant',
-      'cascade terre metal', 'rate poumon cycle sheng',
+      'cascade terre metal', 'rate poumon cycle cheng',
       'digestion ne soutient plus le poumon', 'rate ne soutient plus poumon',
     ],
     priorite: 1,
   },
   {
     id: 'cycle_sheng_metal_eau',
-    label: 'Cycle Sheng Métal → Eau brisé (Poumon ne nourrit plus Rein)',
+    label: 'Cycle Cheng Métal → Eau brisé (Poumon ne nourrit plus Rein)',
     categorie: 'syndrome',
     description: 'Le Poumon (Métal) ne diffuse plus vers le Rein (Eau) — vide de Yin du Rein secondaire à un vide du Poumon.',
     patterns: [
-      'metal ne nourrit plus eau', 'cycle sheng metal eau',
+      'metal ne nourrit plus eau', 'cycle cheng metal eau', 'cycle sheng metal eau',
       'poumon ne nourrit plus le rein', 'metal vers eau defaillant',
-      'cascade metal eau', 'poumon rein cycle sheng',
+      'cascade metal eau', 'poumon rein cycle cheng',
       'diffusion du poumon vers le rein insuffisante',
       'poumon ne soutient plus le rein',
     ],
@@ -1015,13 +1018,14 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Merveilleux Vaisseaux ───────────────────────────────────────────────────
   {
     id: 'du_mai_insuffisant',
-    label: 'Du Mai insuffisant — Yang ne monte plus',
+    label: 'Tou Mo (Du Mai) insuffisant — Yang ne monte plus',
     categorie: 'syndrome',
-    description: 'Du Mai (Vaisseau Gouverneur) insuffisant — le Yang de l\'axe dorsal ne monte plus. Ming Men → VG4.',
+    description: 'Tou Mo / Du Mai (Vaisseau Gouverneur) insuffisant — le Yang de l\'axe dorsal ne monte plus. Ming Men → VG4.',
     patterns: [
-      'du mai insuffisant', 'du mai fragilise',
+      'du mai insuffisant', 'du mai fragilise', 'du mai vide',
+      'tou mo insuffisant', 'tou mo fragilise', 'tou mo vide',
       'yang ne monte plus le long du du mai',
-      'yang du dos insuffisant', 'du mai vide',
+      'yang du dos insuffisant',
       'vaisseau gouverneur insuffisant', 'vg insuffisant',
     ],
     regles: ['R2'],
@@ -1030,11 +1034,12 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'ren_mai_fragilise',
-    label: 'Ren Mai fragilisé — Yin insuffisant pour ancrer',
+    label: 'Jenn Mo (Ren Mai) fragilisé — Yin insuffisant pour ancrer',
     categorie: 'syndrome',
-    description: 'Ren Mai (Vaisseau Conception) fragilisé — Yin de base insuffisant, Yang non ancré.',
+    description: 'Jenn Mo / Ren Mai (Vaisseau Conception) fragilisé — Yin de base insuffisant, Yang non ancré.',
     patterns: [
-      'ren mai fragilise', 'ren mai insuffisant',
+      'ren mai fragilise', 'ren mai insuffisant', 'ren mai vide',
+      'jenn mo fragilise', 'jenn mo insuffisant', 'jenn mo vide',
       'yin insuffisant pour ancrer', 'yin de base insuffisant',
       'vaisseau conception fragilise', 'vc insuffisant',
     ],
@@ -1261,54 +1266,55 @@ export const ORGANES_LOCA: ConceptIeatc[] = [
     patterns: ['foyer inferieur'],
   },
 
-  // ─── Merveilleux Vaisseaux ───────────────────────────────────────────────────
+  // ─── Merveilleux Vaisseaux (8 Mo) ───────────────────────────────────────────
+  // Nomenclature IEATC : Tou Mo, Jenn Mo, Tchrong Mo, Taé Mo, Yang/Yin Tsiao Mo, Yang/Yin Oé Mo
   {
     id: 'du_mai',
-    label: 'Du Mai (Vaisseau Gouverneur)',
+    label: 'Tou Mo / Du Mai (Vaisseau Gouverneur)',
     categorie: 'vaisseau',
-    patterns: ['du mai', 'vaisseau gouverneur'],
+    patterns: ['du mai', 'vaisseau gouverneur', 'tou mo'],
   },
   {
     id: 'ren_mai',
-    label: 'Ren Mai (Vaisseau Conception)',
+    label: 'Jenn Mo / Ren Mai (Vaisseau Conception)',
     categorie: 'vaisseau',
-    patterns: ['ren mai', 'vaisseau conception'],
+    patterns: ['ren mai', 'vaisseau conception', 'jenn mo'],
   },
   {
     id: 'yang_qiao',
-    label: 'Yang Qiao Mo',
+    label: 'Yang Tsiao Mo / Yang Qiao Mo',
     categorie: 'vaisseau',
-    patterns: ['yang qiao', 'yang qiao mo'],
+    patterns: ['yang qiao', 'yang qiao mo', 'yang tsiao mo', 'yang tsiao'],
   },
   {
     id: 'yin_qiao',
-    label: 'Yin Qiao Mo',
+    label: 'Yin Tsiao Mo / Yin Qiao Mo',
     categorie: 'vaisseau',
-    patterns: ['yin qiao', 'yin qiao mo'],
+    patterns: ['yin qiao', 'yin qiao mo', 'yin tsiao mo', 'yin tsiao'],
   },
   {
     id: 'chong_mai',
-    label: 'Chong Mai (Vaisseau Pénétrant)',
+    label: 'Tchrong Mo / Chong Mai (Vaisseau Pénétrant)',
     categorie: 'vaisseau',
-    patterns: ['chong mai', 'vaisseau penetrant', 'tchrong mai'],
+    patterns: ['chong mai', 'vaisseau penetrant', 'tchrong mo', 'tchrong mai'],
   },
   {
     id: 'dai_mai',
-    label: 'Dai Mai (Vaisseau Ceinture)',
+    label: 'Taé Mo / Dai Mai (Vaisseau Ceinture)',
     categorie: 'vaisseau',
-    patterns: ['dai mai', 'vaisseau ceinture'],
+    patterns: ['dai mai', 'vaisseau ceinture', 'tae mo'],
   },
   {
     id: 'yang_wei_mo',
-    label: 'Yang Wei Mo',
+    label: 'Yang Oé Mo / Yang Wei Mo',
     categorie: 'vaisseau',
-    patterns: ['yang wei mo', 'yang wei'],
+    patterns: ['yang wei mo', 'yang wei', 'yang oe mo'],
   },
   {
     id: 'yin_wei_mo',
-    label: 'Yin Wei Mo',
+    label: 'Yin Oé Mo / Yin Wei Mo',
     categorie: 'vaisseau',
-    patterns: ['yin wei mo', 'yin wei'],
+    patterns: ['yin wei mo', 'yin wei', 'yin oe mo'],
   },
 
   // ─── Axes Grands Méridiens ───────────────────────────────────────────────────
@@ -1501,11 +1507,13 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'relancer_cycle_sheng',
-    label: 'Relancer le cycle Sheng Eau → Bois',
+    label: 'Relancer le cycle Cheng Eau → Bois',
     categorie: 'strategie',
     patterns: [
-      'relancer le cycle sheng', 'nourrir l eau pour relancer le bois',
-      'relancer cycle sheng', 'relancer sheng eau bois',
+      'relancer le cycle cheng', 'relancer le cycle sheng',
+      'nourrir l eau pour relancer le bois',
+      'relancer cycle cheng', 'relancer cycle sheng',
+      'relancer cheng eau bois', 'relancer sheng eau bois',
       'nourrir eau pour bois', 'relancer l eau et le bois',
     ],
     regles: ['R4'],
@@ -1712,27 +1720,29 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 2,
   },
 
-  // ─── Strategies cycles Sheng supplémentaires ─────────────────────────────────
+  // ─── Strategies cycles Cheng supplémentaires ─────────────────────────────────
   {
     id: 'relancer_cycle_sheng_terre_metal',
-    label: 'Relancer le cycle Sheng Terre → Métal',
+    label: 'Relancer le cycle Cheng Terre → Métal',
     categorie: 'strategie',
     patterns: [
-      'relancer cycle sheng terre metal', 'relancer terre metal',
+      'relancer cycle cheng terre metal', 'relancer cycle sheng terre metal',
+      'relancer terre metal',
       'soutenir rate pour poumon', 'nourrir la rate pour le poumon',
-      'relancer sheng terre vers metal',
+      'relancer cheng terre vers metal', 'relancer sheng terre vers metal',
       'consolider la terre pour le metal',
     ],
     priorite: 1,
   },
   {
     id: 'relancer_cycle_sheng_metal_eau',
-    label: 'Relancer le cycle Sheng Métal → Eau',
+    label: 'Relancer le cycle Cheng Métal → Eau',
     categorie: 'strategie',
     patterns: [
-      'relancer cycle sheng metal eau', 'relancer metal eau',
+      'relancer cycle cheng metal eau', 'relancer cycle sheng metal eau',
+      'relancer metal eau',
       'soutenir poumon pour rein', 'nourrir le poumon pour le rein',
-      'relancer sheng metal vers eau',
+      'relancer cheng metal vers eau', 'relancer sheng metal vers eau',
       'consolider le metal pour l eau',
     ],
     priorite: 1,
