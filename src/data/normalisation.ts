@@ -1013,7 +1013,6 @@ export interface ConceptIeatc {
   id: string;
   label: string;                   // Label canonique affiché dans les stats
   categorie: CategorieConcept;
-  description?: string;            // Note clinique courte (visible dans UI future)
   /**
    * Expressions de reconnaissance (texte normalisé : minuscules, sans accents).
    * AU MOINS UNE expression doit être présente (word-boundary matching).
@@ -1051,7 +1050,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vide_yang',
     label: 'Vide de Yang',
     categorie: 'famille_diag',
-    description: 'Insuffisance de la force Yang — froid, fatigue, pâleur, pouls vide profond.',
     patterns: [
       'vide de yang', 'vide yang', 'yang vide',
       'insuffisance yang', 'yang insuffisant', 'yang deficient',
@@ -1065,7 +1063,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vide_yin',
     label: 'Vide de Yin',
     categorie: 'famille_diag',
-    description: 'Insuffisance de substance Yin — chaleur vespérale, sécheresse, sueurs nocturnes.',
     patterns: [
       'vide de yin', 'vide yin', 'yin vide',
       'insuffisance yin', 'yin insuffisant', 'yin deficient',
@@ -1078,7 +1075,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vide_qi',
     label: 'Vide de Qi / Tchi',
     categorie: 'famille_diag',
-    description: 'Insuffisance de Qi (Tchi) — fatigue, essoufflement, voix basse, sueur spontanée.',
     patterns: [
       'vide de qi', 'vide qi', 'qi vide', 'vide de tchi', 'tchi vide',
       'insuffisance qi', 'qi insuffisant', 'qi deficient',
@@ -1091,7 +1087,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vide_sang',
     label: 'Vide de Sang (Xue Xu)',
     categorie: 'famille_diag',
-    description: 'Insuffisance de Sang — pâleur, vertiges, palpitations, ongles fragiles.',
     patterns: [
       'vide de sang', 'vide sang', 'sang vide',
       'insuffisance sang', 'sang insuffisant', 'xue vide',
@@ -1103,7 +1098,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vide_jing',
     label: 'Vide de Jing / Tsing (Ancestrale)',
     categorie: 'famille_diag',
-    description: 'Épuisement de l\'énergie ancestrale Tsing (Jing). Irréversible — on ne peut qu\'en économiser l\'usage.',
     patterns: [
       'vide de jing', 'vide jing', 'jing vide', 'tsing vide',
       'vide de tsing', 'insuffisance jing', 'jing epuise', 'tsing epuise',
@@ -1116,7 +1110,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vide_iong',
     label: 'Vide d\'Iong (Ying Qi insuffisante)',
     categorie: 'famille_diag',
-    description: 'Insuffisance de l\'énergie nutritive Iong (Ying Qi). L\'Iong nourrit les structures internes via les méridiens.',
     patterns: [
       'iong insuffisante', 'iong vide', 'vide d iong', 'vide de iong',
       'ying qi insuffisante', 'insuffisance iong', 'iong affaiblie',
@@ -1130,7 +1123,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'exces_yin',
     label: 'Excès / Plénitude de Yin',
     categorie: 'famille_diag',
-    description: 'Excès de Yin — humidité, froid, lourdeur, blocage de la circulation Yang.',
     patterns: [
       'exces de yin', 'exces yin', 'yin en exces', 'plenitude yin',
       'plenitude de yin', 'yin plenitude', 'trop de yin',
@@ -1143,7 +1135,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'exces_yang',
     label: 'Excès / Plénitude de Yang',
     categorie: 'famille_diag',
-    description: 'Excès de Yang — chaleur, rougeur, agitation, plein. (Yang Shi — plénitude Yang réelle, distincte du Yang apparent produit par vide de Yin)',
     patterns: [
       'exces de yang', 'exces yang', 'yang en exces', 'plenitude yang',
       'plenitude de yang', 'yang plenitude', 'trop de yang',
@@ -1156,7 +1147,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'plenitude_oe',
     label: 'Plénitude d\'Oé (Wei Qi en excès)',
     categorie: 'famille_diag',
-    description: 'Oé (Wei Qi / énergie défensive) en excès local : chaleur, rougeur, inflammation de surface.',
     patterns: [
       'oe en plenitude', 'plenitude d oe', 'oe en exces', 'oé en plenitude',
       'wei qi en exces', 'oé excessif', 'exces d oe',
@@ -1171,7 +1161,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'stagnation_qi',
     label: 'Stagnation de Qi',
     categorie: 'famille_diag',
-    description: 'Qi bloqué — douleur distensive, ballonnements, humeur changeante.',
     patterns: [
       'stagnation de qi', 'stagnation qi', 'qi stagnant',
       'stagnation energetique', 'stagnation d energie', 'energie stagnante',
@@ -1186,7 +1175,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'stagnation_sang',
     label: 'Stagnation de Sang',
     categorie: 'famille_diag',
-    description: 'Sang bloqué — douleur fixe et lancinante, teint sombre, pouls en corde.',
     patterns: [
       'stagnation de sang', 'stagnation sang', 'sang stagnant',
       'sang bloque', 'stase sanguine', 'stase de sang', 'xue stagnant',
@@ -1198,7 +1186,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'obstruction_meridien',
     label: 'Obstruction / Atteinte de méridien',
     categorie: 'famille_diag',
-    description: 'Méridien principal (TT) atteint ou obstrué : douleur sur trajet, aggravation nocturne si Yin.',
     patterns: [
       'obstruction du meridien', 'obstruction meridien',
       'atteinte du meridien', 'atteinte meridien',
@@ -1223,7 +1210,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'chaleur',
     label: 'Chaleur (plénitude)',
     categorie: 'famille_diag',
-    description: 'Chaleur réelle — plénitude : rougeur, soif, agitation, langue rouge, pouls rapide.',
     patterns: [
       'chaleur interne', 'chaleur de', 'chaleur dans', 'chaleur au',
       'accumulation de chaleur', 'exces de chaleur', 'chaleur pathogene',
@@ -1239,7 +1225,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'feu_vide',
     label: 'Yang apparent / Feu apparent (Xu Huo)',
     categorie: 'famille_diag',
-    description: 'CRITIQUE (IEATC) : chaleur produite par un vide de Yin — le Yang monte non parce qu\'il est en excès, mais parce que le Yin ne l\'ancre plus. On appelle ça le Yang apparent ou Feu apparent. NE JAMAIS disperser — NOURRIR le Yin pour que le Yang apparent s\'éteigne de lui-même.',
     patterns: [
       'feu du vide', 'chaleur de vide', 'feu de vide', 'xu huo',
       'chaleur xu', 'chaleur vide', 'vide avec chaleur',
@@ -1257,7 +1242,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'humidite',
     label: 'Humidité',
     categorie: 'famille_diag',
-    description: 'Humidité interne — lourdeur, oedème, selles molles, enduit épais.',
     patterns: [
       'humidite interne', 'retention d humidite', 'accumulation d humidite',
       'humidite de', 'humidite dans', 'humidite au',
@@ -1272,7 +1256,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'humidite_chaleur',
     label: 'Humidité-Chaleur',
     categorie: 'famille_diag',
-    description: 'Association humidité + chaleur — dysurie, ictère, éruptions, enduit jaune gras.',
     patterns: [
       'humidite chaleur', 'chaleur humidite',
       'humidite et chaleur', 'chaleur et humidite',
@@ -1284,7 +1267,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'humidite_froid',
     label: 'Humidité-Froid',
     categorie: 'famille_diag',
-    description: 'Association humidité + froid — douleurs articulaires, lourdeur, membres froids.',
     patterns: [
       'humidite froid', 'froid humidite',
       'humidite et froid', 'froid et humidite', 'froid humide',
@@ -1296,7 +1278,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'froid_interne',
     label: 'Froid interne',
     categorie: 'famille_diag',
-    description: 'Froid interne — contraction, douleurs améliorées par la chaleur, selles liquides.',
     patterns: [
       'froid interne', 'froid de', 'froid dans', 'froid au',
       'invasion de froid', 'froid pathogene', 'accumulation de froid',
@@ -1308,7 +1289,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vent_interne',
     label: 'Fong interne',
     categorie: 'famille_diag',
-    description: 'Fong interne (du Foie) — IEATC : le Vent s\'appelle Fong. On le disperse, expulse, chasse ou fait sortir. Vertiges, tremblements, mouvements involontaires, pouls corde-arc.',
     patterns: [
       'fong interne', 'fong du foie', 'fong interne du foie',
       'fong', 'fongs', 'le fong', 'les fong', 'les fongs', 'un fong',
@@ -1323,7 +1303,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'vent_externe',
     label: 'Fong externe (Vent externe)',
     categorie: 'famille_diag',
-    description: 'Invasion de Fong externe — début brusque, symptômes mobiles, crainte du vent. IEATC : Fong = Vent.',
     patterns: [
       'fong externe', 'invasion de fong', 'fong pathogene',
       'agression de fong', 'fong froid', 'fong chaleur',
@@ -1337,7 +1316,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'secheresse',
     label: 'Sécheresse',
     categorie: 'famille_diag',
-    description: 'Sécheresse — yeux secs, gorge sèche, constipation, peau desséchée.',
     patterns: [
       'secheresse interne', 'secheresse de', 'secheresse dans',
       'manque de liquides', 'assechement des', 'liquides insuffisants',
@@ -1351,7 +1329,6 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     id: 'tan',
     label: 'Tan (Phlegme / Flegme)',
     categorie: 'famille_diag',
-    description: 'Humidité épaissi en Phlegme (Tan). Obstrue méridiens, orifices, organes. Traitement long — dissoudre progressivement.',
     patterns: [
       'phlegme', 'flegme', 'glaires pathogenes', 'mucus pathologique',
       'accumulation de tan', 'retention de tan', 'formation de tan',
@@ -1379,7 +1356,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yang_rein',
     label: 'Vide de Yang du Rein',
     categorie: 'syndrome',
-    description: 'Insuffisance Yang du Rein — froid lombaire, urines claires, poils d\'oreille blancs précoces.',
     patterns: [
       'vide de yang du rein', 'vide yang rein', 'yang du rein vide',
       'yang du rein insuffisant', 'rein yang vide', 'yang rein insuffisant',
@@ -1393,7 +1369,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'mingmen_insuffisant',
     label: 'Feu du Ming Men insuffisant',
     categorie: 'syndrome',
-    description: 'CRITIQUE : le Feu du Ming Men (VG4) est la source du Yang constitutionnel. Son insuffisance = froid profond, diarrhées matinales, impuissance.',
     patterns: [
       'ming men insuffisant', 'ming men eteint', 'feu du ming men',
       'feu de ming men', 'feu du rein', 'feu originel insuffisant',
@@ -1408,7 +1383,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yin_rein',
     label: 'Vide de Yin du Rein',
     categorie: 'syndrome',
-    description: 'Insuffisance Yin du Rein — cause profonde du Yang du Foie montant et du Yang apparent (Feu apparent). Traiter en premier.',
     patterns: [
       'vide de yin du rein', 'vide yin rein', 'yin du rein vide',
       'yin du rein insuffisant', 'rein yin vide', 'rein en vide de yin',
@@ -1424,7 +1398,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_jing_rein',
     label: 'Vide de Tsing du Rein',
     categorie: 'syndrome',
-    description: 'Épuisement de l\'essence ancestrale (Tsing/Jing) stockée dans le Rein.',
     patterns: [
       'vide de jing du rein', 'jing du rein vide',
       'tsing du rein vide', 'essence renale insuffisante',
@@ -1437,7 +1410,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_poumon',
     label: 'Vide de Qi du Poumon',
     categorie: 'syndrome',
-    description: 'Insuffisance du Qi du Poumon — souffle court, fatigue profonde, voix faible, transpiration spontanée. Le Poumon gouverne le Qi et la respiration.',
     patterns: [
       'vide de qi du poumon', 'vide qi poumon', 'poumon qi vide',
       'poumon en vide de qi', 'qi du poumon vide', 'qi du poumon insuffisant',
@@ -1454,7 +1426,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yin_poumon',
     label: 'Vide de Yin du Poumon',
     categorie: 'syndrome',
-    description: 'Yin du Poumon insuffisant — toux sèche, raucité, chaleur vespérale, sécheresse des muqueuses.',
     patterns: [
       'vide de yin du poumon', 'yin du poumon vide', 'poumon yin vide',
       'vide yin poumon', 'insuffisance yin poumon', 'yin pulmonaire vide',
@@ -1469,7 +1440,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'chaleur_poumon',
     label: 'Chaleur du Poumon',
     categorie: 'syndrome',
-    description: 'Chaleur dans le Poumon — toux avec expectorations jaunes, fièvre, narines dilatées.',
     patterns: [
       'chaleur du poumon', 'poumon en chaleur', 'feu du poumon',
       'chaleur poumon', 'poumon chaud', 'chaleur metal',
@@ -1483,7 +1453,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vent_froid_poumon',
     label: 'Vent-Froid envahissant le Poumon',
     categorie: 'syndrome',
-    description: 'Invasion de Vent-Froid dans le Poumon — rhume, frissons, toux, congestion nasale.',
     patterns: [
       'vent froid poumon', 'vent froid envahit le poumon',
       'invasion vent froid', 'poumon envahi par le vent froid',
@@ -1500,7 +1469,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'yang_foie_montant',
     label: 'Yang du Foie montant',
     categorie: 'syndrome',
-    description: 'Yang du Foie non ancré monte vers le haut — céphalées temporales, visage rouge, irritabilité. Cause : vide de Yin du Rein. Traiter le Rein d\'abord.',
     patterns: [
       'yang du foie montant', 'yang foie montant',
       'yang du foie en exces', 'prosperite du yang du foie',
@@ -1517,7 +1485,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vent_interne_foie',
     label: 'Fong interne du Foie',
     categorie: 'syndrome',
-    description: 'Fong interne du Foie (IEATC : Fong = Vent) — toujours secondaire à vide Yin/Sang du Foie ou Rein. On le disperse/expulse/chasse, jamais on ne le "pacifie". Pouls corde-arc caractéristique.',
     patterns: [
       'fong interne du foie', 'fong du foie', 'fong interne foie',
       'fong foie', 'foie fong', 'fongs du foie',
@@ -1533,7 +1500,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'feu_foie',
     label: 'Feu du Foie',
     categorie: 'syndrome',
-    description: 'Chaleur en plénitude dans le Foie — yeux rouges, amertume buccale, constipation.',
     patterns: [
       'feu du foie', 'chaleur du foie', 'chaleur foie',
       'chaleur du bois', 'bois en chaleur',
@@ -1548,7 +1514,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_sang_foie',
     label: 'Vide de Sang du Foie',
     categorie: 'syndrome',
-    description: 'Sang insuffisant dans le Foie — yeux secs, ongles cassants, règles pâles, crampes nocturnes.',
     patterns: [
       'vide de sang du foie', 'sang du foie vide', 'foie sang vide',
       'foie non nourri', 'foie mal nourri', 'sang foie insuffisant',
@@ -1563,7 +1528,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yin_foie',
     label: 'Vide de Yin du Foie',
     categorie: 'syndrome',
-    description: 'Yin du Foie insuffisant — tendons non nourris, vision trouble, chaleur du vide associée.',
     patterns: [
       'vide de yin du foie', 'yin du foie vide', 'foie yin vide',
       'vide yin foie', 'insuffisance yin foie',
@@ -1578,7 +1542,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'stagnation_qi_foie',
     label: 'Stagnation de Qi du Foie',
     categorie: 'syndrome',
-    description: 'Qi du Foie stagnant — irritabilité, hypocondre douloureux, règles irrégulières.',
     patterns: [
       'stagnation de qi du foie', 'qi du foie stagnant',
       'foie qi stagnant', 'stagnation qi foie',
@@ -1594,7 +1557,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'bois_envahit_terre',
     label: 'Bois envahit la Terre',
     categorie: 'syndrome',
-    description: 'Foie/VB (Bois) en excès contrôle trop fort la Rate/Estomac (Terre) — troubles digestifs aggravés par le stress.',
     patterns: [
       'bois envahit terre', 'foie envahit rate', 'bois sur terre',
       'ko pathologique', 'cycle ko pathologique',
@@ -1612,7 +1574,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'cycle_ko_inverse',
     label: 'Cycle Raé (rébellion)',
     categorie: 'syndrome',
-    description: 'Cycle Raé (侮 Wǔ) : l\'élément contrôlé se retourne contre son contrôlant — désordre profond, épuisement du contrôle.',
     patterns: [
       'cycle rae', 'rae', 'cycle de rebellion',
       'cycle ko inverse', 'ko inverse', 'ko brise',
@@ -1629,7 +1590,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'shen_perturbe',
     label: 'Shen perturbé',
     categorie: 'syndrome',
-    description: 'Le Shen (esprit, hébergé par le Cœur) est perturbé — insomnie, palpitations, anxiété, irritabilité.',
     patterns: [
       'shen perturbe', 'coeur perturbe', 'shen trouble',
       'insomnie palpitations', 'coeur shen',
@@ -1641,7 +1601,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'feu_monte_au_coeur',
     label: 'Feu du Foie monte au Cœur',
     categorie: 'syndrome',
-    description: 'Le Feu du Foie remonte vers le Cœur via le cycle Bois→Feu — insomnie, palpitations, agitation.',
     patterns: [
       'feu monte au coeur', 'yang foie feu coeur',
       'feu foie monte', 'bois vers feu coeur',
@@ -1656,7 +1615,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_coeur',
     label: 'Vide de Qi du Cœur',
     categorie: 'syndrome',
-    description: 'Qi du Cœur insuffisant — palpitations légères à l\'effort, essoufflement, fatigue, pouls vide.',
     patterns: [
       'vide de qi du coeur', 'vide qi coeur', 'coeur qi vide',
       'qi du coeur vide', 'qi du coeur insuffisant',
@@ -1671,7 +1629,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yin_coeur',
     label: 'Vide de Yin du Cœur',
     categorie: 'syndrome',
-    description: 'Yin du Cœur insuffisant — insomnie, chaleur vespérale, sueurs nocturnes, palpitations, anxiété.',
     patterns: [
       'vide de yin du coeur', 'yin du coeur vide', 'coeur yin vide',
       'vide yin coeur', 'insuffisance yin coeur',
@@ -1686,7 +1643,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yang_coeur',
     label: 'Vide de Yang du Cœur',
     categorie: 'syndrome',
-    description: 'Yang du Cœur insuffisant — froid thoracique, dyspnée, pouls profond lent, teint pâle-bleuté.',
     patterns: [
       'vide de yang du coeur', 'yang du coeur vide', 'coeur yang vide',
       'vide yang coeur', 'insuffisance yang coeur',
@@ -1701,7 +1657,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_sang_coeur',
     label: 'Vide de Sang du Cœur',
     categorie: 'syndrome',
-    description: 'Sang du Cœur insuffisant — palpitations, rêves agités, mémoire faible, visage terne.',
     patterns: [
       'vide de sang du coeur', 'sang du coeur vide', 'coeur sang vide',
       'sang coeur insuffisant', 'coeur non nourri par le sang',
@@ -1715,7 +1670,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'tan_coeur',
     label: 'Tan obstruant le Cœur',
     categorie: 'syndrome',
-    description: 'Phlegme obstruant les orifices du Cœur — confusion mentale, agitation, manie.',
     patterns: [
       'tan obstrue le coeur', 'phlegme coeur', 'flegme coeur',
       'tan coeur', 'phlegme feu coeur', 'tan feu monte au coeur',
@@ -1731,7 +1685,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'rate_non_rechauffee',
     label: 'Rate non réchauffée',
     categorie: 'syndrome',
-    description: 'Le Yang du Rein (Ming Men) insuffisant ne réchauffe plus la Rate — digestion froide, selles molles.',
     patterns: [
       'rate non rechauffee', 'rate sans soutien yang',
       'digestion froide', 'rate non soutenue',
@@ -1749,7 +1702,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'exces_yin_foyer_moyen',
     label: 'Excès de Yin au Foyer Moyen',
     categorie: 'syndrome',
-    description: 'Plénitude de Yin bloque le Foyer Moyen — TRAITER EN PREMIER selon la règle des 3 Foyers.',
     patterns: [
       'exces yin foyer moyen', 'yin foyer moyen excessif',
       'foyer moyen sature', 'rate surchargee',
@@ -1770,7 +1722,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_rate',
     label: 'Vide de Qi de la Rate',
     categorie: 'syndrome',
-    description: 'Qi de la Rate insuffisant — digestion lente, fatigue post-prandiale, selles molles, membres lourds.',
     patterns: [
       'vide de qi de la rate', 'vide qi rate', 'rate qi vide',
       'qi de la rate vide', 'qi de la rate insuffisant',
@@ -1786,7 +1737,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yang_rate',
     label: 'Vide de Yang de la Rate',
     categorie: 'syndrome',
-    description: 'Yang de la Rate insuffisant — digestion froide, membres froids, diarrhées, œdèmes.',
     patterns: [
       'vide de yang de la rate', 'vide yang rate', 'rate yang vide',
       'yang de la rate vide', 'yang rate insuffisant',
@@ -1801,7 +1751,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'humidite_rate',
     label: 'Humidité envahissant la Rate',
     categorie: 'syndrome',
-    description: 'Humidité bloquant la Rate — digestion lourde, lourdeur générale, enduit lingual épais.',
     patterns: [
       'humidite envahit la rate', 'humidite rate', 'rate envahie par l humidite',
       'rate sature d humidite', 'humidite bloque la rate',
@@ -1816,7 +1765,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'chaleur_estomac',
     label: 'Chaleur de l\'Estomac',
     categorie: 'syndrome',
-    description: 'Chaleur dans l\'Estomac — faim intense, soif, gencives enflées, brûlures épigastriques.',
     patterns: [
       'chaleur de l estomac', 'chaleur estomac', 'estomac en chaleur',
       'feu de l estomac', 'estomac chaud', 'feu estomac',
@@ -1829,7 +1777,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yin_estomac',
     label: 'Vide de Yin de l\'Estomac',
     categorie: 'syndrome',
-    description: 'Yin de l\'Estomac insuffisant — faim sans appétit, bouche sèche, épigastre brûlant, langue rouge sans enduit.',
     patterns: [
       'vide de yin de l estomac', 'yin de l estomac vide',
       'estomac yin vide', 'vide yin estomac',
@@ -1845,7 +1792,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'foyer_inferieur_vide_yang',
     label: 'Foyer Inférieur en vide de Yang',
     categorie: 'syndrome',
-    description: 'Yang insuffisant au Foyer Inférieur — Rein/VB/Ming Men défaillants. Diarrhées, urines claires, froid lombaire.',
     patterns: [
       'foyer inferieur vide de yang', 'foyer inferieur vide yang',
       'foyer inferieur yang vide', 'vide yang foyer inferieur',
@@ -1865,7 +1811,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'paradoxe_oe_iong',
     label: 'Paradoxe Oé / Iong',
     categorie: 'syndrome',
-    description: 'SPÉCIFIQUE IEATC : chaleur/inflammation locale (Oé en excès) sur fond de vide Yang général (Iong insuffisante). Traiter l\'Iong générale ET disperser l\'Oé locale.',
     patterns: [
       'paradoxe yang local', 'paradoxe local general',
       'vide yang general chaleur locale', 'oé plenitude iong vide',
@@ -1883,7 +1828,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'du_mai_insuffisant',
     label: 'Tou Mo insuffisant',
     categorie: 'syndrome',
-    description: 'Tou Mo / Du Mai (Vaisseau Gouverneur) insuffisant — le Yang de l\'axe dorsal ne monte plus. Ming Men → VG4.',
     patterns: [
       'du mai insuffisant', 'du mai fragilise', 'du mai vide',
       'tou mo insuffisant', 'tou mo fragilise', 'tou mo vide',
@@ -1899,7 +1843,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'ren_mai_fragilise',
     label: 'Jenn Mo fragilisé',
     categorie: 'syndrome',
-    description: 'Jenn Mo / Ren Mai (Vaisseau Conception) fragilisé — Yin de base insuffisant, Yang non ancré.',
     patterns: [
       'ren mai fragilise', 'ren mai insuffisant', 'ren mai vide',
       'jenn mo fragilise', 'jenn mo insuffisant', 'jenn mo vide',
@@ -1916,7 +1859,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vb_sans_drainage',
     label: 'VB sans drainage',
     categorie: 'syndrome',
-    description: 'La VB ne se draine plus — chaleur et bile refluent vers le Foie. Amertume, nausées, ictère.',
     patterns: [
       'vb ne se draine pas', 'vesicule biliaire sans drainage',
       'vb sature', 'refluence vers le foie',
@@ -1931,7 +1873,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'hun_perturbe',
     label: 'Hun perturbé (Foie)',
     categorie: 'syndrome',
-    description: 'Le Hun (esprit du Foie) est perturbé — rêves agités, déambulations nocturnes, instabilité psychique, décisions difficiles.',
     patterns: [
       'hun perturbe', 'hun instable', 'hun non ancre',
       'esprit du foie perturbe', 'hun agite', 'foie hun',
@@ -1944,7 +1885,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'po_perturbe',
     label: 'Po perturbé (Poumon)',
     categorie: 'syndrome',
-    description: 'Le Po (esprit du Poumon) est perturbé — deuil non résolu, mélancolie, tristesse profonde, crispation cutanée.',
     patterns: [
       'po perturbe', 'po non ancre', 'esprit du poumon perturbe',
       'po agite', 'poumon po', 'ame corporelle perturbee',
@@ -1957,7 +1897,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'zhi_perturbe',
     label: 'Zhi perturbé (Rein)',
     categorie: 'syndrome',
-    description: 'Le Zhi (volonté du Rein) est perturbé — manque de volonté, peur chronique, incapacité à avancer.',
     patterns: [
       'zhi perturbe', 'zhi insuffisant', 'esprit du rein perturbe',
       'volonte affaiblie', 'rein zhi', 'zhi vide',
@@ -1970,7 +1909,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'yi_perturbe',
     label: 'Yi perturbé (Rate)',
     categorie: 'syndrome',
-    description: 'Le Yi (intellect de la Rate) est perturbé — ruminations, idées fixes, pensées circulaires, obsessions.',
     patterns: [
       'yi perturbe', 'yi insuffisant', 'esprit de la rate perturbe',
       'intellectualite perturbee', 'rate yi', 'rumination pathologique',
@@ -1984,7 +1922,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'tan_meridiens',
     label: 'Tan obstruant les méridiens',
     categorie: 'syndrome',
-    description: 'Phlegme (Tan) accumulé dans les méridiens — douleurs sourdes, engourdissements, lourdeur, masses molles.',
     patterns: [
       'tan dans les meridiens', 'phlegme dans les meridiens',
       'tan obstrue les meridiens', 'accumulation de phlegme dans les meridiens',
@@ -2001,7 +1938,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'stagnation_qi_estomac',
     label: 'Stagnation de Qi de l\'Estomac',
     categorie: 'syndrome',
-    description: 'Qi de l\'Estomac bloqué — douleur épigastrique distensive, ballonnements, rot, rots acides. L\'Estomac ne fait plus descendre.',
     patterns: [
       'stagnation de qi de l estomac', 'stagnation qi estomac',
       'qi de l estomac stagnant', 'estomac qi stagnant',
@@ -2017,7 +1953,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'rebellion_qi_estomac',
     label: 'Rébellion du Qi de l\'Estomac',
     categorie: 'syndrome',
-    description: 'Le Qi de l\'Estomac monte au lieu de descendre — nausées, vomissements, rots, reflux acide, hoquets.',
     patterns: [
       'rebellion du qi de l estomac', 'qi de l estomac rebelle',
       'qi de l estomac ne descend pas', 'qi estomac qui monte',
@@ -2034,7 +1969,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'stagnation_nourriture',
     label: 'Rétention de nourriture',
     categorie: 'syndrome',
-    description: 'Aliments non transformés stagnant dans l\'Estomac — épigastre plein et douloureux, goût acide, selles nauséabondes.',
     patterns: [
       'retention de nourriture', 'stagnation de nourriture',
       'nourriture stagnante', 'estomac surcharge',
@@ -2051,7 +1985,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'stagnation_qi_rate',
     label: 'Stagnation de Qi de la Rate',
     categorie: 'syndrome',
-    description: 'Qi de la Rate bloqué — ballonnements, lourdeur abdominale, selles irrégulières.',
     patterns: [
       'stagnation de qi de la rate', 'stagnation qi rate',
       'qi de la rate stagnant', 'rate qi stagnant',
@@ -2066,7 +1999,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_sang_rate',
     label: 'Vide de Sang de la Rate',
     categorie: 'syndrome',
-    description: 'Sang insuffisant au niveau de la Rate — digestion molle, teint terne, fatigue profonde.',
     patterns: [
       'vide de sang de la rate', 'sang de la rate vide',
       'rate sang vide', 'vide sang rate',
@@ -2082,7 +2014,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_foie',
     label: 'Vide de Qi du Foie',
     categorie: 'syndrome',
-    description: 'Qi du Foie insuffisant — fatigue à la décision, vision faible, tendons mous, dépression silencieuse.',
     patterns: [
       'vide de qi du foie', 'vide qi foie', 'foie qi vide',
       'qi du foie vide', 'qi du foie insuffisant',
@@ -2096,7 +2027,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'stagnation_sang_foie',
     label: 'Stagnation de Sang au Foie',
     categorie: 'syndrome',
-    description: 'Sang bloqué au niveau du Foie — hypocondre douloureux fixe, masse abdominale, règles sombres avec caillots.',
     patterns: [
       'stagnation de sang au foie', 'stagnation sang foie',
       'sang du foie stagnant', 'foie sang stagnant',
@@ -2111,7 +2041,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yang_foie',
     label: 'Vide de Yang du Foie',
     categorie: 'syndrome',
-    description: 'Yang du Foie insuffisant — rare, souvent confondu avec Vide de Yang général. Froid aux hypocondres, fatigue décisionnelle, dépression froide.',
     patterns: [
       'vide de yang du foie', 'vide yang foie', 'foie yang vide',
       'yang du foie vide', 'yang du foie insuffisant',
@@ -2127,7 +2056,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_rein',
     label: 'Vide de Qi du Rein',
     categorie: 'syndrome',
-    description: 'Qi du Rein insuffisant — lombalgies, urines fréquentes, pollakiurie nocturne, essoufflement à l\'effort.',
     patterns: [
       'vide de qi du rein', 'vide qi rein', 'rein qi vide',
       'qi du rein vide', 'qi du rein insuffisant',
@@ -2143,7 +2071,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_yang_poumon',
     label: 'Vide de Yang du Poumon',
     categorie: 'syndrome',
-    description: 'Yang du Poumon insuffisant (rare) — toux froide, expectoration claire, aversion au froid, transpiration spontanée.',
     patterns: [
       'vide de yang du poumon', 'vide yang poumon', 'poumon yang vide',
       'yang du poumon vide', 'yang du poumon insuffisant',
@@ -2157,7 +2084,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'tan_poumon',
     label: 'Tan obstruant le Poumon',
     categorie: 'syndrome',
-    description: 'Phlegme (Tan) dans le Poumon — toux grasse avec expectorations, oppression thoracique, sifflements.',
     patterns: [
       'tan dans le poumon', 'phlegme dans le poumon',
       'tan obstrue le poumon', 'poumon obstrue par le tan',
@@ -2174,7 +2100,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_rate_coeur',
     label: 'Vide de Qi Rate et Cœur',
     categorie: 'syndrome',
-    description: 'Double vide : Rate et Cœur insuffisants ensemble — fatigue profonde, palpitations légères, digestion lente.',
     patterns: [
       'vide qi rate coeur', 'vide de qi rate et coeur',
       'rate coeur en vide de qi', 'coeur rate insuffisants',
@@ -2189,7 +2114,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vide_qi_vb',
     label: 'Vide de Qi de la Vésicule Biliaire',
     categorie: 'syndrome',
-    description: 'Qi de la VB insuffisant — indécision, timidité excessive, peur de se décider, soupirs fréquents.',
     patterns: [
       'vide de qi de la vesicule', 'vide qi vb',
       'vesicule biliaire en vide de qi', 'qi de la vb vide',
@@ -2205,7 +2129,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'yang_apparent_vb',
     label: 'Yang apparent de VB',
     categorie: 'syndrome',
-    description: 'Yang de la VB non ancré qui monte — TOUJOURS secondaire à un vide de Yin (Foie ou Rein). Traiter le Yin, jamais disperser le Yang.',
     patterns: [
       'yang apparent de vb', 'yang apparent vb',
       'yang apparent de la vesicule', 'faux yang vb',
@@ -2221,7 +2144,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'yang_apparent_foie',
     label: 'Yang apparent du Foie',
     categorie: 'syndrome',
-    description: 'Yang du Foie non ancré qui monte — secondaire à vide de Yin du Foie ou du Rein. Traiter le Yin en premier.',
     patterns: [
       'yang apparent du foie', 'yang apparent foie',
       'faux yang foie', 'yang flottant foie',
@@ -2238,7 +2160,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'rein_coeur_dysharmonie',
     label: 'Dysharmonie Cœur–Rein',
     categorie: 'syndrome',
-    description: 'L\'Eau (Rein) ne monte plus vers le Feu (Cœur) et/ou le Feu ne descend plus vers l\'Eau — insomnie profonde, anxiété avec lombalgie, chaleur du haut et froid du bas.',
     patterns: [
       'dysharmonie coeur rein', 'axe coeur rein brise',
       'axe eau feu brise', 'coeur et rein ne communiquent plus',
@@ -2255,7 +2176,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'qi_rate_ne_monte_plus',
     label: 'Qi de la Rate ne monte plus',
     categorie: 'syndrome',
-    description: 'Le Qi de la Rate n\'a plus la force de monter (ascension du pur). Conséquences : prolapsus d\'organes, ptoses, hémorragies par non-rétention.',
     patterns: [
       'qi de la rate ne monte plus', 'rate ne monte plus',
       'qi ne monte plus', 'prolapsus', 'ptose',
@@ -2272,7 +2192,6 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     id: 'vent_chaleur_poumon',
     label: 'Fong-Chaleur envahissant le Poumon',
     categorie: 'syndrome',
-    description: 'Invasion de Fong-Chaleur dans le Poumon — fièvre, gorge douloureuse, toux avec expectoration jaune, soif.',
     patterns: [
       'vent chaleur poumon', 'fong chaleur poumon',
       'vent chaleur envahit le poumon', 'fong chaleur envahit le poumon',
@@ -2525,7 +2444,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'equilibrer_yy',
     label: 'Équilibrer le Yin/Yang général',
     categorie: 'strategie',
-    description: 'Étape 1 du protocole IEATC — toujours en premier.',
     patterns: [
       'equilibrer le yin yang', 'traiter le yy', 'traiter le yin yang general',
       'equilibre yin yang', 'yin yang general', 'yy general',
@@ -2560,7 +2478,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'tonifier_yang_rein',
     label: 'Tonifier le Yang du Rein / Ming Men',
     categorie: 'strategie',
-    description: 'Avec moxas en priorité (VG4, V23).',
     patterns: [
       'tonifier le yang du rein', 'tonifier yang rein',
       'tonifier ming men', 'ranimer le feu du ming men',
@@ -2576,7 +2493,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'nourrir_yin_rein',
     label: 'Nourrir le Yin du Rein',
     categorie: 'strategie',
-    description: 'Stratégie indirecte pour le Yang du Foie montant — traiter la cause, pas le symptôme.',
     patterns: [
       'nourrir le yin du rein', 'nourrir yin rein',
       'tonifier le yin du rein', 'soutenir le yin du rein',
@@ -2592,7 +2508,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'disperser_yang_foie',
     label: 'Disperser / Abaisser le Yang du Foie',
     categorie: 'strategie',
-    description: 'Traitement secondaire — toujours après avoir nourri le Yin du Rein (R4).',
     patterns: [
       'disperser le yang du foie', 'abaisser le yang du foie',
       'disperser yang foie', 'descendre le yang du foie',
@@ -2605,7 +2520,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_yang_apparent',
     label: 'Traiter le Yang apparent / Feu apparent (vide de Yin)',
     categorie: 'strategie',
-    description: 'IEATC : un Yang apparent ou Feu apparent est dû à un vide de Yin — traiter = nourrir le Yin, pas disperser la chaleur.',
     patterns: [
       'yang apparent', 'feu apparent', 'chaleur apparente',
       'echauffement par vide de yin', 'chaleur par vide de yin',
@@ -2622,7 +2536,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_yin_apparent',
     label: 'Traiter le Yin apparent / Froid apparent (vide de Yang)',
     categorie: 'strategie',
-    description: 'IEATC : un Yin apparent ou Froid apparent est dû à un vide de Yang — traiter = tonifier le Yang.',
     patterns: [
       'yin apparent', 'froid apparent', 'froid par vide de yang',
       'yin apparent par vide de yang', 'froid apparent par vide de yang',
@@ -2636,7 +2549,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'disperser_fong',
     label: 'Disperser / Expulser le Fong interne',
     categorie: 'strategie',
-    description: 'IEATC : le Vent s\'appelle Fong. On ne pacifie pas le Fong — on le disperse, expulse, chasse ou fait sortir.',
     patterns: [
       'disperser le fong', 'expulser le fong', 'chasser le fong',
       'faire sortir le fong', 'fong disperser', 'fong interne',
@@ -2655,7 +2567,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'disperser_foyer_moyen',
     label: 'Disperser le Foyer Moyen (excès de Yin)',
     categorie: 'strategie',
-    description: 'RÈGLE DES 3 FOYERS : traiter le Foyer Moyen plein AVANT le Foyer Inférieur vide.',
     patterns: [
       'disperser le foyer moyen', 'lever l exces de yin au foyer moyen',
       'lever l exces yin foyer moyen', 'disperser la plenitude du foyer moyen',
@@ -2695,7 +2606,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'relancer_cycle_sheng',
     label: 'Relancer le cycle Cheng Eau → Bois',
     categorie: 'strategie',
-    description: 'Le Rein (Eau) nourrit le Foie (Bois) — Cycle Cheng nourricier.',
     patterns: [
       'relancer le cycle cheng', 'relancer le cycle sheng',
       'nourrir l eau pour relancer le bois',
@@ -2712,7 +2622,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'relancer_cycle_sheng_bois_feu',
     label: 'Relancer le cycle Cheng Bois → Feu',
     categorie: 'strategie',
-    description: 'Le Foie (Bois) nourrit le Cœur (Feu) — Cycle Cheng nourricier.',
     patterns: [
       'relancer cycle cheng bois feu', 'relancer cycle sheng bois feu',
       'relancer bois feu', 'nourrir le bois pour le feu',
@@ -2726,7 +2635,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'relancer_cycle_sheng_feu_terre',
     label: 'Relancer le cycle Cheng Feu → Terre',
     categorie: 'strategie',
-    description: 'Le Cœur (Feu) nourrit la Rate (Terre) — Cycle Cheng nourricier.',
     patterns: [
       'relancer cycle cheng feu terre', 'relancer cycle sheng feu terre',
       'relancer feu terre', 'nourrir le feu pour la terre',
@@ -2740,7 +2648,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'debloquer_cycles_cheng',
     label: 'Débloquer les cycles Cheng (global)',
     categorie: 'strategie',
-    description: 'Action globale sur le cycle nourricier (Cheng/Sheng) — sans cibler un élément spécifique.',
     patterns: [
       'debloquer les cycles cheng', 'debloquer les cycles sheng',
       'cycle d engendrement', 'cycle nourricier',
@@ -2754,7 +2661,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_ko_pathologique',
     label: 'Traiter un cycle Ko pathologique (attaque)',
     categorie: 'strategie',
-    description: 'Ko physiologique = contrôle. Ko pathologique = attaque d\'un élément par un autre (ex: Bois attaque Terre). Traitement : disperser l\'élément agresseur, soutenir l\'attaqué.',
     patterns: [
       'ko pathologique', 'cycle ko pathologique', 'attaque par le cycle ko',
       'disperser l element agresseur', 'soutenir l element attaque',
@@ -2768,7 +2674,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'corriger_cycle_rae',
     label: 'Corriger un cycle Raé (Ko inversé / Rébellion)',
     categorie: 'strategie',
-    description: 'Cycle Raé = Ko inversé : l\'élément normalement contrôlé se rebelle et attaque son contrôleur. Ex: l\'Eau (contrôlée par la Terre) contre-attaque la Terre.',
     patterns: [
       'cycle rae', 'rae', 'ko inverse', 'rebellion du cycle ko',
       'cycle ko inverse', 'element rebelle', 'rébellion element',
@@ -2819,7 +2724,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'tonifier_iong',
     label: 'Tonifier l\'Iong (Ying Qi)',
     categorie: 'strategie',
-    description: 'Traitement général en cas de paradoxe Oé/Iong.',
     patterns: [
       'tonifier l iong', 'tonifier l iong generale',
       'tonification iong', 'nourrir l iong', 'soutenir l iong',
@@ -2879,7 +2783,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traitement_local',
     label: 'Traitement local (dernier temps)',
     categorie: 'strategie',
-    description: 'Le traitement local vient TOUJOURS en dernier, après avoir équilibré le général.',
     patterns: [
       'traitement local', 'traitement local en dernier', 'local en dernier',
       'traiter localement', 'traitement secondaire local',
@@ -3026,7 +2929,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'consolider_yang_ming',
     label: 'Traiter le Yang Ming / Grand Yang Ming (E / GI)',
     categorie: 'strategie',
-    description: 'Yang Ming = Estomac (E) + Gros Intestin (GI). Niveau Yang du milieu — chaleur, plénitude, axe digestif. Grand Yang Ming = technique spécifique.',
     patterns: [
       'consolider le yang ming', 'soutenir le yang ming',
       'tonifier le yang ming', 'yang ming', 'grand yang ming',
@@ -3040,7 +2942,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'harmoniser_foie_rate',
     label: 'Harmoniser Foie / Rate (Bois-Terre)',
     categorie: 'strategie',
-    description: 'Dysharmonie Foie-Rate = Bois qui attaque la Terre (Ko pathologique courant). Harmoniser = calmer le Foie + tonifier la Rate.',
     patterns: [
       'harmoniser le foie et la rate', 'harmoniser foie rate',
       'calmer le foie soutenir la rate', 'bois terre harmonisation',
@@ -3055,7 +2956,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'nourrir_yin_foie',
     label: 'Nourrir le Yin du Foie',
     categorie: 'strategie',
-    description: 'Distinct du Yin du Rein. Le Yin du Foie nourrit le Sang et ancre le Yang du Foie.',
     patterns: [
       'nourrir le yin du foie', 'nourrir yin foie',
       'tonifier le yin du foie', 'soutenir le yin du foie',
@@ -3068,7 +2968,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'sudation',
     label: 'Méthode sudation (Han Fa)',
     categorie: 'strategie',
-    description: 'Han Fa = méthode de transpiration — ouvre les pores, expulse les facteurs pathogènes externes.',
     patterns: [
       'sudation', 'han fa', 'methode sudation',
       'provoquer la sudation', 'ouvrir les pores',
@@ -3081,7 +2980,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'purgation',
     label: 'Méthode purgation (Xia Fa)',
     categorie: 'strategie',
-    description: 'Xia Fa = méthode de purgation — évacue les facteurs pathogènes par le bas.',
     patterns: [
       'purgation', 'xia fa', 'methode purgation',
       'purger', 'evacuer par le bas', 'traitement par purgation',
@@ -3095,7 +2993,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_tae_yang',
     label: 'Traiter le niveau Taé Yang (V / IG)',
     categorie: 'strategie',
-    description: 'Niveau Taé Yang = Vessie (V) + Intestin Grêle (IG). Premier niveau Yang — superficie, défenses, dos.',
     patterns: [
       'tae yang', 'tai yang', 'niveau tae yang', 'niveau tai yang',
       'traiter le tae yang', 'traiter le tai yang',
@@ -3111,7 +3008,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_chao_yang',
     label: 'Traiter le niveau Chao Yang (VB / TR)',
     categorie: 'strategie',
-    description: 'Niveau Chao Yang = Vésicule Biliaire (VB) + Triple Réchauffeur (TR). Niveau charnière — demi-superficie, demi-profondeur.',
     patterns: [
       'chao yang', 'shao yang', 'niveau chao yang', 'niveau shao yang',
       'traiter le chao yang', 'traiter le shao yang',
@@ -3128,7 +3024,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_tae_yin',
     label: 'Traiter le niveau Taé Yin (P / Rt)',
     categorie: 'strategie',
-    description: 'Niveau Taé Yin = Poumon (P) + Rate (Rt). Premier niveau Yin — surface Yin, Qi et liquides.',
     patterns: [
       'tae yin', 'tai yin', 'niveau tae yin', 'niveau tai yin',
       'traiter le tae yin', 'traiter le tai yin',
@@ -3144,7 +3039,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_chao_yin',
     label: 'Traiter le niveau Chao Yin (C / R)',
     categorie: 'strategie',
-    description: 'Niveau Chao Yin = Cœur (C) + Rein (R). Niveau profond Yin — Feu et Eau, axe Cœur-Rein.',
     patterns: [
       'chao yin', 'shao yin', 'niveau chao yin', 'niveau shao yin',
       'traiter le chao yin', 'traiter le shao yin',
@@ -3161,7 +3055,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'traiter_jue_yin',
     label: 'Traiter le niveau Tsiué Yin (F / MC)',
     categorie: 'strategie',
-    description: 'Niveau Tsiué Yin = Foie (F) + Maître Cœur (MC). Niveau le plus profond Yin — terminal, récapitule Yin et Yang.',
     patterns: [
       'tsieu yin', 'tsiue yin', 'niveau tsieu yin', 'niveau tsiue yin',
       'jue yin', 'tjue yin', 'niveau jue yin', 'niveau tjue yin',
@@ -3187,7 +3080,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'faire_circuler_qi',
     label: 'Faire circuler le Qi (débloquer)',
     categorie: 'strategie',
-    description: 'Remettre le Qi en mouvement — contre toute stagnation. Action générale avant de cibler un organe.',
     patterns: [
       'faire circuler le qi', 'relancer la circulation du qi',
       'relancer le qi', 'debloquer le qi', 'mobiliser le qi',
@@ -3200,7 +3092,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'disperser_chaleur',
     label: 'Disperser / Clarifier la Chaleur réelle',
     categorie: 'strategie',
-    description: 'Chaleur réelle (plénitude) — NE PAS confondre avec le Yang apparent (vide de Yin). Ici on disperse car c\'est une vraie chaleur.',
     patterns: [
       'disperser la chaleur', 'clarifier la chaleur',
       'evacuer la chaleur', 'rafraichir la chaleur',
@@ -3214,7 +3105,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'faire_descendre_qi',
     label: 'Faire descendre le Qi (rébellion)',
     categorie: 'strategie',
-    description: 'Le Qi monte au lieu de descendre (Estomac, Poumon). Stratégie : ramener vers le bas.',
     patterns: [
       'faire descendre le qi', 'abaisser le qi',
       'ramener le qi vers le bas', 'le qi doit redescendre',
@@ -3227,7 +3117,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'ancrer_yang',
     label: 'Ancrer le Yang (nourrir le Yin pour stabiliser)',
     categorie: 'strategie',
-    description: 'Le Yang flotte car le Yin ne l\'ancre plus. Stratégie = nourrir le Yin pour que le Yang redescende et se stabilise. Distinct de disperser.',
     patterns: [
       'ancrer le yang', 'yang a ancrer', 'le yang doit etre ancre',
       'ramener le yang vers le bas', 'stabiliser le yang',
@@ -3241,7 +3130,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'faire_circuler_sang',
     label: 'Faire circuler le Sang / Disperser les stases',
     categorie: 'strategie',
-    description: 'Remettre le Sang en mouvement, dissoudre les stases sanguines.',
     patterns: [
       'faire circuler le sang', 'activer le sang', 'mobiliser le sang',
       'disperser les stases', 'lever les stases', 'lever les stases sanguines',
@@ -3254,7 +3142,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'nourrir_sang_foie',
     label: 'Nourrir le Sang du Foie',
     categorie: 'strategie',
-    description: 'Sang du Foie insuffisant — nourrir spécifiquement pour renforcer les tendons, la vision, le cycle menstruel.',
     patterns: [
       'nourrir le sang du foie', 'nourrir sang foie',
       'tonifier le sang du foie', 'soutenir le sang du foie',
@@ -3267,7 +3154,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'monter_yang_rate',
     label: 'Monter le Yang de la Rate (relever le Qi)',
     categorie: 'strategie',
-    description: 'Le Qi pur de la Rate doit monter. Quand il ne monte plus = prolapsus, ptoses, hémorragies. Stratégie de relèvement du Qi.',
     patterns: [
       'monter le yang de la rate', 'relever le qi de la rate',
       'relever le qi', 'faire monter le qi de la rate',
@@ -3280,7 +3166,6 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     id: 'reconnecter_coeur_rein',
     label: 'Reconnecter l\'axe Cœur–Rein (Eau-Feu)',
     categorie: 'strategie',
-    description: 'Rétablir la communication entre le Feu (Cœur) et l\'Eau (Rein) — le Feu descend, l\'Eau monte.',
     patterns: [
       'reconnecter coeur rein', 'reconnecter l axe coeur rein',
       'retablir l axe eau feu', 'retablir l axe coeur rein',
@@ -3974,12 +3859,6 @@ export function labelConceptIeatc(id: string): string {
   return TOUS_CONCEPTS.find((c) => c.id === id)?.label ?? id;
 }
 
-/**
- * Retourne la description clinique d'un concept.
- */
-export function descriptionConceptIeatc(id: string): string | undefined {
-  return TOUS_CONCEPTS.find((c) => c.id === id)?.description;
-}
 
 /**
  * Retourne les règles cliniques associées à un concept (ex : ['R3', 'R4']).
