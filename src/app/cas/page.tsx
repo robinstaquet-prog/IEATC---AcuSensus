@@ -144,12 +144,9 @@ function filterCas(cas: ClinicalCase[], f: Filters): ClinicalCase[] {
       if (!haystack.includes(q)) return false;
     }
 
-    // Filtre 1 : Apprentissage = exemplaire, qualifié communautaire, ou analyse expert
+    // Filtre 1 : Apprentissage = marqué exemplaire par un éditeur, ou qualifié par la communauté
     if (f.mode === 'apprentissage') {
-      const isApprentissage =
-        c.exemplaire ||
-        c.qualifieApprentissage ||
-        c.analyses.some((a) => a.role === 'expert' || a.auteurStatut === 'expert');
+      const isApprentissage = c.exemplaire === true || c.qualifieApprentissage === true;
       if (!isApprentissage) return false;
     }
 

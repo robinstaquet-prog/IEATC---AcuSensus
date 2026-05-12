@@ -42,34 +42,43 @@ export function VoteButton({
   const balance = user?.votePoints ?? 0;
   const canVote = !!user && balance >= cost;
 
-  // Compte combien de votes s'appliquent déjà (utile pour l'affichage)
   const votes = participation.votes ?? [];
   const count = elementKey
-    ? votes.filter(
-        (v) => v.cible === 'participation' || v.elementKey === elementKey,
-      ).length
+    ? votes.filter((v) => v.cible === 'participation' || v.elementKey === elementKey).length
     : votes.filter((v) => v.cible === 'participation').length;
 
+  // Vote sur la participation entière (toggle possible)
   const hasUserVotedOnParticipation = !elementKey && !!user && votes.some(
     (v) => v.voterId === user.id && v.cible === 'participation',
   );
+
+  // Vote sur un élément précis (one-way — pas d'unvote élément)
+  const hasUserVotedOnElement = !!elementKey && !!user && votes.some(
+    (v) => v.voterId === user.id && v.cible === 'element' && v.elementKey === elementKey,
+  );
+
+  const alreadyVoted = hasUserVotedOnParticipation || hasUserVotedOnElement;
 
   const handleClick = async () => {
     if (!user) {
       show('Connectez-vous pour voter', 'error');
       return;
     }
+    // Unvote participation
     if (!elementKey && hasUserVotedOnParticipation) {
       const result = await unvoteOnParticipation(participation, user);
       if (!result.ok) {
         show(result.error ?? 'Annulation impossible', 'error');
         return;
       }
-      addVotePoints(cost); // remboursement
+      addVotePoints(cost);
       show(`+${cost} pts remboursés`, 'success');
       if (result.updated) onVoted?.(result.updated);
       return;
     }
+    // Élément déjà voté — sécurité (ne devrait pas arriver, bouton désactivé)
+    if (hasUserVotedOnElement) return;
+
     if (!canVote) {
       show(`Solde insuffisant (${cost} pt requis)`, 'error');
       return;
@@ -83,15 +92,31 @@ export function VoteButton({
     }
     addVotePoints(-cost);
     show(`−${cost} pt · il vous reste ${balance - cost}`, 'success');
-    if (result.updated) onVoted?.(result.updated);
+
+    if (result.updated) {
+      onVoted?.(result.updated);
+    } else {
+      // Optimistic update si le RPC ne renvoie pas la ligne mise à jour
+      const newVote = {
+        id: `opt-${Date.now()}`,
+        voterId: user.id,
+        voterStatut: (user.statut ?? 'etudiant') as import('@/types').StatutPraticien,
+        cible: (elementKey ? 'element' : 'participation') as import('@/types').VoteCible,
+        elementKey: elementKey,
+        createdAt: new Date().toISOString(),
+      };
+      onVoted?.({ ...participation, votes: [...votes, newVote] });
+    }
   };
 
   return (
     <button
       onClick={handleClick}
-      disabled={!hasUserVotedOnParticipation && !canVote}
+      disabled={hasUserVotedOnElement || (!hasUserVotedOnParticipation && !canVote)}
       title={
-        elementKey
+        hasUserVotedOnElement
+          ? 'Déjà voté'
+          : elementKey
           ? `Voter pour cet élément (${cost} pt)`
           : hasUserVotedOnParticipation
           ? 'Annuler votre validation'
@@ -100,7 +125,7 @@ export function VoteButton({
       className={cn(
         'inline-flex items-center gap-1 rounded-full border font-medium transition-colors',
         size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-3 py-1.5',
-        hasUserVotedOnParticipation
+        alreadyVoted
           ? 'bg-amber-100 text-amber-700 border-amber-300 hover:bg-amber-200'
           : canVote
           ? 'border-teal-200 text-teal-700 bg-teal-50 hover:bg-teal-100'
@@ -108,8 +133,11 @@ export function VoteButton({
         className,
       )}
     >
-      <ThumbsUp size={size === 'sm' ? 11 : 13} fill={hasUserVotedOnParticipation ? 'currentColor' : 'none'} />
-      {label ?? (elementKey ? `+1` : hasUserVotedOnParticipation ? `Validé ✓` : `Valider (2 pts)`)}
+      <ThumbsUp size={size === 'sm' ? 11 : 13} fill={alreadyVoted ? 'currentColor' : 'none'} />
+      {label ?? (elementKey
+        ? (hasUserVotedOnElement ? '✓' : '+1')
+        : hasUserVotedOnParticipation ? 'Validé ✓' : 'Valider (2 pts)'
+      )}
       {count > 0 && (
         <span className="text-[10px] font-semibold text-teal-600">· {count}</span>
       )}
