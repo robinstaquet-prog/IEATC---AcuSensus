@@ -1391,7 +1391,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'mingmen_insuffisant',
-    label: 'Ming Men insuffisant — Feu de la Porte de la Vie',
+    label: 'Feu du Ming Men insuffisant',
     categorie: 'syndrome',
     description: 'CRITIQUE : le Feu du Ming Men (VG4) est la source du Yang constitutionnel. Son insuffisance = froid profond, diarrhées matinales, impuissance.',
     patterns: [
@@ -1422,7 +1422,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'vide_jing_rein',
-    label: 'Vide de Jing / Tsing du Rein',
+    label: 'Vide de Tsing du Rein',
     categorie: 'syndrome',
     description: 'Épuisement de l\'essence ancestrale (Tsing/Jing) stockée dans le Rein.',
     patterns: [
@@ -1435,7 +1435,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'vide_qi_poumon',
-    label: 'Vide de Qi du Poumon (Métal insuffisant)',
+    label: 'Vide de Qi du Poumon',
     categorie: 'syndrome',
     description: 'Insuffisance du Qi du Poumon — souffle court, fatigue profonde, voix faible, transpiration spontanée. Le Poumon gouverne le Qi et la respiration.',
     patterns: [
@@ -1498,7 +1498,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Foie : syndromes Yang montant et Vent ──────────────────────────────────
   {
     id: 'yang_foie_montant',
-    label: 'Yang du Foie montant (Gan Yang Shang Kang)',
+    label: 'Yang du Foie montant',
     categorie: 'syndrome',
     description: 'Yang du Foie non ancré monte vers le haut — céphalées temporales, visage rouge, irritabilité. Cause : vide de Yin du Rein. Traiter le Rein d\'abord.',
     patterns: [
@@ -1515,7 +1515,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'vent_interne_foie',
-    label: 'Fong interne du Foie (Gan Feng Nei Dong)',
+    label: 'Fong interne du Foie',
     categorie: 'syndrome',
     description: 'Fong interne du Foie (IEATC : Fong = Vent) — toujours secondaire à vide Yin/Sang du Foie ou Rein. On le disperse/expulse/chasse, jamais on ne le "pacifie". Pouls corde-arc caractéristique.',
     patterns: [
@@ -1531,7 +1531,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'feu_foie',
-    label: 'Feu du Foie / Chaleur du Foie',
+    label: 'Feu du Foie',
     categorie: 'syndrome',
     description: 'Chaleur en plénitude dans le Foie — yeux rouges, amertume buccale, constipation.',
     patterns: [
@@ -1592,7 +1592,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Cycle Ko Bois → Terre ──────────────────────────────────────────────────
   {
     id: 'bois_envahit_terre',
-    label: 'Bois envahit Terre (cycle Ko pathologique)',
+    label: 'Bois envahit la Terre',
     categorie: 'syndrome',
     description: 'Foie/VB (Bois) en excès contrôle trop fort la Rate/Estomac (Terre) — troubles digestifs aggravés par le stress.',
     patterns: [
@@ -1610,7 +1610,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'cycle_ko_inverse',
-    label: 'Cycle Raé (Ko inversé / Rébellion)',
+    label: 'Cycle Raé (rébellion)',
     categorie: 'syndrome',
     description: 'Cycle Raé (侮 Wǔ) : l\'élément contrôlé se retourne contre son contrôlant — désordre profond, épuisement du contrôle.',
     patterns: [
@@ -1624,85 +1624,10 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     priorite: 2,
   },
 
-  // ─── Cycle Cheng (génération) ────────────────────────────────────────────────
-  // Terminologie IEATC : Cycle Cheng (生 Shēng) — le cycle nourricier/générateur.
-  {
-    id: 'cycle_sheng_eau_bois',
-    label: 'Cycle Cheng Eau → Bois brisé (Rein ne nourrit plus Foie)',
-    categorie: 'syndrome',
-    description: 'Le Rein (Eau) n\'alimente plus le Foie/VB (Bois) — tendons fragiles, fatigabilité, mononucléose séquellaire.',
-    patterns: [
-      'eau ne nourrit plus bois', 'cycle cheng eau bois', 'cycle sheng eau bois',
-      'cheng eau vers bois', 'sheng eau vers bois',
-      'rein ne nourrit plus foie', 'eau insuffisante bois',
-      'insuffisance eau bois', 'cycle cheng brise', 'cycle sheng brise',
-      'eau vers bois defaillant', 'bois mal nourri par l eau',
-      'foie mal nourri par le rein',
-      'eau ne soutient plus le bois', 'foie non nourri par le rein',
-      'rein ne soutient plus le foie', 'insuffisance eau vers bois',
-    ],
-    regles: ['R4'],
-    priorite: 1,
-  },
-  {
-    id: 'cycle_sheng_bois_feu',
-    label: 'Cycle Cheng Bois → Feu brisé',
-    categorie: 'syndrome',
-    description: 'Le Foie/VB (Bois) n\'alimente plus le Cœur/IG (Feu) — cascade énergétique défaillante.',
-    patterns: [
-      'bois ne nourrit plus feu', 'cycle cheng bois feu', 'cycle sheng bois feu',
-      'cascade eau bois feu', 'bois vers feu defaillant',
-      'cycle eau bois feu',
-    ],
-    priorite: 1,
-  },
-
-  // ─── Cycles Cheng supplémentaires ────────────────────────────────────────────
-  {
-    id: 'cycle_sheng_feu_terre',
-    label: 'Cycle Cheng Feu → Terre brisé (Cœur ne nourrit plus Rate)',
-    categorie: 'syndrome',
-    description: 'Le Cœur (Feu) n\'alimente plus la Rate (Terre) — fatigue digestive profonde sur fond de faiblesse cardiaque.',
-    patterns: [
-      'feu ne nourrit plus terre', 'cycle cheng feu terre', 'cycle sheng feu terre',
-      'coeur ne nourrit plus la rate', 'feu vers terre defaillant',
-      'cascade feu terre', 'coeur rate cycle cheng',
-      'feu insuffisant pour la terre',
-    ],
-    priorite: 1,
-  },
-  {
-    id: 'cycle_sheng_terre_metal',
-    label: 'Cycle Cheng Terre → Métal brisé (Rate ne nourrit plus Poumon)',
-    categorie: 'syndrome',
-    description: 'La Rate (Terre) n\'alimente plus le Poumon (Métal) — infections respiratoires répétées sur fond de vide digestif.',
-    patterns: [
-      'terre ne nourrit plus metal', 'cycle cheng terre metal', 'cycle sheng terre metal',
-      'rate ne nourrit plus le poumon', 'terre vers metal defaillant',
-      'cascade terre metal', 'rate poumon cycle cheng',
-      'digestion ne soutient plus le poumon', 'rate ne soutient plus poumon',
-    ],
-    priorite: 1,
-  },
-  {
-    id: 'cycle_sheng_metal_eau',
-    label: 'Cycle Cheng Métal → Eau brisé (Poumon ne nourrit plus Rein)',
-    categorie: 'syndrome',
-    description: 'Le Poumon (Métal) ne diffuse plus vers le Rein (Eau) — vide de Yin du Rein secondaire à un vide du Poumon.',
-    patterns: [
-      'metal ne nourrit plus eau', 'cycle cheng metal eau', 'cycle sheng metal eau',
-      'poumon ne nourrit plus le rein', 'metal vers eau defaillant',
-      'cascade metal eau', 'poumon rein cycle cheng',
-      'diffusion du poumon vers le rein insuffisante',
-      'poumon ne soutient plus le rein',
-    ],
-    priorite: 1,
-  },
-
   // ─── Syndromes du Cœur ───────────────────────────────────────────────────────
   {
     id: 'shen_perturbe',
-    label: 'Shen perturbé (Cœur troublé)',
+    label: 'Shen perturbé',
     categorie: 'syndrome',
     description: 'Le Shen (esprit, hébergé par le Cœur) est perturbé — insomnie, palpitations, anxiété, irritabilité.',
     patterns: [
@@ -1788,7 +1713,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'tan_coeur',
-    label: 'Tan obstruant le Cœur (Phlegme-Feu)',
+    label: 'Tan obstruant le Cœur',
     categorie: 'syndrome',
     description: 'Phlegme obstruant les orifices du Cœur — confusion mentale, agitation, manie.',
     patterns: [
@@ -1804,7 +1729,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Syndromes de la Rate / Foyer Moyen ─────────────────────────────────────
   {
     id: 'rate_non_rechauffee',
-    label: 'Rate non réchauffée par le Feu du Rein',
+    label: 'Rate non réchauffée',
     categorie: 'syndrome',
     description: 'Le Yang du Rein (Ming Men) insuffisant ne réchauffe plus la Rate — digestion froide, selles molles.',
     patterns: [
@@ -1822,7 +1747,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'exces_yin_foyer_moyen',
-    label: 'Excès de Yin au Foyer Moyen (Rate chargée)',
+    label: 'Excès de Yin au Foyer Moyen',
     categorie: 'syndrome',
     description: 'Plénitude de Yin bloque le Foyer Moyen — TRAITER EN PREMIER selon la règle des 3 Foyers.',
     patterns: [
@@ -1935,26 +1860,10 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     priorite: 1,
     parentFamilleId: 'vide_yang',
   },
-  {
-    id: 'diarrhees_matinales_mingmen',
-    label: 'Diarrhées matinales — Ming Men (Yang Ming)',
-    categorie: 'syndrome',
-    description: 'Diarrhées au petit matin (heure du GI) = Ming Men ne stimule plus le Yang Ming. Signe très caractéristique.',
-    patterns: [
-      'diarrhees matinales', 'diarrhee au petit matin',
-      'diarrhees le matin', 'yang ming sans stimulus',
-      'gros intestin non active le matin', 'yang ming perturbe',
-      'souffles yang ne montent plus', 'yang ne monte pas le matin',
-    ],
-    regles: ['R2'],
-    priorite: 1,
-    parentFamilleId: 'vide_yang',
-  },
-
   // ─── Paradoxe Oé/Iong ────────────────────────────────────────────────────────
   {
     id: 'paradoxe_oe_iong',
-    label: 'Paradoxe : Oé plein local / Iong vide général',
+    label: 'Paradoxe Oé / Iong',
     categorie: 'syndrome',
     description: 'SPÉCIFIQUE IEATC : chaleur/inflammation locale (Oé en excès) sur fond de vide Yang général (Iong insuffisante). Traiter l\'Iong générale ET disperser l\'Oé locale.',
     patterns: [
@@ -1972,7 +1881,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Merveilleux Vaisseaux ───────────────────────────────────────────────────
   {
     id: 'du_mai_insuffisant',
-    label: 'Tou Mo (Du Mai) insuffisant — Yang ne monte plus',
+    label: 'Tou Mo insuffisant',
     categorie: 'syndrome',
     description: 'Tou Mo / Du Mai (Vaisseau Gouverneur) insuffisant — le Yang de l\'axe dorsal ne monte plus. Ming Men → VG4.',
     patterns: [
@@ -1988,7 +1897,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'ren_mai_fragilise',
-    label: 'Jenn Mo (Ren Mai) fragilisé — Yin insuffisant pour ancrer',
+    label: 'Jenn Mo fragilisé',
     categorie: 'syndrome',
     description: 'Jenn Mo / Ren Mai (Vaisseau Conception) fragilisé — Yin de base insuffisant, Yang non ancré.',
     patterns: [
@@ -2005,7 +1914,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Spécifiques organiques ─────────────────────────────────────────────────
   {
     id: 'vb_sans_drainage',
-    label: 'Vésicule Biliaire sans drainage — reflux vers Foie',
+    label: 'VB sans drainage',
     categorie: 'syndrome',
     description: 'La VB ne se draine plus — chaleur et bile refluent vers le Foie. Amertume, nausées, ictère.',
     patterns: [
@@ -2017,40 +1926,10 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     priorite: 2,
   },
-  {
-    id: 'oreille_rein_shao_yang',
-    label: 'Oreille interne — domaine Rein / Chao Yang',
-    categorie: 'syndrome',
-    description: 'L\'oreille est l\'orifice du Rein. Les méridiens TR et VB (Chao Yang) passent dans l\'oreille. Bourdonnements ou surdité = diagnostic différentiel vide/plein.',
-    patterns: [
-      'oreille interne', 'oreille rein', 'oreille domaine rein',
-      'bourdonnements vide', 'bourdonnements rein',
-      'surdite vide', 'chao yang oreille', 'shao yang oreille', 'tr vb oreille',
-      'yang apparent irrite oreille', 'feu vide irrite oreille',
-    ],
-    regles: ['R3'],
-    priorite: 2,
-  },
-  {
-    id: 'tendons_foie_vb',
-    label: 'Tendons / Ligaments — domaine Foie/VB',
-    categorie: 'syndrome',
-    description: 'Les tendons sont gouvernés par le Foie (Su Wen). Insuffisance du Foie = tendons fragiles, genou vulnérable.',
-    patterns: [
-      'tendons non nourris', 'tendons insuffisamment nourris',
-      'tendons fragiles', 'tendons vulnerables',
-      'ligaments non nourris', 'foie ne gouverne plus les tendons',
-      'tendons foie vb', 'tendons et ligaments insuffisants',
-      'foie vb tendons',
-    ],
-    regles: ['R4'],
-    priorite: 2,
-  },
-
   // ─── Esprits des organes (Wushen) ────────────────────────────────────────────
   {
     id: 'hun_perturbe',
-    label: 'Hun perturbé (âme végétative — domaine Foie)',
+    label: 'Hun perturbé (Foie)',
     categorie: 'syndrome',
     description: 'Le Hun (esprit du Foie) est perturbé — rêves agités, déambulations nocturnes, instabilité psychique, décisions difficiles.',
     patterns: [
@@ -2063,7 +1942,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'po_perturbe',
-    label: 'Po perturbé (âme corporelle — domaine Poumon)',
+    label: 'Po perturbé (Poumon)',
     categorie: 'syndrome',
     description: 'Le Po (esprit du Poumon) est perturbé — deuil non résolu, mélancolie, tristesse profonde, crispation cutanée.',
     patterns: [
@@ -2076,7 +1955,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'zhi_perturbe',
-    label: 'Zhi perturbé (volonté — domaine Rein)',
+    label: 'Zhi perturbé (Rein)',
     categorie: 'syndrome',
     description: 'Le Zhi (volonté du Rein) est perturbé — manque de volonté, peur chronique, incapacité à avancer.',
     patterns: [
@@ -2089,7 +1968,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'yi_perturbe',
-    label: 'Yi perturbé (intellect — domaine Rate)',
+    label: 'Yi perturbé (Rate)',
     categorie: 'syndrome',
     description: 'Le Yi (intellect de la Rate) est perturbé — ruminations, idées fixes, pensées circulaires, obsessions.',
     patterns: [
@@ -2153,7 +2032,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'stagnation_nourriture',
-    label: 'Rétention de nourriture — Estomac surchargé',
+    label: 'Rétention de nourriture',
     categorie: 'syndrome',
     description: 'Aliments non transformés stagnant dans l\'Estomac — épigastre plein et douloureux, goût acide, selles nauséabondes.',
     patterns: [
@@ -2293,7 +2172,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Syndromes manquants : Cœur/Rate (Feu-Terre) ────────────────────────────
   {
     id: 'vide_qi_rate_coeur',
-    label: 'Vide de Qi Rate-Cœur (Feu ne nourrit plus Terre)',
+    label: 'Vide de Qi Rate et Cœur',
     categorie: 'syndrome',
     description: 'Double vide : Rate et Cœur insuffisants ensemble — fatigue profonde, palpitations légères, digestion lente.',
     patterns: [
@@ -2324,7 +2203,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Syndromes manquants : Yang apparent composite ───────────────────────────
   {
     id: 'yang_apparent_vb',
-    label: 'Yang apparent de VB (Faux Yang — Vide de Yin sous-jacent)',
+    label: 'Yang apparent de VB',
     categorie: 'syndrome',
     description: 'Yang de la VB non ancré qui monte — TOUJOURS secondaire à un vide de Yin (Foie ou Rein). Traiter le Yin, jamais disperser le Yang.',
     patterns: [
@@ -2340,7 +2219,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'yang_apparent_foie',
-    label: 'Yang apparent du Foie (Faux Yang — Vide de Yin sous-jacent)',
+    label: 'Yang apparent du Foie',
     categorie: 'syndrome',
     description: 'Yang du Foie non ancré qui monte — secondaire à vide de Yin du Foie ou du Rein. Traiter le Yin en premier.',
     patterns: [
@@ -2357,7 +2236,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Dysharmonie Cœur–Rein (axe Eau-Feu) ────────────────────────────────
   {
     id: 'rein_coeur_dysharmonie',
-    label: 'Dysharmonie Cœur–Rein (axe Eau-Feu brisé)',
+    label: 'Dysharmonie Cœur–Rein',
     categorie: 'syndrome',
     description: 'L\'Eau (Rein) ne monte plus vers le Feu (Cœur) et/ou le Feu ne descend plus vers l\'Eau — insomnie profonde, anxiété avec lombalgie, chaleur du haut et froid du bas.',
     patterns: [
@@ -2374,7 +2253,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   // ─── Qi de la Rate ne monte plus (prolapsus) ────────────────────────────
   {
     id: 'qi_rate_ne_monte_plus',
-    label: 'Qi de la Rate ne monte plus (prolapsus)',
+    label: 'Qi de la Rate ne monte plus',
     categorie: 'syndrome',
     description: 'Le Qi de la Rate n\'a plus la force de monter (ascension du pur). Conséquences : prolapsus d\'organes, ptoses, hémorragies par non-rétention.',
     patterns: [
