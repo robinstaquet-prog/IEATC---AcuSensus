@@ -27,8 +27,9 @@ export function getCasesPublies(): ClinicalCase[] {
 // ─── Statistiques globales calculées ─────────────────────────────────────────
 
 import { CLINICAL_CASES } from './cases';
-import { normaliserTextes, labelConceptIeatc } from './normalisation';
+import { normaliserTextes, labelConceptIeatc, SYNDROMES_IEATC } from './normalisation';
 import { normalizePoint } from '@/lib/point-normalize';
+import { createClient } from '@supabase/supabase-js';
 import type { GlobalStats, FrequencyEntry, NiveauComplexite } from '@/types';
 
 function computeFrequency(ids: string[]): FrequencyEntry[] {
@@ -42,7 +43,21 @@ function computeFrequency(ids: string[]): FrequencyEntry[] {
     .sort((a, b) => b.count - a.count);
 }
 
-export function computeGlobalStats(): GlobalStats {
+/**
+ * Retourne l'ensemble des IDs de familles couvertes par les syndromes donnés.
+ * Quand un syndrome spécifique est reconnu (ex: vide_yin_rein), sa famille-mère
+ * (vide_yin) ne doit pas être comptée séparément dans les stats.
+ */
+function famillesCouvertesBySyndromes(syndromeIds: string[]): Set<string> {
+  const covered = new Set<string>();
+  for (const sid of syndromeIds) {
+    const parentId = SYNDROMES_IEATC.find((s) => s.id === sid)?.parentFamilleId;
+    if (parentId) covered.add(parentId);
+  }
+  return covered;
+}
+
+export async function computeGlobalStats(): Promise<GlobalStats> {
   const publie = CLINICAL_CASES.filter((c) => c.statut === 'publie');
   const allAnalyses = publie.flatMap((c) => c.analyses);
 
@@ -68,6 +83,8 @@ export function computeGlobalStats(): GlobalStats {
   // ── Normalisation sémantique à 4 couches ─────────────────────────────────────
   // Sources : categoriesDiagnostiques (requis) + bilanEnergetique + strategie (optionnels)
   // Chaque analyse contribue une fois par concept reconnu (sans doublons intra-analyse).
+  // Fix A : quand un syndrome spécifique est reconnu, sa famille-mère n'est PAS
+  //         comptée séparément (déduplication hiérarchique).
   const famillesCounts: Record<string, number> = {};
   const syndromesCounts: Record<string, number> = {};
   const organesCounts: Record<string, number> = {};
@@ -87,7 +104,11 @@ export function computeGlobalStats(): GlobalStats {
     const { familles, syndromes, organes } = normaliserTextes(textesDiag);
     const { strategies } = normaliserTextes(textesStrategie);
 
-    for (const f of familles) famillesCounts[f] = (famillesCounts[f] ?? 0) + 1;
+    // Fix A — ne pas compter les familles déjà couvertes par un syndrome spécifique
+    const couvertes = famillesCouvertesBySyndromes(syndromes);
+    for (const f of familles) {
+      if (!couvertes.has(f)) famillesCounts[f] = (famillesCounts[f] ?? 0) + 1;
+    }
     for (const s of syndromes) syndromesCounts[s] = (syndromesCounts[s] ?? 0) + 1;
     for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
     for (const s of strategies) strategiesCounts[s] = (strategiesCounts[s] ?? 0) + 1;
@@ -97,6 +118,69 @@ export function computeGlobalStats(): GlobalStats {
   for (const c of publie) {
     const { pathologies } = normaliserTextes([c.content.motif]);
     for (const p of pathologies) pathologiesCounts[p] = (pathologiesCounts[p] ?? 0) + 1;
+  }
+
+  // ── Fix C — Participations publiques Supabase ────────────────────────────────
+  // Inclure les analyses publiées par les membres dans les statistiques globales.
+  // Seules les participations avec publicationMode='public' et publiee=true sont incluses.
+  // Les exercices (isExercice=true) sont toujours exclus.
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+
+    const { data: parts } = await supabase
+      .from('user_participations')
+      .select('extra_data')
+      .filter('extra_data->>publicationMode', 'eq', 'public')
+      .filter('extra_data->>publiee', 'eq', 'true')
+      .filter('extra_data->>isExercice', 'neq', 'true');
+
+    for (const row of parts ?? []) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const extra: Record<string, any> = row.extra_data ?? {};
+
+      // Points proposés par l'utilisateur
+      const pointsProposer: Array<{ code?: string; technique?: string }> = extra.pointsProposer ?? [];
+      for (const p of pointsProposer) {
+        if (p.code) allPointCodes.push(normalizePoint(p.code).code);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (p.technique) allTechniques.push(p.technique as any);
+      }
+
+      // Grille choisie
+      if (extra.grilleChoisie) allGrilles.push(extra.grilleChoisie);
+
+      // Localisation identifiée
+      const foyer = extra.localisationIdentifiee;
+      if (foyer && foyer !== 'non_applicable') allFoyers.push(String(foyer));
+
+      // Textes diagnostiques : catégories retenues + bilan énergétique
+      const textesDiag: string[] = [
+        ...(Array.isArray(extra.categoriesRetenues) ? extra.categoriesRetenues.filter(Boolean) : []),
+        ...(extra.bilanEnergetique ? [extra.bilanEnergetique] : []),
+      ];
+
+      // Texte stratégie
+      const textesStrategie: string[] = extra.strategie ? [extra.strategie] : [];
+
+      if (textesDiag.length > 0 || textesStrategie.length > 0) {
+        const { familles, syndromes, organes } = normaliserTextes(textesDiag);
+        const { strategies } = normaliserTextes(textesStrategie);
+
+        // Fix A — même déduplication pour les participations
+        const couvertes = famillesCouvertesBySyndromes(syndromes);
+        for (const f of familles) {
+          if (!couvertes.has(f)) famillesCounts[f] = (famillesCounts[f] ?? 0) + 1;
+        }
+        for (const s of syndromes) syndromesCounts[s] = (syndromesCounts[s] ?? 0) + 1;
+        for (const o of organes) organesCounts[o] = (organesCounts[o] ?? 0) + 1;
+        for (const s of strategies) strategiesCounts[s] = (strategiesCounts[s] ?? 0) + 1;
+      }
+    }
+  } catch {
+    // Supabase non disponible (build statique, etc.) — on continue avec le corpus seul
   }
 
   const topFamillesDiag: FrequencyEntry[] = Object.entries(famillesCounts)

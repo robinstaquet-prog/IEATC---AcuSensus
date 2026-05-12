@@ -19,8 +19,8 @@ import {
 import { getGrille, GRILLES } from '@/data/grilles';
 import { TutorialAccordion } from '@/components/home/TutorialAccordion';
 
-export default function HomePage() {
-  const stats = computeGlobalStats();
+export default async function HomePage() {
+  const stats = await computeGlobalStats();
   const exemplaires = getCasesExemplaires();
   const recents = getCasesRecents(4);
 

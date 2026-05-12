@@ -89,6 +89,13 @@ export interface ConceptIeatc {
    * Reflète la logique protocole (général avant local, cause avant conséquence).
    */
   priorite?: 1 | 2 | 3;
+  /**
+   * ID de la famille-mère dans FAMILLES_DIAG.
+   * Quand ce syndrome est reconnu dans un texte, sa famille-mère ne doit PAS
+   * être comptée séparément dans les stats (évite le double comptage).
+   * Exemple : vide_yin_rein (syndrome) couvre vide_yin (famille).
+   */
+  parentFamilleId?: string;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -393,6 +400,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R1', 'R2'],
     priorite: 1,
+    parentFamilleId: 'vide_yang',
   },
   {
     id: 'mingmen_insuffisant',
@@ -407,6 +415,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R1', 'R2'],
     priorite: 1,
+    parentFamilleId: 'vide_yang',
   },
   {
     id: 'vide_yin_rein',
@@ -422,6 +431,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R3', 'R4'],
     priorite: 1,
+    parentFamilleId: 'vide_yin',
   },
   {
     id: 'vide_jing_rein',
@@ -434,6 +444,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
       'epuisement du jing du rein', 'jing rein insuffisant',
     ],
     priorite: 1,
+    parentFamilleId: 'vide_jing',
   },
 
   // ─── Foie : syndromes Yang montant et Vent ──────────────────────────────────
@@ -464,6 +475,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R4'],
     priorite: 2,
+    parentFamilleId: 'vent_interne',
   },
   {
     id: 'feu_foie',
@@ -478,6 +490,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R3'],
     priorite: 2,
+    parentFamilleId: 'chaleur',
   },
   {
     id: 'vide_sang_foie',
@@ -490,6 +503,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
       'vide sang foie',
     ],
     priorite: 1,
+    parentFamilleId: 'vide_sang',
   },
   {
     id: 'vide_yin_foie',
@@ -504,6 +518,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R4'],
     priorite: 1,
+    parentFamilleId: 'vide_yin',
   },
   {
     id: 'stagnation_qi_foie',
@@ -517,6 +532,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
       'bois qui se bloque',
     ],
     priorite: 2,
+    parentFamilleId: 'stagnation_qi',
   },
 
   // ─── Cycle Ko Bois → Terre ──────────────────────────────────────────────────
@@ -604,6 +620,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
       'chaleur foie coeur', 'foie feu coeur',
     ],
     priorite: 2,
+    parentFamilleId: 'chaleur',
   },
 
   // ─── Syndromes de la Rate / Foyer Moyen ─────────────────────────────────────
@@ -621,6 +638,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R2'],
     priorite: 2,
+    parentFamilleId: 'vide_yang',
   },
   {
     id: 'exces_yin_foyer_moyen',
@@ -635,6 +653,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R5'],
     priorite: 1,
+    parentFamilleId: 'exces_yin',
   },
 
   // ─── Syndromes du Rein / Foyer Inférieur ────────────────────────────────────
@@ -652,6 +671,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R2'],
     priorite: 1,
+    parentFamilleId: 'vide_yang',
   },
   {
     id: 'diarrhees_matinales_mingmen',
@@ -666,6 +686,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R2'],
     priorite: 1,
+    parentFamilleId: 'vide_yang',
   },
 
   // ─── Paradoxe Oé/Iong ────────────────────────────────────────────────────────
@@ -698,6 +719,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R2'],
     priorite: 1,
+    parentFamilleId: 'vide_yang',
   },
   {
     id: 'ren_mai_fragilise',
@@ -711,6 +733,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     ],
     regles: ['R4'],
     priorite: 1,
+    parentFamilleId: 'vide_yin',
   },
 
   // ─── Spécifiques organiques ─────────────────────────────────────────────────

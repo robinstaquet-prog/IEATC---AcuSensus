@@ -82,8 +82,8 @@ function StatBar({
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function StatistiquesPage() {
-  const stats = computeGlobalStats();
+export default async function StatistiquesPage() {
+  const stats = await computeGlobalStats();
 
   const maxPointCount = stats.topPoints[0]?.count ?? 1;
   const maxGrilleCount = stats.topGrilles[0]?.count ?? 1;
