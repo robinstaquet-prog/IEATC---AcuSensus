@@ -12,17 +12,20 @@ import {
 } from 'lucide-react';
 import {
   getCasesExemplaires,
-  getCasesRecents,
+  getRecentCasesWithDb,
   computeGlobalStats,
 } from '@/data';
 import { getGrille, GRILLES } from '@/data/grilles';
 import { TutorialAccordion } from '@/components/home/TutorialAccordion';
 import { JoinCta } from '@/components/home/JoinCta';
 
+// Revalider la page toutes les 60 secondes (ISR)
+export const revalidate = 60;
+
 export default async function HomePage() {
   const stats = await computeGlobalStats();
   const exemplaires = getCasesExemplaires();
-  const recents = getCasesRecents(4);
+  const recents = await getRecentCasesWithDb(4);
 
   return (
     <div className="bg-slate-50 min-h-screen">

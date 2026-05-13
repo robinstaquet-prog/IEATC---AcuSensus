@@ -24,6 +24,68 @@ export function getCasesPublies(): ClinicalCase[] {
   return getCasesPubliesCorpus();
 }
 
+// ─── Cas récents avec Supabase (server-side) ────────────────────────────────
+// Fusionne les cas statiques du corpus avec les cas soumis par les utilisateurs.
+
+import { getGrille } from './grilles';
+import type { ReadingGridId } from '@/types';
+
+export async function getRecentCasesWithDb(limit = 4): Promise<ClinicalCase[]> {
+  const corpusCases = getCasesPubliesCorpus();
+  let dbCases: ClinicalCase[] = [];
+
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+    const { data } = await supabase
+      .from('clinical_cases')
+      .select('*')
+      .eq('statut', 'publie')
+      .order('date_creation', { ascending: false })
+      .limit(20);
+
+    if (data) {
+      dbCases = data.map((row) => ({
+        id: row.id,
+        slug: row.slug,
+        titre: row.titre,
+        statut: row.statut,
+        niveauComplexite: row.niveau_complexite,
+        age: row.age ?? undefined,
+        sexe: row.sexe ?? undefined,
+        casComplet: row.cas_complet,
+        exemplaire: row.exemplaire,
+        grillePrincipale: row.grille_principale as ReadingGridId,
+        tags: row.tags ?? [],
+        content: row.content,
+        auteurId: row.auteur_id ?? undefined,
+        dateCreation: row.date_creation ?? '',
+        datePublication: row.date_publication ?? undefined,
+        viewCount: row.view_count ?? 0,
+        analyses: [],
+      }));
+    }
+  } catch {
+    // Supabase non disponible — on continue avec le corpus seul
+  }
+
+  // Fusionner en dédupliquant par ID (les cas du corpus existent aussi en DB)
+  const seen = new Set<string>();
+  const all: ClinicalCase[] = [];
+  for (const c of [...dbCases, ...corpusCases]) {
+    if (!seen.has(c.id)) {
+      seen.add(c.id);
+      all.push(c);
+    }
+  }
+
+  return all
+    .sort((a, b) => new Date(b.dateCreation).getTime() - new Date(a.dateCreation).getTime())
+    .slice(0, limit);
+}
+
 // ─── Statistiques globales calculées ─────────────────────────────────────────
 
 import { CLINICAL_CASES } from './cases';
