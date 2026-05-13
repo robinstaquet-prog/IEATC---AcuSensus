@@ -1255,7 +1255,10 @@ export function ParticipationForm({
       try {
         if (!skipPersist) {
           await upsertParticipation(user.id, data);
-          addVotePoints(2, true);
+          // +2 points seulement à la première soumission, pas aux modifications
+          if (!existingParticipation) {
+            addVotePoints(2, true);
+          }
         }
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);

@@ -149,7 +149,7 @@ alter table public.clinical_cases enable row level security;
 create policy "cases_select_publie" on public.clinical_cases for select using (statut = 'publie');
 create policy "cases_select_own" on public.clinical_cases for select using (auth.uid() = auteur_id);
 create policy "cases_select_editor" on public.clinical_cases for select using (exists (select 1 from public.users u where u.id = auth.uid() and u.role in ('editeur', 'admin')));
-create policy "cases_insert_contributor" on public.clinical_cases for insert with check (exists (select 1 from public.users u where u.id = auth.uid() and u.role in ('contributeur', 'editeur', 'admin')));
+create policy "cases_insert_authenticated" on public.clinical_cases for insert with check (auth.uid() = auteur_id);
 create policy "cases_update_own_or_editor" on public.clinical_cases for update using (auth.uid() = auteur_id or exists (select 1 from public.users u where u.id = auth.uid() and u.role in ('editeur', 'admin')));
 create policy "cases_delete_admin" on public.clinical_cases for delete using (exists (select 1 from public.users u where u.id = auth.uid() and u.role = 'admin'));
 

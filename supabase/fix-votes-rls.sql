@@ -4,6 +4,8 @@
 -- Problème 2 : UPDATE bloqué → voter = mettre à jour extra_data de la ligne
 --              d'un autre user → impossible avec la policy actuelle
 -- Solution   : SELECT élargi + fonction RPC SECURITY DEFINER pour les votes
+-- Problème 3 : cast_vote ne déduisait pas points_vote de la table users
+-- Problème 4 : cast_vote ne vérifiait pas le solde avant de voter
 
 -- ─── 1. Politique SELECT élargie ─────────────────────────────────────────────
 
@@ -14,15 +16,17 @@ DROP POLICY IF EXISTS "participations_select_public" ON public.user_participatio
 CREATE POLICY "participations_select_own" ON public.user_participations
   FOR SELECT USING (auth.uid() = user_id);
 
--- Participations publiques des autres membres (anonyme ou nommée)
+-- Participations publiques des autres membres
 CREATE POLICY "participations_select_public" ON public.user_participations
   FOR SELECT USING (
-    publication_mode IN ('anonyme', 'nommee')
+    (extra_data->>'publicationMode') IS NOT NULL
+    AND (extra_data->>'publicationMode') != ''
+    AND COALESCE(extra_data->>'isExercice', 'false') != 'true'
   );
 
 -- ─── 2. Fonction RPC pour voter (SECURITY DEFINER) ───────────────────────────
 -- cast_vote : ajoute un vote dans extra_data.votes de la participation cible
--- Appelée par l'utilisateur, s'exécute avec les droits owner (bypass RLS)
+-- Déduit points_vote de la table users et vérifie le solde
 
 DROP FUNCTION IF EXISTS public.cast_vote(text, text, text, text, text);
 
@@ -45,11 +49,20 @@ DECLARE
   v_extra        jsonb;
   v_valeur       numeric;
   v_vote_points  int;
+  v_cost         int;
   v_result       json;
 BEGIN
   -- Vérifier que l'appelant est bien connecté et correspond à p_voter_id
   IF auth.uid() IS NULL OR auth.uid()::text <> p_voter_id THEN
     RETURN json_build_object('ok', false, 'error', 'Non autorisé');
+  END IF;
+
+  -- Calculer le coût
+  v_cost := CASE WHEN p_cible = 'participation' THEN 2 ELSE 1 END;
+
+  -- Vérifier le solde de points
+  IF (SELECT points_vote FROM public.users WHERE id = auth.uid()) < v_cost THEN
+    RETURN json_build_object('ok', false, 'error', 'Solde insuffisant');
   END IF;
 
   -- Récupérer la participation
@@ -95,14 +108,21 @@ BEGIN
 
   v_votes := v_votes || jsonb_build_array(v_new_vote);
 
-  -- Mettre à jour valeur et votePoints
-  v_vote_points := COALESCE((v_extra->>'votePoints')::int, 0) +
-    CASE WHEN p_cible = 'participation' THEN 2 ELSE 1 END;
+  -- Mettre à jour votePoints dans extra_data (compteur interne participation)
+  v_vote_points := COALESCE((v_extra->>'votePoints')::int, 0) + v_cost;
 
-  -- valeur = 1 + somme pondérée (simplifié : on incrémente juste)
-  v_valeur := COALESCE(v_row.valeur, 1.0) + 0.1;
+  -- Recalculer valeur avec pondération par statut
+  v_valeur := COALESCE(v_row.valeur, 1.0) + (
+    CASE p_voter_statut
+      WHEN 'expert'                 THEN 1.0
+      WHEN 'praticien_experimente'  THEN 0.5
+      WHEN 'jeune_praticien'        THEN 0.25
+      WHEN 'etudiant_4e_annee'     THEN 0.15
+      ELSE 0.1
+    END
+  );
 
-  -- Écrire dans Supabase
+  -- Écrire dans la participation
   UPDATE public.user_participations
   SET
     extra_data = v_extra || jsonb_build_object('votes', v_votes, 'votePoints', v_vote_points),
@@ -110,6 +130,9 @@ BEGIN
     updated_at = now()
   WHERE id = p_participation_id
   RETURNING to_json(user_participations.*) INTO v_result;
+
+  -- Déduire les points du votant dans la table users
+  UPDATE public.users SET points_vote = points_vote - v_cost WHERE id = auth.uid();
 
   RETURN json_build_object('ok', true, 'row', v_result);
 END;
@@ -136,11 +159,14 @@ DECLARE
   v_extra       jsonb;
   v_valeur      numeric;
   v_vote_points int;
+  v_cost        int;
   v_result      json;
 BEGIN
   IF auth.uid() IS NULL OR auth.uid()::text <> p_voter_id THEN
     RETURN json_build_object('ok', false, 'error', 'Non autorisé');
   END IF;
+
+  v_cost := CASE WHEN p_cible = 'participation' THEN 2 ELSE 1 END;
 
   SELECT * INTO v_row
   FROM public.user_participations
@@ -171,8 +197,7 @@ BEGIN
   v_votes := COALESCE(v_votes, '[]'::jsonb);
 
   v_vote_points := GREATEST(0,
-    COALESCE((v_extra->>'votePoints')::int, 0) -
-    CASE WHEN p_cible = 'participation' THEN 2 ELSE 1 END
+    COALESCE((v_extra->>'votePoints')::int, 0) - v_cost
   );
 
   v_valeur := GREATEST(1.0, COALESCE(v_row.valeur, 1.0) - 0.1);
@@ -184,6 +209,9 @@ BEGIN
     updated_at = now()
   WHERE id = p_participation_id
   RETURNING to_json(user_participations.*) INTO v_result;
+
+  -- Rembourser les points au votant
+  UPDATE public.users SET points_vote = points_vote + v_cost WHERE id = auth.uid();
 
   RETURN json_build_object('ok', true, 'row', v_result);
 END;
