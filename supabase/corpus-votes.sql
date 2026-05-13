@@ -12,9 +12,11 @@ CREATE TABLE IF NOT EXISTS public.corpus_votes (
   voter_statut text NOT NULL DEFAULT 'etudiant',
   cible       text NOT NULL DEFAULT 'participation',
   element_key text,
-  created_at  timestamptz NOT NULL DEFAULT now(),
-  UNIQUE(analysis_id, voter_id, cible, COALESCE(element_key, ''))
+  created_at  timestamptz NOT NULL DEFAULT now()
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS corpus_votes_unique
+  ON public.corpus_votes (analysis_id, voter_id, cible, COALESCE(element_key, ''));
 
 CREATE INDEX IF NOT EXISTS corpus_votes_analysis_id ON public.corpus_votes(analysis_id);
 

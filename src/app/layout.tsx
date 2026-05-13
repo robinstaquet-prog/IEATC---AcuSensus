@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-slate-50">
         <AuthProvider>
           <ToastProvider>
-            {/* ClientRoot : initialisation côté client (seed localStorage, etc.) */}
+            {/* ClientRoot : wrapper client */}
             <ClientRoot>
               <Navbar />
               <main className="flex-1">{children}</main>

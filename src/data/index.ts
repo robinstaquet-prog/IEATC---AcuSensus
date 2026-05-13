@@ -7,7 +7,7 @@ export {
 } from './cases';
 export { LEXIQUE, getTermById, getTermesByCategorie } from './lexique';
 
-// ─── Re-exports enrichis avec les cas utilisateur (localStorage) ────────────
+// ─── Re-exports enrichis avec les cas utilisateur ──────────────────────────
 // getCaseById et getCasesPublies cherchent aussi dans le store utilisateur.
 
 import {
