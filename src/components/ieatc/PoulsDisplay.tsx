@@ -14,6 +14,7 @@ const QUALITE_CONFIG: Record<QualitePouls, { label: string; color: string }> = {
   mou: { label: 'Mou', color: 'bg-indigo-100 text-indigo-800 border-indigo-200' },
   dur: { label: 'Dur', color: 'bg-red-200 text-red-900 border-red-300' },
   corde_arc: { label: 'Corde-arc', color: 'bg-rose-100 text-rose-800 border-rose-200' },
+  tendu: { label: 'Tendu', color: 'bg-pink-100 text-pink-800 border-pink-200' },
   rapide: { label: 'Rapide', color: 'bg-amber-100 text-amber-800 border-amber-200' },
   lent: { label: 'Lent', color: 'bg-teal-100 text-teal-800 border-teal-200' },
   superficiel: { label: 'Superficiel', color: 'bg-sky-100 text-sky-800 border-sky-200' },

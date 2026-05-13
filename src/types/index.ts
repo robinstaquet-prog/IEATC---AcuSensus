@@ -68,6 +68,7 @@ export type QualitePouls =
   | 'lent'
   | 'superficiel'
   | 'profond'
+  | 'tendu'
   | 'normal'
   | 'absent';
 

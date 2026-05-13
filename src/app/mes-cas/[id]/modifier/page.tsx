@@ -37,6 +37,7 @@ const QUALITES_POULS: { id: QualitePouls; label: string }[] = [
   { id: 'dur', label: 'Dur' },
   { id: 'etroit', label: 'Étroit' },
   { id: 'corde_arc', label: 'Corde-arc' },
+  { id: 'tendu', label: 'Tendu' },
   { id: 'normal', label: 'Normal' },
   { id: 'absent', label: 'Absent' },
 ];

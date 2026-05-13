@@ -1007,7 +1007,7 @@ export type CategorieConcept =
   | 'syndrome'       // Syndrome nommé spécifique — niveau 2
   | 'organe'         // Organe Tsang ou Fu — niveau 3
   | 'localisation'   // Foyer Supérieur/Moyen/Inférieur — niveau 3
-  | 'vaisseau'       // Merveilleux Vaisseau (Du Mai, Ren Mai…) — niveau 3
+  | 'vaisseau'       // Merveilleux Vaisseau (Tou Mo, Jenn Mo…) — niveau 3
   | 'element'        // Élément wuxing (Eau, Bois, Feu, Terre, Métal) — niveau 3
   | 'strategie'      // Stratégie thérapeutique — niveau 4
   | 'pathologie';    // Présentation clinique / motif de consultation — niveau 5
@@ -2319,13 +2319,13 @@ export const ORGANES_LOCA: ConceptIeatc[] = [
   // Nomenclature IEATC : Tou Mo, Jenn Mo, Tchrong Mo, Taé Mo, Yang/Yin Tsiao Mo, Yang/Yin Oé Mo
   {
     id: 'du_mai',
-    label: 'Tou Mo / Du Mai (Vaisseau Gouverneur)',
+    label: 'Tou Mo (Vaisseau Gouverneur)',
     categorie: 'vaisseau',
     patterns: ['du mai', 'vaisseau gouverneur', 'tou mo'],
   },
   {
     id: 'ren_mai',
-    label: 'Jenn Mo / Ren Mai (Vaisseau Conception)',
+    label: 'Jenn Mo (Vaisseau Conception)',
     categorie: 'vaisseau',
     patterns: ['ren mai', 'vaisseau conception', 'jenn mo'],
   },
