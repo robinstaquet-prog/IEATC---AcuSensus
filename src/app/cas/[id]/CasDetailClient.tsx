@@ -17,7 +17,7 @@ import {
   syncParticipationIfNeeded,
   isCasApprentissage,
 } from '@/lib/participation-store';
-import { getCorpusVotes, computeValeur } from '@/lib/vote-system';
+import { fetchCorpusVotes, computeValeur } from '@/lib/vote-system';
 import { PoulsDisplay } from '@/components/ieatc/PoulsDisplay';
 import { ParticipationForm } from '@/components/ieatc/ParticipationForm';
 import { AnalysePanel } from '@/components/ieatc/AnalysePanel';
@@ -160,16 +160,16 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
     setDifficultyInfo(computeDifficulty(parts));
   }, [cas.id]);
 
+  // Votes corpus chargés depuis Supabase (persistants)
+  const [corpusVotesMap, setCorpusVotesMap] = useState<Record<string, UserParticipation['votes']>>({});
+
   // Participation factices issues de cas.analyses (variantes) — affichées dans AnalysePanel
-  // Les ClinicalAnalysis sont compatibles avec UserParticipation via un cast :
-  //   grillePrincipale → grilleChoisie, grillesSecondaires[0] → grilleSecondaire
-  // Les votes persistés dans localStorage sont mergés automatiquement.
   const analyseVariantes = useMemo((): UserParticipation[] =>
     (cas.analyses ?? [])
       .filter((a: ClinicalAnalysis) => a.type === 'variante')
       .map((a: ClinicalAnalysis) => {
-        const savedVotes = getCorpusVotes(a.id) ?? [];
-        const mergedVotes = savedVotes.length > 0 ? savedVotes : (a.votes ?? []);
+        const dbVotes = corpusVotesMap[a.id] ?? [];
+        const mergedVotes = dbVotes.length > 0 ? dbVotes : (a.votes ?? []);
         return {
           id: a.id,
           userId: a.auteurId ?? a.id,
@@ -197,10 +197,17 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
           role: a.role,
         } as UserParticipation & { auteurPseudo?: string; auteurStatut?: string; role?: string };
       }),
-  [cas.analyses]);
+  [cas.analyses, corpusVotesMap]);
 
   useEffect(() => {
     void refreshParticipations();
+    // Charger les votes corpus depuis Supabase
+    const corpusIds = (cas.analyses ?? [])
+      .filter((a: ClinicalAnalysis) => a.type === 'variante')
+      .map((a: ClinicalAnalysis) => a.id);
+    if (corpusIds.length > 0) {
+      fetchCorpusVotes(corpusIds).then(setCorpusVotesMap);
+    }
     if (user) {
       getParticipation(user.id, cas.id).then((p) => {
         if (p) {
@@ -209,7 +216,7 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
         }
       });
     }
-  }, [user, cas.id, refreshParticipations]);
+  }, [user, cas.id, refreshParticipations, cas.analyses]);
 
   const handleReveal = () => {
     setRevealed(true);
