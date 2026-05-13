@@ -58,6 +58,16 @@ export async function getUserCaseById(id: string): Promise<ClinicalCase | undefi
   return mapRow(data);
 }
 
+export async function getCasesByIds(ids: string[]): Promise<ClinicalCase[]> {
+  if (ids.length === 0) return [];
+  const { data, error } = await supabase
+    .from('clinical_cases')
+    .select('*')
+    .in('id', ids);
+  if (error || !data) return [];
+  return data.map(mapRow);
+}
+
 export async function addUserCase(cas: ClinicalCase): Promise<{ error: string | null }> {
   const { error } = await supabase.from('clinical_cases').insert({
     id: cas.id,

@@ -8,6 +8,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { getCasesPublies } from '@/data';
+import { getUserCases } from '@/lib/user-cases-store';
 import type { ClinicalCase } from '@/types';
 import { cn } from '@/lib/utils';
 import { COMPLEXITE_LABELS, COMPLEXITE_COLORS } from '@/lib/constants';
@@ -95,16 +96,32 @@ function ApprentissageCasCard({ cas }: { cas: ClinicalCase }) {
 export default function ApprentissagePage() {
   const [mounted, setMounted] = useState(false);
   const [niveauFiltre, setNiveauFiltre] = useState<number | ''>('');
+  const [dbCases, setDbCases] = useState<ClinicalCase[]>([]);
 
   useEffect(() => {
     setMounted(true);
+    // Charger les cas Supabase marqués apprentissage
+    getUserCases().then((cas) => {
+      setDbCases(
+        cas.filter((c) => c.statut === 'publie' && (c.exemplaire || c.qualifieApprentissage)),
+      );
+    });
   }, []);
 
   const casApprentissage = useMemo(() => {
     if (!mounted) return [];
-    const allCases = getCasesPublies();
-    return allCases.filter((c) => c.exemplaire || c.qualifieApprentissage);
-  }, [mounted]);
+    const corpusCases = getCasesPublies().filter((c) => c.exemplaire || c.qualifieApprentissage);
+    // Fusionner corpus + Supabase (dédupliquer par ID)
+    const seen = new Set(corpusCases.map((c) => c.id));
+    const merged = [...corpusCases];
+    for (const c of dbCases) {
+      if (!seen.has(c.id)) {
+        seen.add(c.id);
+        merged.push(c);
+      }
+    }
+    return merged;
+  }, [mounted, dbCases]);
 
   const filtered = useMemo(() => {
     if (!niveauFiltre) return casApprentissage;

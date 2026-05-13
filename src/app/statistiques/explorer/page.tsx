@@ -3,12 +3,14 @@
 // au composant client CrossStatsExplorer.
 
 import Link from 'next/link';
-import { buildObservations, buildConceptIndex } from '@/data/observations';
+import { buildObservationsWithDb, buildConceptIndex } from '@/data/observations';
 import { CrossStatsExplorer } from '@/components/ieatc/CrossStatsExplorer';
 import { BarChart3, ArrowLeft, Layers } from 'lucide-react';
 
-export default function ExplorerPage() {
-  const observations = buildObservations();
+export const revalidate = 60;
+
+export default async function ExplorerPage() {
+  const observations = await buildObservationsWithDb();
   const conceptIndex = buildConceptIndex(observations);
 
   return (

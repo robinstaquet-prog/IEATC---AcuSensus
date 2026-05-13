@@ -11,7 +11,7 @@ import {
   GraduationCap,
 } from 'lucide-react';
 import {
-  getCasesExemplaires,
+  getCasesExemplairesWithDb,
   getRecentCasesWithDb,
   computeGlobalStats,
 } from '@/data';
@@ -24,7 +24,7 @@ export const revalidate = 60;
 
 export default async function HomePage() {
   const stats = await computeGlobalStats();
-  const exemplaires = getCasesExemplaires();
+  const exemplaires = await getCasesExemplairesWithDb();
   const recents = await getRecentCasesWithDb(4);
 
   return (

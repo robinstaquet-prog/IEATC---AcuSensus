@@ -24,11 +24,101 @@ export function getCasesPublies(): ClinicalCase[] {
   return getCasesPubliesCorpus();
 }
 
-// ─── Cas récents avec Supabase (server-side) ────────────────────────────────
-// Fusionne les cas statiques du corpus avec les cas soumis par les utilisateurs.
+// ─── Helpers Supabase (server-side) ──────────────────────────────────────────
 
 import { getGrille } from './grilles';
 import type { ReadingGridId } from '@/types';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapDbRow(row: Record<string, any>): ClinicalCase {
+  return {
+    id: row.id,
+    slug: row.slug,
+    titre: row.titre,
+    statut: row.statut,
+    niveauComplexite: row.niveau_complexite,
+    age: row.age ?? undefined,
+    sexe: row.sexe ?? undefined,
+    casComplet: row.cas_complet,
+    exemplaire: row.exemplaire,
+    qualifieApprentissage: false,
+    grillePrincipale: row.grille_principale as ReadingGridId,
+    tags: row.tags ?? [],
+    content: row.content,
+    auteurId: row.auteur_id ?? undefined,
+    dateCreation: row.date_creation ?? '',
+    datePublication: row.date_publication ?? undefined,
+    viewCount: row.view_count ?? 0,
+    analyses: [],
+  };
+}
+
+// ─── Cas par ID avec fallback Supabase (server-side) ────────────────────────
+
+export async function getCaseByIdWithDb(id: string): Promise<ClinicalCase | undefined> {
+  // Vérifier le corpus statique d'abord (rapide, sans réseau)
+  const corpusCase = getCaseByIdCorpus(id);
+  if (corpusCase) return corpusCase;
+
+  // Fallback : chercher dans Supabase
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+    const { data } = await supabase
+      .from('clinical_cases')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (data) return mapDbRow(data);
+  } catch {
+    // Supabase non disponible
+  }
+  return undefined;
+}
+
+// ─── Tous les cas publiés avec Supabase (server-side) ───────────────────────
+
+export async function getCasesPubliesWithDb(): Promise<ClinicalCase[]> {
+  const corpusCases = getCasesPubliesCorpus();
+  let dbCases: ClinicalCase[] = [];
+
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+    const { data } = await supabase
+      .from('clinical_cases')
+      .select('*')
+      .eq('statut', 'publie')
+      .order('date_creation', { ascending: false });
+    if (data) dbCases = data.map(mapDbRow);
+  } catch {
+    // Supabase non disponible
+  }
+
+  // Fusionner en dédupliquant (DB prioritaire sur corpus)
+  const seen = new Set<string>();
+  const all: ClinicalCase[] = [];
+  for (const c of [...dbCases, ...corpusCases]) {
+    if (!seen.has(c.id)) {
+      seen.add(c.id);
+      all.push(c);
+    }
+  }
+  return all;
+}
+
+// ─── Cas exemplaires avec Supabase (server-side) ───────────────────────────
+
+export async function getCasesExemplairesWithDb(): Promise<ClinicalCase[]> {
+  const allCases = await getCasesPubliesWithDb();
+  return allCases.filter((c) => c.exemplaire || c.qualifieApprentissage);
+}
+
+// ─── Cas récents avec Supabase (server-side) ────────────────────────────────
 
 export async function getRecentCasesWithDb(limit = 4): Promise<ClinicalCase[]> {
   const corpusCases = getCasesPubliesCorpus();
@@ -45,28 +135,7 @@ export async function getRecentCasesWithDb(limit = 4): Promise<ClinicalCase[]> {
       .eq('statut', 'publie')
       .order('date_creation', { ascending: false })
       .limit(20);
-
-    if (data) {
-      dbCases = data.map((row) => ({
-        id: row.id,
-        slug: row.slug,
-        titre: row.titre,
-        statut: row.statut,
-        niveauComplexite: row.niveau_complexite,
-        age: row.age ?? undefined,
-        sexe: row.sexe ?? undefined,
-        casComplet: row.cas_complet,
-        exemplaire: row.exemplaire,
-        grillePrincipale: row.grille_principale as ReadingGridId,
-        tags: row.tags ?? [],
-        content: row.content,
-        auteurId: row.auteur_id ?? undefined,
-        dateCreation: row.date_creation ?? '',
-        datePublication: row.date_publication ?? undefined,
-        viewCount: row.view_count ?? 0,
-        analyses: [],
-      }));
-    }
+    if (data) dbCases = data.map(mapDbRow);
   } catch {
     // Supabase non disponible — on continue avec le corpus seul
   }

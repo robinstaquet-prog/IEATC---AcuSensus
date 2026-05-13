@@ -9,11 +9,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { getAllParticipations } from '@/lib/participation-store';
-import { getUserCasesByAuteur, deleteUserCase } from '@/lib/user-cases-store';
+import { getUserCasesByAuteur, deleteUserCase, getCasesByIds } from '@/lib/user-cases-store';
 import { getAllExercices } from '@/lib/exercice-store';
 import { getNotifications, markAllNotifsRead, type Notification } from '@/lib/notification-store';
 import { getReceivedMessages, markAllMessagesRead, sendMessage, type Message } from '@/lib/message-store';
-import { getCaseById } from '@/data';
+import { getCasesPublies } from '@/data';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import { getGrilleLabel } from '@/data/grilles';
 import { LABEL_STATUT_IEATC } from '@/lib/constants';
@@ -53,6 +53,8 @@ export default function ProfilPage() {
   const [exercices, setExercices] = useState<UserParticipation[]>([]);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
+  // Map pour résoudre les noms de cas (corpus + Supabase)
+  const [caseMap, setCaseMap] = useState<Map<string, ClinicalCase>>(new Map());
   // Réponses inline aux messages
   const [replyOpenId, setReplyOpenId] = useState<string | null>(null);
   const [replyText, setReplyText] = useState('');
@@ -85,6 +87,19 @@ export default function ProfilPage() {
       setUserCases(cases);
       setNotifications(notifs);
       setMessages(msgs);
+
+      // Construire la map de résolution des cas (corpus + Supabase)
+      const map = new Map<string, ClinicalCase>();
+      for (const c of getCasesPublies()) map.set(c.id, c);
+      for (const c of cases) map.set(c.id, c);
+      // Chercher les cas manquants dans Supabase (participations sur des cas d'autres utilisateurs)
+      const allCaseIds = new Set([...parts.map((p) => p.caseId), ...exos.map((e) => e.caseId)]);
+      const missingIds = [...allCaseIds].filter((id) => !map.has(id));
+      if (missingIds.length > 0) {
+        const dbCases = await getCasesByIds(missingIds);
+        for (const c of dbCases) map.set(c.id, c);
+      }
+      setCaseMap(map);
     })();
   }, [user]);
 
@@ -336,7 +351,7 @@ export default function ProfilPage() {
                 <div className="space-y-3">
                   {participations.map((p) => {
                     const isAnon = p.publicationMode !== 'public';
-                    const cas = getCaseById(p.caseId);
+                    const cas = caseMap.get(p.caseId);
                     if (!cas) return null;
                     const isExpanded = expandedCards.has(p.id);
                     const toggleExpand = () => {
@@ -777,7 +792,7 @@ export default function ProfilPage() {
               ) : (
                 <div className="space-y-3">
                   {exercices.map((ex) => {
-                    const cas = getCaseById(ex.caseId);
+                    const cas = caseMap.get(ex.caseId);
                     const titreCas = cas?.titre ?? ex.caseId;
                     const dateStr = ex.updatedAt
                       ? new Date(ex.updatedAt).toLocaleDateString('fr-FR', {

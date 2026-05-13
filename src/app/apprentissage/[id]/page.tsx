@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { getCaseById } from '@/data';
+import { getUserCaseById } from '@/lib/user-cases-store';
 import { getParticipationsByCase, isCasApprentissage } from '@/lib/participation-store';
 import { getExercice, saveExercice } from '@/lib/exercice-store';
 import { ParticipationForm } from '@/components/ieatc/ParticipationForm';
@@ -41,9 +42,21 @@ export default function ApprentissageExercicePage() {
   const [exercice, setExercice] = useState<UserParticipation | null>(null);
   const [showForm, setShowForm] = useState(false);
 
-  // Recuperer le cas (corpus uniquement pour l'apprentissage)
-  const cas = useMemo((): ClinicalCase | undefined => {
-    return getCaseById(id);
+  // Recuperer le cas (corpus d'abord, puis Supabase si absent)
+  const [cas, setCas] = useState<ClinicalCase | undefined>(undefined);
+  const [casLoading, setCasLoading] = useState(true);
+
+  useEffect(() => {
+    const corpusCase = getCaseById(id);
+    if (corpusCase) {
+      setCas(corpusCase);
+      setCasLoading(false);
+    } else {
+      getUserCaseById(id).then((dbCase) => {
+        setCas(dbCase);
+        setCasLoading(false);
+      });
+    }
   }, [id]);
 
   // Charger l'exercice existant si present
@@ -94,6 +107,14 @@ export default function ApprentissageExercicePage() {
     },
     [user, cas],
   );
+
+  if (casLoading) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-16 flex justify-center">
+        <div className="w-6 h-6 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!cas) {
     return (

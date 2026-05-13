@@ -7,6 +7,7 @@
 import { CLINICAL_CASES } from './cases';
 import { normaliserTextes, normaliserTechnique, labelConceptIeatc } from './normalisation';
 import { normalizePoint } from '@/lib/point-normalize';
+import { createClient } from '@supabase/supabase-js';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -139,6 +140,91 @@ export function buildConceptIndex(obs: Observation[]): ConceptIndex {
   }
 
   return { syndromes, organes, familles, strategies, points, grilles, labelMap };
+}
+
+// ─── Version async avec Supabase (server-side) ─────────────────────────────
+// Inclut les participations publiques des utilisateurs en plus du corpus.
+
+export async function buildObservationsWithDb(): Promise<Observation[]> {
+  const obs = buildObservations();
+
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+
+    const { data: parts } = await supabase
+      .from('user_participations')
+      .select('case_id, extra_data')
+      .filter('extra_data->>publicationMode', 'eq', 'public')
+      .filter('extra_data->>publiee', 'eq', 'true')
+      .filter('extra_data->>isExercice', 'neq', 'true');
+
+    // Charger les métadonnées des cas pour niveauComplexite et sexe
+    const caseIds = new Set((parts ?? []).map((p) => p.case_id));
+    const caseMetaMap = new Map<string, { niveauComplexite: number; sexe: string }>();
+    // D'abord les cas du corpus
+    for (const c of CLINICAL_CASES) {
+      caseMetaMap.set(c.id, { niveauComplexite: c.niveauComplexite, sexe: c.sexe ?? 'non_precise' });
+    }
+    // Puis les cas Supabase non présents dans le corpus
+    const missingIds = [...caseIds].filter((id) => !caseMetaMap.has(id));
+    if (missingIds.length > 0) {
+      const { data: dbCases } = await supabase
+        .from('clinical_cases')
+        .select('id, niveau_complexite, sexe')
+        .in('id', missingIds);
+      for (const row of dbCases ?? []) {
+        caseMetaMap.set(row.id, {
+          niveauComplexite: row.niveau_complexite,
+          sexe: row.sexe ?? 'non_precise',
+        });
+      }
+    }
+
+    for (const row of parts ?? []) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const extra: Record<string, any> = row.extra_data ?? {};
+      const caseMeta = caseMetaMap.get(row.case_id);
+      if (!caseMeta) continue;
+
+      const pointsProposer: Array<{ code?: string; technique?: string }> = extra.pointsProposer ?? [];
+      const points = pointsProposer
+        .filter((p) => p.code)
+        .map((p) => normalizePoint(p.code!).code);
+      const techniques = pointsProposer.flatMap((p) =>
+        p.technique ? normaliserTechnique(p.technique) : [],
+      );
+
+      const textesDiag: string[] = [
+        ...(Array.isArray(extra.categoriesRetenues) ? extra.categoriesRetenues.filter(Boolean) : []),
+        ...(extra.bilanEnergetique ? [extra.bilanEnergetique] : []),
+      ];
+      const textesStrategie: string[] = extra.strategie ? [extra.strategie] : [];
+
+      const { familles, syndromes, organes } = normaliserTextes(textesDiag);
+      const { strategies } = normaliserTextes(textesStrategie);
+
+      obs.push({
+        caseId: row.case_id,
+        grille: extra.grilleChoisie ?? '',
+        foyer: extra.localisationIdentifiee ?? null,
+        points,
+        techniques,
+        familles,
+        syndromes,
+        organes,
+        strategies,
+        niveauComplexite: caseMeta.niveauComplexite,
+        sexe: caseMeta.sexe,
+      });
+    }
+  } catch {
+    // Supabase non disponible
+  }
+
+  return obs;
 }
 
 // Note : computeCrossStats est défini directement dans CrossStatsExplorer.tsx

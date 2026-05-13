@@ -29,7 +29,7 @@ import { COMPLEXITE_LABELS, COMPLEXITE_COLORS } from '@/lib/constants';
 function CasCard({ cas, showApprentissage }: { cas: ClinicalCase; showApprentissage?: boolean }) {
   const complexiteColor = COMPLEXITE_COLORS[cas.niveauComplexite];
   const complexiteLabel = COMPLEXITE_LABELS[cas.niveauComplexite];
-  const href = cas.id.startsWith('user-cas-') ? `/mes-cas/${cas.id}` : `/cas/${cas.id}`;
+  const href = `/cas/${cas.id}`;
 
   return (
     <Link href={href} className="group block">
