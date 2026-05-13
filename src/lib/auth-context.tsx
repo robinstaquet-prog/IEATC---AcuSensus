@@ -67,7 +67,7 @@ interface AuthContextValue {
   signUp: (data: SignUpData) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   refreshUser: () => Promise<void>;
-  addVotePoints: (delta: number) => void;
+  addVotePoints: (delta: number, persistToDb?: boolean) => void;
   updatePrivacy: (showMail: boolean, showTelephone: boolean) => Promise<{ error: string | null }>;
 }
 
@@ -225,6 +225,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: authData, error: signUpError } = await supabase.auth.signUp({
       email,
       password: data.password,
+      options: {
+        data: {
+          prenom: data.prenom,
+          nom: data.nom,
+          statut_ieatc: data.statut_ieatc,
+        },
+      },
     });
 
     if (signUpError) {
@@ -274,10 +281,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
-  const addVotePoints = (delta: number) => {
-    setUser((prev) =>
-      prev ? { ...prev, votePoints: (prev.votePoints ?? 0) + delta } : prev
-    );
+  const addVotePoints = (delta: number, persistToDb = false) => {
+    setUser((prev) => {
+      if (!prev) return prev;
+      const newPoints = (prev.votePoints ?? 0) + delta;
+      if (persistToDb) {
+        // Persister en DB (pour les gains hors-vote, ex: soumission participation)
+        // Les RPCs de vote gèrent elles-mêmes la déduction en DB.
+        supabase
+          .from('users')
+          .update({ points_vote: newPoints })
+          .eq('id', prev.id)
+          .then();
+      }
+      return { ...prev, votePoints: newPoints };
+    });
   };
 
   const updatePrivacy = async (showMail: boolean, showTelephone: boolean): Promise<{ error: string | null }> => {
