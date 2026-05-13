@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
-import { Shield, Check, Loader2, AlertCircle, ExternalLink, Eye, EyeOff, BookOpen, Trash2, Pencil, Database } from 'lucide-react';
+import { Shield, Check, Loader2, AlertCircle, ExternalLink, Eye, EyeOff, BookOpen, Trash2, Pencil, Database, FileText } from 'lucide-react';
 import { CLINICAL_CASES } from '@/data/cases';
 import { fetchHiddenCorpusCaseIds, setCorpusCaseHidden } from '@/lib/corpus-overrides';
 import type { ClinicalCase } from '@/types';
@@ -54,6 +54,20 @@ export default function AdminPage() {
   const [seedingCorpus, setSeedingCorpus] = useState(false);
   const [seedCorpusMsg, setSeedCorpusMsg] = useState<string | null>(null);
 
+  // ─── Participations ────────────────────────────────────────────────────────
+  interface ParticipationRow {
+    id: string;
+    user_id: string;
+    case_id: string;
+    created_at: string;
+    extra_data: Record<string, unknown>;
+    user_prenom?: string;
+    user_nom?: string;
+    case_titre?: string;
+  }
+  const [participations, setParticipations] = useState<ParticipationRow[]>([]);
+  const [loadingParts, setLoadingParts] = useState(false);
+
   const fetchSupabaseCases = useCallback(async () => {
     setLoadingCases(true);
     const { data } = await supabase
@@ -63,6 +77,66 @@ export default function AdminPage() {
     setSupabaseCases(data ?? []);
     setLoadingCases(false);
   }, []);
+
+  const fetchParticipations = useCallback(async () => {
+    setLoadingParts(true);
+    // Charger participations + infos user et cas
+    const { data } = await supabase
+      .from('user_participations')
+      .select('id, user_id, case_id, created_at, extra_data')
+      .order('created_at', { ascending: false });
+    if (!data) { setLoadingParts(false); return; }
+
+    // Enrichir avec prénoms et titres
+    const userIds = [...new Set(data.map((p) => p.user_id))];
+    const caseIds = [...new Set(data.map((p) => p.case_id))];
+
+    const { data: usersData } = await supabase
+      .from('users')
+      .select('id, prenom, nom')
+      .in('id', userIds);
+    const userMap = new Map((usersData ?? []).map((u) => [u.id, u]));
+
+    const { data: casesData } = await supabase
+      .from('clinical_cases')
+      .select('id, titre')
+      .in('id', caseIds);
+    const caseMap = new Map((casesData ?? []).map((c) => [c.id, c]));
+
+    setParticipations(
+      data.map((p) => ({
+        ...p,
+        extra_data: (p.extra_data ?? {}) as Record<string, unknown>,
+        user_prenom: userMap.get(p.user_id)?.prenom,
+        user_nom: userMap.get(p.user_id)?.nom,
+        case_titre: caseMap.get(p.case_id)?.titre,
+      })),
+    );
+    setLoadingParts(false);
+  }, []);
+
+  const deleteParticipation = async (id: string) => {
+    if (!confirm('Supprimer définitivement cette participation ?\n\nCette action est irréversible.')) return;
+    try {
+      const session = (await supabase.auth.getSession()).data.session;
+      const res = await fetch('/api/admin/delete-participation', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token ?? ''}`,
+        },
+        body: JSON.stringify({ participationId: id }),
+      });
+      if (!res.ok) {
+        const { error } = await res.json();
+        alert('Erreur suppression : ' + (error ?? 'inconnue'));
+        return;
+      }
+      setParticipations((prev) => prev.filter((p) => p.id !== id));
+    } catch (e) {
+      alert('Erreur réseau : ' + String(e));
+    }
+  };
 
   const deleteCas = async (id: string) => {
     if (!confirm(`Supprimer définitivement le cas "${id}" de Supabase ?\n\nLes participations liées seront aussi supprimées (cascade FK).`)) return;
@@ -164,8 +238,9 @@ export default function AdminPage() {
       fetchUsers();
       fetchHiddenCorpusCaseIds().then(setHiddenIds);
       fetchSupabaseCases();
+      fetchParticipations();
     }
-  }, [user, isLoading, router, fetchUsers, fetchSupabaseCases]);
+  }, [user, isLoading, router, fetchUsers, fetchSupabaseCases, fetchParticipations]);
 
   const toggleCasVisibility = async (id: string) => {
     const nowHidden = !hiddenIds.has(id);
@@ -464,6 +539,76 @@ export default function AdminPage() {
                           <Trash2 size={11} /> Supprimer
                         </button>
                       </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* ─── Participations (analyses soumises) ──────────────────────────── */}
+      <div className="mt-10">
+        <div className="flex items-center gap-3 mb-4">
+          <FileText size={18} className="text-slate-600" />
+          <div>
+            <h2 className="text-lg font-bold text-slate-900">Participations</h2>
+            <p className="text-xs text-slate-400">
+              Toutes les analyses soumises par les utilisateurs. Suppression définitive.
+            </p>
+          </div>
+        </div>
+
+        {loadingParts ? (
+          <div className="flex items-center justify-center py-10">
+            <Loader2 size={24} className="animate-spin text-slate-300" />
+          </div>
+        ) : participations.length === 0 ? (
+          <div className="text-center py-10 text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">
+            Aucune participation pour l&apos;instant.
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50 text-left">
+                  <th className="px-4 py-3 font-semibold text-slate-600">Auteur</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Cas</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Mode</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Date</th>
+                  <th className="px-4 py-3 font-semibold text-slate-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {participations.map((p) => (
+                  <tr key={p.id} className="hover:bg-slate-50/40">
+                    <td className="px-4 py-3">
+                      <div className="font-medium text-slate-800 text-xs whitespace-nowrap">
+                        {p.user_prenom ?? ''} {p.user_nom ?? ''}
+                      </div>
+                      <div className="text-[10px] text-slate-400 truncate max-w-[120px]">{p.user_id.slice(0, 8)}…</div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="text-xs text-slate-700 max-w-[200px] truncate">{p.case_titre ?? p.case_id}</div>
+                    </td>
+                    <td className="px-4 py-3 text-xs text-slate-500">
+                      {(p.extra_data?.publicationMode as string) ?? '—'}
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap text-xs text-slate-500">
+                      {new Date(p.created_at).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
+                    </td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => deleteParticipation(p.id)}
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-red-200 text-xs text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <Trash2 size={11} /> Supprimer
+                      </button>
                     </td>
                   </tr>
                 ))}
