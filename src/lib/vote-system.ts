@@ -88,12 +88,31 @@ function alreadyVoted(
 
 /** Les analyses du corpus statique ne sont PAS dans Supabase. */
 function isCorpusAnalysis(participation: UserParticipation): boolean {
-  // Les IDs Supabase commencent par 'p-' (UUID auto), les analyses corpus ont
-  // des IDs comme 'a001-yy-meridiens', 'a002-student', etc.
   return !participation.id.startsWith('p-');
 }
 
-/** Vote optimiste pour les analyses du corpus (pas de RPC). */
+// ─── Persistance localStorage pour les votes corpus ─────────────────────────
+
+const CORPUS_VOTES_KEY = 'acusensus:corpus-votes';
+
+function loadCorpusVotes(): Record<string, UserParticipation['votes']> {
+  if (typeof window === 'undefined') return {};
+  try {
+    return JSON.parse(localStorage.getItem(CORPUS_VOTES_KEY) ?? '{}');
+  } catch { return {}; }
+}
+
+function saveCorpusVotes(all: Record<string, UserParticipation['votes']>) {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(CORPUS_VOTES_KEY, JSON.stringify(all));
+}
+
+/** Charger les votes persistés pour une analyse corpus. */
+export function getCorpusVotes(analysisId: string): UserParticipation['votes'] {
+  return loadCorpusVotes()[analysisId] ?? [];
+}
+
+/** Vote optimiste pour les analyses du corpus — persisté dans localStorage. */
 function optimisticVote(
   participation: UserParticipation,
   voter: Pick<User, 'id' | 'statut'>,
@@ -110,10 +129,36 @@ function optimisticVote(
     createdAt: new Date().toISOString(),
   };
   const votes = [...(participation.votes ?? []), newVote];
+  // Persister dans localStorage
+  const all = loadCorpusVotes();
+  all[participation.id] = votes;
+  saveCorpusVotes(all);
   return {
     ok: true,
     updated: { ...participation, votes, valeur: computeValeur(votes) },
     consumed: cost,
+  };
+}
+
+/** Retrait de vote optimiste — met à jour localStorage. */
+function optimisticUnvote(
+  participation: UserParticipation,
+  voterId: string,
+  cible: 'participation' | 'element',
+  elementKey?: string,
+  cost = 1,
+): VoteResult {
+  const votes = (participation.votes ?? []).filter((v) => {
+    if (cible === 'participation') return !(v.voterId === voterId && v.cible === 'participation');
+    return !(v.voterId === voterId && v.cible === 'element' && v.elementKey === elementKey);
+  });
+  const all = loadCorpusVotes();
+  all[participation.id] = votes;
+  saveCorpusVotes(all);
+  return {
+    ok: true,
+    updated: { ...participation, votes, valeur: computeValeur(votes) },
+    consumed: -cost,
   };
 }
 
@@ -199,12 +244,9 @@ export async function unvoteOnElement(
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
   elementKey: string,
 ): Promise<VoteResult> {
-  // Corpus → retrait optimiste
+  // Corpus → retrait optimiste (persisté dans localStorage)
   if (isCorpusAnalysis(participation)) {
-    const votes = (participation.votes ?? []).filter(
-      (v) => !(v.voterId === voter.id && v.cible === 'element' && v.elementKey === elementKey),
-    );
-    return { ok: true, updated: { ...participation, votes, valeur: computeValeur(votes) }, consumed: -COST_ELEMENT };
+    return optimisticUnvote(participation, voter.id, 'element', elementKey, COST_ELEMENT);
   }
 
   const { data, error } = await supabase.rpc('cancel_vote', {
@@ -225,12 +267,9 @@ export async function unvoteOnParticipation(
   participation: UserParticipation,
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
 ): Promise<VoteResult> {
-  // Corpus → retrait optimiste
+  // Corpus → retrait optimiste (persisté dans localStorage)
   if (isCorpusAnalysis(participation)) {
-    const votes = (participation.votes ?? []).filter(
-      (v) => !(v.voterId === voter.id && v.cible === 'participation'),
-    );
-    return { ok: true, updated: { ...participation, votes, valeur: computeValeur(votes) }, consumed: -COST_PARTICIPATION };
+    return optimisticUnvote(participation, voter.id, 'participation', undefined, COST_PARTICIPATION);
   }
 
   const { data, error } = await supabase.rpc('cancel_vote', {

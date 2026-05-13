@@ -14,8 +14,9 @@ import type {
   ClinicalCase,
   ReadingGridId,
   Annotation,
+  Vote,
 } from '@/types';
-import { DIFFICULTE_LABELS } from '@/types';
+import { DIFFICULTE_LABELS, RATIO_STATUT } from '@/types';
 import { GRILLES, getGrilleLabel } from '@/data/grilles';
 import { GridBadge } from '@/components/ieatc/GridBadge';
 import { VoteButton } from '@/components/ieatc/VoteButton';
@@ -289,15 +290,15 @@ function AnnotatedTextWithPanel({
       .filter((x) => selection.ids.includes(x.ann.id))
       .map((x) => {
         const p = participations.find((pp) => pp.id === x.participationId);
-        const votes = p?.votes ?? [];
-        const elemVotes = votes.filter(
-          (v) => v.cible === 'element' && v.elementKey === `annotation:${x.ann.id}`,
-        ).length;
-        const partVotes = votes.filter((v) => v.cible === 'participation').length;
-        const voteCount = elemVotes + partVotes;
+        const allVotes = (p?.votes ?? []) as Vote[];
+        const elemWeight = weightedVotes(
+          allVotes.filter((v) => v.cible === 'element' && v.elementKey === `annotation:${x.ann.id}`),
+        );
+        const partWeight = weightedVotes(allVotes.filter((v) => v.cible === 'participation'));
+        const voteCount = elemWeight + partWeight;
         const hasVoted =
           !!user &&
-          votes.some(
+          allVotes.some(
             (v) =>
               v.voterId === user.id &&
               v.cible === 'element' &&
@@ -787,11 +788,16 @@ function buildPoulsText(cas: ClinicalCase): string {
 
 // ─── Forme 2 : Synthèse intelligente ──────────────────────────────────────────
 
+/** Somme pondérée d'un sous-ensemble de votes (applique RATIO_STATUT). */
+function weightedVotes(votes: Vote[]): number {
+  return votes.reduce((acc, v) => acc + (RATIO_STATUT[v.voterStatut] ?? 1), 0);
+}
+
 interface AggItem {
   text: string;
   total: number;
   count: number;
-  votes: number;
+  votes: number;  // poids pondéré par statut (expert = 10, étudiant = 1…)
 }
 
 function aggregate(
@@ -802,27 +808,28 @@ function aggregate(
   const map = new Map<string, AggItem>();
   for (const p of participations) {
     const valeur = participationValeur(p);
-    const partVotes = (p.votes ?? []).filter((v) => v.cible === 'participation').length;
+    const allVotes = p.votes ?? [];
+    const partWeight = weightedVotes(allVotes.filter((v) => v.cible === 'participation'));
     const items = extract(p);
     for (let i = 0; i < items.length; i++) {
       const t = items[i]!;
       const key = t.trim().toLowerCase();
       if (!key) continue;
-      let elemVotes = 0;
+      let elemWeight = 0;
       if (elementKeyFn) {
         const ek = elementKeyFn(i, t.trim());
-        elemVotes = (p.votes ?? []).filter(
-          (v) => v.cible === 'element' && v.elementKey === ek,
-        ).length;
+        elemWeight = weightedVotes(
+          allVotes.filter((v) => v.cible === 'element' && v.elementKey === ek),
+        );
       }
-      const itemVotes = partVotes + elemVotes;
+      const itemWeight = partWeight + elemWeight;
       const cur = map.get(key);
       if (cur) {
         cur.total += valeur;
         cur.count += 1;
-        cur.votes += itemVotes;
+        cur.votes += itemWeight;
       } else {
-        map.set(key, { text: t.trim(), total: valeur, count: 1, votes: itemVotes });
+        map.set(key, { text: t.trim(), total: valeur, count: 1, votes: itemWeight });
       }
     }
   }
@@ -1138,13 +1145,13 @@ function AggColumn({
                     {it.count}
                   </span>
                   {it.votes > 0 && (
-                    <span className="inline-flex items-center gap-0.5 text-xs text-amber-600 shrink-0" title={`${it.votes} vote${it.votes > 1 ? 's' : ''}`}>
+                    <span className="inline-flex items-center gap-0.5 text-xs text-amber-600 shrink-0" title={`Poids votes : ${Math.round(it.votes * 10) / 10} (pondéré par statut)`}>
                       <ThumbsUp size={10} fill="currentColor" />
-                      {it.votes}
+                      {Math.round(it.votes * 10) / 10}
                     </span>
                   )}
-                  <span className="text-xs font-bold text-teal-700 shrink-0 ml-1" title="Score = analyses + votes">
-                    {score}
+                  <span className="text-xs font-bold text-teal-700 shrink-0 ml-1" title="Score = analyses + votes pondérés">
+                    {Math.round(score * 10) / 10}
                   </span>
                 </div>
                 {techStr && (

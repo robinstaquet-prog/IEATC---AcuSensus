@@ -17,6 +17,7 @@ import {
   syncParticipationIfNeeded,
   isCasApprentissage,
 } from '@/lib/participation-store';
+import { getCorpusVotes, computeValeur } from '@/lib/vote-system';
 import { PoulsDisplay } from '@/components/ieatc/PoulsDisplay';
 import { ParticipationForm } from '@/components/ieatc/ParticipationForm';
 import { AnalysePanel } from '@/components/ieatc/AnalysePanel';
@@ -162,37 +163,40 @@ export function CasDetailClient({ cas }: CasDetailClientProps) {
   // Participation factices issues de cas.analyses (variantes) — affichées dans AnalysePanel
   // Les ClinicalAnalysis sont compatibles avec UserParticipation via un cast :
   //   grillePrincipale → grilleChoisie, grillesSecondaires[0] → grilleSecondaire
+  // Les votes persistés dans localStorage sont mergés automatiquement.
   const analyseVariantes = useMemo((): UserParticipation[] =>
     (cas.analyses ?? [])
       .filter((a: ClinicalAnalysis) => a.type === 'variante')
-      .map((a: ClinicalAnalysis) => ({
-        id: a.id,
-        userId: a.auteurId ?? a.id,
-        caseId: a.caseId,
-        grilleChoisie: a.grillePrincipale,
-        grilleSecondaire: a.grillesSecondaires?.[0],
-        categoriesRetenues: a.categoriesDiagnostiques ?? [],
-        pointsProposer: a.pointsProposer ?? a.pointsUtilises ?? [],
-        revelationFaite: true,
-        createdAt: '',
-        updatedAt: '',
-        // Champs annotations et affichage
-        annotationsInterrogatoire: a.annotationsInterrogatoire ?? [],
-        annotationsPouls: a.annotationsPouls ?? [],
-        langueTexte: a.langueTexte,
-        annotationsLangue: a.annotationsLangue ?? [],
-        bilanEnergetique: a.bilanEnergetique,
-        strategie: a.strategie,
-        commentaireLibre: a.commentaireLibre,
-        publicationMode: a.publicationMode ?? 'public',
-        votes: a.votes ?? [],
-        valeur: a.valeur ?? 1.0,
-        difficultéEstimee: a.difficultéEstimee,
-        // Champs bonus (lus via cast dans AnalysePanel)
-        auteurPseudo: a.auteurPseudo,
-        auteurStatut: a.auteurStatut,
-        role: a.role,
-      } as UserParticipation & { auteurPseudo?: string; auteurStatut?: string; role?: string })),
+      .map((a: ClinicalAnalysis) => {
+        const savedVotes = getCorpusVotes(a.id) ?? [];
+        const mergedVotes = savedVotes.length > 0 ? savedVotes : (a.votes ?? []);
+        return {
+          id: a.id,
+          userId: a.auteurId ?? a.id,
+          caseId: a.caseId,
+          grilleChoisie: a.grillePrincipale,
+          grilleSecondaire: a.grillesSecondaires?.[0],
+          categoriesRetenues: a.categoriesDiagnostiques ?? [],
+          pointsProposer: a.pointsProposer ?? a.pointsUtilises ?? [],
+          revelationFaite: true,
+          createdAt: '',
+          updatedAt: '',
+          annotationsInterrogatoire: a.annotationsInterrogatoire ?? [],
+          annotationsPouls: a.annotationsPouls ?? [],
+          langueTexte: a.langueTexte,
+          annotationsLangue: a.annotationsLangue ?? [],
+          bilanEnergetique: a.bilanEnergetique,
+          strategie: a.strategie,
+          commentaireLibre: a.commentaireLibre,
+          publicationMode: a.publicationMode ?? 'public',
+          votes: mergedVotes,
+          valeur: computeValeur(mergedVotes),
+          difficultéEstimee: a.difficultéEstimee,
+          auteurPseudo: a.auteurPseudo,
+          auteurStatut: a.auteurStatut,
+          role: a.role,
+        } as UserParticipation & { auteurPseudo?: string; auteurStatut?: string; role?: string };
+      }),
   [cas.analyses]);
 
   useEffect(() => {
