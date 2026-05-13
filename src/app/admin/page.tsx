@@ -9,7 +9,7 @@ import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import { Shield, Check, Loader2, AlertCircle, ExternalLink, Eye, EyeOff, BookOpen, Trash2, Pencil, Database } from 'lucide-react';
 import { CLINICAL_CASES } from '@/data/cases';
-import { getHiddenCorpusCaseIds, setCorpusCaseHidden } from '@/lib/corpus-overrides';
+import { fetchHiddenCorpusCaseIds, setCorpusCaseHidden } from '@/lib/corpus-overrides';
 import type { ClinicalCase } from '@/types';
 
 const STATUTS_OPTIONS = [
@@ -162,14 +162,14 @@ export default function AdminPage() {
     }
     if (user?.is_admin) {
       fetchUsers();
-      setHiddenIds(getHiddenCorpusCaseIds());
+      fetchHiddenCorpusCaseIds().then(setHiddenIds);
       fetchSupabaseCases();
     }
   }, [user, isLoading, router, fetchUsers, fetchSupabaseCases]);
 
-  const toggleCasVisibility = (id: string) => {
+  const toggleCasVisibility = async (id: string) => {
     const nowHidden = !hiddenIds.has(id);
-    setCorpusCaseHidden(id, nowHidden);
+    await setCorpusCaseHidden(id, nowHidden);
     setHiddenIds((prev) => {
       const next = new Set(prev);
       if (nowHidden) next.add(id);

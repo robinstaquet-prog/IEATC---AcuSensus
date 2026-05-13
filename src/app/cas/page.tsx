@@ -9,7 +9,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { getCasesPublies } from '@/data';
-import { getHiddenCorpusCaseIds } from '@/lib/corpus-overrides';
+import { fetchHiddenCorpusCaseIds } from '@/lib/corpus-overrides';
 import { getUserCases } from '@/lib/user-cases-store';
 import { GRILLES } from '@/data/grilles';
 import { Input } from '@/components/ui/input';
@@ -192,7 +192,7 @@ export default function CasListPage() {
   const [userCases, setUserCases] = useState<ClinicalCase[]>([]);
 
   useEffect(() => {
-    setHiddenIds(getHiddenCorpusCaseIds());
+    fetchHiddenCorpusCaseIds().then(setHiddenIds);
     getUserCases().then((cas) => {
       const publies = cas.filter((c) => c.statut === 'publie');
       const nouveaux = publies.filter((c) => !allCorpus.some((cc) => cc.id === c.id));

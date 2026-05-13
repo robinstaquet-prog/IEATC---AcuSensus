@@ -1,23 +1,31 @@
 // ─── Corpus case visibility overrides (admin-only) ───────────────────────────
 // Permet à l'admin de masquer des cas du corpus depuis l'interface.
-// Stocké en localStorage — côté client uniquement.
-// N'affecte pas les stats (calculées statiquement au build).
+// Stocké dans Supabase (table corpus_hidden_cases) — global pour tous les users.
 
-const KEY = 'acusensus_hidden_corpus_cases';
+import { supabase } from '@/lib/supabase';
 
-export function getHiddenCorpusCaseIds(): Set<string> {
-  if (typeof window === 'undefined') return new Set();
-  try {
-    const raw = localStorage.getItem(KEY);
-    return new Set<string>(raw ? (JSON.parse(raw) as string[]) : []);
-  } catch {
-    return new Set();
-  }
+/** Charge les IDs des cas masqués depuis Supabase. */
+export async function fetchHiddenCorpusCaseIds(): Promise<Set<string>> {
+  const { data, error } = await supabase
+    .from('corpus_hidden_cases')
+    .select('case_id');
+  if (error || !data) return new Set();
+  return new Set<string>(data.map((r) => r.case_id));
 }
 
-export function setCorpusCaseHidden(id: string, hidden: boolean): void {
-  const ids = getHiddenCorpusCaseIds();
-  if (hidden) ids.add(id);
-  else ids.delete(id);
-  localStorage.setItem(KEY, JSON.stringify([...ids]));
+/** Masque ou rend visible un cas corpus (insert/delete dans Supabase). */
+export async function setCorpusCaseHidden(
+  id: string,
+  hidden: boolean,
+): Promise<void> {
+  if (hidden) {
+    await supabase
+      .from('corpus_hidden_cases')
+      .upsert({ case_id: id }, { onConflict: 'case_id' });
+  } else {
+    await supabase
+      .from('corpus_hidden_cases')
+      .delete()
+      .eq('case_id', id);
+  }
 }
