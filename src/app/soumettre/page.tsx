@@ -53,6 +53,7 @@ const QUALITES_POULS: { id: QualitePouls; label: string }[] = [
   { id: 'dur', label: 'Dur' },
   { id: 'etroit', label: 'Étroit' },
   { id: 'corde_arc', label: 'Corde-arc' },
+  { id: 'tendu' as QualitePouls, label: 'Tendu' },
   { id: 'normal', label: 'Normal' },
   { id: 'absent', label: 'Absent' },
 ];
@@ -572,10 +573,13 @@ export default function SoumettreCasPage() {
           <p className="text-slate-500 text-sm mb-6">
             Connectez-vous pour soumettre un cas clinique.
           </p>
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-teal-600 text-white hover:bg-teal-500 font-semibold text-sm transition-colors">
+          <Link
+            href="/connexion"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-teal-600 text-white hover:bg-teal-500 font-semibold text-sm transition-colors"
+          >
             <LogIn size={16} />
             Connexion
-          </button>
+          </Link>
         </div>
       </div>
     );
@@ -796,7 +800,7 @@ export default function SoumettreCasPage() {
               <div>
                 <p className="text-xs font-semibold text-slate-600 mb-2">Comparaison quantitative gauche / droite</p>
                 <div className="flex flex-wrap gap-2">
-                  {['G=D', 'G>D', 'G>>D', 'G<D', 'G<<D'].map((opt) => (
+                  {['G=D', 'G>D', 'G≥D', 'G>>D', 'G<D', 'G≤D', 'G<<D'].map((opt) => (
                     <button
                       key={opt}
                       type="button"

@@ -17,7 +17,7 @@ function mapRow(row: Record<string, any>): ClinicalCase {
     sexe: row.sexe ?? undefined,
     casComplet: row.cas_complet,
     exemplaire: row.exemplaire,
-    qualifieApprentissage: row.qualifie_apprentissage ?? false,
+    qualifieApprentissage: false,
     grillePrincipale: row.grille_principale as ReadingGridId,
     tags: row.tags ?? [],
     content: row.content,
