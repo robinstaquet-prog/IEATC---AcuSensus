@@ -290,9 +290,11 @@ function AnnotatedTextWithPanel({
       .map((x) => {
         const p = participations.find((pp) => pp.id === x.participationId);
         const votes = p?.votes ?? [];
-        const voteCount = votes.filter(
+        const elemVotes = votes.filter(
           (v) => v.cible === 'element' && v.elementKey === `annotation:${x.ann.id}`,
         ).length;
+        const partVotes = votes.filter((v) => v.cible === 'participation').length;
+        const voteCount = elemVotes + partVotes;
         const hasVoted =
           !!user &&
           votes.some(
@@ -824,7 +826,9 @@ function aggregate(
       }
     }
   }
-  return [...map.values()].sort((a, b) => b.votes - a.votes || b.total - a.total);
+  return [...map.values()].sort(
+    (a, b) => (b.count + b.votes) - (a.count + a.votes) || b.total - a.total,
+  );
 }
 
 function AnalyseForme2({
@@ -1114,25 +1118,37 @@ function AggColumn({
         <div className="space-y-1.5">
           {visibleItems.map((it, i) => {
             const techStr = techniqueMap ? techniqueLabel(it.text) : null;
+            const score = it.count + it.votes;
+            const maxScore = items[0] ? items[0].count + items[0].votes : 1;
+            const barPct = Math.round((score / Math.max(maxScore, 1)) * 100);
             return (
               <div
                 key={i}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm relative overflow-hidden"
               >
-                <div className="flex items-center gap-2">
-                  <span className={cn('text-slate-700 flex-1', mono && 'font-mono text-xs')}>{it.text}</span>
-                  <span className="text-xs text-slate-400 shrink-0">
-                    ×{it.count}
+                {/* Barre de fond proportionnelle au score */}
+                <div
+                  className="absolute inset-y-0 left-0 bg-teal-50/60 transition-all"
+                  style={{ width: `${barPct}%` }}
+                />
+                <div className="relative flex items-center gap-2">
+                  <span className={cn('text-slate-700 flex-1 min-w-0 truncate', mono && 'font-mono text-xs')}>{it.text}</span>
+                  <span className="inline-flex items-center gap-1 text-xs text-slate-500 shrink-0" title={`${it.count} analyse${it.count > 1 ? 's' : ''}`}>
+                    <Users size={10} />
+                    {it.count}
                   </span>
                   {it.votes > 0 && (
-                    <span className="inline-flex items-center gap-0.5 text-xs text-amber-600 shrink-0" title={`${it.votes} vote${it.votes > 1 ? 's' : ''} reçu${it.votes > 1 ? 's' : ''}`}>
+                    <span className="inline-flex items-center gap-0.5 text-xs text-amber-600 shrink-0" title={`${it.votes} vote${it.votes > 1 ? 's' : ''}`}>
                       <ThumbsUp size={10} fill="currentColor" />
                       {it.votes}
                     </span>
                   )}
+                  <span className="text-xs font-bold text-teal-700 shrink-0 ml-1" title="Score = analyses + votes">
+                    {score}
+                  </span>
                 </div>
                 {techStr && (
-                  <span className="block text-[10px] text-slate-500 mt-0.5">
+                  <span className="relative block text-[10px] text-slate-500 mt-0.5">
                     {techStr}
                   </span>
                 )}
