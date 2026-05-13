@@ -53,12 +53,13 @@ const MERIDIEN_ALIASES: Record<string, string> = {
   DM: 'TM',   // Du Mai  → Tou Mo
   VC: 'JM',   // Vaisseau Conception (nomenclature MTC) → JM
   VG: 'TM',   // Vaisseau Gouverneur (nomenclature MTC) → TM
+  RTE: 'RT',  // Rate (notation longue) → RT
 };
 
 // Méridiens reconnus (lettres seules), du plus long au plus court pour matcher
 // d'abord "VB", "GI", "TR" avant les lettres simples.
 const MERIDIENS = [
-  'VB', 'GI', 'TR', 'IG', 'MC', 'RT',
+  'RTE', 'VB', 'GI', 'TR', 'IG', 'MC', 'RT',
   'JM', 'TM', 'VC', 'VG', 'RM', 'DM',
   'P', 'E', 'C', 'V', 'R', 'F',
 ];

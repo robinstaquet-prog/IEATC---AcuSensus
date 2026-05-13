@@ -107,12 +107,12 @@ export async function getAllParticipations(userId: string): Promise<UserParticip
   return data.map(fromRow);
 }
 
-/** Si la valeur dépasse 50, marque le cas comme qualifié pour l'apprentissage. */
+/** Si la valeur dépasse 50, marque le cas comme exemplaire (apprentissage). */
 async function maybeQualifieCase(caseId: string, valeur?: number): Promise<void> {
   if ((valeur ?? 0) >= 50) {
     await supabase
       .from('clinical_cases')
-      .update({ qualifie_apprentissage: true })
+      .update({ exemplaire: true })
       .eq('id', caseId);
   }
 }

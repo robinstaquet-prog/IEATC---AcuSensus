@@ -21,11 +21,15 @@ const CATEGORIE_CONFIG: Record<CategorieTerm, { label: string; color: string }> 
   energie: { label: 'Énergie', color: 'bg-teal-100 text-teal-800' },
   organe_tsang: { label: 'Organe Tsang', color: 'bg-indigo-100 text-indigo-800' },
   organe_fu: { label: 'Organe Fu', color: 'bg-violet-100 text-violet-800' },
+  meridien: { label: 'Méridien', color: 'bg-cyan-100 text-cyan-800' },
   grille: { label: 'Grille de lecture', color: 'bg-slate-100 text-slate-700' },
   point_type: { label: 'Type de point', color: 'bg-emerald-100 text-emerald-800' },
   technique: { label: 'Technique', color: 'bg-amber-100 text-amber-700' },
+  protocole: { label: 'Protocole', color: 'bg-orange-100 text-orange-800' },
+  diagnostic: { label: 'Diagnostic', color: 'bg-yellow-100 text-yellow-800' },
   pathologie: { label: 'Pathologie', color: 'bg-red-100 text-red-800' },
   physiologie: { label: 'Physiologie', color: 'bg-sky-100 text-sky-800' },
+  psychisme: { label: 'Psychisme', color: 'bg-purple-100 text-purple-800' },
   concept_fondamental: { label: 'Concept fondamental', color: 'bg-rose-100 text-rose-800' },
 };
 

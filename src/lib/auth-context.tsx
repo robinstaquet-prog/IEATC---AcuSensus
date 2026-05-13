@@ -165,24 +165,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [fetchProfile]);
 
   useEffect(() => {
-    // onAuthStateChange tire immédiatement avec INITIAL_SESSION — pas besoin de getSession() séparé.
-    // Le finally garantit que setLoading(false) est toujours appelé, même si fetchProfile échoue.
+    let mounted = true;
+
+    // 1. getSession() pour le chargement initial — fiable même si INITIAL_SESSION ne se déclenche pas.
+    async function initSession() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!mounted) return;
+        if (session?.user) {
+          const profile = await fetchProfile(session.user.id);
+          if (mounted) setUser(profile);
+        }
+      } catch {
+        // Recovery échouée — l'utilisateur reste déconnecté
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+    initSession();
+
+    // 2. onAuthStateChange pour les changements ultérieurs (login, logout, token refresh).
+    //    On ignore INITIAL_SESSION car déjà traité par getSession() ci-dessus.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
-        try {
-          if (session?.user) {
-            const profile = await fetchProfile(session.user.id);
-            setUser(profile);
-          } else {
-            setUser(null);
-          }
-        } finally {
-          setLoading(false);
+      async (event, session) => {
+        if (!mounted || event === 'INITIAL_SESSION') return;
+        if (session?.user) {
+          const profile = await fetchProfile(session.user.id);
+          if (mounted) setUser(profile);
+        } else {
+          if (mounted) setUser(null);
         }
       }
     );
 
     return () => {
+      mounted = false;
       subscription.unsubscribe();
     };
   }, [fetchProfile]);

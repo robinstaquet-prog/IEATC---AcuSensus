@@ -14,7 +14,7 @@
  *   3. Organes/Foyers    — Rein, Foie, Rate, Foyer Moyen, etc.
  *   4. Stratégies        — Nourrir Yin, Tonifier Yang, Disperser Fong, etc.
  *
- * ─── RÈGLES CLINIQUES FONDAMENTALES (intégrées dans la données) ──────────────
+ * ─── RÈGLES CLINIQUES FONDAMENTALES (intégrées dans les données) ─────────────
  *
  * R1. Yin/Yang prime TOUJOURS — orienter la polarité avant tout autre lecture.
  * R2. Traiter le général AVANT le local — un Yang local sur vide Yang général
@@ -27,7 +27,7 @@
  *     PREMIER, avant le Foyer Inférieur vide (sinon le plein bloque tout).
  * R6. Oé en plénitude locale / Iong insuffisante = paradoxe IEATC classique.
  *     Tonifier l'Iong générale ET disperser l'Oé locale.
- * R7. Cycle Ko inversé (Bois envahit Terre) : ne pas soutenir la Terre seule
+ * R7. Cycle Ko inversé (Bois attaque Terre) : ne pas soutenir la Terre seule
  *     sans calmer d'abord le Bois en excès.
  *
  * Source : Corpus IEATC — PIV YY tomes 4-5, PVI EEA tome 3
@@ -327,42 +327,42 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['stase sanguine',                 'stagnation de sang stase sanguine'],
   ['sang qui ne circule plus',       'stagnation de sang sang bloque'],
 
-  // ─── CYCLE CHENG (Sheng) — formulations naturelles ───────────────────────────
-  ['rein ne soutient plus le foie',  'rein ne nourrit plus foie cycle cheng eau bois eau ne nourrit plus bois'],
-  ['rein n alimente plus le foie',   'rein ne nourrit plus foie cycle cheng eau bois'],
-  ['eau ne monte plus vers le bois', 'eau ne nourrit plus bois cycle cheng eau bois'],
+  // ─── CYCLE TCHENG (engendrement) — formulations naturelles ──────────────────
+  ['rein ne soutient plus le foie',  'rein ne nourrit plus foie cycle tcheng eau bois eau ne nourrit plus bois'],
+  ['rein n alimente plus le foie',   'rein ne nourrit plus foie cycle tcheng eau bois'],
+  ['eau ne monte plus vers le bois', 'eau ne nourrit plus bois cycle tcheng eau bois'],
   ['rein ne peut plus nourrir le foie', 'rein ne nourrit plus foie eau ne nourrit plus bois'],
-  ['foie mal nourri par le rein',    'foie mal nourri par le rein cycle cheng eau bois'],
-  ['bois mal nourri par l eau',      'bois mal nourri par l eau cycle cheng eau bois'],
-  ['rein n arrive pas a nourrir le foie', 'rein ne nourrit plus foie cycle cheng eau bois'],
+  ['foie mal nourri par le rein',    'foie mal nourri par le rein cycle tcheng eau bois'],
+  ['bois mal nourri par l eau',      'bois mal nourri par l eau cycle tcheng eau bois'],
+  ['rein n arrive pas a nourrir le foie', 'rein ne nourrit plus foie cycle tcheng eau bois'],
   ['rein ne peut plus soutenir le foie', 'rein ne nourrit plus foie eau ne soutient plus le bois'],
-  ['rate ne soutient plus le poumon','rate ne nourrit plus le poumon cycle cheng terre metal'],
-  ['rate n alimente plus le poumon', 'rate ne nourrit plus le poumon cycle cheng terre metal'],
-  ['poumon ne soutient plus le rein','poumon ne nourrit plus le rein cycle cheng metal eau'],
-  ['coeur ne soutient plus la rate', 'coeur ne nourrit plus la rate cycle cheng feu terre'],
-  ['feu ne nourrit plus la terre',   'feu ne nourrit plus terre cycle cheng feu terre'],
+  ['rate ne soutient plus le poumon','rate ne nourrit plus le poumon cycle tcheng terre metal'],
+  ['rate n alimente plus le poumon', 'rate ne nourrit plus le poumon cycle tcheng terre metal'],
+  ['poumon ne soutient plus le rein','poumon ne nourrit plus le rein cycle tcheng metal eau'],
+  ['coeur ne soutient plus la rate', 'coeur ne nourrit plus la rate cycle tcheng feu terre'],
+  ['feu ne nourrit plus la terre',   'feu ne nourrit plus terre cycle tcheng feu terre'],
 
-  // ─── CYCLE KO — formulations naturelles ──────────────────────────────────────
-  ['foie agresse la rate',           'foie agresse la rate bois envahit terre ko pathologique'],
-  ['foie envahit la rate',           'foie envahit rate bois envahit terre ko pathologique'],
-  ['stress affecte la digestion',    'bois envahit terre foie envahit rate stress crise foie rate'],
-  ['colere affecte la digestion',    'bois envahit terre foie envahit rate stress crise foie rate'],
-  ['emotions perturbent la rate',    'bois envahit terre foie envahit rate conflit bois terre'],
-  ['foie perturbe la rate',          'foie envahit rate bois envahit terre conflit bois terre'],
-  ['foie attaque la rate',           'foie agresse la rate bois envahit terre ko pathologique'],
-  ['tension emotionnelle perturbe la digestion', 'bois envahit terre stress crise foie rate'],
-  ['rate fragilisee par le foie',    'rate fragilisee secondairement bois envahit terre'],
-  ['foie bois en exces affecte la terre', 'bois envahit terre ko pathologique bois domine terre'],
-  ['stress perturbe la digestion',   'bois envahit terre stress crise foie rate conflit bois terre'],
-  ['colere affecte l estomac',       'bois envahit terre foie envahit rate ko pathologique'],
+  // ─── CYCLE KO — formulations naturelles (IEATC : "attaque" pas "envahit") ───
+  ['foie agresse la rate',           'foie attaque la rate bois attaque terre ko pathologique'],
+  ['foie envahit la rate',           'foie attaque la rate bois attaque terre ko pathologique'],
+  ['stress affecte la digestion',    'bois attaque terre foie attaque rate stress crise foie rate'],
+  ['colere affecte la digestion',    'bois attaque terre foie attaque rate stress crise foie rate'],
+  ['emotions perturbent la rate',    'bois attaque terre foie attaque rate conflit bois terre'],
+  ['foie perturbe la rate',          'foie attaque rate bois attaque terre conflit bois terre'],
+  ['foie attaque la rate',           'foie attaque la rate bois attaque terre ko pathologique'],
+  ['tension emotionnelle perturbe la digestion', 'bois attaque terre stress crise foie rate'],
+  ['rate fragilisee par le foie',    'rate fragilisee secondairement bois attaque terre'],
+  ['foie bois en exces affecte la terre', 'bois attaque terre ko pathologique bois domine terre'],
+  ['stress perturbe la digestion',   'bois attaque terre stress crise foie rate conflit bois terre'],
+  ['colere affecte l estomac',       'bois attaque terre foie attaque rate ko pathologique'],
 
   // ─── MING MEN / DIARRHÉES MATINALES ─────────────────────────────────────────
   ['diarrhee 5h matin',              'diarrhees matinales diarrhee au petit matin'],
   ['diarrhee tot le matin',          'diarrhees matinales diarrhee au petit matin'],
   ['va a la selle le matin',         'diarrhees matinales diarrhee au petit matin'],
-  ['selles molles le matin',         'diarrhees matinales yang ming perturbe'],
-  ['diarrhee a l aube',              'diarrhees matinales diarrhee au petit matin'],
-  ['diarrhee entre 5h et 7h',        'diarrhees matinales yang ming sans stimulus'],
+  ['selles molles le matin',         'diarrhees matinales vide yang rein ming men insuffisant'],
+  ['diarrhee a l aube',              'diarrhees matinales vide yang rein ming men insuffisant'],
+  ['diarrhee entre 5h et 7h',        'diarrhees matinales vide yang rein ming men insuffisant'],
   ['transit le matin de bonne heure','diarrhees matinales diarrhee au petit matin'],
 
   // ─── FONG INTERNE (Vent interne) ─────────────────────────────────────────────
@@ -394,7 +394,7 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['tan qui obstrue',                'tan obstrue obstruction par le tan'],
   ['mucosites',                      'accumulation de tan retention de tan'],
   ['mucus pathologique',             'accumulation de tan phlegme accumule'],
-  ['glaires dans les poumons',       'accumulation de tan tan dans les meridiens phlegme coeur'],
+  ['glaires dans les poumons',       'accumulation de tan tan dans les meridiens phlegme poumon'],
   ['terrain humide',                 'humidite interne retention d humidite terrain humide'],
 
   // ─── PARADOXE OÉ / IONG (R6) ────────────────────────────────────────────────
@@ -427,25 +427,27 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['carence en yin',                 'vide de yin carence yin yin insuffisant'],
   ['yin epuise',                     'vide de yin yin vide yin epuise'],
 
-  // ─── SHEN / PSYCHISME ────────────────────────────────────────────────────────
-  ['esprit perturbe',                'shen perturbe coeur perturbe shen agite'],
-  ['esprit agite',                   'shen perturbe shen agite perturbation du shen'],
-  ['psychisme perturbe',             'shen perturbe coeur perturbe'],
-  ['mental instable',                'shen perturbe shen agite'],
-  ['esprit instable',                'shen perturbe shen trouble'],
-  ['sommeil agite par le shen',      'shen perturbe insomnie palpitations'],
-  ['coeur qui n ancre plus le shen', 'shen perturbe coeur ne peut plus ancrer le shen'],
-  ['shen non ancre',                 'shen perturbe shen agite coeur ne peut plus ancrer le shen'],
-  ['pensees qui s emballent',        'shen perturbe shen agite yi perturbe'],
-  ['ruminations',                    'yi perturbe yi insuffisant rumination pathologique'],
-  ['pensees circulaires',            'yi perturbe pensees circulaires'],
-  ['idees fixes',                    'yi perturbe idees fixes'],
-  ['obsessions',                     'yi perturbe idees fixes rumination pathologique'],
-  ['peur profonde',                  'zhi perturbe peur chronique envahissante peur pathologique rein'],
-  ['peur du vide',                   'zhi perturbe peur chronique envahissante'],
-  ['manque de volonte',              'zhi perturbe volonte affaiblie manque de volonte profond'],
-  ['deuil non fait',                 'po perturbe deuil non resolu melancolie profonde'],
-  ['tristesse profonde',             'po perturbe melancolie profonde tristesse metal'],
+  // ─── CHEN / PSYCHISME (terminologie IEATC : Chen, Roun, Pro, I, Tche) ───────
+  ['esprit perturbe',                'chen perturbe coeur perturbe chen agite'],
+  ['esprit agite',                   'chen perturbe chen agite perturbation du chen'],
+  ['psychisme perturbe',             'chen perturbe coeur perturbe'],
+  ['mental instable',                'chen perturbe chen agite'],
+  ['esprit instable',                'chen perturbe chen trouble'],
+  ['sommeil agite par le chen',      'chen perturbe insomnie palpitations'],
+  ['coeur qui n ancre plus le chen', 'chen perturbe coeur ne peut plus ancrer le chen'],
+  ['chen non ancre',                 'chen perturbe chen agite coeur ne peut plus ancrer le chen'],
+  ['shen perturbe',                  'chen perturbe chen agite'],
+  ['shen non ancre',                 'chen perturbe chen agite'],
+  ['pensees qui s emballent',        'chen perturbe chen agite i perturbe'],
+  ['ruminations',                    'i perturbe i insuffisant rumination pathologique'],
+  ['pensees circulaires',            'i perturbe pensees circulaires'],
+  ['idees fixes',                    'i perturbe idees fixes'],
+  ['obsessions',                     'i perturbe idees fixes rumination pathologique'],
+  ['peur profonde',                  'tche perturbe peur chronique envahissante peur pathologique rein'],
+  ['peur du vide',                   'tche perturbe peur chronique envahissante'],
+  ['manque de volonte',              'tche perturbe volonte affaiblie manque de volonte profond'],
+  ['deuil non fait',                 'pro perturbe deuil non resolu melancolie profonde'],
+  ['tristesse profonde',             'pro perturbe melancolie profonde tristesse metal'],
 
   // ─── TENDONS / LIGAMENTS ─────────────────────────────────────────────────────
   ['tendons fragiles',               'tendons foie vb tendons fragiles foie ne gouverne plus les tendons'],
@@ -522,20 +524,20 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['yang ling tsuan',                '34vb'],
 
   // ─── CORRESPONDANCES ÉNERGÉTIQUES IEATC ↔ MTC ───────────────────────────────
-  ['energie nutritive',              'iong iong insuffisante'],
-  ['ying qi',                        'iong iong insuffisante'],
-  ['energie defensive',              'oe wei qi oe en plenitude'],
+  ['energie nutritive',              'iong energie nutritive'],
+  ['ying qi',                        'iong energie nutritive'],
+  ['energie defensive',              'oe energie defensive'],
   ['wei qi',                         'oe'],
-  ['energie ancestrale',             'tsing jing vide de jing tsing epuise'],
-  ['energie vitale',                 'tchi qi vide de qi'],
-  ['jing qi',                        'tsing vide de jing jing epuise'],
-  ['yuan qi',                        'yuan tchi energie ancestrale'],
+  ['energie ancestrale',             'tsing energie ancestrale'],
+  ['energie vitale',                 'tchi energie vitale'],
+  ['jing qi',                        'tsing energie ancestrale'],
+  ['yuan qi',                        'yuan tchi energie originelle'],
   ['zong qi',                        'tsong tchi'],
   ['zhen qi',                        'tcheung tchi tchi'],
-  ['xue',                            'sang vide de sang'],
-  ['jin ye',                         'jin ye insuffisants liquides insuffisants'],
-  ['merveilleux vaisseaux',          'du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo'],
-  ['qi jing ba mai',                 'du mai ren mai yang qiao yin qiao chong mai dai mai yang wei mo yin wei mo'],
+  ['xue',                            'sang'],
+  ['jin ye',                         'liquides organiques'],
+  ['merveilleux vaisseaux',          'tou mo jenn mo yang tsiao mo yin tsiao mo tchrong mo tae mo yang oe mo yin oe mo du mai ren mai chong mai dai mai'],
+  ['qi jing ba mai',                 'tou mo jenn mo yang tsiao mo yin tsiao mo tchrong mo tae mo yang oe mo yin oe mo du mai ren mai chong mai dai mai'],
 
   // ─── STAGNATION DE QI DE L'ESTOMAC ─────────────────────────────────────────
   ['blocage de l estomac',           'stagnation qi estomac estomac bloque'],
@@ -820,7 +822,7 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['le rein ne rechauffe plus la rate',    'rate non rechauffee vide yang rein yang du rein insuffisant'],
   ['le feu du ming men ne rechauffe plus', 'ming men insuffisant vide yang rein feu du ming men'],
 
-  // ─── CŒUR gouverne le Sang, abrite le Shen ──────────────────────────────
+  // ─── CŒUR gouverne le Sang, abrite le Chen ──────────────────────────────
   ['le coeur ne gouverne plus le sang',    'vide qi coeur vide sang coeur'],
   ['le coeur n abrite plus le shen',       'shen perturbe coeur ne peut plus ancrer le shen'],
   ['le coeur ne propulse plus',            'vide qi coeur stagnation de sang'],
@@ -836,6 +838,7 @@ const EQUIVALENCES_SEMANTIQUES: Array<[phrase: string, enrichissement: string]> 
   ['attrape un fong',                'vent externe fong externe invasion de fong'],
   ['pris un fong',                   'vent externe fong externe invasion de fong'],
   ['fong attaque le poumon',         'vent externe fong externe poumon attaque par le vent invasion externe poumon'],
+  ['fong attaque la surface',        'vent externe fong externe invasion de fong vent froid en surface'],
   ['fong envahit la surface',        'vent externe fong externe invasion de fong vent froid en surface'],
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1066,7 +1069,7 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
     patterns: [
       'vide de yin', 'vide yin', 'yin vide',
       'insuffisance yin', 'yin insuffisant', 'yin deficient',
-      'carence yin', 'manque de yin', 'yin manquant', 'yin insuffisant',
+      'carence yin', 'manque de yin', 'yin manquant',
     ],
     regles: ['R1', 'R4'],
     priorite: 1,
@@ -1085,7 +1088,7 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'vide_sang',
-    label: 'Vide de Sang (Xue Xu)',
+    label: 'Vide de Sang',
     categorie: 'famille_diag',
     patterns: [
       'vide de sang', 'vide sang', 'sang vide',
@@ -1108,7 +1111,7 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'vide_iong',
-    label: 'Vide d\'Iong (Ying Qi insuffisante)',
+    label: 'Vide d\'Iong',
     categorie: 'famille_diag',
     patterns: [
       'iong insuffisante', 'iong vide', 'vide d iong', 'vide de iong',
@@ -1145,7 +1148,7 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'plenitude_oe',
-    label: 'Plénitude d\'Oé (Wei Qi en excès)',
+    label: 'Plénitude d\'Oé',
     categorie: 'famille_diag',
     patterns: [
       'oe en plenitude', 'plenitude d oe', 'oe en exces', 'oé en plenitude',
@@ -1223,7 +1226,7 @@ export const FAMILLES_DIAG: ConceptIeatc[] = [
   },
   {
     id: 'feu_vide',
-    label: 'Yang apparent / Feu apparent (Xu Huo)',
+    label: 'Yang apparent / Feu apparent',
     categorie: 'famille_diag',
     patterns: [
       'feu du vide', 'chaleur de vide', 'feu de vide', 'xu huo',
@@ -1359,7 +1362,7 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
     patterns: [
       'vide de yang du rein', 'vide yang rein', 'yang du rein vide',
       'yang du rein insuffisant', 'rein yang vide', 'yang rein insuffisant',
-      'vide yang rein', 'rein en vide de yang',
+      'rein en vide de yang',
     ],
     regles: ['R1', 'R2'],
     priorite: 1,
@@ -1554,11 +1557,11 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
 
   // ─── Cycle Ko Bois → Terre ──────────────────────────────────────────────────
   {
-    id: 'bois_envahit_terre',
-    label: 'Bois envahit la Terre',
+    id: 'bois_attaque_terre',
+    label: 'Bois attaque la Terre',
     categorie: 'syndrome',
     patterns: [
-      'bois envahit terre', 'foie envahit rate', 'bois sur terre',
+      'bois attaque terre', 'bois envahit terre', 'foie attaque rate', 'foie envahit rate', 'bois sur terre',
       'ko pathologique', 'cycle ko pathologique',
       'foie vb envahit', 'bois domine terre',
       'rate affaiblie par le foie', 'foie agresse la rate',
@@ -1587,13 +1590,14 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
 
   // ─── Syndromes du Cœur ───────────────────────────────────────────────────────
   {
-    id: 'shen_perturbe',
-    label: 'Shen perturbé',
+    id: 'chen_perturbe',
+    label: 'Chen perturbé (Cœur)',
     categorie: 'syndrome',
     patterns: [
-      'shen perturbe', 'coeur perturbe', 'shen trouble',
-      'insomnie palpitations', 'coeur shen',
-      'shen agite', 'perturbation du shen',
+      'chen perturbe', 'coeur perturbe', 'chen trouble',
+      'shen perturbe', 'shen trouble', 'shen agite', 'perturbation du shen',
+      'insomnie palpitations', 'coeur chen',
+      'chen agite', 'perturbation du chen',
     ],
     priorite: 2,
   },
@@ -1682,11 +1686,11 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
 
   // ─── Syndromes de la Rate / Foyer Moyen ─────────────────────────────────────
   {
-    id: 'rate_non_rechauffee',
-    label: 'Rate non réchauffée',
+    id: 'froid_a_la_rate',
+    label: 'Froid à la Rate',
     categorie: 'syndrome',
     patterns: [
-      'rate non rechauffee', 'rate sans soutien yang',
+      'froid a la rate', 'froid rate', 'rate non rechauffee', 'rate sans soutien yang',
       'digestion froide', 'rate non soutenue',
       'rate non soutenue par le feu',
       'foyer moyen non soutenu par le foyer inferieur',
@@ -1870,49 +1874,53 @@ export const SYNDROMES_IEATC: ConceptIeatc[] = [
   },
   // ─── Esprits des organes (Wushen) ────────────────────────────────────────────
   {
-    id: 'hun_perturbe',
-    label: 'Hun perturbé (Foie)',
+    id: 'roun_perturbe',
+    label: 'Roun perturbé (Foie)',
     categorie: 'syndrome',
     patterns: [
-      'hun perturbe', 'hun instable', 'hun non ancre',
-      'esprit du foie perturbe', 'hun agite', 'foie hun',
-      'ame vegetative perturbee', 'hun fragilise',
+      'roun perturbe', 'roun instable', 'roun non ancre',
+      'esprit du foie perturbe', 'roun agite', 'foie roun',
+      'hun perturbe', 'hun instable', 'hun non ancre', 'hun agite',
+      'ame vegetative perturbee', 'roun fragilise',
       'reves perturbants foie', 'instabilite psychique foie',
     ],
     priorite: 2,
   },
   {
-    id: 'po_perturbe',
-    label: 'Po perturbé (Poumon)',
+    id: 'pro_perturbe',
+    label: 'Pro perturbé (Poumon)',
     categorie: 'syndrome',
     patterns: [
-      'po perturbe', 'po non ancre', 'esprit du poumon perturbe',
-      'po agite', 'poumon po', 'ame corporelle perturbee',
+      'pro perturbe', 'pro non ancre', 'esprit du poumon perturbe',
+      'pro agite', 'poumon pro', 'po perturbe', 'po non ancre', 'po agite',
+      'ame corporelle perturbee',
       'deuil non resolu', 'melancolie profonde', 'tristesse metal',
-      'po fragilise',
+      'pro fragilise',
     ],
     priorite: 2,
   },
   {
-    id: 'zhi_perturbe',
-    label: 'Zhi perturbé (Rein)',
+    id: 'tche_perturbe',
+    label: 'Tche perturbé (Rein)',
     categorie: 'syndrome',
     patterns: [
-      'zhi perturbe', 'zhi insuffisant', 'esprit du rein perturbe',
-      'volonte affaiblie', 'rein zhi', 'zhi vide',
+      'tche perturbe', 'tche insuffisant', 'esprit du rein perturbe',
+      'volonte affaiblie', 'rein tche', 'tche vide',
+      'zhi perturbe', 'zhi insuffisant', 'zhi vide',
       'manque de volonte profond', 'peur chronique envahissante',
       'peur pathologique rein',
     ],
     priorite: 2,
   },
   {
-    id: 'yi_perturbe',
-    label: 'Yi perturbé (Rate)',
+    id: 'i_perturbe',
+    label: 'I perturbé (Rate)',
     categorie: 'syndrome',
     patterns: [
-      'yi perturbe', 'yi insuffisant', 'esprit de la rate perturbe',
-      'intellectualite perturbee', 'rate yi', 'rumination pathologique',
-      'pensees circulaires', 'idees fixes', 'yi fragilise',
+      'i perturbe', 'i insuffisant', 'esprit de la rate perturbe',
+      'yi perturbe', 'yi insuffisant', 'yi fragilise',
+      'intellectualite perturbee', 'rate i', 'rumination pathologique',
+      'pensees circulaires', 'idees fixes', 'i fragilise',
     ],
     priorite: 2,
   },
@@ -2603,8 +2611,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 1,
   },
   {
-    id: 'relancer_cycle_sheng',
-    label: 'Relancer le cycle Cheng Eau → Bois',
+    id: 'relancer_cycle_tcheng',
+    label: 'Relancer le cycle Tcheng Eau → Bois',
     categorie: 'strategie',
     patterns: [
       'relancer le cycle cheng', 'relancer le cycle sheng',
@@ -2619,8 +2627,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 1,
   },
   {
-    id: 'relancer_cycle_sheng_bois_feu',
-    label: 'Relancer le cycle Cheng Bois → Feu',
+    id: 'relancer_cycle_tcheng_bois_feu',
+    label: 'Relancer le cycle Tcheng Bois → Feu',
     categorie: 'strategie',
     patterns: [
       'relancer cycle cheng bois feu', 'relancer cycle sheng bois feu',
@@ -2632,8 +2640,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 1,
   },
   {
-    id: 'relancer_cycle_sheng_feu_terre',
-    label: 'Relancer le cycle Cheng Feu → Terre',
+    id: 'relancer_cycle_tcheng_feu_terre',
+    label: 'Relancer le cycle Tcheng Feu → Terre',
     categorie: 'strategie',
     patterns: [
       'relancer cycle cheng feu terre', 'relancer cycle sheng feu terre',
@@ -2645,8 +2653,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 1,
   },
   {
-    id: 'debloquer_cycles_cheng',
-    label: 'Débloquer les cycles Cheng (global)',
+    id: 'debloquer_cycles_tcheng',
+    label: 'Débloquer les cycles Tcheng (global)',
     categorie: 'strategie',
     patterns: [
       'debloquer les cycles cheng', 'debloquer les cycles sheng',
@@ -2709,8 +2717,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 2,
   },
   {
-    id: 'pacifier_shen',
-    label: 'Pacifier le Shen (Cœur)',
+    id: 'pacifier_chen',
+    label: 'Pacifier le Chen (Cœur)',
     categorie: 'strategie',
     patterns: [
       'pacifier le shen', 'calmer le shen', 'shen pacifie',
@@ -2722,7 +2730,7 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
   },
   {
     id: 'tonifier_iong',
-    label: 'Tonifier l\'Iong (Ying Qi)',
+    label: 'Tonifier l\'Iong',
     categorie: 'strategie',
     patterns: [
       'tonifier l iong', 'tonifier l iong generale',
@@ -2892,10 +2900,10 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 2,
   },
 
-  // ─── Strategies cycles Cheng supplémentaires ─────────────────────────────────
+  // ─── Strategies cycles Tcheng supplémentaires ────────────────────────────────
   {
-    id: 'relancer_cycle_sheng_terre_metal',
-    label: 'Relancer le cycle Cheng Terre → Métal',
+    id: 'relancer_cycle_tcheng_terre_metal',
+    label: 'Relancer le cycle Tcheng Terre → Métal',
     categorie: 'strategie',
     patterns: [
       'relancer cycle cheng terre metal', 'relancer cycle sheng terre metal',
@@ -2909,8 +2917,8 @@ export const STRATEGIES_IEATC: ConceptIeatc[] = [
     priorite: 1,
   },
   {
-    id: 'relancer_cycle_sheng_metal_eau',
-    label: 'Relancer le cycle Cheng Métal → Eau',
+    id: 'relancer_cycle_tcheng_metal_eau',
+    label: 'Relancer le cycle Tcheng Métal → Eau',
     categorie: 'strategie',
     patterns: [
       'relancer cycle cheng metal eau', 'relancer cycle sheng metal eau',

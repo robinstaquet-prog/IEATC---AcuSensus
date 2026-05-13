@@ -33,7 +33,7 @@ export const GRILLES: ReadingGrid[] = [
     nom: 'Cinq Éléments',
     nomCourt: '5 Éléments',
     description:
-      "Bois, Feu, Terre, Métal, Eau. Cycles d'engendrement (Sheng) et de contrôle (Ke). Lecture constitutionnelle, saisonnière, émotionnelle. Points Shu.",
+      "Bois, Feu, Terre, Métal, Eau. Cycles d'engendrement (Tcheng) et de contrôle (Ko). Lecture constitutionnelle, saisonnière, émotionnelle. Points Su.",
     ordre: 3,
     colorClass: 'bg-amber-600',
     textClass: 'text-white',
@@ -42,10 +42,10 @@ export const GRILLES: ReadingGrid[] = [
   },
   {
     id: 'zang_fu',
-    nom: 'Zang / Fu',
-    nomCourt: 'Zang/Fu',
+    nom: 'Tsang / Fu',
+    nomCourt: 'Tsang/Fu',
     description:
-      "Organes Zang (pleins, Yin : Cœur, Foie, Rate, Poumon, Rein) et viscères Fu (creux, Yang). Leurs fonctions, pathologies et traitements.",
+      "Organes Tsang (pleins, Yin : Cœur, Foie, Rate, Poumon, Rein) et viscères Fu (creux, Yang). Leurs fonctions, pathologies et traitements.",
     ordre: 4,
     colorClass: 'bg-indigo-600',
     textClass: 'text-white',

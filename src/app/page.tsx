@@ -9,7 +9,6 @@ import {
   GitBranch,
   Lightbulb,
   GraduationCap,
-  Users,
 } from 'lucide-react';
 import {
   getCasesExemplaires,
@@ -18,6 +17,7 @@ import {
 } from '@/data';
 import { getGrille, GRILLES } from '@/data/grilles';
 import { TutorialAccordion } from '@/components/home/TutorialAccordion';
+import { JoinCta } from '@/components/home/JoinCta';
 
 export default async function HomePage() {
   const stats = await computeGlobalStats();
@@ -43,7 +43,7 @@ export default async function HomePage() {
             </h1>
             <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl">
               AcuSensus est une base vivante de cas cliniques commentés selon les grilles de lecture
-              de l'approche IEATC — Yin/Yang, Cinq Éléments, Zang/Fu, Méridiens et plus.
+              de l'approche IEATC — Yin/Yang, Cinq Éléments, Tsang/Fou, Méridiens et plus.
               Explorez, comparez, consignez votre raisonnement.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -253,31 +253,8 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Participer */}
-            <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl p-5 text-white shadow-sm">
-              <div className="flex items-center gap-2 mb-2">
-                <Users size={16} className="text-teal-200" />
-                <h3 className="font-semibold text-sm">Rejoindre la communauté</h3>
-              </div>
-              <p className="text-teal-100 text-xs leading-relaxed mb-4">
-                Déposez votre analyse sur un cas, entraînez-vous en mode apprentissage,
-                votez pour les raisonnements les plus solides.
-              </p>
-              <div className="space-y-2">
-                <Link
-                  href="/inscription"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg bg-white text-teal-700 font-semibold text-sm hover:bg-teal-50 transition-colors"
-                >
-                  Créer un compte
-                </Link>
-                <Link
-                  href="/connexion"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg border border-teal-400/50 text-teal-100 font-medium text-sm hover:bg-teal-600 transition-colors"
-                >
-                  Se connecter
-                </Link>
-              </div>
-            </div>
+            {/* Participer — visible seulement si non connecté */}
+            <JoinCta />
 
             {/* Navigation rapide */}
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">

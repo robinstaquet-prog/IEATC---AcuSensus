@@ -91,7 +91,10 @@ export type TechniquePoint =
   | 'tonification'
   | 'dispersion'
   | 'harmonisation'
+  | 'neutre'
+  | 'moxa'
   | 'moxa_tonification'        // alias de tonification_chauffee (données historiques)
+  | 'moxa_dispersion'
   | 'tonification_chauffee'
   | 'dispersion_chauffee'
   | 'dispersion_puis_tonification'
@@ -355,7 +358,7 @@ export interface UserParticipation {
   votes?: Vote[];
   votePoints?: number;
   valeur?: number;                   // 1.0 + Σ(ratio × 0.1)
-  difficultéEstimee?: DifficulteEstimee; // évaluation subjective de la difficulté du cas
+  difficultéEstimee?: DifficulteEstimee; // niveau de lecture de l'analyse (accessible à quel niveau d'étude)
 }
 
 // ─── Utilisateur ─────────────────────────────────────────────────────────────
@@ -392,10 +395,14 @@ export type CategorieTerm =
   | 'organe_tsang'
   | 'organe_fu'
   | 'energie'
+  | 'meridien'
   | 'point_type'
   | 'technique'
+  | 'protocole'
+  | 'diagnostic'
   | 'pathologie'
   | 'physiologie'
+  | 'psychisme'
   | 'concept_fondamental';
 
 export interface Term {

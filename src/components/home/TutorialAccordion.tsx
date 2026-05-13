@@ -11,7 +11,7 @@ const SECTIONS = [
     id: 'synthese',
     title: `Qu'est-ce qu'une synthèse clinique ?`,
     content:
-      `Chaque cas clinique peut recevoir plusieurs synthèses — des analyses structurées rédigées par des praticiens ou des experts. Chaque synthèse est organisée selon une grille de lecture spécifique à l'approche IEATC : Yin/Yang, Cinq Éléments, Zang/Fu, Méridiens, Tiges & Branches… Une même situation clinique peut ainsi être éclairée sous plusieurs angles complémentaires.`,
+      `Chaque cas clinique peut recevoir plusieurs synthèses — des analyses structurées rédigées par des praticiens ou des experts. Chaque synthèse est organisée selon une grille de lecture spécifique à l'approche IEATC : Yin/Yang, Cinq Éléments, Tsang/Fou, Méridiens, Trois Foyers, 4 Énergies, Merveilleux Vaisseaux ou Grands Méridiens & Climats. Une même situation clinique peut ainsi être éclairée sous plusieurs angles complémentaires.`,
   },
   {
     id: 'apprentissage',

@@ -59,7 +59,6 @@ export async function getUserCaseById(id: string): Promise<ClinicalCase | undefi
 }
 
 export async function addUserCase(cas: ClinicalCase): Promise<{ error: string | null }> {
-  const now = new Date().toISOString();
   const { error } = await supabase.from('clinical_cases').insert({
     id: cas.id,
     slug: cas.slug,
@@ -70,7 +69,6 @@ export async function addUserCase(cas: ClinicalCase): Promise<{ error: string | 
     sexe: cas.sexe ?? null,
     cas_complet: cas.casComplet,
     exemplaire: cas.exemplaire,
-    qualifie_apprentissage: false,
     grille_principale: cas.grillePrincipale,
     tags: cas.tags,
     content: cas.content,
@@ -78,8 +76,6 @@ export async function addUserCase(cas: ClinicalCase): Promise<{ error: string | 
     auteur_id: cas.auteurId ?? null,
     date_creation: cas.dateCreation ?? null,
     date_publication: cas.datePublication ?? null,
-    created_at: now,
-    updated_at: now,
   });
   if (error) return { error: error.message };
   return { error: null };

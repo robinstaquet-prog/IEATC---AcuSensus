@@ -50,11 +50,11 @@ const QUALITES_POULS: { id: QualitePouls; label: string }[] = [
   { id: 'superficiel', label: 'Superficiel' },
   { id: 'large', label: 'Large' },
   { id: 'mou', label: 'Mou' },
-  { id: 'dur', label: 'Tendu' },
-  { id: 'etroit', label: 'Fin' },
-  { id: 'corde_arc', label: 'Glissant' },
-  { id: 'normal', label: 'Rugueux' },
-  { id: 'absent', label: 'Serre' },
+  { id: 'dur', label: 'Dur' },
+  { id: 'etroit', label: 'Étroit' },
+  { id: 'corde_arc', label: 'Corde-arc' },
+  { id: 'normal', label: 'Normal' },
+  { id: 'absent', label: 'Absent' },
 ];
 
 // Qualites supplementaires representees par des cles textuelles
@@ -309,7 +309,7 @@ export default function SoumettreCasPage() {
   const [p3FoyerMoy, setP3FoyerMoy] = useState<PoulsPositionData>(emptyPosition());
   const [p3FoyerInf, setP3FoyerInf] = useState<PoulsPositionData>(emptyPosition());
 
-  // Principe IV — Les organes (Zang/Fu)
+  // Principe IV — Les organes (Tsang/Fou)
   const [p4Organes, setP4Organes] = useState<OrganeEntry[]>([]);
 
   // Pouls peripheriques
@@ -450,7 +450,6 @@ export default function SoumettreCasPage() {
   const handleSubmit = useCallback(
     async (publicationMode: PublicationMode) => {
       setError(null);
-      setSubmitting(true);
 
       if (!user) {
         setError('Vous devez etre connecte pour soumettre un cas.');
@@ -484,16 +483,21 @@ export default function SoumettreCasPage() {
         return;
       }
 
+      // Validation passée — on bloque le bouton seulement maintenant
+      setSubmitting(true);
+
       // Construire le cas
       const now = new Date().toISOString();
-      const casId = `user-cas-${Date.now()}`;
+      const ts = Date.now();
+      const casId = `user-cas-${ts}`;
       const slug = titre
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '')
-        .slice(0, 60);
+        .slice(0, 50)
+        + `-${ts.toString(36)}`;
 
       const newCas: ClinicalCase = {
         id: casId,
@@ -533,21 +537,28 @@ export default function SoumettreCasPage() {
         analyses: [],
       };
 
-      const { error: saveError } = await addUserCase(newCas);
-      if (saveError) {
-        console.error('[soumettre] Erreur Supabase :', saveError);
-        setError('Erreur lors de la sauvegarde : ' + saveError);
+      try {
+        const { error: saveError } = await addUserCase(newCas);
+        if (saveError) {
+          console.error('[soumettre] Erreur Supabase :', saveError);
+          setError('Erreur lors de la sauvegarde : ' + saveError);
+          return;
+        }
+        setSaved(true);
+        setTimeout(() => {
+          router.push(`/mes-cas/${casId}`);
+        }, 1500);
+      } catch (err) {
+        console.error('[soumettre] Exception :', err);
+        setError('Erreur inattendue : ' + (err instanceof Error ? err.message : String(err)));
+      } finally {
         setSubmitting(false);
-        return;
       }
-      setSaved(true);
-      setTimeout(() => {
-        router.push(`/mes-cas/${casId}`);
-      }, 1500);
     },
     [
       user, titre, motifs, observation, palpation, interrogatoire,
       rubriquesLibres, buildLectures, poulsSynthese, router, p4Organes,
+      langue, examens, showPalpAbdo, palpAbdo,
     ],
   );
 
@@ -851,8 +862,8 @@ export default function SoumettreCasPage() {
               <QualitesSelector label="Loge III (Pied) — Foyer Inférieur" data={p3FoyerInf} onChange={setP3FoyerInf} />
             </PrincipeSection>
 
-            {/* PRINCIPE IV — Les organes (Zang/Fu) */}
-            <PrincipeSection title="PRINCIPE IV — Organes (Zang/Fu)" subtitle="Ajoutez les organes observés">
+            {/* PRINCIPE IV — Les organes (Tsang/Fou) */}
+            <PrincipeSection title="PRINCIPE IV — Organes (Tsang/Fou)" subtitle="Ajoutez les organes observés">
               {p4Organes.map((organe) => (
                 <div key={organe.id} className="border border-slate-100 rounded-lg p-3 space-y-2">
                   <div className="flex items-center gap-2">

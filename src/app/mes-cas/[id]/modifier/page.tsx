@@ -34,11 +34,11 @@ const QUALITES_POULS: { id: QualitePouls; label: string }[] = [
   { id: 'superficiel', label: 'Superficiel' },
   { id: 'large', label: 'Large' },
   { id: 'mou', label: 'Mou' },
-  { id: 'dur', label: 'Tendu' },
-  { id: 'etroit', label: 'Fin' },
-  { id: 'corde_arc', label: 'Glissant' },
-  { id: 'normal', label: 'Rugueux' },
-  { id: 'absent', label: 'Serre' },
+  { id: 'dur', label: 'Dur' },
+  { id: 'etroit', label: 'Étroit' },
+  { id: 'corde_arc', label: 'Corde-arc' },
+  { id: 'normal', label: 'Normal' },
+  { id: 'absent', label: 'Absent' },
 ];
 
 const RUBRIQUES_INTERROGATOIRE_SUGGEREES = [
@@ -602,7 +602,7 @@ export default function ModifierCasPage() {
               <QualitesSelector label="Foyer Moyen" data={p3FoyerMoy} onChange={setP3FoyerMoy} />
               <QualitesSelector label="Foyer Inférieur" data={p3FoyerInf} onChange={setP3FoyerInf} />
             </PrincipeSection>
-            <PrincipeSection title="PRINCIPE IV — Organes (Zang/Fu)">
+            <PrincipeSection title="PRINCIPE IV — Organes (Tsang/Fou)">
               {p4Organes.map((organe) => (
                 <div key={organe.id} className="border border-slate-100 rounded-lg p-3 space-y-2">
                   <div className="flex items-center gap-2">

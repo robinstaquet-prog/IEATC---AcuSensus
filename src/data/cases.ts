@@ -119,7 +119,7 @@ Cinq ans de résistance, puis lâchage dans la région la plus sollicitée : le 
 9Rte dispersion — Yin du bas du corps, remontée des liquides, stabilité ligament latéral interne.
 36E tonification + moxas — Yang local genou + état général post-mononucléose.`,
         pointsUtilises: [
-          { code: '62V', nomIeatc: 'Yang Chiao Mo', technique: 'tonification', justification: "Équilibre les deux membres inférieurs et le bassin — YY général", ordre: 1 },
+          { code: '62V', nomIeatc: 'Chen Mo', technique: 'tonification', justification: "Équilibre les deux membres inférieurs et le bassin — YY général", ordre: 1 },
           { code: '30VB', technique: 'moxa_tonification', justification: "Équilibre bassin, amène Yang vers membres inférieurs", ordre: 2 },
           { code: '41VB', technique: 'tonification', justification: "Polyarticulaire train inférieur — indication danseuse", ordre: 3 },
           { code: '31VB', technique: 'dispersion', justification: "Libère la circulation VB hanche → genou", ordre: 4 },
@@ -127,7 +127,7 @@ Cinq ans de résistance, puis lâchage dans la région la plus sollicitée : le 
           { code: '7F', technique: 'dispersion', justification: "Synergie avec 33VB pour liquides et ligaments", ordre: 6 },
           { code: '44VB', technique: 'tonification', justification: "Renforce complexe ligamentaire genou", ordre: 7 },
           { code: '9Rte', technique: 'dispersion', justification: "Yin bas du corps, remontée liquides, ligament latéral interne", ordre: 8 },
-          { code: '36E', nomIeatc: 'Zu San Li', technique: 'moxa_tonification', justification: "Yang local genou + état général post-mononucléose", ordre: 9 },
+          { code: '36E', nomIeatc: 'Tsou Sann Li', technique: 'moxa_tonification', justification: "Yang local genou + état général post-mononucléose", ordre: 9 },
         ],
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
@@ -187,7 +187,7 @@ Pourquoi la nuit ? La douleur nocturne au repos est un signal Yin pur : le Yang 
           { code: '33VB', technique: 'dispersion', justification: "Stagnation locale au-dessus du genou", ordre: 4 },
           { code: '34VB', technique: 'tonification', justification: "Point d'influence des tendons — renforce le complexe ligamentaire", ordre: 5 },
           { code: '44VB', technique: 'tonification', justification: "Distal — renforce le méridien en profondeur", ordre: 6 },
-          { code: '62V', technique: 'tonification', justification: "Yang Qiao Mo — équilibre Yin/Yang des membres inférieurs", ordre: 7 },
+          { code: '62V', technique: 'tonification', justification: "Yang Tsiao Mo — équilibre Yin/Yang des membres inférieurs", ordre: 7 },
           { code: '36E', technique: 'moxa_tonification', justification: "Yang local genou et état général post-séquellaire", ordre: 8 },
         ],
         bilanEnergetique: `1. Vide de Yang Foyer Inférieur — pouls vide gauche, insuffisance Yang générale\n2. Méridien VB obstrué depuis le cou — séquelles mononucléose 7 ans\n3. Stagnation Yang locale au genou sur terrain de vide méridien\n4. Sur-sollicitation du trajet VB chez la danseuse (rotations, turnout)`,
@@ -197,7 +197,7 @@ Pourquoi la nuit ? La douleur nocturne au repos est un signal Yin pur : le Yang 
           { code: '30VB', action: 'tonification', justification: "Fait descendre le Yang depuis la hanche — moxa recommandé" },
           { code: '33VB', action: 'dispersion', justification: "Stagnation locale au-dessus du genou" },
           { code: '34VB', action: 'tonification', justification: "Point d'influence des tendons — renforce le complexe ligamentaire" },
-          { code: '62V', action: 'tonification', justification: "Yang Qiao Mo — équilibre Yin/Yang des membres inférieurs" },
+          { code: '62V', action: 'tonification', justification: "Yang Tsiao Mo — équilibre Yin/Yang des membres inférieurs" },
         ],
         // langueTexte : longueur 84 — "Langue pâle, légèrement humide..."
         // annotations : start=0 len=12 "Langue pâle,", start=14 len=21 "légèrement humide,"
@@ -231,7 +231,7 @@ Pourquoi la nuit ? La douleur nocturne au repos est un signal Yin pur : le Yang 
         difficultéEstimee: 'niveau_difficile',
       },
 
-      // [E2] Expert 2 — grille Zang/Fu + Cinq Éléments
+      // [E2] Expert 2 — grille Tsang/Fou + Cinq Éléments
       {
         id: 'p001-expert-jeanmarc',
         caseId: 'cas-001',
@@ -245,30 +245,30 @@ Pourquoi la nuit ? La douleur nocturne au repos est un signal Yin pur : le Yang 
         grillesSecondaires: ['cinq_elements'],
         polarite: 'yin',
         localisationFoyer: 'moyen',
-        raisonnement: `Lecture Zang/Fu avec angle 5 Éléments. La mononucléose a atteint le méridien VB (Bois Yang) et secondairement le Foie (Bois Yin). La fatigabilité persistante depuis 7 ans témoigne d'un vide du Zang Foie jamais traité.
+        raisonnement: `Lecture Tsang/Fou avec angle 5 Éléments. La mononucléose a atteint le méridien VB (Bois Yang) et secondairement le Foie (Bois Yin). La fatigabilité persistante depuis 7 ans témoigne d'un vide du Tsang Foie jamais traité.
 
 Le genou est gouverné par les tendons — gouvernés par le Foie (Su Wen, chap. 44). Un Foie vide ne peut plus nourrir les tendons. La danseuse a compensé par la force musculaire, mais le vide tendineux finit par se révéler.
 
 Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → Bois ne soutient plus la Terre → Rate en excès de Yin → blocage général.`,
         categoriesDiagnostiques: [
-          "Vide du Zang Foie — séquelles de mononucléose non résolues",
+          "Vide du Tsang Foie — séquelles de mononucléose non résolues",
           "Tendons insuffisamment nourris par le Foie — genou vulnérable",
           "Vide de Yin du Rein — Eau ne nourrit plus le Bois",
           "Rate en excès de Yin — Foyer Moyen bloqué (cycle Ko inversé)",
         ],
-        strategieTherapeutique: `1. Nourrir l'Eau (Rein) — base du cycle Sheng.\n2. Tonifier le Foie (Zang) pour qu'il nourrisse les tendons.\n3. Lever l'excès de Yin de la Rate (Foyer Moyen).\n4. Traitement local secondaire.`,
+        strategieTherapeutique: `1. Nourrir l'Eau (Rein) — base du cycle Tcheng.\n2. Tonifier le Foie (Tsang) pour qu'il nourrisse les tendons.\n3. Lever l'excès de Yin de la Rate (Foyer Moyen).\n4. Traitement local secondaire.`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Tonifie le Yin du Rein — base du cycle Eau→Bois", ordre: 1 },
-          { code: '8F', technique: 'tonification', justification: "Source du Foie — nourrit le Foie et les tendons", ordre: 2 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Tonifie le Yin du Rein — base du cycle Eau→Bois", ordre: 1 },
+          { code: '8F', technique: 'tonification', justification: "Point Ro Eau du Foie — nourrit le Yin du Foie et les tendons", ordre: 2 },
           { code: '6Rte', technique: 'dispersion', justification: "Disperse l'humidité de la Rate — Foyer Moyen", ordre: 3 },
           { code: '36E', technique: 'tonification', justification: "Soutient la Terre — stabilise après dispersion Rate", ordre: 4 },
           { code: '34VB', technique: 'tonification', justification: "Point hui des tendons — après avoir nourri la source", ordre: 5 },
         ],
-        bilanEnergetique: `1. Vide du Zang Foie — séquelles mononucléose non résolues depuis 7 ans\n2. Vide de Yin du Rein — Eau ne nourrit plus le Bois (cycle Sheng insuffisant)\n3. Tendons non nourris par le Foie — genou vulnérable chez danseuse\n4. Rate en excès de Yin — Foyer Moyen bloqué (cycle Ko inversé)`,
-        strategie: `1. Nourrir l'Eau (Rein) pour relancer le cycle Sheng vers le Bois\n2. Tonifier le Zang Foie pour qu'il nourrisse les tendons\n3. Disperser la Rate (Foyer Moyen) pour lever le blocage`,
+        bilanEnergetique: `1. Vide du Tsang Foie — séquelles mononucléose non résolues depuis 7 ans\n2. Vide de Yin du Rein — Eau ne nourrit plus le Bois (cycle Tcheng insuffisant)\n3. Tendons non nourris par le Foie — genou vulnérable chez danseuse\n4. Rate en excès de Yin — Foyer Moyen bloqué (cycle Ko inversé)`,
+        strategie: `1. Nourrir l'Eau (Rein) pour relancer le cycle Tcheng vers le Bois\n2. Tonifier le Tsang Foie pour qu'il nourrisse les tendons\n3. Disperser la Rate (Foyer Moyen) pour lever le blocage`,
         pointsProposer: [
           { code: '3R', action: 'tonification', justification: "Tai Xi — source Yin du Rein, nourrit le cycle Eau→Bois" },
-          { code: '8F', action: 'tonification', justification: "Source du Foie — nourrit le Foie et gouverne les tendons" },
+          { code: '8F', action: 'tonification', justification: "Point Ro Eau du Foie — nourrit le Yin du Foie et gouverne les tendons" },
           { code: '6Rte', action: 'dispersion', justification: "Disperse l'humidité de la Rate — lève le blocage du Foyer Moyen" },
           { code: '36E', action: 'tonification', justification: "Soutient la Terre après dispersion — relance le Yang" },
           { code: '34VB', action: 'tonification', justification: "Point hui des tendons — action directe sur les ligaments" },
@@ -290,7 +290,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         annotationsInterrogatoire: [
           { id: 'ann-p001e-jm-i1', start: 0, length: 56, comment: "Motif de craquement = signe objectif de dysfonction méridienne VB — chercher la cause en amont.", createdAt: '2026-01-11T09:55:00.000Z' },
           { id: 'ann-p001e-jm-i2', start: 286, length: 18, comment: "Danseuse = sur-sollicitation méridien VB (rotations, turnout) → aggrave le vide Foie/tendons.", createdAt: '2026-01-11T09:57:00.000Z' },
-          { id: 'ann-p001e-jm-i3', start: 497, length: 36, comment: "Mononucléose hépatique → vide du Zang Foie datant de 7 ans : racine du problème 5 Éléments.", createdAt: '2026-01-11T10:00:00.000Z' },
+          { id: 'ann-p001e-jm-i3', start: 497, length: 36, comment: "Mononucléose hépatique → vide du Tsang Foie datant de 7 ans : racine du problème 5 Éléments.", createdAt: '2026-01-11T10:00:00.000Z' },
           { id: 'ann-p001e-jm-i4', start: 572, length: 24, comment: "Fatigabilité persistante = signe direct du vide de Yin du Foie non résolu sur 7 ans.", createdAt: '2026-01-11T10:01:00.000Z' },
         ],
         // Pouls : start=30 len=30 "foyer_moyen_droit — large, mou"
@@ -332,7 +332,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         pointsUtilises: [
           { code: '6Rte', technique: 'dispersion', justification: "Disperse l'humidité au Foyer Moyen — priorité absolue", ordre: 1 },
           { code: '36E', technique: 'tonification', justification: "Stabilise la Terre après dispersion — relance le Yang", ordre: 2 },
-          { code: '62V', technique: 'tonification', justification: "Yang Qiao Mo — équilibre les membres inférieurs", ordre: 3 },
+          { code: '62V', technique: 'tonification', justification: "Yang Tsiao Mo — équilibre les membres inférieurs", ordre: 3 },
           { code: '41VB', technique: 'tonification', justification: "Train inférieur — indication danseuse polyarticulaire", ordre: 4 },
         ],
         bilanEnergetique: `1. Plénitude de Yin au Foyer Moyen — Rate trop forte, blocage de descente\n2. Vide de Yang au Foyer Inférieur — Rein/VB insuffisant\n3. Le Foyer Moyen bouché empêche la descente du Yang vers les membres inférieurs\n4. Danseuse = sollicitation intense du Foyer Inférieur sur fond de blocage supérieur`,
@@ -340,7 +340,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         pointsProposer: [
           { code: '6Rte', action: 'dispersion', justification: "Disperse l'humidité au Foyer Moyen — priorité des 3 Foyers" },
           { code: '36E', action: 'tonification_chauffee', justification: "Relance la Terre après dispersion — tonifié chauffé pour activer le Yang digestif" },
-          { code: '62V', action: 'tonification', justification: "Yang Qiao Mo — équilibre général des membres inférieurs" },
+          { code: '62V', action: 'tonification', justification: "Yang Tsiao Mo — équilibre général des membres inférieurs" },
           { code: '41VB', action: 'tonification', justification: "Polyarticulaire train inférieur — indication danseuse" },
           { code: '33VB', action: 'dispersion', justification: "Stagnation locale au genou — traitement en dernier temps" },
         ],
@@ -377,7 +377,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         difficultéEstimee: 'niveau_4e',
       },
 
-      // [PE2] Praticien expérimenté 2 — grille Cinq Éléments + Zang/Fu
+      // [PE2] Praticien expérimenté 2 — grille Cinq Éléments + Tsang/Fou
       {
         id: 'p001-praticien-thomas',
         caseId: 'cas-001',
@@ -393,23 +393,23 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         localisationFoyer: 'inferieur',
         raisonnement: "Lecture Cinq Éléments : l'Eau (Rein) ne nourrit plus le Bois (Foie/VB) depuis la mononucléose. Le Foie affaibli ne gouverne plus les tendons — genou vulnérable. La Rate (Terre) est envahie par l'humidité car le Bois ne contrôle plus correctement la Terre (cycle Ko affaibli).",
         categoriesDiagnostiques: [
-          "Insuffisance Eau → Bois — cycle Sheng brisé depuis la mononucléose",
+          "Insuffisance Eau → Bois — cycle Tcheng brisé depuis la mononucléose",
           "Foie-VB ne gouverne plus les tendons — genou vulnérable",
           "Terre envahie par l'humidité — Rate surchargée",
         ],
-        strategieTherapeutique: `1. Nourrir l'Eau (Rein) pour relancer le cycle Sheng.\n2. Soutenir le Bois (Foie/VB) pour qu'il nourrisse les tendons.\n3. Lever l'humidité de la Terre (Rate).`,
+        strategieTherapeutique: `1. Nourrir l'Eau (Rein) pour relancer le cycle Tcheng.\n2. Soutenir le Bois (Foie/VB) pour qu'il nourrisse les tendons.\n3. Lever l'humidité de la Terre (Rate).`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau", ordre: 1 },
-          { code: '8F', technique: 'tonification', justification: "Source du Foie — nourrit le Bois et les tendons", ordre: 2 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau", ordre: 1 },
+          { code: '8F', technique: 'tonification', justification: "Point Ro Eau du Foie — nourrit le Bois et les tendons", ordre: 2 },
           { code: '34VB', technique: 'tonification', justification: "Point hui des tendons — renforce localement", ordre: 3 },
           { code: '6Rte', technique: 'dispersion', justification: "Disperse l'humidité de la Terre (Rate)", ordre: 4 },
           { code: '36E', technique: 'tonification', justification: "Stabilise la Terre après dispersion", ordre: 5 },
         ],
-        bilanEnergetique: `1. Insuffisance Eau (Rein) — base du cycle Sheng défaillante depuis mononucléose\n2. Foie-VB (Bois) mal nourri — ne gouverne plus les tendons du genou\n3. Rate (Terre) envahie par humidité — cycle Ko affaibli par le Bois\n4. Tendons vulnérables chez danseuse sur fond de vide Eau→Bois`,
-        strategie: `1. Nourrir l'Eau (R3 Tai Xi) pour relancer le cycle Sheng vers le Bois\n2. Soutenir le Bois (8F, 34VB) pour gouverner les tendons\n3. Lever l'humidité de la Terre (6Rte dispersion)`,
+        bilanEnergetique: `1. Insuffisance Eau (Rein) — base du cycle Tcheng défaillante depuis mononucléose\n2. Foie-VB (Bois) mal nourri — ne gouverne plus les tendons du genou\n3. Rate (Terre) envahie par humidité — cycle Ko affaibli par le Bois\n4. Tendons vulnérables chez danseuse sur fond de vide Eau→Bois`,
+        strategie: `1. Nourrir l'Eau (3R Tae Kri) pour relancer le cycle Tcheng vers le Bois\n2. Soutenir le Bois (8F, 34VB) pour gouverner les tendons\n3. Lever l'humidité de la Terre (6Rte dispersion)`,
         pointsProposer: [
-          { code: '3R', action: 'tonification', justification: "Tai Xi — source Yin du Rein, base Eau du cycle Sheng" },
-          { code: '8F', action: 'tonification', justification: "Source du Foie — nourrit les tendons via le Bois" },
+          { code: '3R', action: 'tonification', justification: "Tai Xi — source Yin du Rein, base Eau du cycle Tcheng" },
+          { code: '8F', action: 'tonification', justification: "Point Ro Eau du Foie — nourrit les tendons via le Bois" },
           { code: '34VB', action: 'tonification', justification: "Point hui des tendons — rôle clé dans le Bois" },
           { code: '6Rte', action: 'dispersion', justification: "Disperse l'humidité de la Rate (Terre)" },
           { code: '36E', action: 'tonification', justification: "Stabilise la Terre après dispersion — relance le Yang" },
@@ -436,7 +436,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         // Pouls : start=30 len=30, start=91 len=26
         annotationsPouls: [
           { id: 'ann-p001pe-thomas-p1', start: 30, length: 30, comment: "Large et mou à droite = Rate envahie par humidité (Bois ne contrôle plus la Terre).", createdAt: '2026-02-03T11:10:00.000Z' },
-          { id: 'ann-p001pe-thomas-p2', start: 0, length: 29, comment: "Vide Foyer Inférieur gauche = Rein Yang insuffisant — base Eau défaillante du cycle Sheng.", createdAt: '2026-02-03T11:11:00.000Z' },
+          { id: 'ann-p001pe-thomas-p2', start: 0, length: 29, comment: "Vide Foyer Inférieur gauche = Rein Yang insuffisant — base Eau défaillante du cycle Tcheng.", createdAt: '2026-02-03T11:11:00.000Z' },
         ],
         niveauConfiance: 'standard',
         sourceType: 'humaine',
@@ -486,7 +486,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         // start=0 len=16 "Langue normale,"
         langueTexte: "Langue normale, légèrement humide. Enduit blanc fin. Corps légèrement bombé.",
         annotationsLangue: [
-          { id: 'ann-p001jp-claire-l1', start: 0, length: 14, comment: "Langue normale = pas de chaleur interne — confirme que la pathologie est méridienne, pas Zang/Fu.", createdAt: '2026-02-01T10:15:00.000Z' },
+          { id: 'ann-p001jp-claire-l1', start: 0, length: 14, comment: "Langue normale = pas de chaleur interne — confirme que la pathologie est méridienne, pas Tsang/Fou.", createdAt: '2026-02-01T10:15:00.000Z' },
         ],
         commentaireLibre: "J'ai choisi la lecture méridienne car le trajet VB depuis le cou jusqu'au genou m'a semblé être le fil conducteur le plus direct de ce cas.",
         // Offsets interrogatoireText :
@@ -534,7 +534,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         ],
         strategieTherapeutique: `1. Tonifier le Yang général.\n2. Lever l'excès de Yin au Foyer Moyen.\n3. Traitement local secondaire.`,
         pointsUtilises: [
-          { code: '62V', technique: 'tonification', justification: "Yang Qiao Mo — équilibre général Yin/Yang", ordre: 1 },
+          { code: '62V', technique: 'tonification', justification: "Yang Tsiao Mo — équilibre général Yin/Yang", ordre: 1 },
           { code: '36E', technique: 'moxa_tonification', justification: "Yang général et local", ordre: 2 },
           { code: '6Rte', technique: 'dispersion', justification: "Disperse le Yin en excès au Foyer Moyen", ordre: 3 },
           { code: '41VB', technique: 'tonification', justification: "Polyarticulaire train inférieur", ordre: 4 },
@@ -542,7 +542,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         bilanEnergetique: `1. Vide de Yang général — pouls vide Foyer Inférieur gauche\n2. Excès de Yin au Foyer Moyen — Rate trop forte, blocage de la descente\n3. Douleur Yin au genou — manque de Yang local`,
         strategie: `1. Tonifier le Yang général (62V, 36E moxas)\n2. Lever l'excès de Yin Foyer Moyen (6Rte dispersion)\n3. Renforcer localement le genou (41VB)`,
         pointsProposer: [
-          { code: '62V', action: 'tonification', justification: "Yang Qiao Mo — Yang général des membres inférieurs" },
+          { code: '62V', action: 'tonification', justification: "Yang Tsiao Mo — Yang général des membres inférieurs" },
           { code: '36E', action: 'tonification', justification: "Yang général et local du genou — moxa recommandé" },
           { code: '6Rte', action: 'dispersion', justification: "Disperse le Yin en excès au Foyer Moyen" },
           { code: '41VB', action: 'tonification', justification: "Polyarticulaire train inférieur" },
@@ -595,21 +595,21 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         localisationFoyer: 'inferieur',
         raisonnement: "Lecture 5 Éléments : insuffisance Eau qui ne nourrit pas le Bois. Le Foie/VB, affaibli par les séquelles de mononucléose, ne peut plus soutenir les tendons et ligaments du genou. La fatigabilité depuis 7 ans est le signe le plus important du vide de fond.",
         categoriesDiagnostiques: [
-          "Insuffisance Eau → Bois (cycle Sheng) depuis mononucléose",
+          "Insuffisance Eau → Bois (cycle Tcheng) depuis mononucléose",
           "Foie-VB ne gouverne plus les tendons — genou vulnérable",
         ],
         strategieTherapeutique: `1. Nourrir l'Eau (Rein).\n2. Soutenir le Bois (Foie/VB).\n3. Traiter localement les tendons.`,
         pointsUtilises: [
           { code: '3R', technique: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau", ordre: 1 },
-          { code: '8F', technique: 'tonification', justification: "Source du Foie — nourrit le Bois et les tendons", ordre: 2 },
+          { code: '8F', technique: 'tonification', justification: "Point Ro Eau du Foie — nourrit le Bois et les tendons", ordre: 2 },
           { code: '34VB', technique: 'tonification', justification: "Point hui des tendons — renforce les tendons du genou", ordre: 3 },
           { code: '7F', technique: 'dispersion', justification: "Libère la stagnation locale méridien Foie", ordre: 4 },
         ],
-        bilanEnergetique: `1. Vide de Yin du Rein (Eau) — base insuffisante du cycle Sheng\n2. Foie-VB (Bois) mal nourri par l'Eau — séquelles mononucléose 7 ans\n3. Tendons insuffisamment alimentés — genou vulnérable chez danseuse`,
+        bilanEnergetique: `1. Vide de Yin du Rein (Eau) — base insuffisante du cycle Tcheng\n2. Foie-VB (Bois) mal nourri par l'Eau — séquelles mononucléose 7 ans\n3. Tendons insuffisamment alimentés — genou vulnérable chez danseuse`,
         strategie: `1. Tonifier le Rein (Eau) pour nourrir le Bois\n2. Soutenir le Foie-VB (Bois) via ses points source\n3. Renforcer localement les tendons du genou`,
         pointsProposer: [
-          { code: '3R', action: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau du cycle Sheng" },
-          { code: '8F', action: 'tonification', justification: "Source du Foie — nourrit les tendons via le Bois" },
+          { code: '3R', action: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau du cycle Tcheng" },
+          { code: '8F', action: 'tonification', justification: "Point Ro Eau du Foie — nourrit les tendons via le Bois" },
           { code: '34VB', action: 'tonification', justification: "Point hui des tendons — rôle clé dans le Bois" },
           { code: '7F', action: 'dispersion', justification: "Libère la stagnation locale du méridien Foie" },
         ],
@@ -669,7 +669,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         pointsUtilises: [
           { code: '6Rte', technique: 'dispersion', justification: "Disperse l'humidité du Foyer Moyen — priorité", ordre: 1 },
           { code: '36E', technique: 'tonification', justification: "Relance la Terre après dispersion", ordre: 2 },
-          { code: '62V', technique: 'tonification', justification: "Yang Qiao Mo — équilibre Foyer Inférieur", ordre: 3 },
+          { code: '62V', technique: 'tonification', justification: "Yang Tsiao Mo — équilibre Foyer Inférieur", ordre: 3 },
           { code: '41VB', technique: 'tonification', justification: "Polyarticulaire — Foyer Inférieur/membres", ordre: 4 },
         ],
         bilanEnergetique: `1. Foyer Moyen bloqué par excès de Yin (Rate trop forte)\n2. Vide de Yang du Foyer Inférieur (Rein/VB)\n3. Blocage de la descente du Yang vers les membres inférieurs`,
@@ -677,7 +677,7 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
         pointsProposer: [
           { code: '6Rte', action: 'dispersion', justification: "Clé du Foyer Moyen — élimine l'humidité de la Rate" },
           { code: '36E', action: 'tonification', justification: "Stabilise la Terre après dispersion" },
-          { code: '62V', action: 'tonification', justification: "Yang Qiao Mo — équilibre Foyer Inférieur" },
+          { code: '62V', action: 'tonification', justification: "Yang Tsiao Mo — équilibre Foyer Inférieur" },
           { code: '41VB', action: 'tonification', justification: "Polyarticulaire train inférieur" },
         ],
         // langueTexte longueur 71 — "Langue pâle avec légère teinte violacée..."
@@ -807,12 +807,12 @@ Le cycle 5 Éléments explique la chaîne : Eau faible → Bois mal nourri → B
 
 Tous les points en unilatéral gauche sauf 4GI. Possibilité de piqûre en étoile autour de l'inflammation locale.`,
         pointsUtilises: [
-          { code: '4GI', nomIeatc: 'He Gu', technique: 'tonification', justification: "Tonification Yang général — bilatéral", ordre: 1 },
+          { code: '4GI', nomIeatc: 'Ro Kou', technique: 'tonification', justification: "Tonification Yang général — bilatéral", ordre: 1 },
           { code: '12JM', technique: 'tonification', justification: "Tonification Yang organique", ordre: 2 },
           { code: '3Rte', technique: 'dispersion', justification: "Disperse en aval — déblocage méridien Yin ascendant", ordre: 3 },
           { code: '2Rte', technique: 'dispersion', justification: "Chaleur du méridien (saignée)", ordre: 4 },
           { code: '2F', technique: 'dispersion', justification: "Vide/plénitude Foie — chaleur méridien", ordre: 5 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Point douloureux en aval — libère et vide la plénitude en amont", ordre: 6 },
+          { code: '3F', nomIeatc: 'Tae Tchong', technique: 'dispersion', justification: "Point douloureux en aval — libère et vide la plénitude en amont", ordre: 6 },
           { code: '38VB', technique: 'dispersion', justification: "Vider la VB de chaleur et plénitude", ordre: 7 },
           { code: '40VB', technique: 'dispersion', justification: "Vider la VB de chaleur et plénitude", ordre: 8 },
         ],
@@ -839,9 +839,9 @@ Tous les points en unilatéral gauche sauf 4GI. Possibilité de piqûre en étoi
         grillePrincipale: 'cinq_elements',
         polarite: 'yang',
         localisationFoyer: 'inferieur',
-        raisonnement: "Lecture 5 Éléments : Bois (F/VB) envahit la Terre (Rte). Les crises au stress confirment la voie Bois-Terre. La chaleur locale vient du Bois qui déborde sur la Terre — le gros orteil est la zone d'interface Foie/Rate. Le lien émotionnel (crises aux moments de stress) ancre cette lecture : le Foie gouverne les émotions, et quand il est trop chargé, il attaque la Rate.",
+        raisonnement: "Lecture 5 Éléments : Bois (F/VB) attaque la Terre (Rte). Les crises au stress confirment la voie Bois-Terre. La chaleur locale vient du Bois qui déborde sur la Terre — le gros orteil est la zone d'interface Foie/Rate. Le lien émotionnel (crises aux moments de stress) ancre cette lecture : le Foie gouverne les émotions, et quand il est trop chargé, il attaque la Rate.",
         categoriesDiagnostiques: [
-          "Bois (F/VB) envahit Terre (Rate) — cycle Ko pathologique",
+          "Bois (F/VB) attaque Terre (Rate) — cycle Ko pathologique",
           "Chaleur du Bois débordant sur la Rate",
           "Lien stress-crise = Foie en plénitude Yang",
         ],
@@ -851,7 +851,7 @@ Tous les points en unilatéral gauche sauf 4GI. Possibilité de piqûre en étoi
           { code: '3Rte', technique: 'dispersion', justification: "Drainer la chaleur locale Rate/Foie", ordre: 2 },
           { code: '36E', technique: 'tonification', justification: "Soutenir la Terre après dispersion", ordre: 3 },
         ],
-        bilanEnergetique: `1. Foie-VB (Bois) en plénitude Yang — envahit la Rate (Terre)\n2. Rate (Terre) agressée — chaleur locale au gros orteil gauche\n3. Lien stress-crise confirme le Foie en excès (émotions = domaine du Bois)`,
+        bilanEnergetique: `1. Foie-VB (Bois) en plénitude Yang — attaque la Rate (Terre)\n2. Rate (Terre) agressée — chaleur locale au gros orteil gauche\n3. Lien stress-crise confirme le Foie en excès (émotions = domaine du Bois)`,
         strategie: `1. Disperser la plénitude du Bois (3F — source Foie)\n2. Drainer la chaleur Rate/Foie locale (3Rte dispersion)\n3. Soutenir la Terre après dispersion (36E tonification)`,
         pointsProposer: [
           { code: '3F', action: 'dispersion', justification: "Point source du Foie — calme le Bois en excès" },
@@ -871,7 +871,7 @@ Tous les points en unilatéral gauche sauf 4GI. Possibilité de piqûre en étoi
           { id: 'ann-p002d1-3', start: 0, length: 83, comment: "Crise de goutte + état latent = forme Yang aiguë sur fond de plénitude chronique Bois.", createdAt: '2026-02-10T09:58:00.000Z' },
         ],
         annotationsPouls: [
-          { id: 'ann-p002d1-p1', start: 0, length: 38, comment: "Plus fort en profondeur à droite = Yin fort — base Terre solide mais Bois l'envahit.", createdAt: '2026-02-10T09:59:00.000Z' },
+          { id: 'ann-p002d1-p1', start: 0, length: 38, comment: "Plus fort en profondeur à droite = Yin fort — base Terre solide mais Bois l'attaque.", createdAt: '2026-02-10T09:59:00.000Z' },
         ],
         commentaireLibre: "Première participation — je suis encore en apprentissage des liens climatiques. Le lien stress-crise est l'indice le plus clair pour la grille 5 Éléments.",
         votePoints: 3,
@@ -935,7 +935,7 @@ Tous les points en unilatéral gauche sauf 4GI. Possibilité de piqûre en étoi
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 3 — DIARRHÉES CHRONIQUES DU PETIT MATIN
   // Source : PVI EEA tome 3 — Tableau 6 (Diarrhées)
-  // Grille principale : Zang/Fu — Yang de Ming Men décroît
+  // Grille principale : Tsang/Fou — Yang de Ming Men décroît
   // ───────────────────────────────────────────────────────────────────────────
   {
     id: 'cas-003',
@@ -1012,20 +1012,20 @@ Tous les points en unilatéral gauche sauf 4GI. Possibilité de piqûre en étoi
         strategieTherapeutique: "Augmenter le Feu du Ming Men. Soutenir le Yang du Rein. Relancer la montée des Souffles Yang vers le Foyer Moyen. Tonifier la Terre (Rate/Estomac).",
         traitementPropose: `**Reconstituer le Yang du Rein et relancer le Feu de Ming Men :**
 
-VG4 (Ming Men) — augmenter le Feu, Yang du Rein. Moxas recommandés.
-V23 (Shu du Rein) — augmenter le Yang du Rein, tonifier directement.
-VC4 (Guan Yuan) — tonifie l'origine du Rein, sépare le clair du trouble — action sur l'Intestin Grêle (Mo de IG).
+4TM (Ming Men) — augmenter le Feu, Yang du Rein. Moxas recommandés.
+23V (Shu du Rein) — augmenter le Yang du Rein, tonifier directement.
+4JM (Guan Yuan) — tonifie l'origine du Rein, sépare le clair du trouble — action sur l'Intestin Grêle (Mo de IG).
 
 **Relancer les Souffles Yang ascendants :**
-VG20 avec moxas — fait monter les Souffles Yang vers la Rate et l'Estomac.
+20TM avec moxas — fait monter les Souffles Yang vers la Rate et l'Estomac.
 
 **Soutenir la Terre :**
-V20 (Shu de la Rate) tonification — soutenir la Terre, consolider le Réchauffeur Moyen.`,
+20V (Shu de la Rate) tonification — soutenir la Terre, consolider le Réchauffeur Moyen.`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Feu de Ming Men — Yang du Rein", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Feu de Ming Men — Yang du Rein", ordre: 1 },
           { code: '23V', technique: 'moxa_tonification', justification: "Shu du Rein — tonification directe Yang Rein", ordre: 2 },
-          { code: '4JM', nomIeatc: 'Guan Yuan', technique: 'tonification', justification: "Origine Rein — Intestin Grêle — sépare clair et trouble", ordre: 3 },
-          { code: '20TM', nomIeatc: 'Bai Hui', technique: 'moxa_tonification', justification: "Fait monter les Souffles Yang — action sur E/Rte", ordre: 4 },
+          { code: '4JM', nomIeatc: 'Koann Yuan', technique: 'tonification', justification: "Origine Rein — Intestin Grêle — sépare clair et trouble", ordre: 3 },
+          { code: '20TM', nomIeatc: 'Pae Roé', technique: 'moxa_tonification', justification: "Fait monter les Souffles Yang — action sur E/Rte", ordre: 4 },
           { code: '20V', technique: 'tonification', justification: "Shu de la Rate — soutient le Réchauffeur Moyen", ordre: 5 },
         ],
         niveauConfiance: 'expert',
@@ -1050,7 +1050,7 @@ V20 (Shu de la Rate) tonification — soutenir la Terre, consolider le Réchauff
       //   start=0  "foyer_inferieur_gauche — vide, profond" (len 38)
       //   start=39 "global_profond — vide, lent" (len 27)
 
-      // [E1] Expert 1 — Zang/Fu + Cinq Éléments (offsets recalculés)
+      // [E1] Expert 1 — Tsang/Fou + Cinq Éléments (offsets recalculés)
       {
         id: 'p003-expert-martine',
         caseId: 'cas-003',
@@ -1064,29 +1064,29 @@ V20 (Shu de la Rate) tonification — soutenir la Terre, consolider le Réchauff
         grillesSecondaires: ['cinq_elements'],
         polarite: 'yin',
         localisationFoyer: 'inferieur',
-        raisonnement: `Lecture Zang/Fu centrée sur le Rein comme organe-racine. Le Ming Men est la Porte de la Vie — sa chaleur réchauffante monte depuis le bas du dos pour activer la Rate et permettre la transformation des aliments. Quand ce feu baisse, la Rate est froide, la digestion ralentit, et les aliments non transformés passent directement dans le Gros Intestin sous forme semi-liquide.
+        raisonnement: `Lecture Tsang/Fou centrée sur le Rein comme organe-racine. Le Ming Men est la Porte de la Vie — sa chaleur réchauffante monte depuis le bas du dos pour activer la Rate et permettre la transformation des aliments. Quand ce feu baisse, la Rate est froide, la digestion ralentit, et les aliments non transformés passent directement dans le Gros Intestin sous forme semi-liquide.
 
 L'horaire 5h-7h est le temps du Yang Ming (Gros Intestin) — le moment où le Yang devrait être en plein essor pour activer l'évacuation des selles. Un vide de Yang du Rein signifie que le Yang Ming ne reçoit pas son stimulus énergétique.
 
-La lecture 5 Éléments enrichit : l'Eau (Rein) faible ne nourrit plus le Bois (Foie) — le cycle Sheng est brisé dès la base. Le visage noirâtre est le signe classique de l'élément Eau en souffrance.`,
+La lecture 5 Éléments enrichit : l'Eau (Rein) faible ne nourrit plus le Bois (Foie) — le cycle Tcheng est brisé dès la base. Le visage noirâtre est le signe classique de l'élément Eau en souffrance.`,
         categoriesDiagnostiques: [
           "Vide de Yang du Rein — Ming Men éteint",
-          "Rate non réchauffée par le Feu du Rein — digestion défaillante",
+          "Froid à la Rate — le Feu du Rein ne monte plus, digestion défaillante",
           "Yang Ming sans stimulus — Gros Intestin non activé au petit matin",
-          "Eau faible → cycle Sheng brisé (Eau ne nourrit plus Bois)",
+          "Eau faible → cycle Tcheng brisé (Eau ne nourrit plus Bois)",
         ],
-        strategieTherapeutique: `1. Ranimer le Feu du Ming Men (VG4, V23 avec moxas).
-2. Réchauffer la Rate/Estomac (V20, VC12 tonification).
+        strategieTherapeutique: `1. Ranimer le Feu du Ming Men (4TM, 23V avec moxas).
+2. Réchauffer la Rate/Estomac (20V, 12JM tonification).
 3. Soutenir le Yang Ming (36E, 25E bilatéral).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Ranime le Feu de Ming Men — racine du Yang", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Ranime le Feu de Ming Men — racine du Yang", ordre: 1 },
           { code: '23V', technique: 'moxa_tonification', justification: "Shu du Rein — tonifie directement le Yang du Rein", ordre: 2 },
           { code: '20V', technique: 'tonification', justification: "Shu de la Rate — réchauffer la Terre", ordre: 3 },
           { code: '12JM', technique: 'tonification', justification: "Mo de l'Estomac — relancer le Foyer Moyen", ordre: 4 },
           { code: '36E', technique: 'moxa_tonification', justification: "Yang Ming — stimuler le Yang de la digestion", ordre: 5 },
         ],
-        bilanEnergetique: `1. Vide de Yang du Rein — Ming Men éteint (racine profonde du tableau)\n2. Rate non réchauffée — le Feu du Rein ne monte plus, digestion froide\n3. Yang Ming (GI) sans stimulus — diarrhées au petit matin (heure GI)\n4. Visage noirâtre — signe clinique d'insuffisance de l'élément Eau`,
-        strategie: `1. Ranimer le Feu du Ming Men avec moxas (VG4, V23)\n2. Réchauffer la Rate/Estomac pour relancer la transformation (V20, VC12)\n3. Consolider le Yang Ming pour activer le GI au petit matin (36E, 25E)`,
+        bilanEnergetique: `1. Vide de Yang du Rein — Ming Men éteint (racine profonde du tableau)\n2. Froid à la Rate — le Feu du Rein ne monte plus, digestion froide\n3. Yang Ming (GI) sans stimulus — diarrhées au petit matin (heure GI)\n4. Visage noirâtre — signe clinique d'insuffisance de l'élément Eau`,
+        strategie: `1. Ranimer le Feu du Ming Men avec moxas (4TM, 23V)\n2. Réchauffer la Rate/Estomac pour relancer la transformation (20V, 12JM)\n3. Consolider le Yang Ming pour activer le GI au petit matin (36E, 25E)`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Ming Men — Porte de la Vie, racine du Yang — moxa indispensable" },
           { code: '23V', action: 'tonification', justification: "Shu du Rein — tonification directe du Yang profond" },
@@ -1116,9 +1116,9 @@ La lecture 5 Éléments enrichit : l'Eau (Rein) faible ne nourrit plus le Bois (
         // Pouls : start=0 len=38, start=39 len=27
         annotationsPouls: [
           { id: 'ann-p003e1-p1', start: 0, length: 38, comment: "Vide profond au Foyer Inférieur = insuffisance Yang du Rein — Ming Men déclinant.", createdAt: '2026-03-01T09:01:00.000Z' },
-          { id: 'ann-p003e1-p2', start: 39, length: 27, comment: "Pouls global vide et lent = vide Yang général — confirme le tableau de fond Zang/Fu.", createdAt: '2026-03-01T09:02:00.000Z' },
+          { id: 'ann-p003e1-p2', start: 39, length: 27, comment: "Pouls global vide et lent = vide Yang général — confirme le tableau de fond Tsang/Fou.", createdAt: '2026-03-01T09:02:00.000Z' },
         ],
-        commentaireLibre: "Ce cas illustre la règle de Ming Men : sans Feu à la racine, aucune transformation n'est possible. Les moxas sur VG4 et V23 sont indispensables — pas d'acupuncture seule ici.",
+        commentaireLibre: "Ce cas illustre la règle de Ming Men : sans Feu à la racine, aucune transformation n'est possible. Les moxas sur 4TM et 23V sont indispensables — pas d'acupuncture seule ici.",
         niveauConfiance: 'expert',
         sourceType: 'humaine',
         version: 1,
@@ -1152,16 +1152,16 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
           "Yin en excès au Foyer Inférieur (froid, humidité, rétention)",
           "Yang insuffisant pour activer le GI et réchauffer le Foyer Moyen",
         ],
-        strategieTherapeutique: `1. Tonifier le Yang global (VG4, 4GI, 36E en moxas).\n2. Réchauffer spécifiquement le Foyer Inférieur (VC4, VC6 moxas).\n3. Consolider la Terre (V20 tonification).`,
+        strategieTherapeutique: `1. Tonifier le Yang global (4TM, 4GI, 36E en moxas).\n2. Réchauffer spécifiquement le Foyer Inférieur (4JM, 6JM moxas).\n3. Consolider la Terre (20V tonification).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Yang du Rein — point majeur du Yang du dos", ordre: 1 },
-          { code: '4GI', nomIeatc: 'He Gu', technique: 'moxa_tonification', justification: "Yang général — tonifier le Yang dans l'ensemble du corps", ordre: 2 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Yang du Rein — point majeur du Yang du dos", ordre: 1 },
+          { code: '4GI', nomIeatc: 'Ro Kou', technique: 'moxa_tonification', justification: "Yang général — tonifier le Yang dans l'ensemble du corps", ordre: 2 },
           { code: '36E', technique: 'moxa_tonification', justification: "Yang général et digestion", ordre: 3 },
-          { code: '4JM', nomIeatc: 'Guan Yuan', technique: 'moxa_tonification', justification: "Réchauffer le Foyer Inférieur — Yin et Yang du Rein", ordre: 4 },
+          { code: '4JM', nomIeatc: 'Koann Yuan', technique: 'moxa_tonification', justification: "Réchauffer le Foyer Inférieur — Yin et Yang du Rein", ordre: 4 },
           { code: '20V', technique: 'tonification', justification: "Shu de la Rate — consolide le Foyer Moyen", ordre: 5 },
         ],
         bilanEnergetique: `1. Vide de Yang global — constitutionnel, aggravé par surmenage chronique\n2. Yin en excès au Foyer Inférieur — froid, humidité, urines claires\n3. Foyer Moyen non réchauffé par le Yang du bas — digestion défaillante le matin\n4. Surmenage = épuisement progressif du Yang constitutionnel du Rein`,
-        strategie: `1. Tonifier le Yang global avec moxas (VG4, 4GI, 36E)\n2. Réchauffer spécifiquement le Foyer Inférieur (VC4, VC6 moxas)\n3. Consolider la Rate/Estomac (V20 tonification)`,
+        strategie: `1. Tonifier le Yang global avec moxas (4TM, 4GI, 36E)\n2. Réchauffer spécifiquement le Foyer Inférieur (4JM, 6JM moxas)\n3. Consolider la Rate/Estomac (20V tonification)`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Ming Men — Yang du Rein, indispensable avec moxas" },
           { code: '4GI', action: 'tonification', justification: "He Gu — tonifie le Yang général dans tout le corps" },
@@ -1200,7 +1200,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         difficultéEstimee: 'niveau_intermediaire',
       },
 
-      // [PE1] Praticien expérimenté 1 — Vaisseaux Merveilleux + Zang/Fu
+      // [PE1] Praticien expérimenté 1 — Vaisseaux Merveilleux + Tsang/Fou
       {
         id: 'p003-praticien-bernard',
         caseId: 'cas-003',
@@ -1214,24 +1214,24 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         grillesSecondaires: ['zang_fu'],
         polarite: 'yin',
         localisationFoyer: 'inferieur',
-        raisonnement: "Approche par les Vaisseaux Merveilleux : Ren Mai et Du Mai sont le nœud de la problématique Yin/Yang verticale. Le Du Mai gouverne le Yang — si le Feu de Ming Men s'affaiblit, c'est le Du Mai qui ne soutient plus le Yang ascendant. Traiter VG4 comme entrée Du Mai, VC4 comme entrée Ren Mai.",
+        raisonnement: "Approche par les Vaisseaux Merveilleux : Jenn Mo et Tou Mo sont le nœud de la problématique Yin/Yang verticale. Le Tou Mo gouverne le Yang — si le Feu de Ming Men s'affaiblit, c'est le Tou Mo qui ne soutient plus le Yang ascendant. Traiter 4TM comme entrée Tou Mo, 4JM comme entrée Jenn Mo.",
         categoriesDiagnostiques: [
-          "Du Mai insuffisant — Feu de Ming Men déclinant",
-          "Yang ne monte plus le long du Du Mai",
-          "Ren Mai fragilisé — Yin insuffisant pour ancrer le Yang",
+          "Tou Mo insuffisant — Feu de Ming Men déclinant",
+          "Yang ne monte plus le long du Tou Mo",
+          "Jenn Mo fragilisé — Yin insuffisant pour ancrer le Yang",
         ],
-        strategieTherapeutique: `1. Tonifier Ming Men (VG4) — restaurer le Feu via Du Mai.\n2. Tonifier Guan Yuan (VC4) — nourrir le Yin de base via Ren Mai.\n3. Shu du Rein (V23) pour soutenir directement le Rein.`,
+        strategieTherapeutique: `1. Tonifier Ming Men (4TM) — restaurer le Feu via Tou Mo.\n2. Tonifier Guan Yuan (4JM) — nourrir le Yin de base via Jenn Mo.\n3. Shu du Rein (23V) pour soutenir directement le Rein.`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Feu de Ming Men — entrée Du Mai — Yang ascendant", ordre: 1 },
-          { code: '4JM', nomIeatc: 'Guan Yuan', technique: 'tonification', justification: "Ren Mai — Yin de base — ancre le Yang", ordre: 2 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Feu de Ming Men — entrée Tou Mo — Yang ascendant", ordre: 1 },
+          { code: '4JM', nomIeatc: 'Koann Yuan', technique: 'tonification', justification: "Jenn Mo — Yin de base — ancre le Yang", ordre: 2 },
           { code: '23V', technique: 'moxa_tonification', justification: "Shu du Rein — soutien direct", ordre: 3 },
           { code: '12JM', technique: 'tonification', justification: "Foyer Moyen — soutenir la Rate/Estomac", ordre: 4 },
         ],
-        bilanEnergetique: `1. Du Mai insuffisant — Feu de Ming Men déclinant, Yang ne monte plus\n2. Ren Mai fragilisé — Yin insuffisant pour ancrer le Yang ascendant\n3. Foyer Inférieur non réchauffé → Foyer Moyen sans soutien énergétique\n4. Diarrhées matinales = Du Mai ne soutient plus le Yang Ming au petit matin`,
-        strategie: `1. Restaurer le Feu de Ming Men via Du Mai (VG4 moxas)\n2. Nourrir le Yin de base via Ren Mai (VC4 tonification)\n3. Soutenir directement le Rein (V23 moxas)`,
+        bilanEnergetique: `1. Tou Mo insuffisant — Feu de Ming Men déclinant, Yang ne monte plus\n2. Jenn Mo fragilisé — Yin insuffisant pour ancrer le Yang ascendant\n3. Foyer Inférieur non réchauffé → Foyer Moyen sans soutien énergétique\n4. Diarrhées matinales = Tou Mo ne soutient plus le Yang Ming au petit matin`,
+        strategie: `1. Restaurer le Feu de Ming Men via Tou Mo (4TM moxas)\n2. Nourrir le Yin de base via Jenn Mo (4JM tonification)\n3. Soutenir directement le Rein (23V moxas)`,
         pointsProposer: [
-          { code: '4TM', action: 'tonification', justification: "Ming Men — entrée Du Mai — restaure le Yang ascendant" },
-          { code: '4JM', action: 'tonification', justification: "Guan Yuan — entrée Ren Mai — ancre le Yin de base" },
+          { code: '4TM', action: 'tonification', justification: "Ming Men — entrée Tou Mo — restaure le Yang ascendant" },
+          { code: '4JM', action: 'tonification', justification: "Guan Yuan — entrée Jenn Mo — ancre le Yin de base" },
           { code: '23V', action: 'tonification', justification: "Shu du Rein — soutien direct du Rein (moxas)" },
           { code: '12JM', action: 'tonification', justification: "Foyer Moyen — relancer la Rate/Estomac" },
         ],
@@ -1239,7 +1239,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         // start=0 len=37 "Langue pâle, corps légèrement gonflé."
         langueTexte: "Langue pâle, corps légèrement gonflé. Enduit blanc épais et humide à la racine.",
         annotationsLangue: [
-          { id: 'ann-p003pe-ber-l1', start: 0, length: 36, comment: "Pâle avec corps gonflé = vide Yang Rein + Froid interne — Du/Ren Mai insuffisants.", createdAt: '2026-03-03T10:00:00.000Z' },
+          { id: 'ann-p003pe-ber-l1', start: 0, length: 36, comment: "Pâle avec corps gonflé = vide Yang Rein + Froid interne — Du/Jenn Mo insuffisants.", createdAt: '2026-03-03T10:00:00.000Z' },
         ],
         // Offsets calculés :
         // start=0  len=22 "Diarrhées persistantes"
@@ -1247,15 +1247,15 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         // start=631 len=19 "Surmenage chronique"
         // start=495 len=14 "Urines claires"
         annotationsInterrogatoire: [
-          { id: 'ann-p003pe-ber-i1', start: 0, length: 22, comment: "Diarrhées persistantes depuis plusieurs mois = vide de fond — Du Mai chroniquement insuffisant.", createdAt: '2026-03-03T09:55:00.000Z' },
-          { id: 'ann-p003pe-ber-i2', start: 555, length: 40, comment: "Froid lombaire = siège du Du Mai et du Rein — confirme l'insuffisance de Ming Men.", createdAt: '2026-03-03T09:57:00.000Z' },
+          { id: 'ann-p003pe-ber-i1', start: 0, length: 22, comment: "Diarrhées persistantes depuis plusieurs mois = vide de fond — Tou Mo chroniquement insuffisant.", createdAt: '2026-03-03T09:55:00.000Z' },
+          { id: 'ann-p003pe-ber-i2', start: 555, length: 40, comment: "Froid lombaire = siège du Tou Mo et du Rein — confirme l'insuffisance de Ming Men.", createdAt: '2026-03-03T09:57:00.000Z' },
           { id: 'ann-p003pe-ber-i3', start: 631, length: 19, comment: "Surmenage chronique = dépense excessive du Yang ancestral (Rein) — étiologie classique.", createdAt: '2026-03-03T09:59:00.000Z' },
-          { id: 'ann-p003pe-ber-i4', start: 495, length: 14, comment: "Urines claires = Yang du Rein ne retient plus les liquides — Du Mai insuffisant.", createdAt: '2026-03-03T10:00:00.000Z' },
+          { id: 'ann-p003pe-ber-i4', start: 495, length: 14, comment: "Urines claires = Yang du Rein ne retient plus les liquides — Tou Mo insuffisant.", createdAt: '2026-03-03T10:00:00.000Z' },
         ],
         // Pouls : start=0 len=38
         annotationsPouls: [
-          { id: 'ann-p003pe-ber-p1', start: 0, length: 38, comment: "Vide profond Foyer Inférieur = Du Mai insuffisant — racine Yang défaillante.", createdAt: '2026-03-03T10:01:00.000Z' },
-          { id: 'ann-p003pe-ber-p2', start: 39, length: 27, comment: "Global vide et lent = Ren Mai fragilisé — Yin insuffisant pour ancrer le Yang.", createdAt: '2026-03-03T10:02:00.000Z' },
+          { id: 'ann-p003pe-ber-p1', start: 0, length: 38, comment: "Vide profond Foyer Inférieur = Tou Mo insuffisant — racine Yang défaillante.", createdAt: '2026-03-03T10:01:00.000Z' },
+          { id: 'ann-p003pe-ber-p2', start: 39, length: 27, comment: "Global vide et lent = Jenn Mo fragilisé — Yin insuffisant pour ancrer le Yang.", createdAt: '2026-03-03T10:02:00.000Z' },
         ],
         commentaireLibre: "Les Vaisseaux Merveilleux sur les tableaux de vide profond agissent sur les racines énergétiques — plus profond que l'action des méridiens simples.",
         niveauConfiance: 'standard',
@@ -1267,7 +1267,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         difficultéEstimee: 'niveau_4e',
       },
 
-      // [PE2] Praticien expérimenté 2 — Trois Foyers + Zang/Fu (anonyme)
+      // [PE2] Praticien expérimenté 2 — Trois Foyers + Tsang/Fou (anonyme)
       {
         id: 'p003-praticien-anon',
         caseId: 'cas-003',
@@ -1287,16 +1287,16 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
           "Foyer Moyen non soutenu par le Foyer Inférieur",
           "Diarrhées = Foyer Inférieur ne retient plus (Yang insuffisant)",
         ],
-        strategieTherapeutique: `1. Tonifier le Yang du Foyer Inférieur en priorité (VG4, V23).\n2. Consolider le Foyer Moyen secondairement (V20, VC12).`,
+        strategieTherapeutique: `1. Tonifier le Yang du Foyer Inférieur en priorité (4TM, 23V).\n2. Consolider le Foyer Moyen secondairement (20V, 12JM).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Yang du Foyer Inférieur — Ming Men en priorité", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Yang du Foyer Inférieur — Ming Men en priorité", ordre: 1 },
           { code: '23V', technique: 'moxa_tonification', justification: "Shu du Rein — tonification directe Foyer Inférieur", ordre: 2 },
           { code: '20V', technique: 'tonification', justification: "Shu de la Rate — consolide Foyer Moyen", ordre: 3 },
           { code: '12JM', technique: 'tonification', justification: "Mo de l'Estomac — renforce la digestion", ordre: 4 },
           { code: '6JM', technique: 'moxa_tonification', justification: "Réchauffer le Foyer Inférieur directement", ordre: 5 },
         ],
         bilanEnergetique: `1. Foyer Inférieur vide de Yang — Rein insuffisant, froid lombaire\n2. Foyer Moyen fragilisé secondairement — Rate/Estomac sans soutien\n3. Diarrhées matinales = Foyer Inférieur ne retient plus les liquides\n4. Urines claires = Yang du Rein ne retient plus l'Eau`,
-        strategie: `1. Tonifier le Yang du Foyer Inférieur en priorité (VG4, V23 moxas)\n2. Consolider ensuite le Foyer Moyen (V20, VC12)\n3. Traitement sur plusieurs séries — vide constitutionnel`,
+        strategie: `1. Tonifier le Yang du Foyer Inférieur en priorité (4TM, 23V moxas)\n2. Consolider ensuite le Foyer Moyen (20V, 12JM)\n3. Traitement sur plusieurs séries — vide constitutionnel`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Yang du Foyer Inférieur — Ming Men, moxas indispensables" },
           { code: '23V', action: 'tonification', justification: "Shu du Rein — tonification directe Foyer Inférieur" },
@@ -1354,15 +1354,15 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
           "Vide de Yang au Foyer Inférieur",
           "Froid interne — manque de chaleur Yang",
         ],
-        strategieTherapeutique: `1. Tonifier le Yang du Rein (VG4, moxas).\n2. Réchauffer directement le Foyer Inférieur (VC6, moxas).\n3. Soutenir le Yang général (36E moxas).`,
+        strategieTherapeutique: `1. Tonifier le Yang du Rein (4TM, moxas).\n2. Réchauffer directement le Foyer Inférieur (6JM, moxas).\n3. Soutenir le Yang général (36E moxas).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Yang du Rein — Ming Men essentiel avec moxas", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Yang du Rein — Ming Men essentiel avec moxas", ordre: 1 },
           { code: '36E', technique: 'moxa_tonification', justification: "Yang général et digestion", ordre: 2 },
           { code: '6JM', technique: 'moxa_tonification', justification: "Réchauffer le Foyer Inférieur directement", ordre: 3 },
           { code: '23V', technique: 'moxa_tonification', justification: "Shu du Rein — tonification directe", ordre: 4 },
         ],
         bilanEnergetique: `1. Vide de Yang au Foyer Inférieur — Ming Men insuffisant\n2. Froid interne — manque de chaleur Yang pour réchauffer le Foyer Moyen\n3. Digestion défaillante le matin — Yang ne monte pas à l'heure GI (5h-7h)`,
-        strategie: `1. Tonifier le Yang du Rein (VG4 moxas)\n2. Réchauffer le Foyer Inférieur (VC6 moxas)\n3. Soutenir le Yang général (36E moxas)`,
+        strategie: `1. Tonifier le Yang du Rein (4TM moxas)\n2. Réchauffer le Foyer Inférieur (6JM moxas)\n3. Soutenir le Yang général (36E moxas)`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Ming Men — Yang du Rein, indispensable avec moxas" },
           { code: '36E', action: 'tonification', justification: "Yang général + activation digestive matinale" },
@@ -1418,21 +1418,21 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         raisonnement: "Lecture Cinq Éléments : l'Eau (Rein) est en vide profond. Le visage noirâtre est le signe de l'élément Eau en souffrance. Le Bois (Foie) mal nourri par l'Eau ne peut plus soutenir la Terre (Rate/Estomac) — d'où les diarrhées chroniques par faiblesse digestive.",
         categoriesDiagnostiques: [
           "Vide profond de l'Eau (Rein) — élément noirâtre",
-          "Bois mal nourri par l'Eau — cycle Sheng insuffisant",
+          "Bois mal nourri par l'Eau — cycle Tcheng insuffisant",
           "Terre (Rate/Estomac) fragilisée secondairement",
         ],
-        strategieTherapeutique: `1. Nourrir l'Eau (Rein) — base du cycle Sheng.\n2. Soutenir le Bois (Foie) pour relancer le cycle.\n3. Consolider la Terre (Rate/Estomac).`,
+        strategieTherapeutique: `1. Nourrir l'Eau (Rein) — base du cycle Tcheng.\n2. Soutenir le Bois (Foie) pour relancer le cycle.\n3. Consolider la Terre (Rate/Estomac).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Yang du Rein — Feu de l'Eau dans les 5 Éléments", ordre: 1 },
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau", ordre: 2 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Yang du Rein — Feu de l'Eau dans les 5 Éléments", ordre: 1 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Source Yin du Rein — nourrit la base Eau", ordre: 2 },
           { code: '36E', technique: 'moxa_tonification', justification: "Soutient la Terre — relance la digestion", ordre: 3 },
           { code: '20V', technique: 'tonification', justification: "Shu de la Rate — consolide la Terre", ordre: 4 },
         ],
-        bilanEnergetique: `1. Vide profond de l'Eau (Rein) — visage noirâtre, signe de l'élément Eau\n2. Bois mal nourri par l'Eau — cycle Sheng brisé dès la base\n3. Terre fragilisée secondairement — Rate/Estomac sans soutien`,
-        strategie: `1. Nourrir l'Eau (VG4 moxas, R3 Tai Xi)\n2. Relancer le cycle Sheng Eau→Bois→Terre\n3. Consolider la Terre (36E moxas, V20)`,
+        bilanEnergetique: `1. Vide profond de l'Eau (Rein) — visage noirâtre, signe de l'élément Eau\n2. Bois mal nourri par l'Eau — cycle Tcheng brisé dès la base\n3. Terre fragilisée secondairement — Rate/Estomac sans soutien`,
+        strategie: `1. Nourrir l'Eau (4TM moxas, 3R Tae Kri)\n2. Relancer le cycle Tcheng Eau→Bois→Terre\n3. Consolider la Terre (36E moxas, 20V)`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Feu de l'Eau (Ming Men) — Yang du Rein" },
-          { code: '3R', action: 'tonification', justification: "Tai Xi — source Yin du Rein, base Eau du cycle Sheng" },
+          { code: '3R', action: 'tonification', justification: "Tai Xi — source Yin du Rein, base Eau du cycle Tcheng" },
           { code: '36E', action: 'tonification', justification: "Soutient la Terre — relance la digestion" },
           { code: '20V', action: 'tonification', justification: "Shu de la Rate — consolide la Terre" },
         ],
@@ -1457,7 +1457,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         // Pouls : start=0 len=38
         annotationsPouls: [
           { id: 'ann-p003jp-anon-p1', start: 0, length: 38, comment: "Vide profond Foyer Inférieur = insuffisance de l'Eau — confirme le diagnostic 5 Éléments.", createdAt: '2026-03-08T09:59:00.000Z' },
-          { id: 'ann-p003jp-anon-p2', start: 39, length: 27, comment: "Vide et lent global = tableau de fond de l'Eau insuffisante — tout le cycle Sheng est affecté.", createdAt: '2026-03-08T10:00:00.000Z' },
+          { id: 'ann-p003jp-anon-p2', start: 39, length: 27, comment: "Vide et lent global = tableau de fond de l'Eau insuffisante — tout le cycle Tcheng est affecté.", createdAt: '2026-03-08T10:00:00.000Z' },
         ],
         niveauConfiance: 'standard',
         sourceType: 'humaine',
@@ -1487,14 +1487,14 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
           "Froid interne — manque de chaleur Yang",
           "Yang insuffisant — Yin en excès secondaire",
         ],
-        strategieTherapeutique: `1. Tonifier le Yang du Rein (VG4 moxas).\n2. Soutenir le Yang général (36E moxas).\n3. Réchauffer le Foyer Inférieur (VC6 moxas).`,
+        strategieTherapeutique: `1. Tonifier le Yang du Rein (4TM moxas).\n2. Soutenir le Yang général (36E moxas).\n3. Réchauffer le Foyer Inférieur (6JM moxas).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Yang du Rein", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Yang du Rein", ordre: 1 },
           { code: '36E', technique: 'moxa_tonification', justification: "Yang général et digestion", ordre: 2 },
           { code: '6JM', technique: 'moxa_tonification', justification: "Réchauffer le Foyer Inférieur", ordre: 3 },
         ],
         bilanEnergetique: `1. Vide de Yang au Foyer Inférieur — Ming Men insuffisant\n2. Froid interne — manque de chaleur Yang pour réchauffer le Foyer Moyen\n3. Digestion défaillante le matin — Yang ne monte pas à l'heure GI (5h-7h)`,
-        strategie: `1. Tonifier le Yang du Rein (VG4 moxas — Ming Men)\n2. Soutenir le Yang général et la digestion (36E moxas)\n3. Réchauffer directement le Foyer Inférieur (VC6 moxas)`,
+        strategie: `1. Tonifier le Yang du Rein (4TM moxas — Ming Men)\n2. Soutenir le Yang général et la digestion (36E moxas)\n3. Réchauffer directement le Foyer Inférieur (6JM moxas)`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Ming Men — Yang du Rein, indispensable avec moxas" },
           { code: '36E', action: 'tonification', justification: "Yang général + activation digestive matinale" },
@@ -1532,7 +1532,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         difficultéEstimee: 'niveau_intermediaire',
       },
 
-      // [Et2] Étudiant 4e année 2 — Trois Foyers + Zang/Fu (anonyme)
+      // [Et2] Étudiant 4e année 2 — Trois Foyers + Tsang/Fou (anonyme)
       {
         id: 'p003-etudiant4-anon',
         caseId: 'cas-003',
@@ -1551,15 +1551,15 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
           "Foyer Inférieur vide de Yang — Rein/Ming Men défaillants",
           "Foyer Moyen fragilisé secondairement — Rate non soutenue",
         ],
-        strategieTherapeutique: `1. Tonifier le Yang du Foyer Inférieur (VG4, V23 moxas).\n2. Consolider le Foyer Moyen (V20, VC12).`,
+        strategieTherapeutique: `1. Tonifier le Yang du Foyer Inférieur (4TM, 23V moxas).\n2. Consolider le Foyer Moyen (20V, 12JM).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Yang du Foyer Inférieur — priorité absolue", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Yang du Foyer Inférieur — priorité absolue", ordre: 1 },
           { code: '23V', technique: 'moxa_tonification', justification: "Shu du Rein — tonification directe", ordre: 2 },
           { code: '20V', technique: 'tonification', justification: "Shu de la Rate — consolide Foyer Moyen", ordre: 3 },
           { code: '12JM', technique: 'tonification', justification: "Mo de l'Estomac — renforce la digestion", ordre: 4 },
         ],
         bilanEnergetique: `1. Foyer Inférieur vide de Yang — Rein insuffisant, froid lombaire\n2. Foyer Moyen fragilisé secondairement — Rate/Estomac sans soutien\n3. Diarrhées matinales = Foyer Inférieur ne retient plus les liquides`,
-        strategie: `1. Tonifier le Yang du Foyer Inférieur (VG4, V23 moxas)\n2. Consolider le Foyer Moyen ensuite (V20, VC12)\n3. Traitement sur plusieurs séries`,
+        strategie: `1. Tonifier le Yang du Foyer Inférieur (4TM, 23V moxas)\n2. Consolider le Foyer Moyen ensuite (20V, 12JM)\n3. Traitement sur plusieurs séries`,
         pointsProposer: [
           { code: '4TM', action: 'tonification', justification: "Ming Men — Yang du Foyer Inférieur" },
           { code: '23V', action: 'tonification', justification: "Shu du Rein — tonification directe Foyer Inférieur" },
@@ -1603,7 +1603,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 4 — HYPERTENSION — Vide de Yin, prospérité de Yang
   // Source : PVI EEA tome 3 — Tableau 1 (Hypertension)
-  // Grille principale : Cinq Éléments (Eau/Bois) puis Zang/Fu
+  // Grille principale : Cinq Éléments (Eau/Bois) puis Tsang/Fou
   // ───────────────────────────────────────────────────────────────────────────
   {
     id: 'cas-004',
@@ -1627,7 +1627,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         { cle: 'sommeil', valeur: "Insomnies : endormissement difficile, réveils nocturnes avec agitation." },
         { cle: 'coeur', valeur: "Palpitations cardiaques intermittentes, sans anomalie organique." },
         { cle: 'aspect', valeur: "Corps amaigri. Visage rouge. Yeux parfois rouges." },
-        { cle: 'psychisme', valeur: "Esprit (Shen) fatigué — difficultés de concentration, irritabilité." },
+        { cle: 'psychisme', valeur: "Esprit (Chen) fatigué — difficultés de concentration, irritabilité." },
         { cle: 'desirs', valeur: "Désirs sexuels marqués dans les antécédents. Soucis et détérioration du Sang par surcharge émotionnelle prolongée." },
       ],
       prisePouls: {
@@ -1669,7 +1669,7 @@ Le surmenage chronique est l'étiologie typique : la sur-utilisation épuise le 
         polarite: 'yang',
         localisationFoyer: 'superieur',
         raisonnement: `**Lecture par les Cinq Éléments — relation Eau/Bois** :
-L'Eau (Rein) est le fondement du Bois (Foie). Dans le cycle d'engendrement (Sheng), l'Eau nourrit le Bois. Si l'Eau est insuffisante, elle ne peut plus contenir le Bois. Le Bois (Yang du Foie) monte alors librement, sans frein.
+L'Eau (Rein) est le fondement du Bois (Foie). Dans le cycle d'engendrement (Tcheng), l'Eau nourrit le Bois. Si l'Eau est insuffisante, elle ne peut plus contenir le Bois. Le Bois (Yang du Foie) monte alors librement, sans frein.
 
 **Physiopathologie selon le Nei Jing** : "Si l'Eau ne peut contenir le Bois, le Sang ne peut nourrir le Foie. Le Yin est vide et le Yang prospère — le Fong du Foie monte en usurpateur." C'est l'hypertension d'apparence Yang avec une cause profonde Yin.
 
@@ -1682,37 +1682,37 @@ L'Eau (Rein) est le fondement du Bois (Foie). Dans le cycle d'engendrement (Shen
           "Vide de Yin du Rein — Eau insuffisante",
           "Prospérité du Yang du Foie — Bois non contenu",
           "Fong interne du Foie — Yang monte en usurpateur",
-          "Insuffisance Eau-Bois dans le cycle Sheng",
+          "Insuffisance Eau-Bois dans le cycle Tcheng",
           "Sang non nourri → Foie non nourri → Yang monte",
         ],
         strategieTherapeutique: "Tonifier le Yin du Rein pour ancrer et descendre le Yang du Foie. Ne jamais disperser agressivement le Yang du Foie sans avoir d'abord nourri le Yin du Rein.",
         traitementPropose: `**Nourrir le Yin du Rein (traiter la cause) :**
-R3 tonification — nourrir le Yin des Reins, point source du méridien Rein.
-V23 tonification — renforcer le Rein (Shu du Rein).
+3R tonification — nourrir le Yin des Reins, point source du méridien Rein.
+23V tonification — renforcer le Rein (Shu du Rein).
 
-**Soutenir le Cœur (Shen perturbé) :**
-V15 tonification — soutenir le Cœur, calmer les palpitations et les insomnies.
+**Soutenir le Cœur (Chen perturbé) :**
+15V tonification — soutenir le Cœur, calmer les palpitations et les insomnies.
 
 **Descendre le Yang du Foie :**
-F2 dispersion — disperser le Yang du Foie.
-F3 dispersion — disperser le Yang du Foie, libère la montée.`,
+2F dispersion — disperser le Yang du Foie.
+3F dispersion — disperser le Yang du Foie, libère la montée.`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — point source", ordre: 1 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Nourrit le Yin du Rein — point source", ordre: 1 },
           { code: '23V', technique: 'tonification', justification: "Renforcer le Rein (Shu du Rein)", ordre: 2 },
           { code: '15V', technique: 'tonification', justification: "Soutenir le Cœur — palpitations, insomnies", ordre: 3 },
           { code: '2F', technique: 'dispersion', justification: "Disperser le Yang du Foie", ordre: 4 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Disperser le Yang montant du Foie", ordre: 5 },
+          { code: '3F', nomIeatc: 'Tae Tchong', technique: 'dispersion', justification: "Disperser le Yang montant du Foie", ordre: 5 },
         ],
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
         version: 1,
         enseignementCle: "L'hypertension en IEATC est d'apparence Yang mais de cause Yin. Traiter la cause (vide Yin Rein) et non le symptôme (Yang Foie montant). Sans nourrir l'Eau, toute dispersion du Bois est provisoire.",
-        variantes: "Une deuxième lecture identifie un tableau de Feu du Phlegme avec Vent et Yang (Tableau 2), qui se traite différemment avec E40, MC6, VB20. La différenciation repose sur la présence ou absence de phlegme et la qualité du pouls.",
+        variantes: "Une deuxième lecture identifie un tableau de Feu du Phlegme avec Vent et Yang (Tableau 2), qui se traite différemment avec 40E, 6MC, 20VB. La différenciation repose sur la présence ou absence de phlegme et la qualité du pouls.",
       },
 
       // ── Participations factices riches — Cas 004 ────────────────────────────
 
-      // Praticien expérimenté — grille Zang/Fu + focus Cœur/Shen
+      // Praticien expérimenté — grille Tsang/Fou + focus Cœur/Chen
       {
         id: 'p004-praticien-1',
         caseId: 'cas-004',
@@ -1725,35 +1725,35 @@ F3 dispersion — disperser le Yang du Foie, libère la montée.`,
         grillesSecondaires: ['cinq_elements'],
         polarite: 'yang',
         localisationFoyer: 'superieur',
-        raisonnement: "Ma lecture priorise la perturbation du Shen (Cœur). Les insomnies, palpitations et irritabilité sont des signes que le Cœur est atteint secondairement par l'excès de Yang du Foie. Le Foie en excès produit du Feu qui monte au Cœur et perturbe le Shen. Sans calmer le Cœur, le patient ne récupère pas et l'hypertension s'aggrave par l'insomnie chronique. Je traite donc Cœur + Foie ensemble, en nourrissant le Rein comme base.",
+        raisonnement: "Ma lecture priorise la perturbation du Chen (Cœur). Les insomnies, palpitations et irritabilité sont des signes que le Cœur est atteint secondairement par l'excès de Yang du Foie. Le Foie en excès produit du Feu qui monte au Cœur et perturbe le Chen. Sans calmer le Cœur, le patient ne récupère pas et l'hypertension s'aggrave par l'insomnie chronique. Je traite donc Cœur + Foie ensemble, en nourrissant le Rein comme base.",
         categoriesDiagnostiques: [
           "Yang du Foie en excès — Feu montant au Cœur",
-          "Shen perturbé — insomnie, palpitations, irritabilité",
+          "Chen perturbé — insomnie, palpitations, irritabilité",
           "Vide de Yin du Rein — cause profonde",
           "Cycle Eau→Bois→Feu : défaillance en cascade",
         ],
         strategieTherapeutique: `1. Nourrir le Yin du Rein (base).
 2. Calmer le Feu du Foie et du Cœur.
-3. Pacifier le Shen.
+3. Pacifier le Chen.
 4. Points Shu du dos pour soutenir Rein et Cœur.`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Yin du Rein — nourrit la base du cycle", ordre: 1 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Yin du Rein — nourrit la base du cycle", ordre: 1 },
           { code: '23V', technique: 'tonification', justification: "Shu du Rein — renforce le Yin profond", ordre: 2 },
-          { code: '15V', technique: 'tonification', justification: "Shu du Cœur — pacifie le Shen, calme les palpitations", ordre: 3 },
-          { code: '7C', nomIeatc: 'Shen Men', technique: 'harmonisation', justification: "Porte du Shen — calme le Cœur et l'anxiété", ordre: 4 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Disperse le Yang du Foie", ordre: 5 },
+          { code: '15V', technique: 'tonification', justification: "Shu du Cœur — pacifie le Chen, calme les palpitations", ordre: 3 },
+          { code: '7C', nomIeatc: 'Chen Menn', technique: 'harmonisation', justification: "Porte du Chen — calme le Cœur et l'anxiété", ordre: 4 },
+          { code: '3F', nomIeatc: 'Tae Tchong', technique: 'dispersion', justification: "Disperse le Yang du Foie", ordre: 5 },
           { code: '2F', technique: 'dispersion', justification: "Clarifie le Feu du Foie", ordre: 6 },
           { code: '20VB', technique: 'dispersion', justification: "Fait descendre le Yang montant du Foie — céphalées, vertiges", ordre: 7 },
         ],
         bilanEnergetique: `Vide de Yin du Rein (cause profonde).
 Foie en excès de Yang — Feu montant au Cœur.
-Shen perturbé : insomnie, palpitations, irritabilité.
+Chen perturbé : insomnie, palpitations, irritabilité.
 Cascade Eau→Bois→Feu défaillante.`,
         annotationsInterrogatoire: [
           { id: 'ann-p004p1-1', start: 0, length: 70, comment: "Maux de tête frontaux/temporaux = Yang du Foie qui monte — confirmation du diagnostic.", createdAt: '2026-02-05T10:00:00.000Z' },
           { id: 'ann-p004p1-2', start: 150, length: 50, comment: "Insomnies = Cœur atteint par le Feu du Foie — à traiter en priorité.", createdAt: '2026-02-05T10:05:00.000Z' },
         ],
-        commentaireLibre: "Je ne peux pas ignorer les insomnies et palpitations — ce sont les signes que le Cœur est impliqué. Traiter le Foie seul ne résoudrait pas la perturbation du Shen.",
+        commentaireLibre: "Je ne peux pas ignorer les insomnies et palpitations — ce sont les signes que le Cœur est impliqué. Traiter le Foie seul ne résoudrait pas la perturbation du Chen.",
         niveauConfiance: 'standard',
         sourceType: 'humaine',
         version: 1,
@@ -1786,8 +1786,8 @@ Cascade Eau→Bois→Feu défaillante.`,
 3. Abaisser le Yang montant.`,
         pointsUtilises: [
           { code: '20VB', technique: 'dispersion', justification: "Disperse le Fong du Foie — point clé du Fong interne", ordre: 1 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Disperse le Foie et le Fong interne", ordre: 2 },
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — traite la cause", ordre: 3 },
+          { code: '3F', nomIeatc: 'Tae Tchong', technique: 'dispersion', justification: "Disperse le Foie et le Fong interne", ordre: 2 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Nourrit le Yin du Rein — traite la cause", ordre: 3 },
           { code: '6Rte', technique: 'tonification', justification: "Nourrit le Yin en général — soutien du Sang", ordre: 4 },
           { code: '20TM', technique: 'dispersion', justification: "Abaisser le Yang en excès au sommet — utiliser avec précaution", ordre: 5 },
         ],
@@ -1807,7 +1807,7 @@ Yang montant en usurpateur.`,
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 5 — BOURDONNEMENTS ET SURDITÉ — Vide de Yin du Rein
   // Source : PVI EEA tome 3 — Pathologies de l'Oreille
-  // Grille principale : Zang/Fu + Méridiens (Chao Yang)
+  // Grille principale : Tsang/Fou + Méridiens (Chao Yang)
   // CAS PARTIEL — motif + interrogatoire + pouls uniquement
   // ───────────────────────────────────────────────────────────────────────────
   {
@@ -1845,7 +1845,7 @@ Yang montant en usurpateur.`,
           {
             position: 'foyer_superieur_gauche',
             qualites: ['vide'],
-            interpretation: "Foyer Supérieur gauche léger — Shen perturbé par l'insuffisance du Yin.",
+            interpretation: "Foyer Supérieur gauche léger — Chen perturbé par l'insuffisance du Yin.",
           },
         ],
         synthese: "Vide de Yin du Rein avec montée de la chaleur du vide. Le Yin des Reins est insuffisant — les liquides ne peuvent plus ancrer le Yang ascendant. Tableau de bourdonnements par vide (différentiel : bourdonnements continus, tenus, aggravés à la fatigue).",
@@ -1888,16 +1888,16 @@ Yang montant en usurpateur.`,
         strategieTherapeutique: "Tonifier le Yin du Rein et du Foie. Traiter le Yang apparent (Feu apparent) — nourrir le Yin pour éteindre la chaleur, jamais disperser. Éviter les moxas (chaleur par vide de Yin).",
         traitementPropose: `**Tonifier Rein et Yin du Foie :**
 23VB tonification — tonifier les Souffles des Reins.
-4VG tonification — renforcer le Yang des Reins (base du Yin).
-R3 tonification — tonifier directement le Yin du Rein.
+4TM tonification — renforcer le Yang des Reins (base du Yin).
+3R tonification — tonifier directement le Yin du Rein.
 6Rte tonification — augmenter le Yin du Foie et des Reins.
 2F tonification — augmenter le Yin du Foie et traiter le Yang apparent (Feu apparent).
 
 Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la dispersion 2F pour vider le Yang (hypertension).`,
         pointsUtilises: [
           { code: '23VB', technique: 'tonification', justification: "Tonifie les Souffles des Reins", ordre: 1 },
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'tonification', justification: "Renforce le Yang des Reins (base du Yin)", ordre: 2 },
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Tonifie directement le Yin du Rein", ordre: 3 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'tonification', justification: "Renforce le Yang des Reins (base du Yin)", ordre: 2 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Tonifie directement le Yin du Rein", ordre: 3 },
           { code: '6Rte', technique: 'tonification', justification: "Augmente le Yin du Foie et des Reins", ordre: 4 },
           { code: '2F', technique: 'tonification', justification: "Augmente le Yin du Foie — traite le Yang apparent (Feu apparent)", ordre: 5 },
         ],
@@ -1905,13 +1905,13 @@ Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la di
         sourceType: 'editoriale',
         version: 1,
         enseignementCle: "Différencier absolument bourdonnements vide (tenus, intermittents, aggraves par fatigue) des bourdonnements plein (violents, brusques, aggraves par colères). Le traitement est opposé. Une erreur ici = aggravation.",
-        variantes: "En cas de plénitude : disperser 3F, 41VB, TR16. En cas de Vent pervers externe : TR5, P7, GI4, VB20, TR17.",
+        variantes: "En cas de plénitude : disperser 3F, 41VB, 16TR. En cas de Vent pervers externe : 5TR, 7P, 4GI, 20VB, 17TR.",
       },
     ],
   },
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 006 — THOMAS, 45 ANS — Lombalgie chronique
-  // Grille principale : Yin/Yang → Zang/Fu (Rein)
+  // Grille principale : Yin/Yang → Tsang/Fou (Rein)
   // ───────────────────────────────────────────────────────────────────────────
   {
     id: 'cas-006',
@@ -1935,7 +1935,7 @@ Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la di
         { cle: 'douleur', valeur: "Douleur sourde et profonde dans le bas du dos. Aggravée au repos prolongé et le matin au réveil. Améliorée par la chaleur et le mouvement." },
         { cle: 'horaire', valeur: "Pire le matin au lever. Mieux après activité douce. Rechutes en hiver et par temps froid." },
         { cle: 'urines', valeur: "Urines claires et abondantes, surtout la nuit (2-3 levées). Légère incontinence d'effort." },
-        { cle: 'froid', valeur: "Froid aux pieds et aux genoux. Aime les bains chauds. Frileuse." },
+        { cle: 'froid', valeur: "Froid aux pieds et aux genoux. Aime les bains chauds. Frileux." },
         { cle: 'antecedents', valeur: "Surmenage professionnel depuis 10 ans. Père opéré du dos (hernie discale L4-L5)." },
       ],
       observation: "Patient pâle, voix basse. Dos courbé légèrement en avant. Pas de déficit neurologique.",
@@ -1965,25 +1965,25 @@ Note : 2F est ici en tonification pour nourrir le Yin — à distinguer de la di
         localisationFoyer: 'inferieur',
         raisonnement: `Tableau classique de Vide de Yang du Rein avec insuffisance du Ming Men. La lombalgie chronique en IEATC n'est jamais purement mécanique — le dos lombaire est le territoire du Rein. La douleur améliorée par la chaleur, les urines claires nocturnes, le froid aux membres inférieurs et la fatigue profonde dessinent le portrait du Yang vide profond.
 
-Le Ming Men (VG4) est le foyer du Yang constitutionnel. Son insuffisance se lit sur les deux pouls du Foyer Inférieur, vides et profonds. Les moxas sur VG4 et V23 sont le traitement de choix.`,
+Le Ming Men (4TM) est le foyer du Yang constitutionnel. Son insuffisance se lit sur les deux pouls du Foyer Inférieur, vides et profonds. Les moxas sur 4TM et 23V sont le traitement de choix.`,
         categoriesDiagnostiques: [
           "Vide de Yang du Rein — Ming Men insuffisant",
           "Froid interne au Foyer Inférieur",
           "Vide de Yang général — fatigue profonde",
         ],
-        strategieTherapeutique: "1. Ranimer le Feu du Ming Men (VG4 moxas). 2. Tonifier le Yang du Rein (V23, R3). 3. Réchauffer le Foyer Inférieur. 4. Soutenir le Yang général (36E).",
-        traitementPropose: `VG4 moxas (Ming Men — clé du Yang constitutionnel). V23 bilatéral tonification + moxas (point Shu du Rein). R3 bilatéral tonification (source Rein). V40 dispersion (lombes locales). 36E bilatéral tonification (soutien Yang général).`,
+        strategieTherapeutique: "1. Ranimer le Feu du Ming Men (4TM moxas). 2. Tonifier le Yang du Rein (23V, 3R). 3. Réchauffer le Foyer Inférieur. 4. Soutenir le Yang général (36E).",
+        traitementPropose: `4TM moxas (Ming Men — clé du Yang constitutionnel). 23V bilatéral tonification + moxas (point Shu du Rein). 3R bilatéral tonification (source Rein). 40V dispersion (lombes locales). 36E bilatéral tonification (soutien Yang général).`,
         pointsUtilises: [
-          { code: '4TM', nomIeatc: 'Ming Men', technique: 'moxa_tonification', justification: "Feu du Ming Men — Yang constitutionnel", ordre: 1 },
+          { code: '4TM', nomIeatc: 'Ming Menn', technique: 'moxa_tonification', justification: "Feu du Ming Men — Yang constitutionnel", ordre: 1 },
           { code: '23V', technique: 'moxa_tonification', justification: "Point Shu du Rein — tonifie Yang du Rein", ordre: 2 },
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Source du Rein — Yin et Yang du Rein", ordre: 3 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Source du Rein — Yin et Yang du Rein", ordre: 3 },
           { code: '40V', technique: 'dispersion', justification: "Point commande des lombes", ordre: 4 },
-          { code: '36E', nomIeatc: 'Zu San Li', technique: 'moxa_tonification', justification: "Yang général — soutien énergétique global", ordre: 5 },
+          { code: '36E', nomIeatc: 'Tsou Sann Li', technique: 'moxa_tonification', justification: "Yang général — soutien énergétique global", ordre: 5 },
         ],
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
         version: 1,
-        enseignementCle: "Lombalgie chronique = Vide de Yang du Rein jusqu'à preuve du contraire. Les moxas sur VG4 sont indispensables — l'aiguille seule ne suffit pas pour ranimer le Ming Men.",
+        enseignementCle: "Lombalgie chronique = Vide de Yang du Rein jusqu'à preuve du contraire. Les moxas sur 4TM sont indispensables — l'aiguille seule ne suffit pas pour ranimer le Ming Men.",
       },
       {
         id: 'a006-cinq-elements',
@@ -1999,19 +1999,19 @@ Le Ming Men (VG4) est le foyer du Yang constitutionnel. Son insuffisance se lit 
         grillesSecondaires: ['yin_yang'],
         polarite: 'yang',
         localisationFoyer: 'inferieur',
-        raisonnement: "L'Eau (Rein) est la base de tout — insuffisance constitutionnelle aggravée par le surmenage. Le cycle Sheng est brisé vers le bas : Eau insuffisante → Bois mal nourri → tendons et dos fragilisés. Traiter d'abord l'Eau pour relancer toute la chaîne.",
+        raisonnement: "L'Eau (Rein) est la base de tout — insuffisance constitutionnelle aggravée par le surmenage. Le cycle Tcheng est brisé vers le bas : Eau insuffisante → Bois mal nourri → tendons et dos fragilisés. Traiter d'abord l'Eau pour relancer toute la chaîne.",
         categoriesDiagnostiques: [
           "Vide de Yang du Rein (Eau) — racine constitutionnelle",
           "Vide de Jing du Rein — épuisement par surmenage",
-          "Cycle Sheng Eau → Bois insuffisant",
+          "Cycle Tcheng Eau → Bois insuffisant",
         ],
-        strategieTherapeutique: "1. Nourrir l'Eau (Rein Yang et Jing). 2. Relancer le cycle Sheng. 3. Traiter la lombalgie secondairement.",
+        strategieTherapeutique: "1. Nourrir l'Eau (Rein Yang et Jing). 2. Relancer le cycle Tcheng. 3. Traiter la lombalgie secondairement.",
         bilanEnergetique: "Vide de Yang du Rein et vide de Jing — surmenage chronique a vidé les réserves ancestrales. Lombalgie = expression locale d'un vide profond du Foyer Inférieur.",
-        strategie: "1. VG4 + V23 moxas (Yang Rein et Ming Men)\n2. R3 + R7 tonification (Yin et Yang Rein)\n3. 39VB (moelle, os, Jing) en soutien",
+        strategie: "1. 4TM + 23V moxas (Yang Rein et Ming Men)\n2. 3R + 7R tonification (Yin et Yang Rein)\n3. 39VB (moelle, os, Jing) en soutien",
         pointsUtilises: [
           { code: '4TM', technique: 'moxa_tonification', justification: "Ming Men — Yang constitutionnel", ordre: 1 },
-          { code: '7R', technique: 'tonification', justification: "Tonifie le Yang du Rein — complément de R3", ordre: 2 },
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Source du Rein", ordre: 3 },
+          { code: '7R', technique: 'tonification', justification: "Tonifie le Yang du Rein — complément de 3R", ordre: 2 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Source du Rein", ordre: 3 },
           { code: '39VB', technique: 'tonification', justification: "Réunion des moelles — soutient le Jing", ordre: 4 },
         ],
         niveauConfiance: 'standard',
@@ -2024,7 +2024,7 @@ Le Ming Men (VG4) est le foyer du Yang constitutionnel. Son insuffisance se lit 
 
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 007 — SOPHIE, 42 ANS — Cervicalgies + céphalées + insomnie
-  // Grille principale : Yin/Yang → Zang/Fu (Foie/Rein)
+  // Grille principale : Yin/Yang → Tsang/Fou (Foie/Rein)
   // ───────────────────────────────────────────────────────────────────────────
   {
     id: 'cas-007',
@@ -2057,7 +2057,7 @@ Le Ming Men (VG4) est le foyer du Yang constitutionnel. Son insuffisance se lit 
         lectures: [
           { position: 'foyer_moyen_gauche', qualites: ['corde_arc', 'rapide'], interpretation: "Pouls en corde-arc rapide au Foyer Moyen gauche — Yang du Foie montant." },
           { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Foyer Inférieur gauche vide profond — Yin du Rein insuffisant (cause profonde)." },
-          { position: 'foyer_superieur_gauche', qualites: ['rapide'], interpretation: "Cœur rapide — Shen légèrement perturbé par le manque de Yin." },
+          { position: 'foyer_superieur_gauche', qualites: ['rapide'], interpretation: "Cœur rapide — Chen légèrement perturbé par le manque de Yin." },
         ],
         synthese: "Vide de Yin du Rein → Yang du Foie non ancré → monte vers le haut. Traiter le Rein en premier, le Foie en second.",
       },
@@ -2083,18 +2083,18 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
         categoriesDiagnostiques: [
           "Vide de Yin du Rein — cause profonde",
           "Yang du Foie montant — conséquence directe",
-          "Shen légèrement perturbé — insomnie secondaire",
+          "Chen légèrement perturbé — insomnie secondaire",
           "Stagnation Yang en Foyer Supérieur — cervicalgies et céphalées",
         ],
-        strategieTherapeutique: "1. Nourrir le Yin du Rein (R3, R6, R7). 2. Abaisser le Yang du Foie (3F, 2F). 3. Pacifier le Shen (C7). 4. Libérer localement le Foyer Supérieur (20VB, VG20).",
-        traitementPropose: `R3 + R6 tonification (nourrit le Yin du Rein — cause profonde). 3F dispersion (abaisse le Yang du Foie). VG20 dispersion (fait descendre le Yang depuis le sommet). 20VB dispersion (libère le Foyer Supérieur et le méridien VB). C7 tonification (pacifie le Shen).`,
+        strategieTherapeutique: "1. Nourrir le Yin du Rein (3R, 6R, 7R). 2. Abaisser le Yang du Foie (3F, 2F). 3. Pacifier le Chen (7C). 4. Libérer localement le Foyer Supérieur (20VB, 20TM).",
+        traitementPropose: `3R + 6R tonification (nourrit le Yin du Rein — cause profonde). 3F dispersion (abaisse le Yang du Foie). 20TM dispersion (fait descendre le Yang depuis le sommet). 20VB dispersion (libère le Foyer Supérieur et le méridien VB). 7C tonification (pacifie le Chen).`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — cause profonde des céphalées", ordre: 1 },
-          { code: '6R', nomIeatc: 'Zhao Hai', technique: 'tonification', justification: "Renforce le Yin du Rein, pacifie le Shen", ordre: 2 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Abaisse le Yang du Foie — traitement secondaire", ordre: 3 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Nourrit le Yin du Rein — cause profonde des céphalées", ordre: 1 },
+          { code: '6R', nomIeatc: 'Tchao Raé', technique: 'tonification', justification: "Renforce le Yin du Rein, pacifie le Chen", ordre: 2 },
+          { code: '3F', nomIeatc: 'Tae Tchong', technique: 'dispersion', justification: "Abaisse le Yang du Foie — traitement secondaire", ordre: 3 },
           { code: '20TM', technique: 'dispersion', justification: "Fait descendre le Yang depuis le sommet du crâne", ordre: 4 },
           { code: '20VB', technique: 'dispersion', justification: "Libère le méridien VB au cou — céphalées temporales", ordre: 5 },
-          { code: '7C', nomIeatc: 'Shen Men', technique: 'tonification', justification: "Pacifie le Shen — insomnie", ordre: 6 },
+          { code: '7C', nomIeatc: 'Chen Menn', technique: 'tonification', justification: "Pacifie le Chen — insomnie", ordre: 6 },
         ],
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
@@ -2106,7 +2106,7 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
 
   // ───────────────────────────────────────────────────────────────────────────
   // CAS 008 — MARIE, 36 ANS — Fatigue chronique + anxiété + insomnie
-  // Grille principale : Zang/Fu (Cœur / Rein)
+  // Grille principale : Tsang/Fou (Cœur / Rein)
   // ───────────────────────────────────────────────────────────────────────────
   {
     id: 'cas-008',
@@ -2122,7 +2122,7 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
     casComplet: true,
     exemplaire: false,
     grillePrincipale: 'zang_fu',
-    tags: ['fatigue', 'anxiété', 'insomnie', 'Shen', 'Cœur', 'Rein', 'vide Yin'],
+    tags: ['fatigue', 'anxiété', 'insomnie', 'Chen', 'Cœur', 'Rein', 'vide Yin'],
     viewCount: 98,
     content: {
       motif: "Fatigue chronique profonde avec anxiété permanente et difficultés d'endormissement depuis 1 an. Épuisement après effort minime.",
@@ -2137,11 +2137,11 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
       prisePouls: {
         condition: "Patient allongé, respiration calmée",
         lectures: [
-          { position: 'foyer_superieur_gauche', qualites: ['vide', 'rapide'], interpretation: "Cœur vide et rapide — Shen sans ancrage, Yin insuffisant." },
+          { position: 'foyer_superieur_gauche', qualites: ['vide', 'rapide'], interpretation: "Cœur vide et rapide — Chen sans ancrage, Yin insuffisant." },
           { position: 'foyer_inferieur_gauche', qualites: ['vide', 'profond'], interpretation: "Yin du Rein vide profond — cause du vide de Yin général et du Yang apparent (Feu apparent)." },
           { position: 'foyer_superieur_droit', qualites: ['vide', 'faible'], interpretation: "Poumon vide — Qi général insuffisant." },
         ],
-        synthese: "Vide de Yin du Rein → Yang apparent (Feu apparent) irrite le Cœur → Shen perturbé. Tableau post-burn-out classique : épuisement du Yin par surmenage chronique.",
+        synthese: "Vide de Yin du Rein → Yang apparent (Feu apparent) irrite le Cœur → Chen perturbé. Tableau post-burn-out classique : épuisement du Yin par surmenage chronique.",
       },
     },
     analyses: [
@@ -2159,30 +2159,30 @@ Les céphalées temporales pulsatiles = Yang du Foie monte vers le haut par le m
         grillesSecondaires: ['yin_yang'],
         polarite: 'yin',
         localisationFoyer: 'superieur',
-        raisonnement: `Tableau de Vide de Yin du Rein → Yang apparent (Feu apparent) → Shen perturbé. C'est la séquence classique du burn-out en IEATC.
+        raisonnement: `Tableau de Vide de Yin du Rein → Yang apparent (Feu apparent) → Chen perturbé. C'est la séquence classique du burn-out en IEATC.
 
 La chaleur vespérale, les sueurs nocturnes, la bouche sèche la nuit, le pouls vide et rapide au Cœur — tout indique le Yang apparent / Feu apparent (Xu Huo). Règle R3 absolue : ne jamais disperser cette chaleur, elle n'est pas réelle. Il faut NOURRIR le Yin pour que le Yang apparent s'éteigne de lui-même.
 
-Le Cœur héberge le Shen. Sans Yin pour l'ancrer, le Shen erre → anxiété, insomnie, palpitations.`,
+Le Cœur héberge le Chen. Sans Yin pour l'ancrer, le Chen erre → anxiété, insomnie, palpitations.`,
         categoriesDiagnostiques: [
           "Vide de Yin du Rein — épuisement post burn-out",
           "Yang apparent / Feu apparent (Xu Huo) — chaleur vespérale, sueurs nocturnes",
-          "Shen perturbé par vide de Yin du Cœur — insomnie, anxiété",
+          "Chen perturbé par vide de Yin du Cœur — insomnie, anxiété",
           "Vide de Qi du Poumon — fatigue profonde, souffle insuffisant",
         ],
-        strategieTherapeutique: "1. Nourrir le Yin du Rein et du Cœur (R3, R6, MC6). 2. Traiter le Yang apparent / Feu apparent (Xu Huo) — NOURRIR le Yin, jamais disperser. 3. Pacifier le Shen (C7, R6). 4. Soutenir le Qi (36E, P7).",
-        traitementPropose: `R3 + R6 tonification (nourrit le Yin du Rein — source du Yang apparent). MC6 tonification (pacifie le Shen, nourrit le Yin du Cœur). C7 tonification (Shen Men — porte du Shen). R6 + C7 tonification (paire de MV : Yin Qiao Mo — excellent pour l'insomnie). 36E tonification (Qi général).`,
+        strategieTherapeutique: "1. Nourrir le Yin du Rein et du Cœur (3R, 6R, 6MC). 2. Traiter le Yang apparent / Feu apparent (Xu Huo) — NOURRIR le Yin, jamais disperser. 3. Pacifier le Chen (7C, 6R). 4. Soutenir le Qi (36E, 7P).",
+        traitementPropose: `3R + 6R tonification (nourrit le Yin du Rein — source du Yang apparent). 6MC tonification (pacifie le Chen, nourrit le Yin du Cœur). 7C tonification (Chen Menn — porte du Chen). 6R + 7C tonification (paire de MV : Yin Tsiao Mo — excellent pour l'insomnie). 36E tonification (Qi général).`,
         pointsUtilises: [
-          { code: '3R', nomIeatc: 'Tai Xi', technique: 'tonification', justification: "Nourrit le Yin du Rein — source profonde du Yang apparent (Feu apparent)", ordre: 1 },
-          { code: '6R', nomIeatc: 'Zhao Hai', technique: 'tonification', justification: "Yin Qiao Mo + Yin Rein — insomnie et anxiété", ordre: 2 },
-          { code: '6MC', nomIeatc: 'Nei Guan', technique: 'tonification', justification: "Pacifie le Shen, calme les palpitations, nourrit le Yin Cœur", ordre: 3 },
-          { code: '7C', nomIeatc: 'Shen Men', technique: 'tonification', justification: "Porte du Shen — ancrage direct du Shen dans le Cœur", ordre: 4 },
-          { code: '36E', nomIeatc: 'Zu San Li', technique: 'tonification', justification: "Soutient le Qi général post-burn-out", ordre: 5 },
+          { code: '3R', nomIeatc: 'Tae Kri', technique: 'tonification', justification: "Nourrit le Yin du Rein — source profonde du Yang apparent (Feu apparent)", ordre: 1 },
+          { code: '6R', nomIeatc: 'Tchao Raé', technique: 'tonification', justification: "Yin Tsiao Mo + Yin Rein — insomnie et anxiété", ordre: 2 },
+          { code: '6MC', nomIeatc: 'Nei Koann', technique: 'tonification', justification: "Pacifie le Chen, calme les palpitations, nourrit le Yin Cœur", ordre: 3 },
+          { code: '7C', nomIeatc: 'Chen Menn', technique: 'tonification', justification: "Porte du Chen — ancrage direct du Chen dans le Cœur", ordre: 4 },
+          { code: '36E', nomIeatc: 'Tsou Sann Li', technique: 'tonification', justification: "Soutient le Qi général post-burn-out", ordre: 5 },
         ],
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
         version: 1,
-        enseignementCle: "Yang apparent (Feu apparent) post burn-out : NOURRIR le Yin, jamais disperser la chaleur. La paire R6 + C7 est le traitement de fond de l'insomnie par vide de Yin.",
+        enseignementCle: "Yang apparent (Feu apparent) post burn-out : NOURRIR le Yin, jamais disperser la chaleur. La paire 6R + 7C est le traitement de fond de l'insomnie par vide de Yin.",
       },
     ],
   },
@@ -2253,13 +2253,13 @@ Stratégie : nourrir le Sang du Foie EN PREMIER, puis lever la stagnation de Qi.
           "Stagnation de Sang au Foyer Inférieur — caillots, douleurs fixes",
         ],
         strategieTherapeutique: "1. Nourrir le Sang du Foie (8F, 6Rte). 2. Lever la stagnation de Qi du Foie (3F, 4GI). 3. Lever la stagnation de Sang (10Rte). 4. Calmer le Bois (2F).",
-        traitementPropose: `8F tonification (nourrit le Sang du Foie — source). 6Rte tonification (nourrit le Sang général, régularise les menstruations). 3F dispersion (lève la stagnation de Qi du Foie). 10Rte dispersion (lève la stagnation de Sang). 4GI dispersion (lève la stagnation de Qi général, antidouleur). 29VC (R25) : réchauffer l'utérus si froid.`,
+        traitementPropose: `8F tonification (nourrit le Sang du Foie — source). 6Rte tonification (nourrit le Sang général, régularise les menstruations). 3F dispersion (lève la stagnation de Qi du Foie). 10Rte dispersion (lève la stagnation de Sang). 4GI dispersion (lève la stagnation de Qi général, antidouleur).`,
         pointsUtilises: [
-          { code: '8F', technique: 'tonification', justification: "Source Foie — nourrit le Sang du Foie, régularise le cycle", ordre: 1 },
+          { code: '8F', technique: 'tonification', justification: "Point Ro Eau du Foie — nourrit le Sang du Foie, régularise le cycle", ordre: 1 },
           { code: '6Rte', technique: 'tonification', justification: "Réunion des 3 Yin — nourrit le Sang, régularise les menstruations", ordre: 2 },
-          { code: '3F', nomIeatc: 'Tai Chong', technique: 'dispersion', justification: "Lève la stagnation de Qi du Foie — SPM et douleurs prémenstruelles", ordre: 3 },
+          { code: '3F', nomIeatc: 'Tae Tchong', technique: 'dispersion', justification: "Lève la stagnation de Qi du Foie — SPM et douleurs prémenstruelles", ordre: 3 },
           { code: '10Rte', technique: 'dispersion', justification: "Lève la stagnation de Sang — caillots et douleurs fixes", ordre: 4 },
-          { code: '4GI', nomIeatc: 'He Gu', technique: 'dispersion', justification: "Lève la stagnation de Qi général — antidouleur puissant", ordre: 5 },
+          { code: '4GI', nomIeatc: 'Ro Kou', technique: 'dispersion', justification: "Lève la stagnation de Qi général — antidouleur puissant", ordre: 5 },
         ],
         niveauConfiance: 'expert',
         sourceType: 'editoriale',
@@ -2334,11 +2334,11 @@ La double action est nécessaire : tonifier l'Iong (Yang général) + disperser 
           "Vide de Yang général — surmenage, Iong affaiblie",
         ],
         strategieTherapeutique: "1. Tonifier l'Iong générale (Yang général). 2. Disperser l'Oé au méridien GI local. 3. Traitement local de l'épicondyle.",
-        traitementPropose: `36E tonification + moxas (Yang général — tonifie l'Iong). 11GI dispersion (point local épicondyle — lève la stagnation d'Oé). 4GI dispersion (distal GI — renforce l'action de 11GI). 5TR dispersion (méridien TR — adjacent à GI au coude). 41VB tonification (tendon-ligaments général).`,
+        traitementPropose: `36E tonification + moxas (Yang général — tonifie l'Iong). 11GI dispersion (point local épicondyle — lève la stagnation d'Oé). 4GI dispersion (distal GI — renforce l'action de 11GI). 5TR dispersion (méridien TR — adjacent à GI au coude). 34VB tonification (point Hui des tendons — action globale tendons-ligaments).`,
         pointsUtilises: [
-          { code: '36E', nomIeatc: 'Zu San Li', technique: 'moxa_tonification', justification: "Tonifie l'Iong générale — traitement de fond du vide Yang", ordre: 1 },
-          { code: '11GI', nomIeatc: 'Qu Chi', technique: 'dispersion', justification: "Point local de l'épicondyle — disperse l'Oé dans le méridien GI", ordre: 2 },
-          { code: '4GI', nomIeatc: 'He Gu', technique: 'dispersion', justification: "Distal GI — renforce la dispersion de l'Oé locale", ordre: 3 },
+          { code: '36E', nomIeatc: 'Tsou Sann Li', technique: 'moxa_tonification', justification: "Tonifie l'Iong générale — traitement de fond du vide Yang", ordre: 1 },
+          { code: '11GI', nomIeatc: 'Tsiu Tchre', technique: 'dispersion', justification: "Point local de l'épicondyle — disperse l'Oé dans le méridien GI", ordre: 2 },
+          { code: '4GI', nomIeatc: 'Ro Kou', technique: 'dispersion', justification: "Distal GI — renforce la dispersion de l'Oé locale", ordre: 3 },
           { code: '5TR', technique: 'dispersion', justification: "Méridien Triple Réchauffeur au coude — complémentaire de GI", ordre: 4 },
           { code: '34VB', technique: 'tonification', justification: "Point Hui des tendons — action globale sur les tendons", ordre: 5 },
         ],

@@ -105,7 +105,6 @@ export default function AdminPage() {
           sexe: cas.sexe ?? null,
           cas_complet: cas.casComplet,
           exemplaire: cas.exemplaire,
-          qualifie_apprentissage: cas.qualifieApprentissage ?? false,
           grille_principale: cas.grillePrincipale,
           tags: cas.tags,
           content: cas.content,
@@ -113,8 +112,6 @@ export default function AdminPage() {
           auteur_id: cas.auteurId ?? null,
           date_creation: cas.dateCreation ?? null,
           date_publication: cas.datePublication ?? null,
-          created_at: cas.dateCreation ?? now,
-          updated_at: now,
         } as Partial<ClinicalCase>,
         { onConflict: 'id', ignoreDuplicates: false },
       );

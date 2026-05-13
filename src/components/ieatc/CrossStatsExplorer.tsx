@@ -86,11 +86,13 @@ const TECHNIQUE_COLORS: Record<string, string> = {
 
 const GRILLE_LABELS: Record<string, string> = {
   yin_yang: 'Yin / Yang',
+  trois_foyers: 'Trois Foyers',
   cinq_elements: 'Cinq Éléments',
-  six_energies: 'Six Énergies',
-  huit_principes: 'Huit Principes',
+  zang_fu: 'Tsang / Fu',
+  meridiens: 'Méridiens',
+  quatre_energies: 'Quatre Énergies',
   merveilleux_vaisseaux: 'Merveilleux Vaisseaux',
-  meridiens_tendino: 'Méridiens Tendino-Musculaires',
+  grands_meridiens_climats: 'Grands Méridiens / Climats',
 };
 
 // ─── Barre de stat ────────────────────────────────────────────────────────────

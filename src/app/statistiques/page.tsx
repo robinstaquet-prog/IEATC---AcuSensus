@@ -30,6 +30,8 @@ const TECHNIQUE_LABELS: Record<string, string> = {
   moxa_dispersion: 'Moxa + Dispersion',
   dispersion_puis_tonification: 'Dispersion → Tonification',
   harmonisation: 'Harmonisation',
+  neutre: 'Neutre',
+  moxa: 'Moxa',
   gros_sel: 'Gros sel (8JM)',
 };
 
@@ -42,6 +44,8 @@ const TECHNIQUE_COLORS: Record<string, string> = {
   moxa_dispersion: 'bg-rose-400',
   dispersion_puis_tonification: 'bg-indigo-500',
   harmonisation: 'bg-violet-500',
+  neutre: 'bg-gray-400',
+  moxa: 'bg-orange-300',
   gros_sel: 'bg-amber-400',
 };
 
