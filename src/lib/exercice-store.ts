@@ -77,7 +77,7 @@ export async function getExercice(
     .select('*')
     .eq('user_id', userId)
     .eq('case_id', caseId)
-    .filter('extra_data->isExercice', 'eq', 'true')
+    .filter('extra_data->>isExercice', 'eq', 'true')
     .maybeSingle();
   if (error || !data) return undefined;
   return fromRow(data);
@@ -89,7 +89,7 @@ export async function getAllExercices(userId: string): Promise<UserParticipation
     .from('user_participations')
     .select('*')
     .eq('user_id', userId)
-    .filter('extra_data->isExercice', 'eq', 'true')
+    .filter('extra_data->>isExercice', 'eq', 'true')
     .order('updated_at', { ascending: false });
   if (error || !data) return [];
   return data.map(fromRow);

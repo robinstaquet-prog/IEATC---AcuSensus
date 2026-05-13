@@ -85,7 +85,7 @@ export default function MembreProfilPage() {
           .from('user_participations')
           .select('id, user_id, case_id, extra_data, created_at, updated_at')
           .eq('user_id', memberId)
-          .filter('extra_data->isExercice', 'neq', 'true')
+          .filter('extra_data->>isExercice', 'neq', 'true')
           .order('created_at', { ascending: false }),
       ]);
 

@@ -113,13 +113,14 @@ function AnnotationSidePanel({
 }) {
   // Animation "+1" : state temporaire par annId
   const [animating, setAnimating] = useState<Record<string, boolean>>({});
+  const [showAll, setShowAll] = useState(false);
 
   // Trier par nombre de votes décroissant
   const sorted = useMemo(
     () => [...comments].sort((a, b) => b.voteCount - a.voteCount),
     [comments],
   );
-  const visible = sorted.slice(0, 3);
+  const visible = showAll ? sorted : sorted.slice(0, 3);
   const extraCount = Math.max(0, sorted.length - 3);
 
   const handleVoteClick = (c: AnnotationComment) => {
@@ -204,10 +205,21 @@ function AnnotationSidePanel({
         );
       })}
 
-      {extraCount > 0 && (
-        <p className="text-xs text-slate-400 italic text-center">
-          +{extraCount} autre{extraCount > 1 ? 's' : ''}
-        </p>
+      {extraCount > 0 && !showAll && (
+        <button
+          onClick={() => setShowAll(true)}
+          className="w-full text-xs text-teal-600 hover:text-teal-800 font-medium text-center py-1.5 rounded-lg hover:bg-teal-50 transition-colors cursor-pointer"
+        >
+          +{extraCount} autre{extraCount > 1 ? 's' : ''} — voir tout
+        </button>
+      )}
+      {showAll && sorted.length > 3 && (
+        <button
+          onClick={() => setShowAll(false)}
+          className="w-full text-xs text-slate-400 hover:text-slate-600 font-medium text-center py-1.5 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
+        >
+          Réduire
+        </button>
       )}
 
       {visible.length === 0 && (
@@ -777,28 +789,42 @@ interface AggItem {
   text: string;
   total: number;
   count: number;
+  votes: number;
 }
 
 function aggregate(
   participations: UserParticipation[],
   extract: (p: UserParticipation) => string[],
+  elementKeyFn?: (index: number, text: string) => string,
 ): AggItem[] {
   const map = new Map<string, AggItem>();
   for (const p of participations) {
     const valeur = participationValeur(p);
-    for (const t of extract(p)) {
+    const partVotes = (p.votes ?? []).filter((v) => v.cible === 'participation').length;
+    const items = extract(p);
+    for (let i = 0; i < items.length; i++) {
+      const t = items[i]!;
       const key = t.trim().toLowerCase();
       if (!key) continue;
+      let elemVotes = 0;
+      if (elementKeyFn) {
+        const ek = elementKeyFn(i, t.trim());
+        elemVotes = (p.votes ?? []).filter(
+          (v) => v.cible === 'element' && v.elementKey === ek,
+        ).length;
+      }
+      const itemVotes = partVotes + elemVotes;
       const cur = map.get(key);
       if (cur) {
         cur.total += valeur;
         cur.count += 1;
+        cur.votes += itemVotes;
       } else {
-        map.set(key, { text: t.trim(), total: valeur, count: 1 });
+        map.set(key, { text: t.trim(), total: valeur, count: 1, votes: itemVotes });
       }
     }
   }
-  return [...map.values()].sort((a, b) => b.total - a.total);
+  return [...map.values()].sort((a, b) => b.votes - a.votes || b.total - a.total);
 }
 
 function AnalyseForme2({
@@ -891,30 +917,39 @@ function AnalyseForme2({
   // Agrégats
   const bilanAgg = useMemo(
     () =>
-      aggregate(participations, (p) =>
-        (p.bilanEnergetique ?? '')
-          .split('\n')
-          .map((l) => l.replace(/^\d+\.\s*/, '').trim())
-          .filter(Boolean),
+      aggregate(
+        participations,
+        (p) =>
+          (p.bilanEnergetique ?? '')
+            .split('\n')
+            .map((l) => l.replace(/^\d+\.\s*/, '').trim())
+            .filter(Boolean),
+        (i) => `bilan:${i}`,
       ),
     [participations],
   );
   const strategieAgg = useMemo(
     () =>
-      aggregate(participations, (p) =>
-        (p.strategie ?? '')
-          .split('\n')
-          .map((l) => l.replace(/^\d+\.\s*/, '').trim())
-          .filter(Boolean),
+      aggregate(
+        participations,
+        (p) =>
+          (p.strategie ?? '')
+            .split('\n')
+            .map((l) => l.replace(/^\d+\.\s*/, '').trim())
+            .filter(Boolean),
+        (i) => `strategie:${i}`,
       ),
     [participations],
   );
   const pointsAgg = useMemo(
     () =>
-      aggregate(participations, (p) =>
-        (p.pointsProposer ?? [])
-          .map((pt) => pt.code ?? '')
-          .filter(Boolean),
+      aggregate(
+        participations,
+        (p) =>
+          (p.pointsProposer ?? [])
+            .map((pt) => pt.code ?? '')
+            .filter(Boolean),
+        (_i, code) => `point:${code}`,
       ),
     [participations],
   );
@@ -1084,10 +1119,18 @@ function AggColumn({
                 key={i}
                 className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
               >
-                <span className={cn('text-slate-700', mono && 'font-mono text-xs')}>{it.text}</span>
-                <span className="text-xs text-slate-400 ml-2">
-                  ×{it.count}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className={cn('text-slate-700 flex-1', mono && 'font-mono text-xs')}>{it.text}</span>
+                  <span className="text-xs text-slate-400 shrink-0">
+                    ×{it.count}
+                  </span>
+                  {it.votes > 0 && (
+                    <span className="inline-flex items-center gap-0.5 text-xs text-amber-600 shrink-0" title={`${it.votes} vote${it.votes > 1 ? 's' : ''} reçu${it.votes > 1 ? 's' : ''}`}>
+                      <ThumbsUp size={10} fill="currentColor" />
+                      {it.votes}
+                    </span>
+                  )}
+                </div>
                 {techStr && (
                   <span className="block text-[10px] text-slate-500 mt-0.5">
                     {techStr}
