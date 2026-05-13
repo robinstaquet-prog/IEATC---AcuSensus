@@ -84,6 +84,39 @@ function alreadyVoted(
   return votes.some((v) => v.voterId === voterId && v.cible === 'participation');
 }
 
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+/** Les analyses du corpus statique ne sont PAS dans Supabase. */
+function isCorpusAnalysis(participation: UserParticipation): boolean {
+  // Les IDs Supabase commencent par 'p-' (UUID auto), les analyses corpus ont
+  // des IDs comme 'a001-yy-meridiens', 'a002-student', etc.
+  return !participation.id.startsWith('p-');
+}
+
+/** Vote optimiste pour les analyses du corpus (pas de RPC). */
+function optimisticVote(
+  participation: UserParticipation,
+  voter: Pick<User, 'id' | 'statut'>,
+  cible: 'participation' | 'element',
+  elementKey?: string,
+  cost = 1,
+): VoteResult {
+  const newVote = {
+    id: `v-${Date.now()}-opt`,
+    voterId: voter.id,
+    voterStatut: (voter.statut ?? 'etudiant') as StatutPraticien,
+    cible: cible as import('@/types').VoteCible,
+    elementKey,
+    createdAt: new Date().toISOString(),
+  };
+  const votes = [...(participation.votes ?? []), newVote];
+  return {
+    ok: true,
+    updated: { ...participation, votes, valeur: computeValeur(votes) },
+    consumed: cost,
+  };
+}
+
 // ─── Votes via RPC ────────────────────────────────────────────────────────────
 
 export async function voteOnElement(
@@ -96,6 +129,11 @@ export async function voteOnElement(
   }
   if (alreadyVoted(participation, voter.id, elementKey)) {
     return { ok: false, error: 'Vous avez déjà voté sur cet élément.' };
+  }
+
+  // Analyse du corpus → vote optimiste (pas dans Supabase)
+  if (isCorpusAnalysis(participation)) {
+    return optimisticVote(participation, voter, 'element', elementKey, COST_ELEMENT);
   }
 
   const { data, error } = await supabase.rpc('cast_vote', {
@@ -122,6 +160,11 @@ export async function voteOnParticipation(
   }
   if (alreadyVoted(participation, voter.id)) {
     return { ok: false, error: 'Vous avez déjà validé cette participation.' };
+  }
+
+  // Analyse du corpus → vote optimiste (pas dans Supabase)
+  if (isCorpusAnalysis(participation)) {
+    return optimisticVote(participation, voter, 'participation', undefined, COST_PARTICIPATION);
   }
 
   const { data, error } = await supabase.rpc('cast_vote', {
@@ -156,6 +199,14 @@ export async function unvoteOnElement(
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
   elementKey: string,
 ): Promise<VoteResult> {
+  // Corpus → retrait optimiste
+  if (isCorpusAnalysis(participation)) {
+    const votes = (participation.votes ?? []).filter(
+      (v) => !(v.voterId === voter.id && v.cible === 'element' && v.elementKey === elementKey),
+    );
+    return { ok: true, updated: { ...participation, votes, valeur: computeValeur(votes) }, consumed: -COST_ELEMENT };
+  }
+
   const { data, error } = await supabase.rpc('cancel_vote', {
     p_participation_id: participation.id,
     p_voter_id:         voter.id,
@@ -174,6 +225,14 @@ export async function unvoteOnParticipation(
   participation: UserParticipation,
   voter: Pick<User, 'id' | 'statut' | 'votePoints'>,
 ): Promise<VoteResult> {
+  // Corpus → retrait optimiste
+  if (isCorpusAnalysis(participation)) {
+    const votes = (participation.votes ?? []).filter(
+      (v) => !(v.voterId === voter.id && v.cible === 'participation'),
+    );
+    return { ok: true, updated: { ...participation, votes, valeur: computeValeur(votes) }, consumed: -COST_PARTICIPATION };
+  }
+
   const { data, error } = await supabase.rpc('cancel_vote', {
     p_participation_id: participation.id,
     p_voter_id:         voter.id,
